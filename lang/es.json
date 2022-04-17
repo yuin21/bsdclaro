@@ -2,6 +2,7 @@
   "E-Mail Address": "Correo electrónico",
   "Email": "Correo electrónico",
   "Password": "Contraseña",
+  "password": "Contraseña",
   "Remember me": "Recuérdame",
   "Login": "Acceder",
   "Log in": "Acceder",
@@ -50,5 +51,9 @@
   "Log Out": "Salir",
   "Log In": "Entrar",
   "Dashboard": "Dashboard",
-  "Manage Account": "Administrar cuenta"
+  "Manage Account": "Administrar cuenta",
+  "Done.": "Listo.",
+  "Saved.": "Guardado.",
+  "current password": "contraseña actual",
+  "Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.": "Ingrese su contraseña para confirmar que desea cerrar sesión en sus otras sesiones de navegador en todos sus dispositivos."
 }
