@@ -266,8 +266,9 @@ return [
         ['header' => 'CONTROL DE USUARIOS'],
         [
             'text' => 'Usuarios',
-            'url'  => 'admin#',
+            'route'  => 'admin.users.index',
             'icon' => 'fas fa-fw fa-users',
+            'can' => 'admin.users.index'
         ],
         [
             'text' => 'Roles',
@@ -482,5 +483,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
