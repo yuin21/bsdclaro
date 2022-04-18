@@ -22,6 +22,7 @@ class RoleSeeder extends Seeder
 
         // $permission = Permission::create(['name' => 'admin.home'])->syncRoles([$roleAdmin]); NO SE NECESITA PORQUE NO HAY VISTA PUBLICA
         $permission = Permission::create(['name' => 'admin.users.index'])->syncRoles([$roleAdmin]);
+        $permission = Permission::create(['name' => 'admin.import_file.index'])->syncRoles([$roleAdmin, $roleVende]);
         // $permission = Permission::create(['name' => 'admin.users.edit'])->syncRoles([$roleAdmin]); NO SE NECESITA PORQUE SE PROTEGE TODO CON admin.users.index
         // $permission = Permission::create(['name' => 'admin.users.update'])->syncRoles([$roleAdmin]); NO SE NECESITA PORQUE SE PROTEGE TODO CON admin.users.index
     }

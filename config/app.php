@@ -196,4 +196,33 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+
+    'db_fields' => [
+        'sec',
+        'expediente',
+        'codigo_cliente',
+        'cod_bscs',
+        'cliente',
+        'dni_ruc',
+        'linea',
+        'plazo_acuerdo',
+        'pdv',
+        'cod_contrato',
+        'fecha_renovacion',
+        'liquidacion',
+        'plan',
+        'aaservicio',
+        'estado_servicio',
+        'cf',
+        'factor_renovacion',
+        'semana_pago',
+        'fecha_pago',
+        'extorno_topes',
+        'extorno_sivco',
+        'comision',
+        'oc',
+        'nota',
+        'segmento',
+        // 'estado'
+    ]
 ];

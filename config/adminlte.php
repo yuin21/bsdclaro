@@ -263,7 +263,10 @@ return [
             'url'  => '/user/profile',
             'icon' => 'fas fa-fw fa-user',
         ],
-        ['header' => 'CONTROL DE USUARIOS'],
+        [
+            'header' => 'CONTROL DE USUARIOS',
+            'can' => 'admin.users.index'
+        ],
         [
             'text' => 'Usuarios',
             'route'  => 'admin.users.index',
@@ -271,10 +274,20 @@ return [
             'can' => 'admin.users.index'
         ],
         [
-            'text' => 'Roles',
-            'url'  => 'admin#',
-            'icon' => 'fas fa-fw fa-address-book',
+            'header' => 'CONTROL DE DATOS',
+            'can'   => 'admin.import_file.index'
         ],
+        [
+            'text'  => 'BASERENUEVA',
+            'route' => 'admin.importfile.index',
+            'icon'  => 'fas fa-fw fa-database',
+            'can'   => 'admin.import_file.index'
+        ],
+        // [
+        //     'text' => 'Roles',
+        //     'url'  => 'admin#',
+        //     'icon' => 'fas fa-fw fa-address-book',
+        // ],
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',
