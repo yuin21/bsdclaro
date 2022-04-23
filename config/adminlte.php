@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>BSD</b>System',
+    'logo' => '<b>Claro Negocios</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -226,15 +226,15 @@ return [
 
     'menu' => [
         // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
+        //  [
+        //      'type'         => 'navbar-search',
         //     'text'         => 'search',
         //     'topnav_right' => true,
         // ],
-        [
+         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
-        ],
+         ],
 
         // Sidebar items:
         // [
@@ -253,97 +253,152 @@ return [
         //     'label'       => 4,
         //     'label_color' => 'success',
         // ],
-        [
-            'text' => 'Dashboard',
-            'url'  => 'admin',
-            'icon' => 'fas fa-fw fa-info',
-        ],
-        [
-            'text' => 'Perfil',
-            'url'  => '/user/profile',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'header' => 'CONTROL DE USUARIOS',
-            'can' => 'admin.users.index'
-        ],
+        // [
+        //     'text' => 'Dashboard',
+        //     'url'  => 'admin',
+        //     'icon' => 'fas fa-fw fa-info',
+        // ],
+       
+        // [
+        //     'header' => 'Usuario',
+        //     'icon' => 'far fa-fw fa-files', 
+        //     'url'         => 'admin/pages',   
+        //     'label'       => 4,
+        //     'submenu' => [                          
+        //         [
+        //             'text' => 'Registros de Usarios', 
+        //             'route'  => 'admin.users.index',
+        //             'icon'  => 'fa-regular fa-user',
+        //             'can' => 'admin.users.index',      
+        //         ],
+        //         ]
+        // ]
+        
         [
             'text' => 'Usuarios',
-            'route'  => 'admin.users.index',
-            'icon' => 'fas fa-fw fa-users',
-            'can' => 'admin.users.index'
+            'url'  => '/user/profile',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [    
+                [
+                    'text' => 'Registro de Usuarios', 
+                    'route'  => 'admin.users.index',
+                    'icon'  => '',
+                    'can' => 'admin.users.index',      
+                ],
+                [
+                    'text' => 'Asignación del Rol', 
+                    'url'  => '#',
+                    'icon'  => '',      
+                ],
+                ]
         ],
         [
-            'header' => 'CONTROL DE DATOS',
-            'can'   => 'admin.import_file.index'
-        ],
+            'text' => 'Personal',
+            'url'  => '/user/profile',
+            'icon' => 'fas fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Registro Personal',  
+                    'route'  => 'admin.personal.index',
+                    'icon'  => '',
+                    'can' => 'admin.personal.index',      
+                   
+                ],
+            ],  
+        ], 
         [
-            'text'  => 'BASERENUEVA',
-            'route' => 'admin.importfile.index',
-            'icon'  => 'fas fa-fw fa-database',
-            'can'   => 'admin.import_file.index'
+            'text' => 'Clientes',
+            'icon' => 'fas fa-fw fa-address-book',
+            'submenu' => [
+                [
+                    'text' => 'Registro Clientes',  
+                    'icon'    => '',
+                    'url'     => '#',            
+                   
+                ],
+            ],  
+        ], 
+        [
+            'text'    => 'Cargas Masivas', 
+            'icon'    => "fas fa-fw fa-file-csv",
+            'submenu' => [                          
+                [
+                    'text' => 'Base Fija', 
+                    'route' => 'admin.importbasefija.index',
+                    'icon'  => '',
+                    'can'   => 'admin.import_basefija.index',       
+                ],
+                [
+                    'text' => 'Base Movil',   
+                    'route' => 'admin.importbasemovil.index',
+                    'icon'  => '',
+                    'can'   => 'admin.import_basemovil.index',      
+                ],
+                [   'text' => 'Base Renueva',  
+                    'route' => 'admin.importbaserenueva.index',
+                    'icon'  => '',
+                    'can'   => 'admin.import_baserenueva.index',   
+                ],
+            ],
         ],
-        // [
-        //     'text' => 'Roles',
-        //     'url'  => 'admin#',
-        //     'icon' => 'fas fa-fw fa-address-book',
-        // ],
-        // [
-        //     'text'    => 'multilevel',
-        //     'icon'    => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //         [
-        //             'text'    => 'level_one',
-        //             'url'     => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url'  => '#',
-        //                 ],
-        //                 [
-        //                     'text'    => 'level_two',
-        //                     'url'     => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url'  => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url'  => '#',
-        //         ],
-        //     ],
-        // ],
-        // ['header' => 'labels'],
-        // [
-        //     'text'       => 'important',
-        //     'icon_color' => 'red',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'warning',
-        //     'icon_color' => 'yellow',
-        //     'url'        => '#',
-        // ],
-        // [
-        //     'text'       => 'information',
-        //     'icon_color' => 'cyan',
-        //     'url'        => '#',
-        // ],
-    ],
+             
+        [
+            'text'    => 'Ventas', 
+            'icon'    => 'fas fa-archive',          
+            'submenu' => [  
+                [
+                    'text' => 'Comisiones',  
+                    'icon'    => '',
+                    'url'     => '#',            
+                   
+                ],                        
+                [
+                    'text' => 'Bonificaciones',  
+                    'icon'    => '',
+                    'url'     => '#',            
+                   
+                ],
+            ]
+        ],
+        
+        [
+            'text'    => 'Reportes', 
+            'icon'    => 'fas fa-file-alt',          
+            'submenu' => [                          
+                [
+                    'text' => 'Ventas Diarias',                            
+                    'icon'    => '',
+                    'url'     => '#',            
+                ],
+                [
+                    'text' => 'Ventas por consultor',                            
+                    'icon'    => '',
+                    'url'     => '#',            
+                ],
+            ]
+        ],
+         
+         [
+            'text'    => 'Herramientas', 
+            'icon'    => 'fas fa-cog',  
+            'submenu' => [                          
+                [
+                    'text' => 'Calculadora',                            
+                    'icon'    => '',
+                    'url'     => 'https://web2.0calc.es',
+                    'target' => '_blank'
+                ],  
+                [
+                    'text' => 'Cálculo del IGV',                            
+                    'icon'    => '',
+                    'url'     => 'https://feelingperu.com/calculadora-igv-peru/',
+                    'target' => '_blank'
+                ], 
 
+                
+                ]
+            ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Menu Filters

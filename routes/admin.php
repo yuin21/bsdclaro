@@ -4,12 +4,29 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ImportFileController;
-
+use App\Http\Controllers\Admin\ImportBaseFijaController;
+use App\Http\Controllers\Admin\ImportBaseMovilController;
+use App\Http\Controllers\Admin\ImportBaseRenuevaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('admin.users');
+//Carga Masiva - BaseFija
+Route::get('import_basefija', [ImportBaseFijaController::class, 'index'])->name('admin.importbasefija.index');
+Route::post('import_basefija_parse', [ImportBaseFijaController::class, 'parseImport'])->name('admin.importbasefija.parseImport');
+Route::post('import_basefija_process', [ImportBaseFijaController::class, 'processImport'])->name('admin.importbasefija.processImport');
 
-Route::get('import_file', [ImportFileController::class, 'index'])->name('admin.importfile.index');
-Route::post('import_file_parse', [ImportFileController::class, 'parseImport'])->name('admin.importfile.parseImport');
-Route::post('import_file_process', [ImportFileController::class, 'processImport'])->name('admin.importfile.processImport');
+//Carga Masiva - BaseMovil
+Route::get('import_basemovil', [ImportBaseMovilController::class, 'index'])->name('admin.importbasemovil.index');
+Route::post('import_basemovil_parse', [ImportBaseMovilController::class, 'parseImport'])->name('admin.importbasemovil.parseImport');
+Route::post('import_basemovil_process', [ImportBaseMovilController::class, 'processImport'])->name('admin.importbasemovil.processImport');
+
+//Carga Masiva - BaseRenueva
+Route::get('import_baserenueva', [ImportBaseRenuevaController::class, 'index'])->name('admin.importbaserenueva.index');
+Route::post('import_baserenueva_parse', [ImportBaseRenuevaController::class, 'parseImport'])->name('admin.importbaserenueva.parseImport');
+Route::post('import_baserenueva_process', [ImportBaseRenuevaController::class, 'processImport'])->name('admin.importbaserenueva.processImport');
+
+//Personal
+admin.personal.index
+Route::resource('personal', PersonalController::class)->only(['index','create','show','edit', 'update','destroy'])->names('admin.personal');
+
