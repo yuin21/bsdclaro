@@ -10,18 +10,18 @@ class PersonalController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
+        // $this->middleware('can:admin.personal.index');
     }
     
     public function index()
     {
         $datos['bsd_personal']=BsdPersonal::paginate(5);
-        return view('personal.index', $datos);
+        return view('admin.personal.index', $datos);
     }
 
     public function create()
     {
-        return view('personal.create');
+        return view('admin.personal.create');
     }
 
      public function store(Request $request)
@@ -49,13 +49,13 @@ class PersonalController extends Controller
     public function show($id)
     {
         $Personal = BsdPersonal::findOrFail($id);
-        return view('personal.show', compact('Personal'));
+        return view('admin.personal.show', compact('Personal'));
     }
     
     public function edit($id)
     {
         $Personal = BsdPersonal::findOrFail($id);
-        return view('personal.edit', compact('Personal'));
+        return view('admin.personal.edit', compact('Personal'));
     }
    
     public function update(Request $request, $id)

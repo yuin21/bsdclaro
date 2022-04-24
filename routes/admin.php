@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ImportFileController;
 use App\Http\Controllers\Admin\ImportBaseFijaController;
 use App\Http\Controllers\Admin\ImportBaseMovilController;
 use App\Http\Controllers\Admin\ImportBaseRenuevaController;
+use App\Http\Controllers\Admin\PersonalController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -27,6 +28,5 @@ Route::post('import_baserenueva_parse', [ImportBaseRenuevaController::class, 'pa
 Route::post('import_baserenueva_process', [ImportBaseRenuevaController::class, 'processImport'])->name('admin.importbaserenueva.processImport');
 
 //Personal
-admin.personal.index
 Route::resource('personal', PersonalController::class)->only(['index','create','show','edit', 'update','destroy'])->names('admin.personal');
 
