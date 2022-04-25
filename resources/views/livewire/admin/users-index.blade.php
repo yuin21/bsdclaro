@@ -20,6 +20,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>{{ $user->roles[0]->name }}</td>
                             <td width="130px">
                                 <a class="btn btn-primary" href="{{ route('admin.users.edit', $user) }}">
                                     Editar Rol
@@ -34,9 +35,9 @@
         <div class="card-footer">
             {{ $users->links() }}
         </div>
-		@else
-				<div class="card-body">
-					<strong>No hay usuarios</strong>
-				</div>
+    @else
+        <div class="card-body">
+            <strong>No hay usuarios</strong>
+        </div>
     @endif
 </div>

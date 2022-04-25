@@ -290,7 +290,12 @@ return [
                     'url'  => '#',
                     'icon'  => '',      
                 ],
-                ]
+                [
+                    'text' => 'Registro de roles', 
+                    'route'  => 'admin.roles.index',
+                    'icon'  => '',      
+                ],
+            ]
         ],
         [
             'text' => 'Personal',

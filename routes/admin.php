@@ -8,10 +8,16 @@ use App\Http\Controllers\Admin\ImportBaseFijaController;
 use App\Http\Controllers\Admin\ImportBaseMovilController;
 use App\Http\Controllers\Admin\ImportBaseRenuevaController;
 use App\Http\Controllers\Admin\PersonalController;
+use App\Http\Controllers\Admin\RoleController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
+//usuarios
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('admin.users');
+
+//roles
+Route::resource('roles', RoleController::class)->names('admin.roles');
+
 //Carga Masiva - BaseFija
 Route::get('import_basefija', [ImportBaseFijaController::class, 'index'])->name('admin.importbasefija.index');
 Route::post('import_basefija_parse', [ImportBaseFijaController::class, 'parseImport'])->name('admin.importbasefija.parseImport');
