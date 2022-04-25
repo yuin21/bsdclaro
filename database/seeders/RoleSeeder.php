@@ -31,7 +31,7 @@ class RoleSeeder extends Seeder
 
         // seccion clientes
         Permission::create(['name' => 'adminlte.clientes', 'description' => 'Ver sección: Clientes'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
-        Permission::create(['name' => 'admin.clientes.index'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.clientes.index', 'description' => 'Ver opción: Registro clientes'])->syncRoles([$roleAdmin]);
 
         // seccion cargas masivas
         Permission::create(['name' => 'adminlte.cargasmasivas', 'description' => 'Ver sección: Cargas Masivas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
