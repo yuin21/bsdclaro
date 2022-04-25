@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BsdPersonal;
+use App\Imports\TipoDoc;
 
 class PersonalController extends Controller
 {
@@ -15,18 +16,20 @@ class PersonalController extends Controller
     
     public function index()
     {
-        $datos['bsd_personal']=BsdPersonal::paginate(5);
-        return view('admin.personal.index', $datos);
+        return view('admin.personal.index');
     }
 
     public function create()
     {
-        return view('admin.personal.create');
+    
+        $tipos_doc = TipoDoc::getTipoDoc();
+
+        return view('admin.personal.create', compact('tipos_doc'));
     }
 
      public function store(Request $request)
     {
-        $campos=[
+        $request->validate([
             'nom_personal' => 'required|string|max:60',
             'ape_paterno' => 'required|string|max:25',
             'ape_materno'=> 'required|string|max:25',
@@ -35,32 +38,29 @@ class PersonalController extends Controller
             'nro_doc_iden'=> 'required|string|max:15', 
             'email'=> 'required|string|max:75',
           
-        ];       
-        $mensaje=[
-            'required'=>'El :attribute es requerido',          
-        ];
+        ]);       
 
-        $this->validate($request,$campos,$mensaje);       
-        $Personal = new BsdPersonal();
-        $Personal->create($request->all());
-        return redirect('admin/personal')->with('mensaje','Agregado con éxito');       
+        $personal = BsdPersonal::create($request->all());
+
+        return redirect()->route('admin.personal.index')->with('mensaje','Agregado con éxito');       
     }
    
     public function show($id)
     {
-        $Personal = BsdPersonal::findOrFail($id);
+        $Personal = BsdPersonal::findOrFail(['id_personal' => $id]);
         return view('admin.personal.show', compact('Personal'));
     }
     
     public function edit($id)
     {
-        $Personal = BsdPersonal::findOrFail($id);
-        return view('admin.personal.edit', compact('Personal'));
+        $tipos_doc = TipoDoc::getTipoDoc();
+        $personal = BsdPersonal::where('id_personal', $id)->firstOrFail();
+        return view('admin.personal.edit', compact('personal', 'tipos_doc'));
     }
    
     public function update(Request $request, $id)
     {        
-        $campos=[
+        $request->validate([
             'nom_personal' => 'required|string|max:60',
             'ape_paterno' => 'required|string|max:25',
             'ape_materno'=> 'required|string|max:25',
@@ -68,17 +68,13 @@ class PersonalController extends Controller
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> 'required|string|max:15', 
             'email'=> 'required|string|max:75',
-        ];
-        $mensaje=[
-            'required'=>'El :attribute es requerido',   
-        ];
+        ]);
 
-        $this->validate($request,$campos,$mensaje);        
-        $datosReporteMovil = request()->except(['_token','_method']);        
-        BsdPersonal::where('id','=',$id)->update($datosReporteMovil);
-        $Personal = BsdPersonal::findOrFail($id);       
-        return redirect('admin/personal')->with('mensaje','Reporte editado');
-    
+        $personal = BsdPersonal::where('id_personal', $id)->firstOrFail();
+        $personal->update($request);
+
+        // $personal->update($request->all());
+        return redirect()->route('admin.personal.edit', $personal)->with('mensaje', 'Se actualizó correctamente');
     }
 
     public function destroy($id)

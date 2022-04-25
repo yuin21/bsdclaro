@@ -28,5 +28,4 @@ Route::post('import_baserenueva_parse', [ImportBaseRenuevaController::class, 'pa
 Route::post('import_baserenueva_process', [ImportBaseRenuevaController::class, 'processImport'])->name('admin.importbaserenueva.processImport');
 
 //Personal
-Route::resource('personal', PersonalController::class)->only(['index','create','show','edit', 'update','destroy'])->names('admin.personal');
-
+Route::resource('personal', PersonalController::class)->names('admin.personal');

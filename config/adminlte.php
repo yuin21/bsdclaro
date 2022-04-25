@@ -301,7 +301,7 @@ return [
                     'text' => 'Registro Personal',  
                     'route'  => 'admin.personal.index',
                     'icon'  => '',
-                    'can' => 'admin.personal.index',      
+                    // 'can' => 'admin.personal.index',      
                    
                 ],
             ],  
