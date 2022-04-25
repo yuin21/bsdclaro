@@ -278,6 +278,7 @@ return [
             'text' => 'Usuarios',
             'url'  => '/user/profile',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'adminlte.usuarios',   
             'submenu' => [    
                 [
                     'text' => 'Registro de Usuarios', 
@@ -285,15 +286,16 @@ return [
                     'icon'  => '',
                     'can' => 'admin.users.index',      
                 ],
-                [
-                    'text' => 'Asignación del Rol', 
-                    'url'  => '#',
-                    'icon'  => '',      
-                ],
+                // [
+                //     'text' => 'Asignación del Rol', 
+                //     'url'  => '#',
+                //     'icon'  => '',      
+                // ],
                 [
                     'text' => 'Registro de roles', 
                     'route'  => 'admin.roles.index',
-                    'icon'  => '',      
+                    'icon'  => '',
+                    'can' => 'admin.roles.index',       
                 ],
             ]
         ],
@@ -301,12 +303,13 @@ return [
             'text' => 'Personal',
             'url'  => '/user/profile',
             'icon' => 'fas fa-users',
+            'can' => 'adminlte.personal', 
             'submenu' => [
                 [
                     'text' => 'Registro Personal',  
                     'route'  => 'admin.personal.index',
                     'icon'  => '',
-                    // 'can' => 'admin.personal.index',      
+                    'can' => 'admin.personal.index',      
                    
                 ],
             ],  
@@ -314,24 +317,26 @@ return [
         [
             'text' => 'Clientes',
             'icon' => 'fas fa-fw fa-address-book',
+            'can' => 'adminlte.clientes', 
             'submenu' => [
                 [
                     'text' => 'Registro Clientes',  
                     'icon'    => '',
                     'url'     => '#',            
-                   
+                    'can' => 'admin.clientes.index',
                 ],
             ],  
         ], 
         [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
+            'can' => 'adminlte.cargasmasivas', 
             'submenu' => [                          
                 [
                     'text' => 'Base Fija', 
                     'route' => 'admin.importbasefija.index',
                     'icon'  => '',
-                    'can'   => 'admin.import_basefija.index',       
+                    'can'   => 'admin.import_basefija.index',      
                 ],
                 [
                     'text' => 'Base Movil',   
@@ -349,7 +354,8 @@ return [
              
         [
             'text'    => 'Ventas', 
-            'icon'    => 'fas fa-archive',          
+            'icon'    => 'fas fa-archive',
+            'can' => 'adminlte.ventas',           
             'submenu' => [  
                 [
                     'text' => 'Comisiones',  
@@ -368,7 +374,8 @@ return [
         
         [
             'text'    => 'Reportes', 
-            'icon'    => 'fas fa-file-alt',          
+            'icon'    => 'fas fa-file-alt',
+            'can' => 'adminlte.reportes',           
             'submenu' => [                          
                 [
                     'text' => 'Ventas Diarias',                            
