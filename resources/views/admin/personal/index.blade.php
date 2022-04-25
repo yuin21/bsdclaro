@@ -7,5 +7,6 @@
 @stop
 
 @section('content')
+    @include('alerts.success')
     @livewire('admin.personal-index')
 @stop

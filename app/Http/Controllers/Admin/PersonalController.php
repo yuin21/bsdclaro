@@ -42,23 +42,21 @@ class PersonalController extends Controller
 
         $personal = BsdPersonal::create($request->all());
 
-        return redirect()->route('admin.personal.index')->with('mensaje','Agregado con éxito');       
+        return redirect()->route('admin.personal.index')->with('success','Agregado con éxito');       
     }
    
-    public function show($id)
+    public function show(BsdPersonal $personal)
     {
-        $Personal = BsdPersonal::findOrFail(['id_personal' => $id]);
-        return view('admin.personal.show', compact('Personal'));
+        return view('admin.personal.show', compact('personal'));
     }
     
-    public function edit($id)
+    public function edit(BsdPersonal $personal)
     {
         $tipos_doc = TipoDoc::getTipoDoc();
-        $personal = BsdPersonal::where('id_personal', $id)->firstOrFail();
         return view('admin.personal.edit', compact('personal', 'tipos_doc'));
     }
    
-    public function update(Request $request, $id)
+    public function update(Request $request, BsdPersonal $personal)
     {        
         $request->validate([
             'nom_personal' => 'required|string|max:60',
@@ -70,16 +68,34 @@ class PersonalController extends Controller
             'email'=> 'required|string|max:75',
         ]);
 
-        $personal = BsdPersonal::where('id_personal', $id)->firstOrFail();
-        $personal->update($request);
-
-        // $personal->update($request->all());
-        return redirect()->route('admin.personal.edit', $personal)->with('mensaje', 'Se actualizó correctamente');
+        $personal->update($request->all());
+        return redirect()->route('admin.personal.edit', $personal)->with('success', 'Se actualizó correctamente');
     }
 
-    public function destroy($id)
+    public function indextrash()
     {
-        BsdPersonal::destroy($id);        
-        return redirect('admin/personal')->with('mensaje','Reporte borrado');
+        $bsd_personal = BsdPersonal::where('estado', 1)->all();
+        return view('admin.personal.indextrash', compact('bsd_personal'));
+    }
+
+
+    public function destroyLogico(BsdPersonal $personal)
+    {
+        $personal->estado = 0;
+        $personal->save();
+        return redirect()->route('admin.personal.index')->with('success','Personal ha sido removido de la lista');       
+    }
+
+    public function restaurarPersonal(BsdPersonal $personal)
+    {
+        $personal->estado = 1;
+        $personal->save();
+        return redirect()->route('admin.personal.index')->with('success','Personal ha sido restaurado');       
+    }
+
+    public function destroy(BsdPersonal $personal)
+    {
+        $personal->delete();
+        return redirect()->route('admin.personal.index')->with('success','Personal borrado');       
     }
 }

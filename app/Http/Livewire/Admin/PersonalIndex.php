@@ -20,7 +20,7 @@ class PersonalIndex extends Component
 
     public function render()
     {
-        $bsd_personal = BsdPersonal::where('ape_paterno','LIKE','%'.$this->search.'%')
+        $bsd_personal = BsdPersonal::where('estado', 1)->where('ape_paterno','LIKE','%'.$this->search.'%')
         // ->orWhere('ape_paterno','LIKE','%'.$this->search.'%')
         ->paginate(15);
         return view('livewire.admin.personal-index', compact('bsd_personal'));

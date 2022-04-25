@@ -1,9 +1,13 @@
-<div class="card">
-    <div class="card-header">
-        <a class="btn btn-primary mb-2" href="{{ route('admin.personal.create') }}">Registrar</a>
-        <a class="btn btn-info mb-2" href="{{ route('admin.personal.indextrash') }}">Removidos</a>
-        <input wire:model="search" class="form-control" type="text" placeholder="Busque por apellido paterno">
-    </div>
+@extends('adminlte::page')
+
+@section('title', 'Listado del Personal')
+
+@section('content_header')
+    <h1>Personal</h1>
+@stop
+
+@section('content')
+    @include('alerts.success')
     @if ($bsd_personal->count())
         <div class="card-footer">
             {{ $bsd_personal->links() }}
@@ -37,19 +41,16 @@
                                 <td>{{ $personal->email }}</td>
                                 <td>{{ $personal->estado }}</td>
                                 <td class="d-flex flex-wrap" style="gap: 5px; justify-content: end;">
-                                    <a href="{{ route('admin.personal.edit', $personal) }}"
-                                        class="btn btn-warning btn-sm">
-                                        Editar
-                                    </a>
-
-                                    <a href="{{ route('admin.personal.show', $personal) }}"
-                                        class="btn btn-primary btn-sm">
-                                        Ver
-                                    </a>
-                                    <form action="{{ route('admin.personal.destroyLogico', $personal) }}"
+                                    <form action="{{ route('admin.personal.restaurarPersonal', $personal) }}"
                                         class="d-inline" method="post">
                                         @csrf
                                         @method('PUT')
+                                        <input type="submit" value="Restaurar" class="btn btn-danger btn-sm">
+                                    </form>
+                                    <form action="{{ route('admin.personal.destroy', $personal) }}" class="d-inline"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
                                         <input type="submit" value="Borrar" class="btn btn-danger btn-sm">
                                     </form>
                                 </td>
@@ -61,7 +62,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de personal</strong>
+            <strong>Sin registros</strong>
         </div>
     @endif
-</div>
+@stop
