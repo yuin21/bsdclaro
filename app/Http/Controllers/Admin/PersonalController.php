@@ -74,7 +74,7 @@ class PersonalController extends Controller
 
     public function indextrash()
     {
-        $bsd_personal = BsdPersonal::where('estado', 1)->all();
+        $bsd_personal = BsdPersonal::where('estado', 0)->get();
         return view('admin.personal.indextrash', compact('bsd_personal'));
     }
 
