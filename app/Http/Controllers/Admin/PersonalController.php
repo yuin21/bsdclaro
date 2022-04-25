@@ -11,7 +11,7 @@ class PersonalController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:admin.personal.index');
+        $this->middleware('can:admin.personal.index');
     }
     
     public function index()
