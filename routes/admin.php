@@ -38,5 +38,3 @@ Route::resource('personal', PersonalController::class)->names('admin.personal');
 Route::get('removidos/personal', [PersonalController::class, 'indextrash'])->name('admin.personal.indextrash');
 Route::put('personal/{personal}/destroylogico', [PersonalController::class, 'destroyLogico'])->name('admin.personal.destroyLogico');
 Route::put('personal/{personal}/restaurarPersonal', [PersonalController::class, 'restaurarPersonal'])->name('admin.personal.restaurarPersonal');
-
-
