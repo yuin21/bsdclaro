@@ -3,35 +3,46 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-
-    <h1>Lista de roles</h1>
+    <h1 class="font-weight-bold">Roles</h1>
 @stop
 
 @section('content')
-    @include('alerts.success')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right">Crear rol</a>
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right">
+                <i class="fas fa-plus-circle"></i> Crear Rol
+            </a>
         </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
+        <div class="card-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="border">
                     <tr>
+                        <th>#</th>
                         <th>Rol</th>
-                        <th></th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($roles as $role)
                         <tr>
+                            <td width="20px">{{ $loop->iteration }}</td>
                             <td>{{ $role->name }}</td>
-                            <td class="d-flex flex-wrap" style="gap: 5px; justify-content: end;">
-                                <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-primary">Editar</a>
-                                <form action="{{ route('admin.roles.destroy', $role) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                                </form>
+                            <td width="260px">
+                                <div class="d-flex" style="gap: 10px">
+                                    <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </a>
+                                    <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-pen"></i> Editar
+                                    </a>
+                                    <form action="{{ route('admin.roles.destroy', $role) }}" method="POST"
+                                        class="form-delete">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger"><i
+                                                class="fas fa-minus-circle"></i> Eliminar</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -39,4 +50,35 @@
             </table>
         </div>
     </div>
+@stop
+
+@section('js')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El rol se eliminó con éxito',
+            })
+        </script>
+    @endif
+
+    <script>
+        $('.form-delete').submit(function(e) {
+            e.preventDefault()
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Elija la opción Eliminar para confirmar.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        })
+    </script>
 @stop

@@ -33,7 +33,7 @@ class RoleController extends Controller
         ]);
         $role = Role::create($request->all());
         $role->permissions()->sync($request->permissions);
-        return redirect()->route('admin.roles.edit', $role)->with('success', 'Se registró un nuevo rol');
+        return redirect()->route('admin.roles.show', $role)->with('success', 'store');
     }
 
     public function show(Role $role)
@@ -54,7 +54,7 @@ class RoleController extends Controller
         ]);
         $role->update($request->all());
         $role->permissions()->sync($request->permissions);
-        return redirect()->route('admin.roles.edit', $role)->with('success', 'Se editó el rol correctamente');
+        return redirect()->route('admin.roles.show', $role)->with('success', 'update');
     }
 
     public function destroy(Role $role)
