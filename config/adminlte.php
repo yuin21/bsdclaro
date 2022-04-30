@@ -253,28 +253,29 @@ return [
         //     'label'       => 4,
         //     'label_color' => 'success',
         // ],
-        // [
-        //     'text' => 'Dashboard',
-        //     'url'  => 'admin',
-        //     'icon' => 'fas fa-fw fa-info',
-        // ],
-        
+        [
+            'text' => 'Perfil',
+            'route'  => 'admin.perfil.index',
+            'icon' => 'fas fa-fw fa-user-circle',
+        ],
         [
             'text' => 'Usuarios',
-            'url'  => '/user/profile',
             'icon' => 'fas fa-fw fa-user',
-            'can' => 'adminlte.usuarios',   
+            'active' => ['admin/users*'],   
+            'can' => 'adminlte.usuarios',
             'submenu' => [    
                 [
                     'text'  => 'Registro de Usuarios', 
                     'route' => 'admin.users.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/users*'],   
                     'can'   => 'admin.users.index',      
                 ],
                 [
                     'text' => 'Registro de roles', 
                     'route'  => 'admin.roles.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/roles*'],  
                     'can' => 'admin.roles.index',       
                 ],
             ]

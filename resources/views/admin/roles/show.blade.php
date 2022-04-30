@@ -22,11 +22,18 @@
                 <li class="list-group-item list-group-item-dark text-bold">
                     Lista de permisos
                 </li>
-                @foreach ($role->permissions as $permission)
+                @if ($role->permissions->count())
+
+                    @foreach ($role->permissions as $permission)
+                        <li class="list-group-item">
+                            {{ $permission->description }}
+                        </li>
+                    @endforeach
+                @else
                     <li class="list-group-item">
-                        {{ $permission->description }}
+                        No tiene asignado ningún permisos
                     </li>
-                @endforeach
+                @endif
             </ul>
         </div>
     </div>

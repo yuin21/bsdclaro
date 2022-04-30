@@ -68,4 +68,10 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
         return redirect()->route('admin.users.show', $user)->with('success', 'update');
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.users.index')->with('success', 'destroy');
+    }
 }

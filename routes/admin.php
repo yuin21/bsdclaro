@@ -9,8 +9,12 @@ use App\Http\Controllers\Admin\ImportBaseMovilController;
 use App\Http\Controllers\Admin\ImportBaseRenuevaController;
 use App\Http\Controllers\Admin\PersonalController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PerfilController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
+
+//perfil
+Route::get('perfil', [PerfilController::class, 'index'])->name('admin.perfil.index');
 
 //usuarios
 Route::resource('users', UserController::class)->names('admin.users');

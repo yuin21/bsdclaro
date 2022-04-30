@@ -12,3 +12,34 @@
 @section('content')
     @livewire('admin.users-index')
 @stop
+
+@section('js')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El usuario se eliminó con éxito',
+            })
+        </script>
+    @endif
+
+    <script>
+        $('.form-delete').submit(function(e) {
+            e.preventDefault()
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Elija la opción Eliminar para confirmar.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        })
+    </script>
+@stop

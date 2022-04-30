@@ -5,6 +5,9 @@
     </div>
     @if ($users->count())
         <div class="card-body table-responsive">
+            <div>
+                {{ $users->links() }}
+            </div>
             <table class="table table-bordered table-hover">
                 <thead class="border">
                     <tr>
@@ -46,6 +49,13 @@
                                         href="{{ route('admin.users.edit', $user) }}">
                                         <i class="fas fa-pen"></i> Editar
                                     </a>
+                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
+                                        class="form-delete text-nowrap">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-minus-circle"></i> Eliminar</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -53,9 +63,6 @@
                 </tbody>
             </table>
 
-        </div>
-        <div class="card-footer">
-            {{ $users->links() }}
         </div>
     @else
         <div class="card-body">
