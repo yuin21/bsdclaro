@@ -226,33 +226,13 @@ return [
 
     'menu' => [
         // Navbar items:
-        //  [
-        //      'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
+
          [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
          ],
 
         // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
-        // [
-        //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
-        // ],
-        // [
-        //     'text'        => 'pages',
-        //     'url'         => 'admin/pages',
-        //     'icon'        => 'far fa-fw fa-file',
-        //     'label'       => 4,
-        //     'label_color' => 'success',
-        // ],
         [
             'text' => 'Perfil',
             'route'  => 'admin.perfil.index',
@@ -284,14 +264,15 @@ return [
             'text' => 'Personal',
             'url'  => '/user/profile',
             'icon' => 'fas fa-users',
+            'active' => ['admin/personal*'], 
             'can' => 'adminlte.personal', 
             'submenu' => [
                 [
                     'text' => 'Registro Personal',  
                     'route'  => 'admin.personal.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'can' => 'admin.personal.index',      
-                   
+                    'active' => ['admin/personal*'], 
+                    'can' => 'admin.personal.index',
                 ],
             ],  
         ], 
@@ -299,11 +280,13 @@ return [
             'text' => 'Clientes',
             'icon' => 'fas fa-fw fa-address-book',
             'can' => 'adminlte.clientes', 
+            'active' => ['admin/clientes*'], 
             'submenu' => [
                 [
                     'text' => 'Registro Clientes',  
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
+                    'url'     => '#',
+                    'active' => ['admin/clientes*'], 
                     'can' => 'admin.clientes.index',
                 ],
             ],  
@@ -311,23 +294,27 @@ return [
         [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
+            'active' => ['admin/cargasmasivas*'], 
             'can' => 'adminlte.cargasmasivas', 
             'submenu' => [                          
                 [
                     'text' => 'Base Fija', 
                     'route' => 'admin.importbasefija.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/import_basefija*'],
                     'can'   => 'admin.import_basefija.index',      
                 ],
                 [
                     'text' => 'Base Movil',   
                     'route' => 'admin.importbasemovil.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/import_basemovil*'],
                     'can'   => 'admin.import_basemovil.index',      
                 ],
                 [   'text' => 'Base Renueva',  
                     'route' => 'admin.importbaserenueva.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/import_baserenueva*'],
                     'can'   => 'admin.import_baserenueva.index',   
                 ],
             ],
