@@ -6,26 +6,13 @@
     <a href="{{ route('admin.users.index') }}" class="float-right mt-2">
         <i class="fas fa-chevron-circle-left"></i> Ver lista de usuarios
     </a>
-    <h1 class="text-bold">Editar Usuario</h1>
+    <h1 class="text-bold">Crear Usuario</h1>
 @stop
 
 @section('content')
-
-    @if (session('info'))
-        <div class="alert alert-success">
-            <strong>{{ session('info') }}</strong>
-        </div>
-    @endif
-
     <div class="card">
-        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
-            <h5 class="flex-grow-1">Usuario: <span class="badge badge-warning">{{ $user->name }}</span></h5>
-            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-sm btn-info text-nowrap">
-                <i class="fas fa-eye"></i> Ver
-            </a>
-        </div>
         <div class="card-body">
-            {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
+            {!! Form::open(['route' => 'admin.users.store']) !!}
             <div class="form-group">
                 {!! Form::label('name', 'Nombre') !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -40,6 +27,20 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
+            <div class="form-group">
+                {!! Form::label('password', 'Contraseña') !!}
+                {!! Form::text('password', null, ['class' => 'form-control']) !!}
+                @error('password')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group">
+                {!! Form::label('password_confirmation', 'Repetir contraseña') !!}
+                {!! Form::text('password_confirmation', null, ['class' => 'form-control']) !!}
+                @error('password_confirmation')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
             {!! Form::label(null, 'Rol') !!}
             <div class="form-group border rounded-lg p-2">
                 @foreach ($roles as $role)
@@ -51,7 +52,7 @@
                     </div>
                 @endforeach
             </div>
-            {!! Form::submit('Editar Usuario', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Crear Usuario', ['class' => 'btn btn-primary']) !!}
             <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
             {!! Form::close() !!}
         </div>

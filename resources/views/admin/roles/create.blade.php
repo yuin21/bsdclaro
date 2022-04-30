@@ -15,6 +15,7 @@
             {!! Form::open(['route' => 'admin.roles.store']) !!}
             @include('admin.roles.partials.form')
             {!! Form::submit('Crear Rol', ['class' => 'btn btn-primary']) !!}
+            <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
             {!! Form::close() !!}
         </div>
     </div>

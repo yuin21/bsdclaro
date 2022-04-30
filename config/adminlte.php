@@ -258,21 +258,6 @@ return [
         //     'url'  => 'admin',
         //     'icon' => 'fas fa-fw fa-info',
         // ],
-       
-        // [
-        //     'header' => 'Usuario',
-        //     'icon' => 'far fa-fw fa-files', 
-        //     'url'         => 'admin/pages',   
-        //     'label'       => 4,
-        //     'submenu' => [                          
-        //         [
-        //             'text' => 'Registros de Usarios', 
-        //             'route'  => 'admin.users.index',
-        //             'icon'  => 'fa-regular fa-user',
-        //             'can' => 'admin.users.index',      
-        //         ],
-        //         ]
-        // ]
         
         [
             'text' => 'Usuarios',
@@ -281,20 +266,15 @@ return [
             'can' => 'adminlte.usuarios',   
             'submenu' => [    
                 [
-                    'text' => 'Registro de Usuarios', 
-                    'route'  => 'admin.users.index',
-                    'icon'  => '',
-                    'can' => 'admin.users.index',      
+                    'text'  => 'Registro de Usuarios', 
+                    'route' => 'admin.users.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'can'   => 'admin.users.index',      
                 ],
-                // [
-                //     'text' => 'Asignación del Rol', 
-                //     'url'  => '#',
-                //     'icon'  => '',      
-                // ],
                 [
                     'text' => 'Registro de roles', 
                     'route'  => 'admin.roles.index',
-                    'icon'  => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'can' => 'admin.roles.index',       
                 ],
             ]
@@ -308,7 +288,7 @@ return [
                 [
                     'text' => 'Registro Personal',  
                     'route'  => 'admin.personal.index',
-                    'icon'  => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'can' => 'admin.personal.index',      
                    
                 ],
@@ -321,7 +301,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Registro Clientes',  
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => '#',            
                     'can' => 'admin.clientes.index',
                 ],
@@ -335,18 +315,18 @@ return [
                 [
                     'text' => 'Base Fija', 
                     'route' => 'admin.importbasefija.index',
-                    'icon'  => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'can'   => 'admin.import_basefija.index',      
                 ],
                 [
                     'text' => 'Base Movil',   
                     'route' => 'admin.importbasemovil.index',
-                    'icon'  => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'can'   => 'admin.import_basemovil.index',      
                 ],
                 [   'text' => 'Base Renueva',  
                     'route' => 'admin.importbaserenueva.index',
-                    'icon'  => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'can'   => 'admin.import_baserenueva.index',   
                 ],
             ],
@@ -359,13 +339,13 @@ return [
             'submenu' => [  
                 [
                     'text' => 'Comisiones',  
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => '#',            
                    
                 ],                        
                 [
                     'text' => 'Bonificaciones',  
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => '#',            
                    
                 ],
@@ -379,12 +359,12 @@ return [
             'submenu' => [                          
                 [
                     'text' => 'Ventas Diarias',                            
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => '#',            
                 ],
                 [
                     'text' => 'Ventas por consultor',                            
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => '#',            
                 ],
             ]
@@ -396,13 +376,13 @@ return [
             'submenu' => [                          
                 [
                     'text' => 'Calculadora',                            
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => 'https://web2.0calc.es',
                     'target' => '_blank'
                 ],  
                 [
                     'text' => 'Cálculo del IGV',                            
-                    'icon'    => '',
+                    'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => 'https://feelingperu.com/calculadora-igv-peru/',
                     'target' => '_blank'
                 ], 

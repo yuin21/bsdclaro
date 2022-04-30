@@ -4,27 +4,49 @@
             placeholder="Ingrese el nombre o correo de un usuario para buscar">
     </div>
     @if ($users->count())
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
+        <div class="card-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="border">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Rol</th>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            <td width="20px">{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->roles[0]->name }}</td>
-                            <td width="130px">
-                                <a class="btn btn-primary" href="{{ route('admin.users.edit', $user) }}">
-                                    Editar Rol
-                                </a>
+                            @if ($user->roles->count())
+                                <td>
+                                    @foreach ($user->roles as $userrol)
+                                        <span class="badge badge-secondary text-nowrap">
+                                            {{ $userrol->name }}
+                                        </span>
+                                    @endforeach
+                                </td>
+                            @else
+                                <td>
+                                    <span class="badge badge-warning text-nowrap">
+                                        Sin rol
+                                    </span>
+                                </td>
+                            @endif
+                            <td width="150px">
+                                <div class="d-flex" style="gap: 10px">
+                                    <a href="{{ route('admin.users.show', $user) }}"
+                                        class="btn btn-sm btn-info text-nowrap">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </a>
+                                    <a class="btn btn-success btn-sm text-nowrap"
+                                        href="{{ route('admin.users.edit', $user) }}">
+                                        <i class="fas fa-pen"></i> Editar
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

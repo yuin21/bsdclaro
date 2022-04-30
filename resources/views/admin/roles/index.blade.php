@@ -3,16 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
+    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right text-nowrap">
+        <i class="fas fa-plus-circle"></i> Crear Rol
+    </a>
     <h1 class="font-weight-bold">Roles</h1>
 @stop
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right">
-                <i class="fas fa-plus-circle"></i> Crear Rol
-            </a>
-        </div>
         <div class="card-body table-responsive">
             <table class="table table-bordered table-hover">
                 <thead class="border">
@@ -29,14 +27,16 @@
                             <td>{{ $role->name }}</td>
                             <td width="260px">
                                 <div class="d-flex" style="gap: 10px">
-                                    <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-sm btn-info">
+                                    <a href="{{ route('admin.roles.show', $role) }}"
+                                        class="btn btn-sm btn-info text-nowrap">
                                         <i class="fas fa-eye"></i> Ver
                                     </a>
-                                    <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-success">
+                                    <a href="{{ route('admin.roles.edit', $role) }}"
+                                        class="btn btn-sm btn-success text-nowrap">
                                         <i class="fas fa-pen"></i> Editar
                                     </a>
                                     <form action="{{ route('admin.roles.destroy', $role) }}" method="POST"
-                                        class="form-delete">
+                                        class="form-delete text-nowrap">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i

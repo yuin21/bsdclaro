@@ -11,9 +11,9 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
             <h5 class="flex-grow-1">Rol: <span class="badge badge-warning">{{ $role->name }}</span></h5>
-            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-success">
+            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-success text-nowrap">
                 <i class="fas fa-pen"></i> Editar
             </a>
         </div>

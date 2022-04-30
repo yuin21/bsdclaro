@@ -11,9 +11,9 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
             <h5 class="flex-grow-1">Rol: <span class="badge badge-warning">{{ $role->name }}</span></h5>
-            <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-sm btn-info">
+            <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-sm btn-info text-nowrap">
                 <i class="fas fa-eye"></i> Ver
             </a>
         </div>
@@ -21,6 +21,7 @@
             {!! Form::model($role, ['route' => ['admin.roles.update', $role], 'method' => 'put']) !!}
             @include('admin.roles.partials.form')
             {!! Form::submit('Editar Rol', ['class' => 'btn btn-primary']) !!}
+            <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
             {!! Form::close() !!}
         </div>
     </div>

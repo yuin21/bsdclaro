@@ -153,7 +153,7 @@ return [
         'img' => 'imagen',
         'current_password' => 'contraseña actual',
         'password' => 'contraseña',
-        'email' => 'correo electrónico'
+        'email' => 'correo'
     ],
 
 ];

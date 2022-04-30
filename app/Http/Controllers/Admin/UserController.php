@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -20,6 +21,37 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
+    public function create(User $user)
+    {
+        $roles = Role::all();
+        return view('admin.users.create', compact('user','roles'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:8|max:20|',
+            "password_confirmation" => "required|min:8|max:20|same:password"
+        ]);
+
+        $user = User::create([
+            'name' =>  $request['name'],
+            'email' =>  $request['email'],
+            'password' => Hash::make( $request['password']),
+        ]);
+
+        $user->roles()->sync($request->roles);
+        return redirect()->route('admin.users.show', $user)->with('success', 'store');
+    }
+
+    public function show(User $user)
+    {
+        $roles = Role::all();
+        return view('admin.users.show', compact('user','roles'));
+    }
+
     public function edit(User $user)
     {
         $roles = Role::all();
@@ -28,7 +60,12 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => "required|unique:users,email,$user->id",
+        ]);
+        $user->update($request->all());
         $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit', $user)->with('info', 'Rol editado correctamente');
+        return redirect()->route('admin.users.show', $user)->with('success', 'update');
     }
 }
