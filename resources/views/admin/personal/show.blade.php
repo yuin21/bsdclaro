@@ -3,15 +3,72 @@
 @section('title', 'Ver Personal')
 
 @section('content_header')
-    <h1>Ver Personal</h1>
+    <a href="{{ route('admin.personal.index') }}" class="float-right mt-2">
+        <i class="fas fa-chevron-circle-left"></i> Ver lista de personal
+    </a>
+    <h1 class="text-bold">Ver Personal</h1>
 @stop
 
 @section('content')
+    <div class="card">
+        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+            <h5 class="flex-grow-1">Personal: <span class="badge badge-warning">{{ $personal->ape_paterno }}
+                    {{ $personal->ape_materno }} {{ $personal->nom_personal }}</span></h5>
+            <a href="{{ route('admin.personal.edit', $personal) }}" class="btn btn-sm btn-success text-nowrap">
+                <i class="fas fa-pen"></i> Editar
+            </a>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Nombre:</b> {{ $personal->nom_personal }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Apellido materno:</b> {{ $personal->ape_paterno }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Apellido paterno:</b> {{ $personal->ape_materno }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Cargo:</b> {{ $personal->cargo }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Tipo de documento:</b>
+                    {{ $personal->tipo_doc_iden }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Número de documento:</b>
+                    {{ $personal->nro_doc_iden }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Dirección:</b> {{ $personal->direccion }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Celular:</b> {{ $personal->celular }}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Correo:</b> {{ $personal->email }}
+                </li>
+            </ul>
+        </div>
+    </div>
+@stop
 
-    <form action="{{ url('admin/personal/' . $BsdPersonal->id_personal) }}" method="get" enctype="multipart/form-data">
-
-        @include('reporte_venta.movil.form', ['modo' => 'Ver'])
-
-    </form>
-
+@section('js')
+    @if (session('success') == 'update')
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El personal se editó con éxito',
+            })
+        </script>
+    @endif
+    @if (session('success') == 'store')
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El personal se registró con éxito',
+            })
+        </script>
+    @endif
 @stop

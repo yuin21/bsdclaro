@@ -42,7 +42,7 @@ class PersonalController extends Controller
 
         $personal = BsdPersonal::create($request->all());
 
-        return redirect()->route('admin.personal.index')->with('success','Agregado con éxito');       
+        return redirect()->route('admin.personal.show', $personal)->with('success','store');       
     }
    
     public function show(BsdPersonal $personal)
@@ -69,7 +69,7 @@ class PersonalController extends Controller
         ]);
 
         $personal->update($request->all());
-        return redirect()->route('admin.personal.edit', $personal)->with('success', 'Se actualizó correctamente');
+        return redirect()->route('admin.personal.show', $personal)->with('success', 'update');
     }
 
     public function indextrash()
@@ -83,19 +83,19 @@ class PersonalController extends Controller
     {
         $personal->estado = 0;
         $personal->save();
-        return redirect()->route('admin.personal.index')->with('success','Personal ha sido removido de la lista');       
+        return redirect()->route('admin.personal.index')->with('success','destroyLogico');       
     }
 
     public function restaurarPersonal(BsdPersonal $personal)
     {
         $personal->estado = 1;
         $personal->save();
-        return redirect()->route('admin.personal.index')->with('success','Personal ha sido restaurado');       
+        return redirect()->route('admin.personal.indextrash')->with('success','restaurar');       
     }
 
     public function destroy(BsdPersonal $personal)
     {
         $personal->delete();
-        return redirect()->route('admin.personal.index')->with('success','Personal borrado');       
+        return redirect()->route('admin.personal.indextrash')->with('success','destroy');       
     }
 }

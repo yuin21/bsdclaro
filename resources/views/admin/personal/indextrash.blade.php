@@ -3,11 +3,13 @@
 @section('title', 'Listado del Personal')
 
 @section('content_header')
-    <h1>Personal</h1>
+    <a href="{{ route('admin.personal.index') }}" class="float-right mt-2">
+        <i class="fas fa-chevron-circle-left"></i> Ver lista de personal
+    </a>
+    <h1 class="text-bold">Personal Removido</h1>
 @stop
 
 @section('content')
-    @include('alerts.success')
     <div class="card">
         @if ($bsd_personal->count())
             <div class="card-body" style="overflow: hidden">
@@ -23,6 +25,7 @@
                                 <th>celular</th>
                                 <th>email</th>
                                 <th>estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,19 +41,25 @@
                                     <td>{{ $personal->celular }}</td>
                                     <td>{{ $personal->email }}</td>
                                     <td>{{ $personal->estado }}</td>
-                                    <td class="d-flex flex-wrap" style="gap: 5px; justify-content: end;">
-                                        <form action="{{ route('admin.personal.restaurarPersonal', $personal) }}"
-                                            class="d-inline" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="submit" value="Restaurar" class="btn btn-info btn-sm">
-                                        </form>
-                                        <form action="{{ route('admin.personal.destroy', $personal) }}"
-                                            class="d-inline" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" value="Borrar" class="btn btn-danger btn-sm">
-                                        </form>
+                                    <td width="200px">
+                                        <div class="d-flex" style="gap: 10px">
+                                            <form action="{{ route('admin.personal.restaurarPersonal', $personal) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-sm btn-info text-nowrap">
+                                                    <i class="fas fa-plus-circle"></i> Restaurar
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('admin.personal.destroy', $personal) }}"
+                                                class="form-delete" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger text-nowrap">
+                                                    <i class="fas fa-minus-circle"></i> Eliminar
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -64,4 +73,45 @@
             </div>
         @endif
     </div>
+@stop
+
+@section('js')
+    @if (session('success') === 'restaurar')
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El personal se ha restaurado con éxito',
+            })
+        </script>
+    @endif
+
+    @if (session('success') === 'destroy')
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'El personal se eliminó con éxito',
+            })
+        </script>
+    @endif
+
+
+    <script>
+        $('.form-delete').submit(function(e) {
+            e.preventDefault()
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Elija la opción Eliminar para confirmar.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        })
+    </script>
 @stop

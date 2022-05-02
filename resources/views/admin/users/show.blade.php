@@ -20,13 +20,13 @@
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <b>Nombre:</b> {{ $user->name }}
+                    <b style="min-width:100px; display: inline-block">Nombre:</b> {{ $user->name }}
                 </li>
                 <li class="list-group-item">
-                    <b>Correo:</b> {{ $user->email }}
+                    <b style="min-width:100px; display: inline-block">Correo:</b> {{ $user->email }}
                 </li>
                 <li class="list-group-item">
-                    <b>Rol:</b>
+                    <b style="min-width:100px; display: inline-block">Rol:</b>
                     @if ($user->roles->count())
                         <td>
                             @foreach ($user->roles as $userrol)

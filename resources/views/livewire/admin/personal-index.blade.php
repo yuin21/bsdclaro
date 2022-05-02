@@ -1,17 +1,18 @@
 <div class="card">
     <div class="card-header">
-        <a class="btn btn-primary mb-2" href="{{ route('admin.personal.create') }}">Registrar</a>
-        <a class="btn btn-info mb-2" href="{{ route('admin.personal.indextrash') }}">Removidos</a>
+        <a class="btn btn-info mb-2" href="{{ route('admin.personal.indextrash') }}">
+            <i class="fas fa-trash"></i> Removidos
+        </a>
         <input wire:model="search" class="form-control" type="text" placeholder="Busque por apellido paterno">
     </div>
     @if ($bsd_personal->count())
-        <div class="card-footer">
-            {{ $bsd_personal->links() }}
-        </div>
-        <div class="card-body" style="overflow: hidden">
-            <div style="overflow: auto">
-                <table class="table table-striped">
-                    <thead>
+        <div class="card-body">
+            <div>
+                {{ $bsd_personal->links() }}
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="border">
                         <tr>
                             <th>Personal</th>
                             <th>cargo</th>
@@ -21,6 +22,7 @@
                             <th>celular</th>
                             <th>email</th>
                             <th>estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,22 +38,25 @@
                                 <td>{{ $personal->celular }}</td>
                                 <td>{{ $personal->email }}</td>
                                 <td>{{ $personal->estado }}</td>
-                                <td class="d-flex flex-wrap" style="gap: 5px; justify-content: end;">
-                                    <a href="{{ route('admin.personal.edit', $personal) }}"
-                                        class="btn btn-warning btn-sm">
-                                        Editar
-                                    </a>
-
-                                    <a href="{{ route('admin.personal.show', $personal) }}"
-                                        class="btn btn-primary btn-sm">
-                                        Ver
-                                    </a>
-                                    <form action="{{ route('admin.personal.destroyLogico', $personal) }}"
-                                        class="d-inline" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="submit" value="Borrar" class="btn btn-danger btn-sm">
-                                    </form>
+                                <td width="270px">
+                                    <div class="d-flex" style="gap: 10px">
+                                        <a href="{{ route('admin.personal.show', $personal) }}"
+                                            class="btn btn-sm btn-info text-nowrap">
+                                            <i class="fas fa-eye"></i> Ver
+                                        </a>
+                                        <a href="{{ route('admin.personal.edit', $personal) }}"
+                                            class="btn btn-success btn-sm text-nowrap">
+                                            <i class="fas fa-pen"></i> Editar
+                                        </a>
+                                        <form action="{{ route('admin.personal.destroyLogico', $personal) }}"
+                                            class="form-borrar" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-sm btn-danger text-nowrap">
+                                                <i class="fas fa-minus-circle"></i> Remover
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

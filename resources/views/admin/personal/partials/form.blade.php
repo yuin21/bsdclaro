@@ -35,15 +35,19 @@
 
 <div class="form-group">
     {!! Form::label(null, 'Tipo de documento') !!}
-    @foreach ($tipos_doc as $tipo)
-        <div>
-            <label>
-                {!! Form::radio('tipo_doc_iden', $tipo->cod, null, ['class' => 'mr-1']) !!}
-                ({{ $tipo->cod }})
-                {{ $tipo->name }}
-            </label>
-        </div>
-    @endforeach
+
+
+    <div class="form-group border rounded-lg p-2">
+        @foreach ($tipos_doc as $tipo)
+            <div>
+                <label>
+                    {!! Form::radio('tipo_doc_iden', $tipo->cod, null, ['class' => 'mr-1']) !!}
+                    ({{ $tipo->cod }})
+                    {{ $tipo->name }}
+                </label>
+            </div>
+        @endforeach
+    </div>
     @error('tipo_doc_iden')
         <span class="text-danger">{{ $message }}</span>
     @enderror
@@ -66,7 +70,7 @@
     {!! Form::text('celular', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! Form::label('Correo Electrónico', 'Correo') !!}
+    {!! Form::label('email', 'Correo') !!}
     {!! Form::text('email', null, ['class' => 'form-control']) !!}
     @error('email')
         <span class="text-danger">{{ $message }}</span>
