@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PdfController;
 
 Route::get('/', function () {
     // return view('welcome');
@@ -18,11 +17,3 @@ Route::middleware([
         return redirect('/admin');
     })->name('dashboard');
 });
-
-
-//Demo de uso snappy para manejar PDF
-// Route::get('graphs', 'PdfController@graphs');
-// Route::get('graphs-pdf', 'PdfController@graphPdf'); 
-
-Route::get('graphs', [PdfController::class, 'graphs']);
-Route::get('graphs-pdf', [PdfController::class, 'graphPdf']);

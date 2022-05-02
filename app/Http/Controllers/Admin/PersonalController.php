@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BsdPersonal;
 use App\Imports\TipoDoc;
+use PDF;
 
 class PersonalController extends Controller
 {
@@ -97,5 +98,11 @@ class PersonalController extends Controller
     {
         $personal->delete();
         return redirect()->route('admin.personal.indextrash')->with('success','destroy');       
+    }
+
+    public function generatePDF(BsdPersonal $personal)
+    {
+        $pdf = PDF::loadView('admin.personal.pdf', compact('personal'));
+        return $pdf->download('personal.pdf');       
     }
 }
