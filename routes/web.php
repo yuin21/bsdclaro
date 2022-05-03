@@ -7,6 +7,10 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
+Route::get('/register', function () {
+    return redirect('/login');
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

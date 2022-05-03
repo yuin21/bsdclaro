@@ -29,14 +29,14 @@
             </div>
             <div class="form-group">
                 {!! Form::label('password', 'Contraseña') !!}
-                {!! Form::text('password', null, ['class' => 'form-control']) !!}
+                {!! Form::password('password', ['class' => 'form-control']) !!}
                 @error('password')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
             <div class="form-group">
                 {!! Form::label('password_confirmation', 'Repetir contraseña') !!}
-                {!! Form::text('password_confirmation', null, ['class' => 'form-control']) !!}
+                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                 @error('password_confirmation')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

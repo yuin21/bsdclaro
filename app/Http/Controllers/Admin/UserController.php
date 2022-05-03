@@ -30,8 +30,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users',
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:8|max:20|',
             "password_confirmation" => "required|min:8|max:20|same:password"
         ]);
@@ -61,9 +61,10 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => "required|unique:users,email,$user->id",
+            'name' => 'required|max:255',
+            'email' => "required|email|max:255|unique:users,email,$user->id",
         ]);
+
         $user->update($request->all());
         $user->roles()->sync($request->roles);
         return redirect()->route('admin.users.show', $user)->with('success', 'update');
