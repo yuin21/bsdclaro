@@ -34,7 +34,12 @@
                 </li>
                 <li class="list-group-item">
                     <b style="min-width:200px; display: inline-block">Tipo de documento:</b>
-                    {{ $personal->tipo_doc_iden }}
+                    ({{ $personal->tipo_doc_iden }})
+                    @foreach ($tipos_doc as $tipo)
+                        @if ($tipo->cod === $personal->tipo_doc_iden)
+                            {{ $tipo->name }}
+                        @endif
+                    @endforeach
                 </li>
                 <li class="list-group-item">
                     <b style="min-width:200px; display: inline-block">Número de documento:</b>
