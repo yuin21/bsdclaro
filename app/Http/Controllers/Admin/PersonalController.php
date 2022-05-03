@@ -24,7 +24,6 @@ class PersonalController extends Controller
     {
     
         $tipos_doc = TipoDoc::getTipoDoc();
-
         return view('admin.personal.create', compact('tipos_doc'));
     }
 
@@ -37,8 +36,7 @@ class PersonalController extends Controller
             'cargo' => 'required|string|max:75',
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> 'required|string|max:15', 
-            'email'=> 'required|string|max:75',
-          
+            'email'=> 'required|string|email|max:75',
         ]);       
 
         $personal = BsdPersonal::create($request->all());
@@ -48,7 +46,8 @@ class PersonalController extends Controller
    
     public function show(BsdPersonal $personal)
     {
-        return view('admin.personal.show', compact('personal'));
+        $tipos_doc = TipoDoc::getTipoDoc();
+        return view('admin.personal.show', compact('personal', 'tipos_doc'));
     }
     
     public function edit(BsdPersonal $personal)
@@ -66,7 +65,7 @@ class PersonalController extends Controller
             'cargo' => 'required|string|max:75',
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> 'required|string|max:15', 
-            'email'=> 'required|string|max:75',
+            'email'=> 'required|string|email|max:75',
         ]);
 
         $personal->update($request->all());
