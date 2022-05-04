@@ -15,33 +15,33 @@ return new class extends Migration
     {
         Schema::create('bsd_base_fijas', function (Blueprint $table) {
             $table->id();
-            $table->string('plataforma', 10);
-            $table->char('ceco', 10);
-            $table->bigInteger('codcliente');
-            $table->string('nomcliente', 120);
-            $table->string('documento', 25);
-            $table->char('num_docu', 11);
-            $table->char('sec', 8);
+            $table->string('plataforma', 10)->nullable();
+            $table->char('ceco', 10)->nullable();
+            $table->bigInteger('codcliente')->nullable();
+            $table->string('nomcliente', 120)->nullable();
+            $table->string('documento', 25)->nullable();
+            $table->char('num_docu', 11)->nullable();
+            $table->char('sec', 8)->nullable();
             $table->string('linea', 13)->nullable();
             $table->string('proyecto', 45)->nullable();
-            $table->smallInteger('ugis');
+            $table->smallInteger('ugis')->nullable();
             $table->char('sot', 8)->nullable();
-            $table->string('estadosot', 20);
+            $table->string('estadosot', 20)->nullable();
             $table->string('solucion', 120)->nullable();
             $table->string('promocion', 120)->nullable();
             $table->string('campana', 200)->nullable(); //No se que es esto
             $table->char('fecinstalacion', 8)->nullable();
-            $table->string('status_carpeta', 25);
-            $table->float('cargo_fijo');
-            $table->char('semanapago', 11);
-            $table->string('motivo_pago', 20);
-            $table->float('factor');
-            $table->float('comision_a_recibir');
-            $table->float('comision_total');
+            $table->string('status_carpeta', 25)->nullable();
+            $table->float('cargo_fijo')->nullable();
+            $table->char('semanapago', 11)->nullable();
+            $table->string('motivo_pago', 20)->nullable(); //Solo existe un campo nulo
+            $table->float('factor')->nullable();
+            $table->float('comision_a_recibir')->nullable();
+            $table->float('comision_total')->nullable();
             $table->char('poliza', 10)->nullable();
-            $table->char('fecha_emision', 8);
-            $table->string('vendedor', 20);
-            $table->string('distrito', 50);
+            $table->char('fecha_emision', 8)->nullable();
+            $table->string('vendedor', 20)->nullable();
+            $table->string('distrito', 50)->nullable();
             $table->string('codplano', 20)->nullable();
             $table->string('plano', 50)->nullable();
             $table->string('usuarioregistro', 20)->nullable();

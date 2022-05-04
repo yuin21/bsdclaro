@@ -15,38 +15,38 @@ return new class extends Migration
     {
         Schema::create('bsd_base_movils', function (Blueprint $table) {
             $table->id();
-            $table->char('sec', 8);
-            $table->date('fecha_operacion');
-            $table->string('tipo_operacion', 35);
-            $table->char('cod_region', 2);
-            $table->string('region', 10);
-            $table->string('departamento', 25);
-            $table->string('pdv', 20);
-            $table->char('cod_pdv', 10);
-            $table->bigInteger('customer_id');
-            $table->string('cod_bscs', 35); //No estoy seguro de que hace referencia esto
-            $table->bigInteger('co_id');
+            $table->char('sec', 8)->nullable();
+            $table->date('fecha_operacion')->nullable();
+            $table->string('tipo_operacion', 35)->nullable();
+            $table->char('cod_region', 2)->nullable();
+            $table->string('region', 10)->nullable();
+            $table->string('departamento', 25)->nullable();
+            $table->string('pdv', 20)->nullable();
+            $table->char('cod_pdv', 10)->nullable();
+            $table->bigInteger('customer_id')->nullable();
+            $table->string('cod_bscs', 35)->nullable(); //No estoy seguro de que hace referencia esto
+            $table->bigInteger('co_id')->nullable();
             $table->date('fec_activacion')->nullable();
             $table->string('linea', 13)->nullable();
-            $table->char('estado_linea', 1)->default('d');
+            $table->char('estado_linea', 1)->nullable();
             $table->date('fec_estado')->nullable();
-            $table->string('plan', 45);
-            $table->string('servicio', 25);
-            $table->float('cargo_fijo');
-            $table->float('cargo_real');
-            $table->float('factor');
-            $table->char('ruc_cliente', 11);
-            $table->float('comision_base');
-            $table->date('fecha_pago');
-            $table->char('semana_pago', 11);
-            $table->string('estado_exp', 20);
-            $table->char('fuera_plazo', 2);
-            $table->float('extorno_sivco')->default(0);
-            $table->float('extorno_tope')->default(0);
-            $table->float('comision_final');
-            $table->char('oc', 10);
+            $table->string('plan', 45)->nullable();
+            $table->string('servicio', 25)->nullable();
+            $table->float('cargo_fijo')->nullable();
+            $table->float('cargo_real')->nullable();
+            $table->float('factor')->nullable(); //Tiene campos nulos pero no deberia creo
+            $table->char('ruc_cliente', 11)->nullable();
+            $table->float('comision_base')->nullable();
+            $table->char('fecha_pago', 10)->nullable(); //Formato de fecha DD/MM/YYYY
+            $table->char('semana_pago', 11)->nullable();
+            $table->string('estado_exp', 20)->nullable();
+            $table->char('fuera_plazo', 2)->nullable();
+            $table->float('extorno_sivco')->nullable();
+            $table->float('extorno_tope')->nullable();
+            $table->float('comision_final')->nullable();
+            $table->char('oc', 10)->nullable();
             $table->string('observacion', 300)->nullable();
-            $table->date('fecha_carga')->nullable();
+            $table->char('fecha_carga', 10)->nullable(); //Formato de fecha DD/MM/YYYY
             $table->char('periodo', 6)->nullable();
             $table->string('tipo_cliente', 30)->nullable();
             $table->string('tipo_comision', 25)->nullable();
