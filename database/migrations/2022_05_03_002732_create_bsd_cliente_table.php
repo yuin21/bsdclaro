@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('bsd_cliente', function (Blueprint $table) {
             $table->id();
             $table->char('ruc', 11)->unique();
-            $table->string('razon_social', 75);
+            $table->string('razon_social', 120);
             $table->string('num_celular', 13)->comment('999999999 or +51 999999999'); //No se si ponerle unico
             $table->string('direccion', 90)->nullable();
             $table->string('departamento', 25);
             $table->string('provincia', 40)->nullable();
             $table->string('distrito', 50)->nullable();
-            $table->string('tipo_cliente', 15);
+            $table->string('tipo_cliente', 30);
             $table->char('estado', 1)->default('A')->comment('A or D');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
