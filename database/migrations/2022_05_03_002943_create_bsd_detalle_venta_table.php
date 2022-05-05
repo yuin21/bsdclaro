@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('numero_proyecto', 45)->nullable();
             $table->timestamp('fecha_instalacion')->nullable(); //No estoy seguro si primero se registra y luego pactan la fecha de instalación o eso se pacta en el registro
             $table->time('hora')->nullable(); //Lo mismo que arriba
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();

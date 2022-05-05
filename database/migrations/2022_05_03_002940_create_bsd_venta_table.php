@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('observaciones_bpo', 300)->nullable();
             $table->float('total');
             $table->char('estado_venta', 1)->default('A')->comment('A or N');
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();

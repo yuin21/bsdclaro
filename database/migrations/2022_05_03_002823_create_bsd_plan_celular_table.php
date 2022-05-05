@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('bsd_servicio_id')->references('id')->on('bsd_servicio');
             $table->string('nombre_plan', 45)->comment('Ejem: MAX CORPORATIVO 29.90');
             $table->float('precio_unitario');
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();

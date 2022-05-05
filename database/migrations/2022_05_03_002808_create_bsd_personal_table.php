@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('direccion', 300);
             $table->string('celular', 30)->nullable()->comment('Email y/o celular'); //No se si es obligatorio u opcional
             $table->string('email', 75)->unique()->nullable()->comment('Email y/o celular');//No se si es obligatorio u opcional
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();

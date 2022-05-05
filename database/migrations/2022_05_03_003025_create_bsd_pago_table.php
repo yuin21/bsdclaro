@@ -44,7 +44,7 @@ return new class extends Migration
             $table->float('por_cump_dic')->nullable();
             $table->float('total')->nullable();
             $table->float('por_cuota')->nullable();
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();

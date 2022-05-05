@@ -41,7 +41,7 @@ return new class extends Migration
             $table->char('pago_1er_recibo', 1)->comment('S or N');
             $table->char('pago_dace', 1)->comment('S or N');
             $table->char('abono_consultor', 1)->comment('S or N');
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre_servicio', 15)->comment('Movil o Fija');
             $table->string('tipo_servicio', 20)->comment('Alta, Porta, HFC, ...');
-            $table->char('estado', 1)->default('A')->comment('A or D');
+            $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();
