@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('observaciones', 300)->nullable();
             $table->timestamp('fecha_entrega_vpo')->nullable();
             $table->string('observaciones_vpo', 300)->nullable();
-            $table->char('registrado_selforce', 1)->nullable()->comment('S or N');//No se si se registra en selforce despues o durante la venta
+            $table->char('registrado_selforce', 1)->default('S')->comment('S or N');//No se si se registra en selforce despues o durante la venta
             $table->string('solicitud', 200)->nullable();
             $table->char('sot', 8)->nullable();
             $table->timestamp('fecha_entrega_bpo')->nullable();
