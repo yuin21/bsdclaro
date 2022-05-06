@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PersonalController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PerfilController;
 use App\Http\Controllers\Admin\ServicioController;
+use App\Http\Controllers\Admin\CuotaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -50,3 +51,9 @@ Route::resource('servicio', ServicioController::class)->names('admin.servicio');
 Route::get('removidos/servicio', [ServicioController::class, 'indextrash'])->name('admin.servicio.indextrash');
 Route::put('servicio/{servicio}/destroylogico', [ServicioController::class, 'destroyLogico'])->name('admin.servicio.destroyLogico');
 Route::put('servicio/{servicio}/restaurarServicio', [ServicioController::class, 'restaurarServicio'])->name('admin.servicio.restaurarServicio');
+
+//Cuota
+Route::resource('cuotas', CuotaController::class)->names('admin.cuotas');
+Route::get('removidos/cuotas', [CuotaController::class, 'indextrash'])->name('admin.cuotas.indextrash');
+Route::put('cuotas/{cuota}/destroylogico', [CuotaController::class, 'destroyLogico'])->name('admin.cuotas.destroyLogico');
+Route::put('cuotas/{cuota}/restaurarCuota', [CuotaController::class, 'restaurarCuotas'])->name('admin.cuotas.restaurarCuotas');

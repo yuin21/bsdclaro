@@ -292,6 +292,38 @@ return [
             ],  
         ], 
         [
+            'text' => 'Servicio',
+            'url'  => '/user/profile', //No se si esto se cambia
+            'icon' => 'fas far fa-shopping-bag',
+            'active' => ['admin/servicio*'], 
+            'can' => 'adminlte.personal', //No se si esto se cambia
+            'submenu' => [
+                [
+                    'text' => 'Registro Servicio',  
+                    'route'  => 'admin.servicio.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/servicio*'], 
+                    'can' => 'admin.personal.index', //No se si esto se cambia
+                ],
+            ],  
+        ], 
+        [
+            'text' => 'Cuota',
+            'url'  => '/user/profile', //No se si esto se cambia
+            'icon' => 'fas far fa-shopping-bag',
+            'active' => ['admin/cuotas*'], 
+            'can' => 'adminlte.personal', //No se si esto se cambia
+            'submenu' => [
+                [
+                    'text' => 'Registro Cuota',  
+                    'route'  => 'admin.cuotas.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/cuotas*'], 
+                    'can' => 'admin.personal.index', //No se si esto se cambia
+                ],
+            ],  
+        ], 
+        [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
             'active' => ['admin/cargasmasivas*'], 
