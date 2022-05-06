@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            {{-- <x-jet-authentication-card-logo /> --}}
+            <img src="{{ url('/img/logoSmall.png') }}" alt="logo claro" width="90px">
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
@@ -28,7 +29,8 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900"
+                    style="background: #db252d">
                     {{ __('Log Out') }}
                 </button>
             </form>
