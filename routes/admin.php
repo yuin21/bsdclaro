@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ImportBaseRenuevaController;
 use App\Http\Controllers\Admin\PersonalController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PerfilController;
+use App\Http\Controllers\Admin\ServicioController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -43,3 +44,9 @@ Route::get('removidos/personal', [PersonalController::class, 'indextrash'])->nam
 Route::put('personal/{personal}/destroylogico', [PersonalController::class, 'destroyLogico'])->name('admin.personal.destroyLogico');
 Route::put('personal/{personal}/restaurarPersonal', [PersonalController::class, 'restaurarPersonal'])->name('admin.personal.restaurarPersonal');
 Route::post('personal/{personal}/generarPDF', [PersonalController::class, 'generatePDF'])->name('admin.personal.generatePDF');
+
+//Servicio
+Route::resource('servicio', ServicioController::class)->names('admin.servicio');
+Route::get('removidos/servicio', [ServicioController::class, 'indextrash'])->name('admin.servicio.indextrash');
+Route::put('servicio/{servicio}/destroylogico', [ServicioController::class, 'destroyLogico'])->name('admin.servicio.destroyLogico');
+Route::put('servicio/{servicio}/restaurarServicio', [ServicioController::class, 'restaurarServicio'])->name('admin.servicio.restaurarServicio');
