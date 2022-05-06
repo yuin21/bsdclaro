@@ -19,6 +19,8 @@
                             <tr>
                                 <th>Nombre de Servicio</th>
                                 <th>Tipo de Servicio</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>

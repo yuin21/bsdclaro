@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    @livewire('servicio-index')
+    @livewire('admin.servicio-index')
 @stop
 
 @section('js')

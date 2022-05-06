@@ -11,7 +11,12 @@ class BsdServicio extends Model
     protected $fillable = [
         'id',
         'nombre_servicio',
-        'tipo_servicio'
+        'tipo_servicio',
+        // 'estado',
+        // 'usuario_reg' ,
+        // 'usuario_act' ,
+        // 'created_at',
+        // 'updated_at',  
      ] ;
 
     protected $table='bsd_servicio';
