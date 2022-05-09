@@ -262,7 +262,6 @@ return [
         ],
         [
             'text' => 'Personal',
-            'url'  => '/user/profile',
             'icon' => 'fas fa-users',
             'active' => ['admin/personal*'], 
             'can' => 'adminlte.personal', 
@@ -293,33 +292,31 @@ return [
         ], 
         [
             'text' => 'Servicio',
-            'url'  => '/user/profile', //No se si esto se cambia
             'icon' => 'fas far fa-shopping-bag',
             'active' => ['admin/servicio*'], 
-            'can' => 'adminlte.personal', //No se si esto se cambia
+            'can' => 'adminlte.servicio',
             'submenu' => [
                 [
                     'text' => 'Registro Servicio',  
                     'route'  => 'admin.servicio.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'active' => ['admin/servicio*'], 
-                    'can' => 'admin.personal.index', //No se si esto se cambia
+                    'can' => 'admin.servicio.index',
                 ],
             ],  
         ], 
         [
             'text' => 'Cuota',
-            'url'  => '/user/profile', //No se si esto se cambia
             'icon' => 'fas far fa-shopping-bag',
             'active' => ['admin/cuotas*'], 
-            'can' => 'adminlte.personal', //No se si esto se cambia
+            'can' => 'adminlte.cuotas',
             'submenu' => [
                 [
                     'text' => 'Registro Cuota',  
                     'route'  => 'admin.cuotas.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'active' => ['admin/cuotas*'], 
-                    'can' => 'admin.personal.index', //No se si esto se cambia
+                    'can' => 'admin.cuotas.index',
                 ],
             ],  
         ],
