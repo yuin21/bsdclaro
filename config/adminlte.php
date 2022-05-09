@@ -322,7 +322,22 @@ return [
                     'can' => 'admin.personal.index', //No se si esto se cambia
                 ],
             ],  
-        ], 
+        ],
+        [
+            'text' => 'Producto Telefonía',
+            'icon' => 'fas far fa-shopping-bag',
+            'active' => ['admin/productotelefonia*'], 
+            'can' => 'adminlte.productotelefonia',
+            'submenu' => [
+                [
+                    'text' => 'Registro Producto Telefonía',  
+                    'route'  => 'admin.productotelefonia.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/productotelefonia*'], 
+                    'can' => 'admin.productotelefonia.index',
+                ],
+            ],  
+        ],  
         [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",

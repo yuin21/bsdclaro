@@ -46,5 +46,9 @@ class RoleSeeder extends Seeder
         // seccion reportes
         Permission::create(['name' => 'adminlte.reportes', 'description' => 'Ver sección: Reportes'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         //Permission::create(['name' => 'admin.reportes.index'])->syncRoles([$roleAdmin]);
+
+        // seccion producto telefonia
+        Permission::create(['name' => 'adminlte.productotelefonia', 'description' => 'Ver sección: Producto Telefonía'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.productotelefonia.index', 'description' => 'Ver opción: Registro Producto Telefonía'])->syncRoles([$roleAdmin]);
     }
 }

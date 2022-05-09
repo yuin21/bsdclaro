@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PerfilController;
 use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\CuotaController;
+use App\Http\Controllers\Admin\ProductoTelefoniaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -57,3 +58,9 @@ Route::resource('cuotas', CuotaController::class)->names('admin.cuotas');
 Route::get('removidos/cuotas', [CuotaController::class, 'indextrash'])->name('admin.cuotas.indextrash');
 Route::put('cuotas/{cuota}/destroylogico', [CuotaController::class, 'destroyLogico'])->name('admin.cuotas.destroyLogico');
 Route::put('cuotas/{cuota}/restaurarCuota', [CuotaController::class, 'restaurarCuotas'])->name('admin.cuotas.restaurarCuotas');
+
+//Producto Telefonia
+Route::resource('productotelefonia', ProductoTelefoniaController::class)->names('admin.productotelefonia');
+Route::get('removidos/productotelefonia', [ProductoTelefoniaController::class, 'indextrash'])->name('admin.productotelefonia.indextrash');
+Route::put('productotelefonia/{productotelefonium}/destroylogico', [ProductoTelefoniaController::class, 'destroyLogico'])->name('admin.productotelefonia.destroyLogico');
+Route::put('productotelefonia/{productotelefonium}/restaurarProductoTelefonia', [ProductoTelefoniaController::class, 'restaurarProductoTelefonia'])->name('admin.productotelefonia.restaurarProductoTelefonia');
