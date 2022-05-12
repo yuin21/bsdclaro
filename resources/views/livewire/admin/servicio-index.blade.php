@@ -3,7 +3,7 @@
         <a class="btn btn-info mb-2" href="{{ route('admin.servicio.indextrash') }}">
             <i class="fas fa-trash"></i> Removidos
         </a>
-        <input wire:model="search" class="form-control" type="text" placeholder="Busque por Tipo de Servicio">
+        <input wire:model="search" class="form-control" type="text" placeholder="Busque por Nombre de Servicio">
     </div>
     @if ($bsd_servicio->count())
         <div class="card-body">
@@ -14,8 +14,8 @@
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
-                            <th>Nombre de Servicio</th>
                             <th>Tipo de Servicio</th>
+                            <th>Nombre de Servicio</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -23,8 +23,8 @@
                     <tbody>
                         @foreach ($bsd_servicio as $servicio)
                             <tr>
-                                <td>{{ $servicio->nombre_servicio }}</td>
-                                <td>{{ $servicio->tipo_servicio }}</td>
+                                <td>{{ $servicio->tiposervicio->nom_tipo_servicio }}</td>
+                                <td>{{ $servicio->nom_servicio }}</td>
                                 <td>{{ $servicio->estado }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
