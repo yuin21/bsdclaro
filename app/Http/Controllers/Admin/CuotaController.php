@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BsdCuota;
+use App\Models\BsdPersonal;
+use App\Models\BsdServicio;
 use Illuminate\Http\Request;
 
 class CuotaController extends Controller
@@ -20,7 +22,13 @@ class CuotaController extends Controller
 
     public function create()
     {
-        return view('admin.cuotas.create');
+        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        $personal = $bsd_personal->pluck('PersonalFullName', 'PersonalFullName');
+        //dd($personal);
+        $bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nombre_servicio')->get();
+        $servicio = $bsd_servicio->pluck('nombre_servicio', 'nombre_servicio');
+
+        return view('admin.cuotas.create', compact('personal','servicio'));
     }
    
     public function store(Request $request)
@@ -31,7 +39,7 @@ class CuotaController extends Controller
             'personal' => 'required|string|max:120',
             'cantidad_cuota' => 'required|numeric',
             'mes' => 'required|string|max:10',
-            'año' => 'required|numeric|max:9999',
+            'año' => 'required|numeric|max:2069|min:1970',
         ]);
 
         $cuota = BsdCuota::create($request->all());
@@ -46,7 +54,14 @@ class CuotaController extends Controller
 
     public function edit(BsdCuota $cuota)
     {
-        return view('admin.cuotas.edit', compact('cuota'));
+        
+        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        $personal = $bsd_personal->pluck('PersonalFullName', 'PersonalFullName');
+
+        $bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nombre_servicio')->get();
+        $servicio = $bsd_servicio->pluck('nombre_servicio', 'nombre_servicio');
+        
+        return view('admin.cuotas.edit', compact('cuota','personal','servicio'));
     }
 
     public function update(Request $request, BsdCuota $cuota)
@@ -57,7 +72,7 @@ class CuotaController extends Controller
             'personal' => 'required|string|max:120',
             'cantidad_cuota' => 'required|numeric',
             'mes' => 'required|string|max:10',
-            'año' => 'required|numeric|max:4',
+            'año' => 'required|numeric|max:2069|min:1970',
         ]);
 
         $cuota->update($request->all());

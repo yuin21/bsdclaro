@@ -27,7 +27,7 @@ class ServicioController extends Controller
     {
         $request->validate([
             'nombre_servicio' => 'required|string|max:15',
-            'tipo_servicio' => 'required|string|max:20',
+            'tipo_servicio' => 'required|string|max:20|unique:bsd_servicio,tipo_servicio',
         ]);       
 
         $servicio = BsdServicio::create($request->all());
@@ -49,7 +49,7 @@ class ServicioController extends Controller
     {
         $request->validate([
             'nombre_servicio' => 'required|string|max:15',
-            'tipo_servicio' => 'required|string|max:20',
+            'tipo_servicio' => 'required|string|max:20|unique:bsd_servicio,tipo_servicio',
         ]);
 
         $servicio->update($request->all());

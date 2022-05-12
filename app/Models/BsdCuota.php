@@ -24,4 +24,6 @@ class BsdCuota extends Model
      ] ;
 
     protected $table='bsd_cuota';
+
+    
 }

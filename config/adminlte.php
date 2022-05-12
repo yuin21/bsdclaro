@@ -310,7 +310,7 @@ return [
         [
             'text' => 'Cuota',
             'url'  => '/user/profile', //No se si esto se cambia
-            'icon' => 'fas far fa-shopping-bag',
+            'icon' => 'fas far fa-file',
             'active' => ['admin/cuotas*'], 
             'can' => 'adminlte.personal', //No se si esto se cambia
             'submenu' => [

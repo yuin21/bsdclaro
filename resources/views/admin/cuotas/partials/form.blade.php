@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('tipo_consultor', 'Tipo de Consultor') !!}
-    {!! Form::text('tipo_consultor', null, ['class' => 'form-control']) !!}
+    {!! Form::select('tipo_consultor', ['Regular' => 'Regular', 'Senior' => 'Senior'], null, ['class' => 'form-control' ]) !!}
 
     @error('tipo_consultor')
         <span class="text-danger">{{ $message }}</span>
@@ -10,7 +10,7 @@
 
 <div class="form-group">
     {!! Form::label('tipo_venta', 'Tipo de Venta') !!}
-    {!! Form::text('tipo_venta', null, ['class' => 'form-control']) !!}
+    {!! Form::select('tipo_venta', $servicio, null, ['class' => 'form-control' ]) !!}
 
     @error('tipo_venta')
         <span class="text-danger">{{ $message }}</span>
@@ -19,7 +19,7 @@
 
 <div class="form-group">
     {!! Form::label('personal', 'Personal') !!}
-    {!! Form::text('personal', null, ['class' => 'form-control']) !!}
+    {!! Form::select('personal', $personal, null, ['class' => 'form-control' ]) !!}
 
     @error('personal')
         <span class="text-danger">{{ $message }}</span>

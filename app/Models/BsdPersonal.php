@@ -27,4 +27,9 @@ class BsdPersonal extends Model
      ] ;
         
     protected $table='bsd_personal';
+
+    public function getPersonalFullNameAttribute()
+    {
+        return $this->attributes['nom_personal'] .' '. $this->attributes['ape_paterno'].' '. $this->attributes['ape_materno'];
+    }
 }
