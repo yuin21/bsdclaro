@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 return new class extends Migration
 {
@@ -13,13 +14,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bsd_producto_telefonia', function (Blueprint $table) {
+        Schema::create('bsd_tipo_servicio', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bsd_servicio_id')->unsigned();
-            $table->foreign('bsd_servicio_id')
-            ->references("id")
-            ->on("bsd_servicio");
-            $table->string('producto', 30)->comment('Ejem: CN FTTH PUPPIES');
+            $table->string('nom_tipo_servicio', 15)->comment('Movil o Fija')->unique();
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bsd_producto_telefonia');
+        Schema::dropIfExists('bsd_tipo_servicio');
     }
 };

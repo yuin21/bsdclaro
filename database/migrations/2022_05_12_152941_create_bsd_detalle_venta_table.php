@@ -19,14 +19,23 @@ return new class extends Migration
             $table->foreign('bsd_venta_id')
             ->references("id")
             ->on("bsd_venta");
+            $table->bigInteger('bsd_plan_id')->unsigned();
+            $table->foreign('bsd_plan_id')
+            ->references("id")
+            ->on("bsd_plan");
             $table->bigInteger('bsd_servicio_id')->unsigned();
             $table->foreign('bsd_servicio_id')
             ->references("id")
             ->on("bsd_servicio");
+            $table->bigInteger('bsd_tipo_servicio_id')->unsigned();
+            $table->foreign('bsd_tipo_servicio_id')
+            ->references("id")
+            ->on("bsd_tipo_servicio");
             $table->smallInteger('cantidad');
+            $table->float('precio_plan');
             $table->float('cf_con_igv');
             $table->float('cf_sin_igv');
-            $table->string('equipo', 25)->nullable();
+            $table->string('equipo_producto', 30)->nullable();
             $table->string('operador', 20)->nullable();
             $table->char('estado_linea', 1)->nullable()->comment('A or D'); //Entiendo que el estado es desactivado por defecto, pero cuando se registra la fecha de activado, este cambia a activado
             $table->timestamp('fecha_activado')->nullable();
