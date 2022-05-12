@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear Reporte de Venta Movil')
+@section('title', 'Editar Servicio')
 
 @section('content_header')
     <a href="{{ route('admin.servicio.index') }}" class="float-right mt-2">

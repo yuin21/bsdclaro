@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BsdServicio;
+use App\Models\BsdTipoServicio;
 use Illuminate\Http\Request;
 
 class ServicioController extends Controller
@@ -20,14 +21,15 @@ class ServicioController extends Controller
 
     public function create()
     {
-        return view('admin.servicio.create');
+        $tiposervicios = BsdTipoServicio::pluck('nom_tipo_servicio', 'id');
+        return view('admin.servicio.create', compact('tiposervicios'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nombre_servicio' => 'required|string|max:15',
-            'tipo_servicio' => 'required|string|max:20|unique:bsd_servicio,tipo_servicio',
+            'bsd_tipo_servicio_id' => 'required',
+            'nom_servicio' => 'required|string|max:20|unique:bsd_servicio,nom_servicio',
         ]);       
 
         $servicio = BsdServicio::create($request->all());
@@ -42,15 +44,16 @@ class ServicioController extends Controller
 
     public function edit(BsdServicio $servicio)
     {
-        return view('admin.servicio.edit', compact('servicio'));
+        $tiposervicios = BsdTipoServicio::pluck('nom_tipo_servicio', 'id');
+        return view('admin.servicio.edit', compact('servicio', 'tiposervicios'));
     }
 
     public function update(Request $request, BsdServicio $servicio)
     {
         $request->validate([
-            'nombre_servicio' => 'required|string|max:15',
-            'tipo_servicio' => 'required|string|max:20|unique:bsd_servicio,tipo_servicio',
-        ]);
+            'bsd_tipo_servicio_id' => 'required',
+            'nom_servicio' => "required|string|max:20|unique:bsd_servicio,nom_servicio,$servicio->id",
+        ]);  
 
         $servicio->update($request->all());
         return redirect()->route('admin.servicio.show', $servicio)->with('success', 'update');

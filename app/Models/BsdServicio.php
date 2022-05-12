@@ -10,8 +10,8 @@ class BsdServicio extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'nombre_servicio',
-        'tipo_servicio',
+        'bsd_tipo_servicio_id',
+        'nom_servicio',
         // 'estado',
         // 'usuario_reg' ,
         // 'usuario_act' ,
@@ -20,4 +20,8 @@ class BsdServicio extends Model
      ] ;
 
     protected $table='bsd_servicio';
+
+    public function tiposervicio(){
+        return $this->belongsTo('App\Models\BsdTipoServicio', 'bsd_tipo_servicio_id');
+    }
 }

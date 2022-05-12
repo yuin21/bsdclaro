@@ -18,7 +18,7 @@ class ServicioIndex extends Component
 
     public function render()
     {
-        $bsd_servicio = BsdServicio::where('estado', 1)->where('tipo_servicio','LIKE','%'.$this->search.'%')
+        $bsd_servicio = BsdServicio::where('estado', 1)->where('nom_servicio','LIKE','%'.$this->search.'%')
         
         ->paginate(15);
         return view('livewire.admin.servicio-index', compact('bsd_servicio'));

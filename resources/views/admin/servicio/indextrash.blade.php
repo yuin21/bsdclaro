@@ -17,8 +17,8 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Nombre de Servicio</th>
                                 <th>Tipo de Servicio</th>
+                                <th>Nombre de Servicio</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
@@ -26,8 +26,8 @@
                         <tbody>
                             @foreach ($bsd_servicio as $servicio)
                                 <tr>
-                                    <td>{{ $servicio->nombre_servicio }}</td>
-                                    <td>{{ $servicio->tipo_servicio }}</td>
+                                    <td>{{ $servicio->tiposervicio->nom_tipo_servicio }}</td>
+                                    <td>{{ $servicio->nom_servicio }}</td>
                                     <td>{{ $servicio->estado }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
