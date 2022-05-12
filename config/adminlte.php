@@ -304,6 +304,46 @@ return [
                     'can' => 'admin.servicio.index',
                 ],
             ],  
+        ],
+        
+        [
+            'text' => 'Tipo de Servicio',
+            'icon' => 'fas far fa-shopping-bag',
+            'active' => ['admin/personal*'], 
+            //'active' => ['admin/tiposervicio*'], 
+            'can' => 'adminlte.personal',
+            //'can' => 'adminlte.tiposervicio',
+            'submenu' => [
+                [
+                    'text' => 'Registro Tipo Servicio',  
+                    'route'  => 'admin.tiposervicio.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/personal*'], 
+                    'can' => 'admin.personal.index',
+                    //'active' => ['admin/tiposervicio*'], 
+                    //'can' => 'admin.tiposervicio.index',
+                ],
+            ],
+        ],  
+         
+        [
+            'text' => 'Plan',
+            'icon' => 'fas far fa-shopping-bag',
+            'active' => ['admin/personal*'], 
+            //'active' => ['admin/plan*'], 
+            'can' => 'adminlte.personal',
+            //'can' => 'adminlte.plan',
+            'submenu' => [
+                [
+                    'text' => 'Registro Plan',  
+                    'route'  => 'admin.plan.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/personal*'], 
+                    'can' => 'admin.personal.index',
+                    //'active' => ['admin/plan*'], 
+                    //'can' => 'admin.plan.index',
+                ],
+            ],
         ], 
         [
             'text' => 'Cuota',

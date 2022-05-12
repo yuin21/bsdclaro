@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\PerfilController;
 use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\Admin\ProductoTelefoniaController;
+use App\Http\Controllers\Admin\TipoServicioController;
+use App\Http\Controllers\Admin\PlanController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -64,3 +66,15 @@ Route::resource('productotelefonia', ProductoTelefoniaController::class)->names(
 Route::get('removidos/productotelefonia', [ProductoTelefoniaController::class, 'indextrash'])->name('admin.productotelefonia.indextrash');
 Route::put('productotelefonia/{productotelefonium}/destroylogico', [ProductoTelefoniaController::class, 'destroyLogico'])->name('admin.productotelefonia.destroyLogico');
 Route::put('productotelefonia/{productotelefonium}/restaurarProductoTelefonia', [ProductoTelefoniaController::class, 'restaurarProductoTelefonia'])->name('admin.productotelefonia.restaurarProductoTelefonia');
+
+//Tipo_Servicio
+Route::resource('tiposervicio', TipoServicioController::class)->names('admin.tiposervicio');
+Route::get('removidos/tiposervicio', [TipoServicioController::class, 'indextrash'])->name('admin.tiposervicio.indextrash');
+Route::put('tiposervicio/{tiposervicio}/destroylogico', [TipoServicioController::class, 'destroyLogico'])->name('admin.tiposervicio.destroyLogico');
+Route::put('tiposervicio/{tiposervicio}/restaurarProductoTelefonia', [TipoServicioController::class, 'restaurarTipoServicio'])->name('admin.tiposervicio.restaurarTipoServicio');
+
+//Plan
+Route::resource('plan', PlanController::class)->names('admin.plan');
+Route::get('removidos/plan', [PlanController::class, 'indextrash'])->name('admin.plan.indextrash');
+Route::put('plan/{plan}/destroylogico', [PlanController::class, 'destroyLogico'])->name('admin.plan.destroyLogico');
+Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan'])->name('admin.plan.restaurarPlan');
