@@ -10,7 +10,7 @@ class ServicioController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
+        $this->middleware('can:admin.servicio.index');
     }
 
     public function index()
