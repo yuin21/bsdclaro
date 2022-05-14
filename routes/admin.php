@@ -3,13 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ImportFileController;
 use App\Http\Controllers\Admin\ImportBaseFijaController;
 use App\Http\Controllers\Admin\ImportBaseMovilController;
 use App\Http\Controllers\Admin\ImportBaseRenuevaController;
 use App\Http\Controllers\Admin\PersonalController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PerfilController;
+use App\Http\Controllers\Admin\ClienteController;
+use App\Http\Controllers\Admin\ServicioController;
+use App\Http\Controllers\Admin\CuotaController;
+use App\Http\Controllers\Admin\TipoServicioController;
+use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\VentaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -43,3 +48,35 @@ Route::get('removidos/personal', [PersonalController::class, 'indextrash'])->nam
 Route::put('personal/{personal}/destroylogico', [PersonalController::class, 'destroyLogico'])->name('admin.personal.destroyLogico');
 Route::put('personal/{personal}/restaurarPersonal', [PersonalController::class, 'restaurarPersonal'])->name('admin.personal.restaurarPersonal');
 Route::post('personal/{personal}/generarPDF', [PersonalController::class, 'generatePDF'])->name('admin.personal.generatePDF');
+
+//Cliente
+Route::resource('clientes', ClienteController::class)->names('admin.clientes');
+Route::get('removidos/cliente', [ClienteController::class, 'indextrash'])->name('admin.clientes.indextrash');
+Route::put('clientes/{cliente}/destroylogico', [ClienteController::class, 'destroyLogico'])->name('admin.clientes.destroyLogico');
+Route::put('clientes/{cliente}/restaurarCliente', [ClienteController::class, 'restaurarCliente'])->name('admin.clientes.restaurarCliente');
+//Servicio
+Route::resource('servicio', ServicioController::class)->names('admin.servicio');
+Route::get('removidos/servicio', [ServicioController::class, 'indextrash'])->name('admin.servicio.indextrash');
+Route::put('servicio/{servicio}/destroylogico', [ServicioController::class, 'destroyLogico'])->name('admin.servicio.destroyLogico');
+Route::put('servicio/{servicio}/restaurarServicio', [ServicioController::class, 'restaurarServicio'])->name('admin.servicio.restaurarServicio');
+
+//Cuota
+Route::resource('cuotas', CuotaController::class)->names('admin.cuotas');
+Route::get('removidos/cuotas', [CuotaController::class, 'indextrash'])->name('admin.cuotas.indextrash');
+Route::put('cuotas/{cuota}/destroylogico', [CuotaController::class, 'destroyLogico'])->name('admin.cuotas.destroyLogico');
+Route::put('cuotas/{cuota}/restaurarCuota', [CuotaController::class, 'restaurarCuotas'])->name('admin.cuotas.restaurarCuotas');
+
+//Tipo_Servicio
+Route::resource('tiposervicio', TipoServicioController::class)->names('admin.tiposervicio');
+Route::get('removidos/tiposervicio', [TipoServicioController::class, 'indextrash'])->name('admin.tiposervicio.indextrash');
+Route::put('tiposervicio/{tiposervicio}/destroylogico', [TipoServicioController::class, 'destroyLogico'])->name('admin.tiposervicio.destroyLogico');
+Route::put('tiposervicio/{tiposervicio}/restaurarProductoTelefonia', [TipoServicioController::class, 'restaurarTipoServicio'])->name('admin.tiposervicio.restaurarTipoServicio');
+
+//Plan
+Route::resource('plan', PlanController::class)->names('admin.plan');
+Route::get('removidos/plan', [PlanController::class, 'indextrash'])->name('admin.plan.indextrash');
+Route::put('plan/{plan}/destroylogico', [PlanController::class, 'destroyLogico'])->name('admin.plan.destroyLogico');
+Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan'])->name('admin.plan.restaurarPlan');
+
+//Ventas
+Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');

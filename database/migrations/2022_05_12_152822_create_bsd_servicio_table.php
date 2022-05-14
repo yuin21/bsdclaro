@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bsd_numero_linea_nueva', function (Blueprint $table) {
+        Schema::create('bsd_servicio', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bsd_venta_id')->unsigned();
-            $table->foreign('bsd_venta_id')
+            $table->bigInteger('bsd_tipo_servicio_id')->unsigned();
+            $table->foreign('bsd_tipo_servicio_id')
             ->references("id")
-            ->on("bsd_venta");
-            $table->string('numero_linea_nueva', 13);
+            ->on("bsd_tipo_servicio");            
+            $table->string('nom_servicio', 20)->comment('Alta, Porta, HFC, ...');
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bsd_numero_linea_nueva');
+        Schema::dropIfExists('bsd_servicio');
     }
 };

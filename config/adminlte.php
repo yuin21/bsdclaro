@@ -278,16 +278,17 @@ return [
         ], 
         [
             'text' => 'Clientes',
+            'url'  => '/user/profile',
             'icon' => 'fas fa-fw fa-address-book',
-            'can' => 'adminlte.clientes', 
+            'can' => 'adminlte.personal', //No se si esto se cambia
             'active' => ['admin/clientes*'], 
             'submenu' => [
                 [
-                    'text' => 'Registro Clientes',  
+                    'text' => 'Registro Clientes',
+                    'route'  => 'admin.clientes.index',  
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',
                     'active' => ['admin/clientes*'], 
-                    'can' => 'admin.clientes.index',
+                    'can' => 'admin.personal.index',
                 ],
             ],  
         ], 
@@ -319,27 +320,17 @@ return [
                 ],
             ],
         ],
-             
         [
             'text'    => 'Ventas', 
-            'icon'    => 'fas fa-archive',
-            'can' => 'adminlte.ventas',           
+            'icon'    => 'fas fa-archive',          
             'submenu' => [  
                 [
-                    'text' => 'Comisiones',  
+                    'text' => 'Registro de ventas',  
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
-                   
+                    'route' => 'admin.ventas.index',          
                 ],                        
-                [
-                    'text' => 'Bonificaciones',  
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
-                   
-                ],
             ]
         ],
-        
         [
             'text'    => 'Reportes', 
             'icon'    => 'fas fa-file-alt',

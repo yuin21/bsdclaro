@@ -13,18 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bsd_plan_telefonia', function (Blueprint $table) {
+        Schema::create('bsd_numero_linea_nueva', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bsd_servicio_id')->unsigned();
-            $table->foreign('bsd_servicio_id')
+            $table->bigInteger('bsd_detalle_venta_id')->unsigned();
+            $table->foreign('bsd_detalle_venta_id')
             ->references("id")
-            ->on("bsd_servicio");
-            $table->string('nombre_plan', 120)->comment('Ejem: INTERNET 100 MBPS + TELEFONIA 100');
-            $table->float('precio_unitario');
+            ->on("bsd_detalle_venta");
+            $table->string('numero_linea_nueva', 13);
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();
+            
         });
     }
 
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bsd_plan_telefonia');
+        Schema::dropIfExists('bsd_numero_linea_nueva');
     }
 };
