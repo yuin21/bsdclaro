@@ -293,6 +293,54 @@ return [
             ],  
         ], 
         [
+            'text' => 'Tipo de Servicio',
+            'url'  => '/user/tiposervicio',
+            'icon' => 'fas fa-list',
+            'active' => ['admin/tiposervicio*'], 
+            'can' => 'adminlte.tiposervicio', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Tipo de Servicio',  
+                    'route'  => 'admin.tiposervicio.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/tiposervicio*'], 
+                    'can' => 'admin.tiposervicio.index',
+                ],
+            ],  
+        ], 
+        [
+            'text' => 'Servicio',
+            'url'  => '/user/servicio',
+            'icon' => 'fas fa-book',
+            'active' => ['admin/servicio*'], 
+            'can' => 'adminlte.servicio', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Servicio',  
+                    'route'  => 'admin.servicio.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/servicio*'], 
+                    'can' => 'admin.servicio.index',
+                ],
+            ],  
+        ], 
+        [
+            'text' => 'Plan',
+            'url'  => '/user/plan',
+            'icon' => 'fas fa-file',
+            'active' => ['admin/plan*'], 
+            'can' => 'adminlte.plan', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Plan',  
+                    'route'  => 'admin.plan.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/plan*'], 
+                    'can' => 'admin.plan.index',
+                ],
+            ],  
+        ], 
+        [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
             'active' => ['admin/cargasmasivas*'], 
