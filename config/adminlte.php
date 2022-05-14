@@ -390,27 +390,17 @@ return [
                 ],
             ],
         ],
-             
         [
             'text'    => 'Ventas', 
-            'icon'    => 'fas fa-archive',
-            'can' => 'adminlte.ventas',           
+            'icon'    => 'fas fa-archive',          
             'submenu' => [  
                 [
-                    'text' => 'Comisiones',  
+                    'text' => 'Registro de ventas',  
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
-                   
+                    'route' => 'admin.ventas.index',          
                 ],                        
-                [
-                    'text' => 'Bonificaciones',  
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
-                   
-                ],
             ]
         ],
-        
         [
             'text'    => 'Reportes', 
             'icon'    => 'fas fa-file-alt',
