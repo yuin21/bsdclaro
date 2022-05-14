@@ -35,8 +35,8 @@ class PersonalController extends Controller
             'ape_materno'=> 'required|string|max:25',
             'cargo' => 'required|string|max:75',
             'tipo_doc_iden'=> 'required|string|max:30',
-            'nro_doc_iden'=> 'required|string|max:15', 
-            'email'=> 'required|string|email|max:75',
+            'nro_doc_iden'=> 'required|string|max:15|unique:bsd_personal', 
+            'email'=> 'required|string|email|max:75|unique:bsd_personal',
         ]);       
 
         $personal = BsdPersonal::create($request->all());
@@ -64,8 +64,8 @@ class PersonalController extends Controller
             'ape_materno'=> 'required|string|max:25',
             'cargo' => 'required|string|max:75',
             'tipo_doc_iden'=> 'required|string|max:30',
-            'nro_doc_iden'=> 'required|string|max:15', 
-            'email'=> 'required|string|email|max:75',
+            'nro_doc_iden'=> "required|string|max:15|unique:bsd_personal,nro_doc_iden,$personal->id", 
+            'email'=> "required|string|email|max:75|unique:bsd_personal,email,$personal->id",
         ]);
 
         $personal->update($request->all());

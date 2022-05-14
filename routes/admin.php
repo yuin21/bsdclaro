@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\Admin\ProductoTelefoniaController;
 use App\Http\Controllers\Admin\TipoServicioController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\VentaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -78,3 +79,6 @@ Route::resource('plan', PlanController::class)->names('admin.plan');
 Route::get('removidos/plan', [PlanController::class, 'indextrash'])->name('admin.plan.indextrash');
 Route::put('plan/{plan}/destroylogico', [PlanController::class, 'destroyLogico'])->name('admin.plan.destroyLogico');
 Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan'])->name('admin.plan.restaurarPlan');
+
+//Ventas
+Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
