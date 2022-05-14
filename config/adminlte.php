@@ -345,37 +345,23 @@ return [
                 ],
             ],
         ], 
-        [
-            'text' => 'Cuota',
-            //'url'  => '/user/profile', //No se si esto se cambia
-            'icon' => 'fas far fa-file',
-            'active' => ['admin/cuotas*'], 
-            'can' => 'adminlte.cuotas',
-            'submenu' => [
-                [
-                    'text' => 'Registro Cuota',  
-                    'route'  => 'admin.cuotas.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/cuotas*'], 
-                    'can' => 'admin.cuotas.index',
-                ],
-            ],  
-        ],
-        [
-            'text' => 'Producto Telefonía',
-            'icon' => 'fas far fa-shopping-bag',
-            'active' => ['admin/productotelefonia*'], 
-            'can' => 'adminlte.productotelefonia',
-            'submenu' => [
-                [
-                    'text' => 'Registro Producto Telefonía',  
-                    'route'  => 'admin.productotelefonia.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/productotelefonia*'], 
-                    'can' => 'admin.productotelefonia.index',
-                ],
-            ],  
-        ],  
+        // [
+        //     'text' => 'Cuota',
+        //     //'url'  => '/user/profile', //No se si esto se cambia
+        //     'icon' => 'fas far fa-file',
+        //     'active' => ['admin/cuotas*'], 
+        //     'can' => 'adminlte.cuotas',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Registro Cuota',  
+        //             'route'  => 'admin.cuotas.index',
+        //             'icon'  => 'far fa-fw fa-dot-circle',
+        //             'active' => ['admin/cuotas*'], 
+        //             'can' => 'admin.cuotas.index',
+        //         ],
+        //     ],  
+        // ],
+         
         [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",

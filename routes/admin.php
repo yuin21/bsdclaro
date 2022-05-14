@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ImportFileController;
 use App\Http\Controllers\Admin\ImportBaseFijaController;
 use App\Http\Controllers\Admin\ImportBaseMovilController;
 use App\Http\Controllers\Admin\ImportBaseRenuevaController;
@@ -12,7 +11,6 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PerfilController;
 use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\CuotaController;
-use App\Http\Controllers\Admin\ProductoTelefoniaController;
 use App\Http\Controllers\Admin\TipoServicioController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\VentaController;
@@ -61,12 +59,6 @@ Route::resource('cuotas', CuotaController::class)->names('admin.cuotas');
 Route::get('removidos/cuotas', [CuotaController::class, 'indextrash'])->name('admin.cuotas.indextrash');
 Route::put('cuotas/{cuota}/destroylogico', [CuotaController::class, 'destroyLogico'])->name('admin.cuotas.destroyLogico');
 Route::put('cuotas/{cuota}/restaurarCuota', [CuotaController::class, 'restaurarCuotas'])->name('admin.cuotas.restaurarCuotas');
-
-//Producto Telefonia
-Route::resource('productotelefonia', ProductoTelefoniaController::class)->names('admin.productotelefonia');
-Route::get('removidos/productotelefonia', [ProductoTelefoniaController::class, 'indextrash'])->name('admin.productotelefonia.indextrash');
-Route::put('productotelefonia/{productotelefonium}/destroylogico', [ProductoTelefoniaController::class, 'destroyLogico'])->name('admin.productotelefonia.destroyLogico');
-Route::put('productotelefonia/{productotelefonium}/restaurarProductoTelefonia', [ProductoTelefoniaController::class, 'restaurarProductoTelefonia'])->name('admin.productotelefonia.restaurarProductoTelefonia');
 
 //Tipo_Servicio
 Route::resource('tiposervicio', TipoServicioController::class)->names('admin.tiposervicio');
