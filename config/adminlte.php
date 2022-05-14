@@ -322,11 +322,13 @@ return [
         ],
         [
             'text'    => 'Ventas', 
-            'icon'    => 'fas fa-archive',          
+            'icon'    => 'fas fa-archive',
+            'active' => ['admin/ventas*'],          
             'submenu' => [  
                 [
                     'text' => 'Registro de ventas',  
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/ventas*'], 
                     'route' => 'admin.ventas.index',          
                 ],                        
             ]

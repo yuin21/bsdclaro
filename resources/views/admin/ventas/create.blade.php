@@ -66,25 +66,39 @@
                     {!! Form::text('inputCantidad', null, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad']) !!}
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="border">
-                            <tr>
-                                <th>#</th>
-                                <th>Tipo Servicio</th>
-                                <th>Servicio</th>
-                                <th>Plan</th>
-                                <th>Precio Plan</th>
-                                <th>Cantidad</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodyDetalleVenta">
-                        </tbody>
-                    </table>
-                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="border">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tipo Servicio</th>
+                                    <th>Servicio</th>
+                                    <th>Plan</th>
+                                    <th>Precio Plan</th>
+                                    <th>Cantidad</th>
+                                    <th>Total</th>
+                                    <th>Sin IGV</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyDetalleVenta">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
                         {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('total', null, ['class' => 'form-control', 'id' => 'total', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                        {!! Form::text('inputTotal', null, ['class' => 'form-control text-danger', 'id' => 'inputTotal', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                        {!! Form::hidden('total', null) !!}
+                    </div>
+                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
+                        @error('total')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
+                        {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
+                        {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                     </div>
                 </div>
             </div>
@@ -194,8 +208,14 @@
         const inputCantidad = document.getElementById('inputCantidad')
         const btnAgregar = document.getElementById('btnAgregar')
         const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
-        let cont = 0
+        const inputTotal = document.getElementById('inputTotal')
+        const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
+        const total = document.getElementById('total') // input hidden para mandar a registrar
 
+        let cont = 0
+        let total_igv = 0
+        let total_sin_igv = 0
+        const IGV = 1.18
 
         selectPlan.addEventListener('input', (e) => {
             const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio 
@@ -208,8 +228,12 @@
             const servicio = selectServicio.value.split('_') // formato: Id, nombre
             const plan = selectPlan.value.split('_') // formato: Id, nombre, precio 
             const cantidad = inputCantidad.value
+            const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
+            const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
+            total_igv = Number((total_igv + subtotal_igv).toFixed(2))
+            total_sin_igv = Number((total_igv / IGV).toFixed(2))
             tbodyDetalleVenta.innerHTML += `
             <tr id="detalleventa_${cont}">
                 <td width="20px">${cont}</td>
@@ -218,8 +242,10 @@
                 <td>${plan[1]}</td>
                 <td>${plan[2]}</td>
                 <td>${cantidad}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}")'>
+                <td>${subtotal_igv}</td>
+                <td>${subtotal_sin_igv}</td>
+                <td width="30px">
+                    <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
@@ -228,12 +254,21 @@
                 <input type="hidden" name="planes[]" value="${plan[0]}">
                 <input type="hidden" name="precioplanes[]" value="${plan[2]}">
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
+                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
             </tr>`
+            inputTotal.value = total_igv
+            inputTotal_sin_igv.value = total_sin_igv
+            total.value = total_igv
         })
 
-        function handleDeleteDetalleVenta(idDetalleVenta) {
+        function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
+            total_igv = Number((total_igv - subtotal_igv).toFixed(2))
+            total_sin_igv = Number((total_igv / IGV).toFixed(2))
+            inputTotal.value = total_igv
+            inputTotal_sin_igv.value = total_sin_igv
+            total.value = total_igv
             const item = document.getElementById(idDetalleVenta)
-            console.log(item)
             tbodyDetalleVenta.removeChild(item)
         }
     </script>

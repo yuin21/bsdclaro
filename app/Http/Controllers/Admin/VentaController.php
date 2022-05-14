@@ -43,6 +43,7 @@ class VentaController extends Controller
             'planes' => 'required',
             'precioplanes' => 'required',
             'cantidades' => 'required',
+            'total' => 'required'
         ]);
 
         // datos de los detalle de venta
@@ -51,10 +52,12 @@ class VentaController extends Controller
         $planes = $request->get('planes');
         $precioplanes = $request->get('precioplanes');
         $cantidades = $request->get('cantidades');
+        $subtotales_igv = $request->get('subtotales_igv');
+        $subtotales_sinigv = $request->get('subtotales_sinigv');
 
-        // try {
-        //     DB::beginTransaction();
-            $venta = BsdVenta::create($request->all() + ['total' => 100]);
+        try {
+            DB::beginTransaction();
+            $venta = BsdVenta::create($request->all());
 
             for ($i=0; $i < count($tiposServicio); $i++) {
                 $detalleventa = new BsdDetalleVenta();
@@ -64,14 +67,14 @@ class VentaController extends Controller
                 $detalleventa->bsd_tipo_servicio_id = $tiposServicio[$i];
                 $detalleventa->cantidad = $cantidades[$i];
                 $detalleventa->precio_plan = $precioplanes[$i];
-                $detalleventa->cf_con_igv = 10;
-                $detalleventa->cf_sin_igv = 20;
+                $detalleventa->cf_con_igv = $subtotales_igv[$i];
+                $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];
                 $detalleventa->save();
             }
-        //     DB::commit();
-        // } catch (\Throwable $th) {
-        //     DB::rollback();
-        // }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
         return redirect()->route('admin.ventas.show', $venta)->with('success','store'); 
     }
 
