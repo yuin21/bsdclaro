@@ -341,6 +341,22 @@ return [
             ],  
         ], 
         [
+            'text' => 'Empresa',
+            'url'  => '/user/empresa',
+            'icon' => 'fas fa-building',
+            'active' => ['admin/empresa*'], 
+            'can' => 'adminlte.empresa', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Empresa',  
+                    'route'  => 'admin.empresa.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/empresa*'], 
+                    'can' => 'admin.empresa.index',
+                ],
+            ],  
+        ],
+        [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
             'active' => ['admin/cargasmasivas*'], 

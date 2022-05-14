@@ -63,5 +63,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'adminlte.plan', 'description' => 'Ver sección: Plan'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.plan.index', 'description' => 'Ver opción: Registro Plan'])->syncRoles([$roleAdmin]);
 
+        //seccion empresa
+        Permission::create(['name' => 'adminlte.empresa', 'description' => 'Ver sección: Empresa'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.empresa.index', 'description' => 'Ver opción: Registro Empresa'])->syncRoles([$roleAdmin]);
+
     }
 }

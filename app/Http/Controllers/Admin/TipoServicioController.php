@@ -10,8 +10,7 @@ class TipoServicioController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
-        //$this->middleware('can:admin.tiposervicio.index');
+        $this->middleware('can:admin.tiposervicio.index');
     }
 
     public function index()
@@ -50,7 +49,7 @@ class TipoServicioController extends Controller
     public function update(Request $request, BsdTipoServicio $tiposervicio)
     {
         $request->validate([
-            'nom_tipo_servicio' => 'required|string|max:15|unique:bsd_tipo_servicio,nom_tipo_servicio',
+            'nom_tipo_servicio' => "required|string|max:15|unique:bsd_tipo_servicio,nom_tipo_servicio, $tiposervicio->id",
         ]);
 
         $tiposervicio->update($request->all());
