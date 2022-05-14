@@ -24,16 +24,19 @@
                     <b style="min-width:200px; display: inline-block">Nombre:</b> {{ $personal->nom_personal }}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Apellido materno:</b> {{ $personal->ape_paterno }}
+                    <b style="min-width:200px; display: inline-block">Apellido Materno:</b> {{ $personal->ape_paterno }}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Apellido paterno:</b> {{ $personal->ape_materno }}
+                    <b style="min-width:200px; display: inline-block">Apellido Paterno:</b> {{ $personal->ape_materno }}
                 </li>
                 <li class="list-group-item">
                     <b style="min-width:200px; display: inline-block">Cargo:</b> {{ $personal->cargo }}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Tipo de documento:</b>
+                    <b style="min-width: 200px; display: inline-block">Tipo de Personal:</b>{{ $personal->tipo_personal}}
+                </li>
+                <li class="list-group-item">
+                    <b style="min-width:200px; display: inline-block">Tipo de Documento:</b>
                     ({{ $personal->tipo_doc_iden }})
                     @foreach ($tipos_doc as $tipo)
                         @if ($tipo->cod === $personal->tipo_doc_iden)
@@ -42,7 +45,7 @@
                     @endforeach
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Número de documento:</b>
+                    <b style="min-width:200px; display: inline-block">Número de Documento:</b>
                     {{ $personal->nro_doc_iden }}
                 </li>
                 <li class="list-group-item">

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ape_paterno', 25);
             $table->string('ape_materno', 25);
             $table->string('cargo', 75);
+            $table->string('tipo_personal', 15);
             $table->string('tipo_doc_iden', 30);
             $table->string('nro_doc_iden', 15)->unique();
             $table->string('direccion', 300);
