@@ -262,6 +262,7 @@ return [
         ],
         [
             'text' => 'Personal',
+            'url'  => '/user/profile',
             'icon' => 'fas fa-users',
             'active' => ['admin/personal*'], 
             'can' => 'adminlte.personal', 
@@ -277,105 +278,20 @@ return [
         ], 
         [
             'text' => 'Clientes',
+            'url'  => '/user/profile',
             'icon' => 'fas fa-fw fa-address-book',
-            'can' => 'adminlte.clientes', 
+            'can' => 'adminlte.personal', //No se si esto se cambia
             'active' => ['admin/clientes*'], 
             'submenu' => [
                 [
-                    'text' => 'Registro Clientes',  
+                    'text' => 'Registro Clientes',
+                    'route'  => 'admin.clientes.index',  
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',
                     'active' => ['admin/clientes*'], 
-                    'can' => 'admin.clientes.index',
+                    'can' => 'admin.personal.index',
                 ],
             ],  
         ], 
-        [
-            'text' => 'Servicio',
-            'icon' => 'fas far fa-shopping-bag',
-            'active' => ['admin/servicio*'], 
-            'can' => 'adminlte.servicio',
-            'submenu' => [
-                [
-                    'text' => 'Registro Servicio',  
-                    'route'  => 'admin.servicio.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/servicio*'], 
-                    'can' => 'admin.servicio.index',
-                ],
-            ],  
-        ],
-        
-        [
-            'text' => 'Tipo de Servicio',
-            'icon' => 'fas far fa-shopping-bag',
-            'active' => ['admin/personal*'], 
-            //'active' => ['admin/tiposervicio*'], 
-            'can' => 'adminlte.personal',
-            //'can' => 'adminlte.tiposervicio',
-            'submenu' => [
-                [
-                    'text' => 'Registro Tipo Servicio',  
-                    'route'  => 'admin.tiposervicio.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/personal*'], 
-                    'can' => 'admin.personal.index',
-                    //'active' => ['admin/tiposervicio*'], 
-                    //'can' => 'admin.tiposervicio.index',
-                ],
-            ],
-        ],  
-         
-        [
-            'text' => 'Plan',
-            'icon' => 'fas far fa-shopping-bag',
-            'active' => ['admin/personal*'], 
-            //'active' => ['admin/plan*'], 
-            'can' => 'adminlte.personal',
-            //'can' => 'adminlte.plan',
-            'submenu' => [
-                [
-                    'text' => 'Registro Plan',  
-                    'route'  => 'admin.plan.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/personal*'], 
-                    'can' => 'admin.personal.index',
-                    //'active' => ['admin/plan*'], 
-                    //'can' => 'admin.plan.index',
-                ],
-            ],
-        ], 
-        [
-            'text' => 'Cuota',
-            //'url'  => '/user/profile', //No se si esto se cambia
-            'icon' => 'fas far fa-file',
-            'active' => ['admin/cuotas*'], 
-            'can' => 'adminlte.cuotas',
-            'submenu' => [
-                [
-                    'text' => 'Registro Cuota',  
-                    'route'  => 'admin.cuotas.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/cuotas*'], 
-                    'can' => 'admin.cuotas.index',
-                ],
-            ],  
-        ],
-        [
-            'text' => 'Producto Telefonía',
-            'icon' => 'fas far fa-shopping-bag',
-            'active' => ['admin/productotelefonia*'], 
-            'can' => 'adminlte.productotelefonia',
-            'submenu' => [
-                [
-                    'text' => 'Registro Producto Telefonía',  
-                    'route'  => 'admin.productotelefonia.index',
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/productotelefonia*'], 
-                    'can' => 'admin.productotelefonia.index',
-                ],
-            ],  
-        ],  
         [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
