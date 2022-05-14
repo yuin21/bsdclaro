@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\BsdVenta;
 use App\Models\BsdDetalleVenta;
 use App\Models\BsdTipoServicio;
 use App\Models\BsdPlan;
 use App\Models\BsdServicio;
-use Illuminate\Support\Facades\DB;
+use App\Models\BsdNumeroLineaNueva;
 
 class VentaController extends Controller
 {
@@ -54,11 +55,13 @@ class VentaController extends Controller
         $cantidades = $request->get('cantidades');
         $subtotales_igv = $request->get('subtotales_igv');
         $subtotales_sinigv = $request->get('subtotales_sinigv');
+        $numerosLineasNuevas = $request->get('numerosLineasNuevas');
 
-        try {
-            DB::beginTransaction();
+        // try {
+        //     DB::beginTransaction();
+            // 1. registrar venta
             $venta = BsdVenta::create($request->all());
-
+            // 2. registrar detalles de venta
             for ($i=0; $i < count($tiposServicio); $i++) {
                 $detalleventa = new BsdDetalleVenta();
                 $detalleventa->bsd_venta_id = $venta->id;
@@ -70,11 +73,20 @@ class VentaController extends Controller
                 $detalleventa->cf_con_igv = $subtotales_igv[$i];
                 $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];
                 $detalleventa->save();
+
+                // 3. registrar numeros de linea nueva
+                $numeros = explode(',', $numerosLineasNuevas[$i]);
+                for ($j=0; $j < count($numeros); $j++) {
+                    $numerolineanueva = new BsdNumeroLineaNueva();
+                    $numerolineanueva->bsd_detalle_venta_id = $detalleventa->id;
+                    $numerolineanueva->numero_linea_nueva = trim($numeros[$j]);
+                    $numerolineanueva->save();
+                }
             }
-            DB::commit();
-        } catch (\Throwable $th) {
-            DB::rollback();
-        }
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        // }
         return redirect()->route('admin.ventas.show', $venta)->with('success','store'); 
     }
 

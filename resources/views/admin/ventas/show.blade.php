@@ -43,6 +43,7 @@
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
                                     <th>Cantidad</th>
+                                    <th>Números de linea nueva</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
                                 </tr>
@@ -56,6 +57,13 @@
                                         <td> {{ $detalle->plan->nombre_plan }}</td>
                                         <td> {{ $detalle->plan->precio }}</td>
                                         <td> {{ $detalle->cantidad }}</td>
+                                        <td>
+                                            @foreach ($detalle->numerosLineaNueva as $numero)
+                                                <span class="badge bg-secondary">
+                                                    {{ $numero->numero_linea_nueva }}
+                                                </span>
+                                            @endforeach
+                                        </td>
                                         <td> {{ $detalle->cf_con_igv }}</td>
                                         <td> {{ $detalle->cf_sin_igv }}</td>
                                     </tr>

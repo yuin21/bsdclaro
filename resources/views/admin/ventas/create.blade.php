@@ -62,8 +62,18 @@
                             </select>
                         </div>
                     </div>
-                    {!! Form::text('precioplan', $planes[0]->precio, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
-                    {!! Form::text('inputCantidad', null, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad']) !!}
+                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                        {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
+                        {!! Form::text('precioplan', $planes[0]->precio, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                    </div>
+                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                        {!! Form::label('inputCantidad', 'Cantidad', ['style' => 'margin: 0; min-width:180px']) !!}
+                        {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                    </div>
+                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                        {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
+                        {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
+                    </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
                 <div class="card-body">
@@ -77,6 +87,7 @@
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
                                     <th>Cantidad</th>
+                                    <th>Números de linea nueva</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
                                     <th></th>
@@ -206,6 +217,7 @@
         const selectServicio = document.getElementById('selectServicio')
         const selectPlan = document.getElementById('selectPlan')
         const inputCantidad = document.getElementById('inputCantidad')
+        const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
         const btnAgregar = document.getElementById('btnAgregar')
         const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
         const inputTotal = document.getElementById('inputTotal')
@@ -228,12 +240,24 @@
             const servicio = selectServicio.value.split('_') // formato: Id, nombre
             const plan = selectPlan.value.split('_') // formato: Id, nombre, precio 
             const cantidad = inputCantidad.value
+            const numerosLineasNuevas = inputNumerosLineasNuevas.value
             const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
+
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
             total_igv = Number((total_igv + subtotal_igv).toFixed(2))
             total_sin_igv = Number((total_igv / IGV).toFixed(2))
+
+            let htmlNumerosLineaNueva = ''
+            numerosLineasNuevas.split(',').map(num => {
+                htmlNumerosLineaNueva += `
+                    <span class="badge bg-secondary">
+                        ${num.trim()}
+                    </span>
+                `
+            })
+
             tbodyDetalleVenta.innerHTML += `
             <tr id="detalleventa_${cont}">
                 <td width="20px">${cont}</td>
@@ -242,6 +266,9 @@
                 <td>${plan[1]}</td>
                 <td>${plan[2]}</td>
                 <td>${cantidad}</td>
+                <td>
+                    ${htmlNumerosLineaNueva}
+                </td>
                 <td>${subtotal_igv}</td>
                 <td>${subtotal_sin_igv}</td>
                 <td width="30px">
@@ -254,13 +281,27 @@
                 <input type="hidden" name="planes[]" value="${plan[0]}">
                 <input type="hidden" name="precioplanes[]" value="${plan[2]}">
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
+                <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
                 <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
                 <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
             </tr>`
+
             inputTotal.value = total_igv
             inputTotal_sin_igv.value = total_sin_igv
             total.value = total_igv
+            //limpiar inputs
+            inputCantidad.value = '0'
+            inputNumerosLineasNuevas.value = ''
         })
+
+        inputNumerosLineasNuevas.addEventListener('input', (e) => {
+            // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil
+            if (!e.target.value.trim()) return inputCantidad.value = 0
+            const cantNumero = e.target.value.split(',').length
+            console.log(cantNumero)
+            inputCantidad.value = cantNumero
+        })
+
 
         function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
             total_igv = Number((total_igv - subtotal_igv).toFixed(2))
