@@ -17,29 +17,26 @@ class CuotaController extends Controller
 
     public function index()
     {
-        return view('admin.cuotas.index');
+        $bsd_cuota = BsdCuota::where('estado', 1)->get();
+
+        return view('admin.cuotas.index', compact('bsd_cuota'));
     }
 
     public function create()
     {
-        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
-        $personal = $bsd_personal->pluck('PersonalFullName', 'PersonalFullName');
+        //$bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        //$personal = $bsd_personal->pluck('PersonalFullName', 'PersonalFullName');
         //dd($personal);
-        $bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nombre_servicio')->get();
-        $servicio = $bsd_servicio->pluck('nombre_servicio', 'nombre_servicio');
 
-        return view('admin.cuotas.create', compact('personal','servicio'));
+        return view('admin.cuotas.create');
     }
    
     public function store(Request $request)
     {
         $request->validate([
-            'tipo_consultor' => 'required|string|max:20',
-            'tipo_venta' => 'required|string|max:20',
-            'personal' => 'required|string|max:120',
-            'cantidad_cuota' => 'required|numeric',
-            'mes' => 'required|string|max:10',
-            'año' => 'required|numeric|max:2069|min:1970',
+            'cuota' => 'required|numeric|unique:bsd_cuota,cuota',
+            //'mes' => 'required|string|max:10',
+            //'año' => 'required|numeric|max:2069|min:1970',
         ]);
 
         $cuota = BsdCuota::create($request->all());
@@ -55,24 +52,21 @@ class CuotaController extends Controller
     public function edit(BsdCuota $cuota)
     {
         
-        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
-        $personal = $bsd_personal->pluck('PersonalFullName', 'PersonalFullName');
+        //$bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        //$personal = $bsd_personal->pluck('PersonalFullName', 'PersonalFullName');
 
-        $bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nombre_servicio')->get();
-        $servicio = $bsd_servicio->pluck('nombre_servicio', 'nombre_servicio');
+        //$bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nombre_servicio')->get();
+        //$servicio = $bsd_servicio->pluck('nombre_servicio', 'nombre_servicio');
         
-        return view('admin.cuotas.edit', compact('cuota','personal','servicio'));
+        return view('admin.cuotas.edit', compact('cuota'));
     }
 
     public function update(Request $request, BsdCuota $cuota)
     {
         $request->validate([
-            'tipo_consultor' => 'required|string|max:20',
-            'tipo_venta' => 'required|string|max:20',
-            'personal' => 'required|string|max:120',
-            'cantidad_cuota' => 'required|numeric',
-            'mes' => 'required|string|max:10',
-            'año' => 'required|numeric|max:2069|min:1970',
+            'cuota' => "required|numeric|unique:bsd_cuota,cuota, $cuota->id",
+            //'mes' => 'required|string|max:10',
+            //'año' => 'required|numeric|max:2069|min:1970',
         ]);
 
         $cuota->update($request->all());

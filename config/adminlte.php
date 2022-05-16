@@ -357,6 +357,22 @@ return [
             ],  
         ],
         [
+            'text' => 'Cuota',
+            'url'  => '/user/cuotas',
+            'icon' => 'fas fa-file',
+            'active' => ['admin/cuotas*'], 
+            'can' => 'adminlte.cuotas', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Cuota',  
+                    'route'  => 'admin.cuotas.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/cuotas*'], 
+                    'can' => 'admin.cuotas.index',
+                ],
+            ],  
+        ],
+        [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
             'active' => ['admin/cargasmasivas*'], 

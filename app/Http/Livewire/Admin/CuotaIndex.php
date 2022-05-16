@@ -18,7 +18,7 @@ class CuotaIndex extends Component
 
     public function render()
     {
-        $bsd_cuota = BsdCuota::where('estado', 1)->where('personal','LIKE','%'.$this->search.'%')
+        $bsd_cuota = BsdCuota::where('estado', 1)->where('cuota','LIKE','%'.$this->search.'%')
         
         ->paginate(15);
         return view('livewire.admin.cuota-index', compact('bsd_cuota'));

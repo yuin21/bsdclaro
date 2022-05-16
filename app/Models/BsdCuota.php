@@ -9,13 +9,7 @@ class BsdCuota extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
-        'tipo_consultor',
-        'tipo_venta',
-        'personal',
-        'cantidad_cuota',
-        'mes',
-        'año',
+        'cuota',
         // 'estado',
         // 'usuario_reg' ,
         // 'usuario_act' ,
