@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\Admin\TipoServicioController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\VentaController;
+use App\Http\Controllers\Admin\NumeroLineaNuevaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -80,3 +81,9 @@ Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan']
 
 //Ventas
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
+
+//Numero_linea_nueva
+Route::resource('numero_linea_nueva', NumeroLineaNuevaController::class)->names('admin.numero_linea_nueva');
+Route::get('removidos/numero_linea_nueva', [NumeroLineaNuevaController::class, 'indextrash'])->name('admin.numero_linea_nueva.indextrash');
+Route::put('numero_linea_nueva/{numero_linea_nueva}/destroylogico', [NumeroLineaNuevaController::class, 'destroyLogico'])->name('admin.numero_linea_nueva.destroyLogico');
+Route::put('numero_linea_nueva/{numero_linea_nueva}/restaurarNumero', [NumeroLineaNuevaController::class, 'restaurarNumero'])->name('admin.numero_linea_nueva.restaurarNumero');
