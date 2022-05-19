@@ -10,7 +10,7 @@
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
-                            <th>#</th>
+                            <th>Item</th>
                             <th>Cuota</th>
                             <th>Estado</th>
                             <th>Acciones</th>
@@ -19,7 +19,7 @@
                     <tbody>
                         @foreach ($bsd_cuota as $cuota)
                             <tr>
-                                <td>{{ $cuota->id }}</td>
+                                <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $cuota->cuota }}</td>
                                 <td>{{ $cuota->estado }}</td>
                                 <td width="270px">

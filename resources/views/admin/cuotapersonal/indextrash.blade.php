@@ -3,41 +3,41 @@
 @section('title', 'Listado de las cuotas')
 
 @section('content_header')
-    <a href="{{ route('admin.cuotas.index') }}" class="float-right mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Ver lista de cuotas
+    <a href="{{ route('admin.cuotapersonal.index') }}" class="float-right mt-2">
+        <i class="fas fa-chevron-circle-left"></i> Ver lista de cuotas asignadas
     </a>
-    <h1 class="text-bold">Cuota Removida</h1>
+    <h1 class="text-bold">Cuota Asignada Removida</h1>
 @stop
 
 @section('content')
     <div class="card">
-        @if ($bsd_cuota->count())
+        @if ($bsd_cuota_personal->count())
             <div class="card-body" style="overflow: hidden">
                 <div style="overflow: auto">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Tipo de Consultor</th>
-                                <th>Tipo de Venta</th>
+                                <th>Item</th>
                                 <th>Personal</th>
-                                <th>Cantidad de Cuota</th>
+                                <th>Cuota</th>
                                 <th>Mes</th>
                                 <th>Año</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($bsd_cuota as $cuota)
+                            @foreach ($bsd_cuota_personal as $cuotapersonal)
                                 <tr>
-                                    <td>{{ $cuota->tipo_consultor }}</td>
-                                    <td>{{ $cuota->tipo_venta }}</td>
-                                    <td>{{ $cuota->personal }}</td>
-                                    <td>{{ $cuota->cantidad_cuota }}</td>
-                                    <td>{{ $cuota->mes }}</td>
-                                    <td>{{ $cuota->año }}</td>
-                                    <td>{{ $cuota->estado }}</td>
+                                    <td width="20px">{{ $loop->iteration }}</td>
+                                    <td>{{ $cuotapersonal->personal->ape_paterno }}
+                                        {{ $cuotapersonal->personal->ape_materno }}
+                                        {{ $cuotapersonal->personal->nom_personal }}</td>
+                                    <td>{{ $cuotapersonal->cuota->cuota }}</td>
+                                    <td>{{ $cuotapersonal->mes }}</td>
+                                    <td>{{ $cuotapersonal->año }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
-                                            <form action="{{ route('admin.cuotas.restaurarCuotas', $cuota) }}"
+                                            <form action="{{ route('admin.cuotapersonal.restaurarCuotaPersonal', $cuotapersonal) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('PUT')
@@ -45,7 +45,7 @@
                                                     <i class="fas fa-plus-circle"></i> Restaurar
                                                 </button>
                                             </form>
-                                            <form action="{{ route('admin.cuotas.destroy', $cuota) }}"
+                                            <form action="{{ route('admin.cuotapersonal.destroy', $cuotapersonal) }}"
                                                 class="form-delete" method="post">
                                                 @csrf
                                                 @method('DELETE')

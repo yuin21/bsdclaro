@@ -20,9 +20,11 @@
         <div class="card-body">
             {!! Form::model($empresa, ['route' => ['admin.empresa.update', $empresa], 'method' => 'put']) !!}
             @include('admin.empresa.partials.form')
-            {!! Form::submit('Editar Empresa', ['class' => 'btn btn-primary']) !!}
-            <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
-            {!! Form::close() !!}
+            <div class="float-right">
+                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @stop

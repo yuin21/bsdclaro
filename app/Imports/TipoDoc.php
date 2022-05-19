@@ -35,7 +35,7 @@ class TipoDoc
         $t8->cod = 'SWIFT';
         $t8->name = 'SOCIETY FOR WORLDBANK INTERBANK FINANTIAL TELECOMMUNICATION';
 
-        $tipos_doc = array($t1, $t2,$t3,$t4,$t5,$t6,$t7,$t8);
+        $tipos_doc = collect([$t1, $t2,$t3,$t4,$t5,$t6,$t7,$t8]);
         return $tipos_doc;
     }
 }

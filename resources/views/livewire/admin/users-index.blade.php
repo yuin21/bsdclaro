@@ -12,7 +12,7 @@
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
-                            <th>#</th>
+                            <th>Item</th>
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Rol</th>

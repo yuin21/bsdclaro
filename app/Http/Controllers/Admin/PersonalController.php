@@ -24,7 +24,9 @@ class PersonalController extends Controller
     public function create()
     {
     
-        $tipos_doc = TipoDoc::getTipoDoc();
+        $tipo_doc = TipoDoc::getTipoDoc();
+        $tipos_doc = $tipo_doc->pluck('name', 'cod');
+        //dd($tipos_doc);
         return view('admin.personal.create', compact('tipos_doc'));
     }
 
@@ -54,7 +56,8 @@ class PersonalController extends Controller
     
     public function edit(BsdPersonal $personal)
     {
-        $tipos_doc = TipoDoc::getTipoDoc();
+        $tipo_doc = TipoDoc::getTipoDoc();
+        $tipos_doc = $tipo_doc->pluck('name', 'cod');
         return view('admin.personal.edit', compact('personal', 'tipos_doc'));
     }
    

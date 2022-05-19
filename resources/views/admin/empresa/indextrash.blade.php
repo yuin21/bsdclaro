@@ -17,26 +17,26 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Item</th>
                                 <th>RUC</th>
                                 <th>Razon Social</th>
                                 <th>Representante</th>
                                 <th>Direccion</th>
                                 <th>Celular</th>
                                 <th>Email</th>
-                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bsd_empresa as $empresa)
                                 <tr>
+                                    <td width="20px">{{ $loop->iteration }}</td>
                                     <td>{{ $empresa->ruc }}</td>
                                     <td>{{ $empresa->razon_social }}</td>
                                     <td>{{ $empresa->representante }}</td>
                                     <td>{{ $empresa->direccion }}</td>
                                     <td>{{ $empresa->celular }}</td>
                                     <td>{{ $empresa->email }}</td>
-                                    <td>{{ $empresa->estado }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
                                             <form action="{{ route('admin.empresa.restaurarEmpresa', $empresa) }}"
