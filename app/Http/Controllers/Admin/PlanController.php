@@ -11,8 +11,7 @@ class PlanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
-        //$this->middleware('can:admin.plan.index');
+        $this->middleware('can:admin.plan.index');
     }
 
     public function index()

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\BsdPersonal;
 use App\Imports\TipoDoc;
 use PDF;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class PersonalController extends Controller
 {
@@ -34,6 +35,7 @@ class PersonalController extends Controller
             'ape_paterno' => 'required|string|max:25',
             'ape_materno'=> 'required|string|max:25',
             'cargo' => 'required|string|max:75',
+            'tipo_personal' => 'required|string|max:15',
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> 'required|string|max:15|unique:bsd_personal', 
             'email'=> 'required|string|email|max:75|unique:bsd_personal',
@@ -63,6 +65,7 @@ class PersonalController extends Controller
             'ape_paterno' => 'required|string|max:25',
             'ape_materno'=> 'required|string|max:25',
             'cargo' => 'required|string|max:75',
+            'tipo_personal' => 'required|string|max:15',
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> "required|string|max:15|unique:bsd_personal,nro_doc_iden,$personal->id", 
             'email'=> "required|string|email|max:75|unique:bsd_personal,email,$personal->id",

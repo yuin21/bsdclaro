@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bsd_personal', function (Blueprint $table) {
+        Schema::create('bsd_empresa', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_personal', 60);
-            $table->string('ape_paterno', 25);
-            $table->string('ape_materno', 25);
-            $table->string('cargo', 75);
-            $table->string('tipo_personal', 15);
-            $table->string('tipo_doc_iden', 30);
-            $table->string('nro_doc_iden', 15)->unique();
-            $table->string('direccion', 300);
+            $table->char('ruc', 11)->unique();
+            $table->string('razon_social', 120);
+            $table->string('representante', 120);
+            $table->string('direccion', 90)->nullable();
             $table->string('celular', 30)->nullable()->comment('Email y/o celular'); //No se si es obligatorio u opcional
             $table->string('email', 75)->unique()->nullable()->comment('Email y/o celular');//No se si es obligatorio u opcional
             $table->char('estado', 1)->default('1')->comment('1 or 0');
@@ -39,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bsd_personal');
+        Schema::dropIfExists('bsd_empresa');
     }
 };

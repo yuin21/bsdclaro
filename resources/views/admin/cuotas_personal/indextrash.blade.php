@@ -17,13 +17,23 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Cuota</th>
+                                <th>Tipo de Consultor</th>
+                                <th>Tipo de Venta</th>
+                                <th>Personal</th>
+                                <th>Cantidad de Cuota</th>
+                                <th>Mes</th>
+                                <th>Año</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bsd_cuota as $cuota)
                                 <tr>
-                                    <td>{{ $cuota->cuota }}</td>
+                                    <td>{{ $cuota->tipo_consultor }}</td>
+                                    <td>{{ $cuota->tipo_venta }}</td>
+                                    <td>{{ $cuota->personal }}</td>
+                                    <td>{{ $cuota->cantidad_cuota }}</td>
+                                    <td>{{ $cuota->mes }}</td>
+                                    <td>{{ $cuota->año }}</td>
                                     <td>{{ $cuota->estado }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">

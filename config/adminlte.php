@@ -293,6 +293,103 @@ return [
             ],  
         ], 
         [
+            'text' => 'Tipo de Servicio',
+            'url'  => '/user/tiposervicio',
+            'icon' => 'fas fa-list',
+            'active' => ['admin/tiposervicio*'], 
+            'can' => 'adminlte.tiposervicio', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Tipo de Servicio',  
+                    'route'  => 'admin.tiposervicio.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/tiposervicio*'], 
+                    'can' => 'admin.tiposervicio.index',
+                ],
+            ],  
+        ], 
+        [
+            'text' => 'Número de linea nueva',
+            'url'  => '/user/numero_linea_nueva',
+            'icon' => 'fas fa-list',
+            'active' => ['admin/numero_linea_nueva*'], 
+            'can' => 'adminlte.numero_linea_nueva', 
+            'submenu' => [
+                [
+                    'text' => 'Registro de los números',  
+                    'route'  => 'admin.numero_linea_nueva.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/numero_linea_nueva*'], 
+                    'can' => 'admin.numero_linea_nueva.index',
+                ],
+            ],  
+        ], 
+
+        [
+            'text' => 'Servicio',
+            'url'  => '/user/servicio',
+            'icon' => 'fas fa-book',
+            'active' => ['admin/servicio*'], 
+            'can' => 'adminlte.servicio', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Servicio',  
+                    'route'  => 'admin.servicio.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/servicio*'], 
+                    'can' => 'admin.servicio.index',
+                ],
+            ],  
+        ], 
+        [
+            'text' => 'Plan',
+            'url'  => '/user/plan',
+            'icon' => 'fas fa-file',
+            'active' => ['admin/plan*'], 
+            'can' => 'adminlte.plan', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Plan',  
+                    'route'  => 'admin.plan.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/plan*'], 
+                    'can' => 'admin.plan.index',
+                ],
+            ],  
+        ], 
+        [
+            'text' => 'Empresa',
+            'url'  => '/user/empresa',
+            'icon' => 'fas fa-building',
+            'active' => ['admin/empresa*'], 
+            'can' => 'adminlte.empresa', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Empresa',  
+                    'route'  => 'admin.empresa.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/empresa*'], 
+                    'can' => 'admin.empresa.index',
+                ],
+            ],  
+        ],
+        [
+            'text' => 'Cuota',
+            'url'  => '/user/cuotas',
+            'icon' => 'fas fa-file',
+            'active' => ['admin/cuotas*'], 
+            'can' => 'adminlte.cuotas', 
+            'submenu' => [
+                [
+                    'text' => 'Registro Cuota',  
+                    'route'  => 'admin.cuotas.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/cuotas*'], 
+                    'can' => 'admin.cuotas.index',
+                ],
+            ],  
+        ],
+        [
             'text'    => 'Cargas Masivas', 
             'icon'    => "fas fa-fw fa-file-csv",
             'active' => ['admin/cargasmasivas*'], 
@@ -322,11 +419,13 @@ return [
         ],
         [
             'text'    => 'Ventas', 
-            'icon'    => 'fas fa-archive',          
+            'icon'    => 'fas fa-archive',
+            'active' => ['admin/ventas*'],          
             'submenu' => [  
                 [
                     'text' => 'Registro de ventas',  
                     'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/ventas*'], 
                     'route' => 'admin.ventas.index',          
                 ],                        
             ]

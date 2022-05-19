@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BsdCuota extends Model
+class BsdEmpresa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'cuota',
+        'ruc',
+        'razon_social' ,
+        'representante' ,
+        'direccion',
+        'celular' ,
+        'email',
         // 'estado',
         // 'usuario_reg' ,
         // 'usuario_act' ,
         // 'created_at',
-        // 'updated_at',
+        // 'updated_at',       
      ] ;
-
-    protected $table='bsd_cuota';
-
-    
+        
+     protected $table='bsd_empresa';
 }

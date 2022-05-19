@@ -54,6 +54,22 @@ class RoleSeeder extends Seeder
         //seccion cuota
         Permission::create(['name' => 'adminlte.cuotas', 'description' => 'Ver sección: Cuota'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.cuotas.index', 'description' => 'Ver opción: Registro Cuota'])->syncRoles([$roleAdmin]);
-        
+
+        //seccion tipo de servicio
+        Permission::create(['name' => 'adminlte.tiposervicio', 'description' => 'Ver sección: Tipo de Servicio'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.tiposervicio.index', 'description' => 'Ver opción: Registro Tipo de Servicio'])->syncRoles([$roleAdmin]);
+ 
+        //seccion plan
+        Permission::create(['name' => 'adminlte.plan', 'description' => 'Ver sección: Plan'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.plan.index', 'description' => 'Ver opción: Registro Plan'])->syncRoles([$roleAdmin]);
+
+        //seccion empresa
+        Permission::create(['name' => 'adminlte.empresa', 'description' => 'Ver sección: Empresa'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.empresa.index', 'description' => 'Ver opción: Registro Empresa'])->syncRoles([$roleAdmin]);
+
+        //seccion Número de linea nueva
+        Permission::create(['name' => 'adminlte.numero_linea_nueva', 'description' => 'Ver sección: Número linea nueva'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.numero_linea_nueva.index', 'description' => 'Ver opción: Número linea nueva'])->syncRoles([$roleAdmin]);
+
     }
 }

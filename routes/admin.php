@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\TipoServicioController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\VentaController;
 use App\Http\Controllers\Admin\NumeroLineaNuevaController;
+use App\Http\Controllers\Admin\EmpresaController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -87,3 +88,9 @@ Route::resource('numero_linea_nueva', NumeroLineaNuevaController::class)->names(
 Route::get('removidos/numero_linea_nueva', [NumeroLineaNuevaController::class, 'indextrash'])->name('admin.numero_linea_nueva.indextrash');
 Route::put('numero_linea_nueva/{numero_linea_nueva}/destroylogico', [NumeroLineaNuevaController::class, 'destroyLogico'])->name('admin.numero_linea_nueva.destroyLogico');
 Route::put('numero_linea_nueva/{numero_linea_nueva}/restaurarNumero', [NumeroLineaNuevaController::class, 'restaurarNumero'])->name('admin.numero_linea_nueva.restaurarNumero');
+
+//Empresa
+Route::resource('empresa', EmpresaController::class)->names('admin.empresa');
+Route::get('removidos/empresa', [EmpresaController::class, 'indextrash'])->name('admin.empresa.indextrash');
+Route::put('empresa/{empresa}/destroylogico', [EmpresaController::class, 'destroyLogico'])->name('admin.empresa.destroyLogico');
+Route::put('empresa/{empresa}/restaurarEmpresa', [EmpresaController::class, 'restaurarEmpresa'])->name('admin.empresa.restaurarEmpresa');

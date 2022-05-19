@@ -14,6 +14,7 @@ class BsdPersonal extends Model
         'ape_paterno' ,
         'ape_materno',
         'cargo' ,
+        'tipo_personal',
         'tipo_doc_iden',
         'nro_doc_iden',
         'direccion',

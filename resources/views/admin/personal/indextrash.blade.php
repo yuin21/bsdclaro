@@ -18,13 +18,14 @@
                         <thead>
                             <tr>
                                 <th>Personal</th>
-                                <th>cargo</th>
-                                <th>tipo Doc.</th>
+                                <th>Cargo</th>
+                                <th>Tipo Per.</th>
+                                <th>Tipo Doc.</th>
                                 <th>Nro. Doc.</th>
-                                <th>direccion</th>
-                                <th>celular</th>
-                                <th>email</th>
-                                <th>estado</th>
+                                <th>Direccion</th>
+                                <th>Celular</th>
+                                <th>Email</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                         {{ $personal->nom_personal }}
                                     </td>
                                     <td>{{ $personal->cargo }}</td>
+                                    <td>{{ $personal->tipo_personal }}</td>
                                     <td>{{ $personal->tipo_doc_iden }}</td>
                                     <td>{{ $personal->nro_doc_iden }}</td>
                                     <td>{{ $personal->direccion }}</td>

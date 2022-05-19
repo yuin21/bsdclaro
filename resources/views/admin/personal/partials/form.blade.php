@@ -34,6 +34,14 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('tipo_personal', 'Tipo de Personal') !!}
+    {!! Form::text('tipo_personal', null, ['class' => 'form-control']) !!}
+    @error('tipo_personal')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+</div>
+
+<div class="form-group">
     {!! Form::label(null, 'Tipo de documento') !!}
 
 

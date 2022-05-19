@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Listado de las Cuotas')
+@section('title', 'Listado de los Servicios')
 
 @section('content_header')
     <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.cuotas.create') }}">
@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    @include('admin.cuotas.form')
+    @livewire('admin.cuota-index')
 @stop
 
 @section('js')

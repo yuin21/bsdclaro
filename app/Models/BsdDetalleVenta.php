@@ -47,5 +47,7 @@ class BsdDetalleVenta extends Model
     public function plan(){
         return $this->belongsTo('App\Models\BsdPlan', 'bsd_plan_id');
     }
-
+    public function numerosLineaNueva(){
+        return $this->hasMany('App\Models\BsdNumeroLineaNueva', 'bsd_detalle_venta_id');
+    }
 }

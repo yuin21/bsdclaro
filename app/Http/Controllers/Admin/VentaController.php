@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\BsdVenta;
 use App\Models\BsdDetalleVenta;
 use App\Models\BsdTipoServicio;
 use App\Models\BsdPlan;
 use App\Models\BsdServicio;
-use Illuminate\Support\Facades\DB;
+use App\Models\BsdNumeroLineaNueva;
 
 class VentaController extends Controller
 {
@@ -43,6 +44,7 @@ class VentaController extends Controller
             'planes' => 'required',
             'precioplanes' => 'required',
             'cantidades' => 'required',
+            'total' => 'required'
         ]);
 
         // datos de los detalle de venta
@@ -51,11 +53,15 @@ class VentaController extends Controller
         $planes = $request->get('planes');
         $precioplanes = $request->get('precioplanes');
         $cantidades = $request->get('cantidades');
+        $subtotales_igv = $request->get('subtotales_igv');
+        $subtotales_sinigv = $request->get('subtotales_sinigv');
+        $numerosLineasNuevas = $request->get('numerosLineasNuevas');
 
         // try {
         //     DB::beginTransaction();
-            $venta = BsdVenta::create($request->all() + ['total' => 100]);
-
+            // 1. registrar venta
+            $venta = BsdVenta::create($request->all());
+            // 2. registrar detalles de venta
             for ($i=0; $i < count($tiposServicio); $i++) {
                 $detalleventa = new BsdDetalleVenta();
                 $detalleventa->bsd_venta_id = $venta->id;
@@ -64,9 +70,18 @@ class VentaController extends Controller
                 $detalleventa->bsd_tipo_servicio_id = $tiposServicio[$i];
                 $detalleventa->cantidad = $cantidades[$i];
                 $detalleventa->precio_plan = $precioplanes[$i];
-                $detalleventa->cf_con_igv = 10;
-                $detalleventa->cf_sin_igv = 20;
+                $detalleventa->cf_con_igv = $subtotales_igv[$i];
+                $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];
                 $detalleventa->save();
+
+                // 3. registrar numeros de linea nueva
+                $numeros = explode(',', $numerosLineasNuevas[$i]);
+                for ($j=0; $j < count($numeros); $j++) {
+                    $numerolineanueva = new BsdNumeroLineaNueva();
+                    $numerolineanueva->bsd_detalle_venta_id = $detalleventa->id;
+                    $numerolineanueva->numero_linea_nueva = trim($numeros[$j]);
+                    $numerolineanueva->save();
+                }
             }
         //     DB::commit();
         // } catch (\Throwable $th) {
