@@ -49,23 +49,15 @@
                                 <td>{{ $personal->celular }}</td>
                                 <td>{{ $personal->email }}</td>
                                 <td width="270px">
-                                    {{-- <form action="{{ route('admin.personal.generatePDF', $personal) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('POST')
-                                        <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                            <i class="fas fa-file-pdf"></i> PDF
-                                        </button>
-                                    </form> --}}
                                     <div class="d-flex" style="gap: 10px">
-                                        <form action="{{ route('admin.personal.generatePDF', $personal) }}"
+                                        {{-- <form action="{{ route('admin.personal.generatePDF', $personal) }}"
                                             method="post">
                                             @csrf
                                             @method('POST')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
                                                 <i class="fas fa-file-pdf"></i> PDF
                                             </button>
-                                        </form>
+                                        </form> --}}
                                         <a href="{{ route('admin.personal.show', $personal) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver
