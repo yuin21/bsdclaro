@@ -18,11 +18,56 @@
                     <p class="h5 text-bold">Datos generales</p>
                 </div>
                 <div class="card-body">
-                    {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
-                    {!! Form::text('tipo_contrato', null, ['class' => 'form-control']) !!}
-                    @error('tipo_contrato')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                    <div class="mb-2">
+                        {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
+                        {!! Form::text('tipo_contrato', null, ['class' => 'form-control']) !!}
+                        @error('tipo_contrato')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="mb-2">
+                                {!! Form::label('tipo_entrega_vpo_bpo', 'Tipo BPO/VPO') !!}
+                                {!! Form::text('tipo_entrega_vpo_bpo', null, ['class' => 'form-control']) !!}
+                                @error('tipo_entrega_vpo_bpo')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="mb-2">
+                                {!! Form::label('estado_te', 'Estado BPO/VPO') !!}
+                                {!! Form::text('estado_te', null, ['class' => 'form-control']) !!}
+                                @error('estado_te')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="mb-2">
+                                {!! Form::label('fecha_entrega_te', 'Fecha Entrega BPO/VPO', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control']) !!}
+                                @error('fecha_entrega_te')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
+                        {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
+                        @error('observaciones_te')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="mb-2">
+                        {!! Form::label('observaciones', 'Observación') !!}
+                        {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
+                        @error('observaciones')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -32,8 +77,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3">
-                            {!! Form::label('selectTipoServicio', 'Tipo de servicio') !!}
-                            <select name="selectTipoServicio" id="selectTipoServicio" class="form-control">
+                            <select name="selectTipoServicio" id="selectTipoServicio" class="selectpicker form-control"
+                                title="Tipo de servicio">
                                 @foreach ($tiposservicio as $tiposervicio)
                                     <option value="{{ $tiposervicio->id }}_{{ $tiposervicio->nom_tipo_servicio }}">
                                         {{ $tiposervicio->nom_tipo_servicio }}
@@ -42,20 +87,21 @@
                             </select>
                         </div>
                         <div class="col-3">
-                            {!! Form::label('selectServicio', 'Servicio') !!}
-                            <select name="selectServicio" id="selectServicio" class="form-control">
+                            <select name="selectServicio" id="selectServicio" class="selectpicker form-control"
+                                title="Servicio">
                                 @foreach ($servicios as $servicio)
-                                    <option value="{{ $servicio->id }}_{{ $servicio->nom_servicio }}">
+                                    <option
+                                        value="{{ $servicio->id }}_{{ $servicio->nom_servicio }}_{{ $servicio->bsd_tipo_servicio_id }}">
                                         {{ $servicio->nom_servicio }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-6">
-                            {!! Form::label('selectPlan', 'Plan') !!}
-                            <select name="selectPlan" id="selectPlan" class="form-control">
+                            <select name="selectPlan" id="selectPlan" class="selectpicker form-control" title="Plan">
                                 @foreach ($planes as $plan)
-                                    <option value="{{ $plan->id }}_{{ $plan->nombre_plan }}_{{ $plan->precio }}">
+                                    <option
+                                        value="{{ $plan->id }}_{{ $plan->nombre_plan }}_{{ $plan->precio }}_{{ $plan->bsd_tipo_servicio_id }}">
                                         {{ $plan->nombre_plan }}
                                     </option>
                                 @endforeach
@@ -64,7 +110,7 @@
                     </div>
                     <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                         {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('precioplan', $planes[0]->precio, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                        {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
                     </div>
                     <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                         {!! Form::label('inputCantidad', 'Cantidad', ['style' => 'margin: 0; min-width:180px']) !!}
@@ -155,21 +201,24 @@
                     </div>
                 </div>
             </div>
+            <div class="text-right pb-4">
+                {!! Form::submit('Registrar Venta', ['class' => 'btn btn-primary btn-lg']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
+            </div>
         </div>
-    </div>
-    <div class="text-right">
-        {!! Form::submit('Registrar Venta', ['class' => 'btn btn-primary']) !!}
-        <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
     </div>
     {!! Form::close() !!}
 @stop
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @stop
 
 @section('js')
     <script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
     <script>
         // busqueda de personal
         $('#searchPersonal').autocomplete({
@@ -212,10 +261,9 @@
         })
     </script>
     <script>
-        // seleccionar plan y mostrar su precio
         const selectTipoServicio = document.getElementById('selectTipoServicio')
         const selectServicio = document.getElementById('selectServicio')
-        const selectPlan = document.getElementById('selectPlan')
+        const selectPlan = $('#selectPlan')
         const inputCantidad = document.getElementById('inputCantidad')
         const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
         const btnAgregar = document.getElementById('btnAgregar')
@@ -229,16 +277,95 @@
         let total_sin_igv = 0
         const IGV = 1.18
 
-        selectPlan.addEventListener('input', (e) => {
+
+
+        //desabilitar select servicio y plan al iniciar
+        $('#selectPlan').prop('disabled', true);
+        $('#selectServicio').prop('disabled', true);
+        $('#selectPlan').selectpicker('refresh');
+        $('#selectServicio').selectpicker('refresh');
+
+        // habilitar select servicio y plan cuando se elige un tipo de servicio
+        $('#selectTipoServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
+            if (isSelected) {
+                const [tipoServicioID, tipoServicioName] = e.target.value.split(
+                    '_') // formato tipo servicio: ID, NOMBRE
+
+                // habilitar los select
+                $('#selectPlan').prop('disabled', false);
+                $('#selectServicio').prop('disabled', false);
+
+                // filtrar select servicio
+                $("#selectServicio").val('default');
+                $.map($("#selectServicio option"), function(option) {
+                    const value = option.value
+                    if (value) {
+                        const servicio = value.split('_') // formato servicio: ID , NOMBRE, ID_TIPO_SERVICIO
+                        const helper = "#selectServicio option[value=" + value + "]"
+                        if (tipoServicioID !== servicio[2]) {
+                            $("#selectServicio option[value=" + value + "]").hide()
+                        } else {
+                            $("#selectServicio option[value=" + value + "]").show()
+                        }
+                    }
+                    return option;
+                })
+                // filtrar select plan
+                $("#selectPlan").val('default');
+                $.map($("#selectPlan option"), function(option) {
+                    const value = option.value
+                    if (value) {
+                        const plan = value.split(
+                            '_') // formato plan: Id, nombre, precio, ID_TIPO_SERVICIO
+                        const helper = "#selectPlan option[value=" + value + "]"
+                        if (tipoServicioID !== plan[3]) {
+                            $(`#selectPlan option[value='${value}']`).hide()
+                        } else {
+                            $(`#selectPlan option[value='${value}']`).show()
+                        }
+                    }
+                    return option;
+                })
+                $('#precioplan').val(0)
+                $('#selectPlan').selectpicker('refresh');
+                $('#selectServicio').selectpicker('refresh');
+            }
+        });
+
+
+        // seleccionar plan y mostrar su precio
+        selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio 
             $('#precioplan').val(dataPlan[2])
-        })
+        });
 
+        // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
+
+            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !
+                inputNumerosLineasNuevas.value) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'bottom-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                return Toast.fire({
+                    icon: 'warning',
+                    title: 'Faltan datos'
+                })
+            }
+
             // obtener la data
             const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
-            const servicio = selectServicio.value.split('_') // formato: Id, nombre
-            const plan = selectPlan.value.split('_') // formato: Id, nombre, precio 
+            const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
+            const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
             const numerosLineasNuevas = inputNumerosLineasNuevas.value
             const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
@@ -291,18 +418,23 @@
             total.value = total_igv
             //limpiar inputs
             inputCantidad.value = '0'
+            $('#precioplan').val(0)
             inputNumerosLineasNuevas.value = ''
+            $("#selectServicio").val('default');
+            $("#selectPlan").val('default');
+            $('#selectPlan').selectpicker('refresh');
+            $('#selectServicio').selectpicker('refresh');
         })
 
+        // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil
         inputNumerosLineasNuevas.addEventListener('input', (e) => {
-            // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil
             if (!e.target.value.trim()) return inputCantidad.value = 0
             const cantNumero = e.target.value.split(',').length
             console.log(cantNumero)
             inputCantidad.value = cantNumero
         })
 
-
+        // eliminar un detalle de venta de la lista
         function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
             total_igv = Number((total_igv - subtotal_igv).toFixed(2))
             total_sin_igv = Number((total_igv / IGV).toFixed(2))
