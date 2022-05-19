@@ -89,7 +89,7 @@ Route::get('removidos/numero_linea_nueva', [NumeroLineaNuevaController::class, '
 Route::put('numero_linea_nueva/{numero_linea_nueva}/destroylogico', [NumeroLineaNuevaController::class, 'destroyLogico'])->name('admin.numero_linea_nueva.destroyLogico');
 Route::put('numero_linea_nueva/{numero_linea_nueva}/restaurarNumero', [NumeroLineaNuevaController::class, 'restaurarNumero'])->name('admin.numero_linea_nueva.restaurarNumero');
 
-//Empresa
+//Empresa_1
 Route::resource('empresa', EmpresaController::class)->names('admin.empresa');
 Route::get('removidos/empresa', [EmpresaController::class, 'indextrash'])->name('admin.empresa.indextrash');
 Route::put('empresa/{empresa}/destroylogico', [EmpresaController::class, 'destroyLogico'])->name('admin.empresa.destroyLogico');
