@@ -12,7 +12,6 @@
                         <tr>
                             <th>Item</th>
                             <th>Cuota</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                           </tr>
                     </thead>
@@ -21,7 +20,6 @@
                             <tr>
                                 <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $cuota->cuota }}</td>
-                                <td>{{ $cuota->estado }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.cuotas.show', $cuota) }}"
