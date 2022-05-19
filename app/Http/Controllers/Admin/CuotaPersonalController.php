@@ -44,7 +44,11 @@ class CuotaPersonalController extends Controller
             'bsd_cuota_id' => 'required',
             'mes' => 'required|string|max:10',
             'año' => 'required|numeric|max:2069|min:1970',
+        ],[
+            'bsd_personal_id.unique' => 'Ya se asignó una cuota en esa fecha para el personal'
         ]);
+
+
         //dd($request);
         //dd($request);
         $cuotapersonal = BsdCuotaPersonal::create($request->all());
