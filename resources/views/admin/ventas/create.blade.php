@@ -183,13 +183,20 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <p class="h5 text-bold">Cliente</p>
+                    <div class="d-flex">
+                        <p class="h5 text-bold" style="flex-grow: 1">Cliente</p>
+                        <div class="spinner-border text-danger float-rigth d-none" role="status" id="cliente_loading"></div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         {!! Form::label('searchCliente', 'RUC') !!}
                         {!! Form::hidden('bsd_cliente_id', null, ['id' => 'bsd_cliente_id']) !!}
-                        {!! Form::text('searchCliente', null, ['class' => 'form-control', 'id' => 'searchCliente']) !!}
+                        <div class="input-group">
+                            {!! Form::text('searchCliente', null, ['class' => 'form-control', 'id' => 'searchCliente']) !!}
+                            <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
+                                style="border-radius: 0 3px 3px 0; opacity: 0.6"><i class="fas fa-search"></i></button>
+                        </div>
                         <ul class="list-group mt-2">
                             <li class="list-group-item text-secondary">
                                 <span class="text-bold">Razón social: </span> <span id="cliente_razonsocial"></span>
@@ -241,24 +248,63 @@
         })
 
         // busqueda de cliente
-        $('#searchCliente').autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: "{{ route('api.clientes.search') }}",
-                    dataType: "json",
-                    data: {
-                        term: request.term
-                    },
-                    success: function(data) {
-                        response(data)
+
+        $(document).ready(function() {
+            $('#btnSearchCliente').click(function(e) {
+                handleSearchClient_sunat()
+            })
+            $("#searchCliente").keypress(function(e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    e.preventDefault();
+                    handleSearchClient()
+                }
+            });
+        });
+
+        function handleSearchClient() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('api.clientes.search') }}',
+                data: {
+                    term: $("#searchCliente").val()
+                },
+                success: function(response) {
+                    if (response && response.length > 0) {
+                        $('#bsd_cliente_id').val(response[0].id);
+                        $('#cliente_razonsocial').text(response[0].razon_social)
                     }
-                })
-            },
-            select: function(evento, selected) {
-                $('#bsd_cliente_id').val(selected.item.id);
-                $('#cliente_razonsocial').text(selected.item.razon_social)
-            }
-        })
+                },
+                error: function(response) {
+                    $('#bsd_cliente_id').val('');
+                    $('#cliente_razonsocial').text('')
+                }
+            });
+        }
+
+        function handleSearchClient_sunat() {
+            $('#cliente_loading').removeClass('d-none')
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('api.clientes.searchSunat') }}',
+                data: {
+                    term: $("#searchCliente").val()
+                },
+                success: function(response) {
+                    $('#cliente_loading').addClass('d-none')
+                    const data = JSON.parse(response)
+                    if (data && data.result && data.result.razon_social) {
+                        // $('#bsd_cliente_id').val(response[0].id);
+                        $('#cliente_razonsocial').text(data.result.razon_social)
+                    }
+                },
+                error: function(response) {
+                    $('#cliente_loading').addClass('d-none')
+                    $('#bsd_cliente_id').val('');
+                    $('#cliente_razonsocial').text('')
+                }
+            });
+        }
     </script>
     <script>
         const selectTipoServicio = document.getElementById('selectTipoServicio')
