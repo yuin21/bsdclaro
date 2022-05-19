@@ -50,6 +50,7 @@ Route::get('removidos/personal', [PersonalController::class, 'indextrash'])->nam
 Route::put('personal/{personal}/destroylogico', [PersonalController::class, 'destroyLogico'])->name('admin.personal.destroyLogico');
 Route::put('personal/{personal}/restaurarPersonal', [PersonalController::class, 'restaurarPersonal'])->name('admin.personal.restaurarPersonal');
 Route::post('personal/{personal}/generarPDF', [PersonalController::class, 'generatePDF'])->name('admin.personal.generatePDF');
+Route::get('personal/pdf/allpersonal', [PersonalController::class, 'generatePDF_allPersonal'])->name('admin.personal.pdf.allpersonal');
 
 //Cliente
 Route::resource('clientes', ClienteController::class)->names('admin.clientes');
