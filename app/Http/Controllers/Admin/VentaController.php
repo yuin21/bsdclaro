@@ -44,7 +44,8 @@ class VentaController extends Controller
             'planes' => 'required',
             'precioplanes' => 'required',
             'cantidades' => 'required',
-            'total' => 'required'
+            'total' => 'required',
+            'personal_cargo' => 'required',
         ]);
 
         // datos de los detalle de venta
