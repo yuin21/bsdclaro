@@ -37,7 +37,7 @@ class VentaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tipo_contrato' => 'required',
+            'tipo_contrato' => 'required|max:20',
             'bsd_personal_id' => 'required',
             'tiposServicio' => 'required',
             'servicios' => 'required',
@@ -46,6 +46,10 @@ class VentaController extends Controller
             'cantidades' => 'required',
             'total' => 'required',
             'razon_social' => 'required',
+            'sot' => 'numeric',
+            'observaciones' => 'max:300',
+            'observaciones_te' => 'max:300',
+            'registrado_selforce' => 'required'
         ]);
 
         // datos de los detalle de venta

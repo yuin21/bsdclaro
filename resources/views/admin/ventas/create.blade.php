@@ -18,18 +18,38 @@
                     <p class="h5 text-bold">Datos generales</p>
                 </div>
                 <div class="card-body">
-                    <div class="mb-2">
-                        {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
-                        {!! Form::text('tipo_contrato', null, ['class' => 'form-control']) !!}
-                        @error('tipo_contrato')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row mb-4">
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
+                            {!! Form::text('tipo_contrato', null, ['class' => 'form-control']) !!}
+                            @error('tipo_contrato')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('registrado_selforce', 'Registro en Selforce') !!}
+                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
+                            @error('registrado_selforce')
+                                <small class="text-danger">Registro en Selforce es obligatorio</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('solicitud', 'Solicitud') !!}
+                            {!! Form::text('solicitud', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('sot', 'SOT') !!}
+                            {!! Form::text('sot', null, ['class' => 'form-control']) !!}
+                            @error('sot')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-6">
                             <div class="mb-2">
                                 {!! Form::label('tipo_entrega_vpo_bpo', 'Tipo BPO/VPO') !!}
-                                {!! Form::text('tipo_entrega_vpo_bpo', null, ['class' => 'form-control']) !!}
+                                {!! Form::select('tipo_entrega_vpo_bpo', ['B' => 'BPO', 'V' => 'VPO'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
                                 @error('tipo_entrega_vpo_bpo')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -38,7 +58,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="mb-2">
                                 {!! Form::label('estado_te', 'Estado BPO/VPO') !!}
-                                {!! Form::text('estado_te', null, ['class' => 'form-control']) !!}
+                                {!! Form::select('estado_te', ['C' => 'conforme', 'N' => 'no conforme'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
                                 @error('estado_te')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -78,7 +98,7 @@
                     <div class="row">
                         <div class="col-3">
                             <select name="selectTipoServicio" id="selectTipoServicio" class="selectpicker form-control"
-                                title="Tipo de servicio">
+                                title="Seleccionar tipo de servicio">
                                 @foreach ($tiposservicio as $tiposervicio)
                                     <option value="{{ $tiposervicio->id }}_{{ $tiposervicio->nom_tipo_servicio }}">
                                         {{ $tiposervicio->nom_tipo_servicio }}
@@ -88,7 +108,7 @@
                         </div>
                         <div class="col-3">
                             <select name="selectServicio" id="selectServicio" class="selectpicker form-control"
-                                title="Servicio">
+                                title="Seleccionar servicio">
                                 @foreach ($servicios as $servicio)
                                     <option
                                         value="{{ $servicio->id }}_{{ $servicio->nom_servicio }}_{{ $servicio->bsd_tipo_servicio_id }}">
@@ -98,7 +118,8 @@
                             </select>
                         </div>
                         <div class="col-6">
-                            <select name="selectPlan" id="selectPlan" class="selectpicker form-control" title="Plan">
+                            <select name="selectPlan" id="selectPlan" class="selectpicker form-control"
+                                title="Seleccionar plan">
                                 @foreach ($planes as $plan)
                                     <option
                                         value="{{ $plan->id }}_{{ $plan->nombre_plan }}_{{ $plan->precio }}_{{ $plan->bsd_tipo_servicio_id }}">
@@ -566,18 +587,33 @@
                 tipo_contrato,
                 bsd_personal_id,
                 razon_social,
+                sot,
+                registrado_selforce,
+                observaciones_te,
+                observaciones
             } = e.target
 
             if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(
-                'El tipo contrato es obligatorio')
+                'El campo tipo contrato es obligatorio')
+
+            if (tipo_contrato.value.length > 20) return alerta(
+                'El campo tipo contrato no debe contener más de 20 caracteres')
+
+            if (!registrado_selforce.value) return alerta('El campo Registro en Selforce es obligatorio')
+
+            if (!sot.value || isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
+
+            if (observaciones_te.value.length > 300) return alerta(
+                'El campo observaciones BPO/VPO acepta máximo 300 caracteres')
+
+            if (observaciones.value.length > 300) return alerta(
+                'El campo observaciones  acepta máximo 300 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
 
             if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
 
-            if (cantDetallesVenta === 0) {
-                alerta('Detalles de venta es obligatorio')
-            }
+            if (cantDetallesVenta === 0) return alerta('Detalles de venta es obligatorio')
 
             formCrearVenta.submit()
         })

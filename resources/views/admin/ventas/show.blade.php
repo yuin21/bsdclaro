@@ -23,7 +23,37 @@
                 <div class="card-body">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <span class="text-bold">Tipo de contrato: </span> {{ $venta->tipo_contrato }}
+                            <span class="text-bold tag-detalle">Tipo de contrato: </span>
+                            {{ $venta->tipo_contrato }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Registro en Selforce: </span>
+                            {{ $venta->registrado_selforce === 'N' ? 'NO' : 'SI' }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Solicitud: </span> {{ $venta->solicitud }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">SOT: </span> {{ $venta->sot }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Tipo BPO/VPO: </span>
+                            {{ $venta->tipo_entrega_vpo_bpo === 'V' ? 'VPO' : 'BPO' }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Estado BPO/VPO: </span>
+                            {{ $venta->estado_te === 'N' ? 'No conforme' : 'Conforme' }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Fecha entrega BPO/VPO: </span>
+                            {{ $venta->fecha_entrega_te }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Observación BPO/VPO: </span>
+                            {{ $venta->observaciones_te }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observaciones }}
                         </li>
                     </ul>
                 </div>
@@ -111,4 +141,14 @@
             </div>
         </div>
     </div>
+@stop
+
+@section('css')
+    <style>
+        .tag-detalle {
+            display: inline-block;
+            min-width: 190px;
+        }
+
+    </style>
 @stop
