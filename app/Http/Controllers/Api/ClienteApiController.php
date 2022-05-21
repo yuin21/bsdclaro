@@ -34,6 +34,10 @@ class ClienteApiController extends Controller
         if (empty($search) or strlen($search) < 6 ) { return []; }
         $cliente = BsdCliente::where('estado', 1)->where('ruc',$search)->first();
 
+        if (!isset($cliente)) {
+            return [];
+        }
+        
         $dataCliente[] = [
             'id' => $cliente->id,
             'value' => $cliente->ruc,

@@ -11,6 +11,7 @@ use App\Models\BsdTipoServicio;
 use App\Models\BsdPlan;
 use App\Models\BsdServicio;
 use App\Models\BsdNumeroLineaNueva;
+use App\Models\BsdCliente;
 
 class VentaController extends Controller
 {
@@ -38,14 +39,13 @@ class VentaController extends Controller
         $request->validate([
             'tipo_contrato' => 'required',
             'bsd_personal_id' => 'required',
-            'bsd_cliente_id'=> 'required',
             'tiposServicio' => 'required',
             'servicios' => 'required',
             'planes' => 'required',
             'precioplanes' => 'required',
             'cantidades' => 'required',
             'total' => 'required',
-            'personal_cargo' => 'required',
+            'razon_social' => 'required',
         ]);
 
         // datos de los detalle de venta
@@ -60,6 +60,16 @@ class VentaController extends Controller
 
         // try {
         //     DB::beginTransaction();
+
+            // 0. registra cliente
+            // cuando no se encuentra en la BD se trae los datos de SUNAT: RUC y razon social
+            if (!isset($request->bsd_cliente_id)) {
+                $cliente= new BsdCliente();
+                $cliente->ruc = $request->searchCliente; // searchCliente contiene el ruc del cliente
+                $cliente->razon_social = $request->razon_social;
+                $cliente->save();
+                $request->merge(['bsd_cliente_id' => $cliente->id]);
+            }
             // 1. registrar venta
             $venta = BsdVenta::create($request->all());
             // 2. registrar detalles de venta

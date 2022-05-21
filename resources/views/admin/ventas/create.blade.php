@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    {!! Form::open(['route' => 'admin.ventas.store']) !!}
+    {!! Form::open(['route' => 'admin.ventas.store', 'id' => 'formCrearVenta']) !!}
     <div class="row">
         <div class="col-8">
             <div class="card">
@@ -149,14 +149,29 @@
                         {!! Form::hidden('total', null) !!}
                     </div>
                     <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
-                        @error('total')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
                         {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
                         {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                     </div>
+                </div>
+                <div class="card-footer">
+                    @error('tiposServicio')
+                        <span class="text-danger">El detalle de venta es obligatorio</span>
+                    @enderror
+                    {{-- @error('servicios') 
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                    @error('planes')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                    @error('precioplanes')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                    @error('cantidades')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                    @error('total')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror --}}
                 </div>
             </div>
         </div>
@@ -170,13 +185,12 @@
                         {!! Form::label('searchPersonal', 'Apellidos y nombre') !!}
                         {!! Form::hidden('bsd_personal_id', null, ['id' => 'bsd_personal_id']) !!}
                         {!! Form::text('searchPersonal', null, ['class' => 'form-control', 'id' => 'searchPersonal']) !!}
-                        <ul class="list-group mt-2">
-                            <li class="list-group-item text-secondary">
-                                <span class="text-bold">Cargo: </span> <span id="personal_cargo"></span>
-                            </li>
-                        </ul>
+                        <div class="input-group mt-2">
+                            <span class="input-group-text">cargo</span>
+                            {!! Form::text('personal_cargo', null, ['class' => 'form-control', 'id' => 'personal_cargo', 'readonly']) !!}
+                        </div>
                         @error('bsd_personal_id')
-                            <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">El personal es obligatorio</small>
                         @enderror
                     </div>
                 </div>
@@ -185,25 +199,32 @@
                 <div class="card-header">
                     <div class="d-flex">
                         <p class="h5 text-bold" style="flex-grow: 1">Cliente</p>
-                        <div class="spinner-border text-danger float-rigth d-none" role="status" id="cliente_loading"></div>
+                        <div id="cliente_loading" class="text-danger d-none">
+                            <span class="text-danger mr-2">
+                                buscando SUNAT
+                            </span>
+                            <div class="spinner-border text-danger float-rigth" role="status">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         {!! Form::label('searchCliente', 'RUC') !!}
                         {!! Form::hidden('bsd_cliente_id', null, ['id' => 'bsd_cliente_id']) !!}
+                        {{-- {!! Form::hidden('razon_social', null, ['id' => 'razon_social']) !!} --}}
                         <div class="input-group">
                             {!! Form::text('searchCliente', null, ['class' => 'form-control', 'id' => 'searchCliente']) !!}
                             <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
                                 style="border-radius: 0 3px 3px 0; opacity: 0.6"><i class="fas fa-search"></i></button>
                         </div>
-                        <ul class="list-group mt-2">
-                            <li class="list-group-item text-secondary">
-                                <span class="text-bold">Razón social: </span> <span id="cliente_razonsocial"></span>
-                            </li>
-                        </ul>
-                        @error('bsd_cliente_id')
-                            <small class="text-danger">{{ $message }}</small>
+
+                        <div class="input-group mt-2">
+                            <span class="input-group-text">razón social</span>
+                            {!! Form::text('razon_social', null, ['class' => 'form-control', 'id' => 'razon_social', 'readonly']) !!}
+                        </div>
+                        @error('razon_social')
+                            <small class="text-danger">El cliente es obligatorio</small>
                         @enderror
                     </div>
                 </div>
@@ -227,6 +248,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <script>
+        // const formCrearVenta = document.getElementById('formCrearVenta')
+        // formCrearVenta.addEventListener('submit', (e) => {
+        //     e.preventDefault()
+        //     //verificar los datos obligatorios
+        //     const {
+        //         tipo_contrato,
+        //         bsd_personal_id,
+        //         razon_social,
+        //     } = e.target
+        //     const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
+
+        //     if (tbodyDetalleVenta.childNotes.length === 0) {
+        //         alerta('Detalles de venta es obligatorio')
+        //     }
+
+        //     console.log(tipo_contrato)
+        //     // submit
+        //     // formCrearVenta.submit()
+        // })
+    </script>
+    <script>
         // busqueda de personal
         $('#searchPersonal').autocomplete({
             source: function(request, response) {
@@ -243,15 +285,25 @@
             },
             select: function(evento, selected) {
                 $('#bsd_personal_id').val(selected.item.id);
-                $('#personal_cargo').text(selected.item.cargo)
+                $('#personal_cargo').val(selected.item.cargo)
             }
         })
+        $("#searchPersonal").keypress(function(e) {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) {
+                e.preventDefault()
+                if (e.target.value === '') {
+                    $('#bsd_personal_id').val('');
+                    $('#personal_cargo').val('')
+                }
+            }
+        });
 
         // busqueda de cliente
 
         $(document).ready(function() {
             $('#btnSearchCliente').click(function(e) {
-                handleSearchClient_sunat()
+                handleSearchClient()
             })
             $("#searchCliente").keypress(function(e) {
                 var code = (e.keyCode ? e.keyCode : e.which);
@@ -272,12 +324,18 @@
                 success: function(response) {
                     if (response && response.length > 0) {
                         $('#bsd_cliente_id').val(response[0].id);
-                        $('#cliente_razonsocial').text(response[0].razon_social)
+                        $('#razon_social').val(response[0].razon_social)
+                    } else {
+                        $('#bsd_cliente_id').val('');
+                        $('#razon_social').val('')
+                        if ($("#searchCliente").val().length > 0) {
+                            handleSearchClient_sunat()
+                        }
                     }
                 },
                 error: function(response) {
                     $('#bsd_cliente_id').val('');
-                    $('#cliente_razonsocial').text('')
+                    $('#razon_social').val('')
                 }
             });
         }
@@ -293,15 +351,16 @@
                 success: function(response) {
                     $('#cliente_loading').addClass('d-none')
                     const data = JSON.parse(response)
-                    if (data && data.result && data.result.razon_social) {
-                        // $('#bsd_cliente_id').val(response[0].id);
-                        $('#cliente_razonsocial').text(data.result.razon_social)
+                    const razonSocial = data.result.razon_social
+                    if (data && data.result && razonSocial) {
+                        $('#bsd_cliente_id').val(null); // null porque se registrara un nuevo cliente
+                        $('#razon_social').val(razonSocial)
                     }
                 },
                 error: function(response) {
                     $('#cliente_loading').addClass('d-none')
                     $('#bsd_cliente_id').val('');
-                    $('#cliente_razonsocial').text('')
+                    $('#razon_social').val('')
                 }
             });
         }
@@ -318,12 +377,11 @@
         const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
         const total = document.getElementById('total') // input hidden para mandar a registrar
 
-        let cont = 0
+        let cantDetallesVenta = 0 // parecido al cont
+        let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
         let total_igv = 0
         let total_sin_igv = 0
         const IGV = 1.18
-
-
 
         //desabilitar select servicio y plan al iniciar
         $('#selectPlan').prop('disabled', true);
@@ -390,18 +448,7 @@
 
             if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !
                 inputNumerosLineasNuevas.value) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
+                alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
                     title: 'Faltan datos'
@@ -419,6 +466,7 @@
 
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
+            cantDetallesVenta++
             total_igv = Number((total_igv + subtotal_igv).toFixed(2))
             total_sin_igv = Number((total_igv / IGV).toFixed(2))
 
@@ -476,7 +524,6 @@
         inputNumerosLineasNuevas.addEventListener('input', (e) => {
             if (!e.target.value.trim()) return inputCantidad.value = 0
             const cantNumero = e.target.value.split(',').length
-            console.log(cantNumero)
             inputCantidad.value = cantNumero
         })
 
@@ -489,6 +536,50 @@
             total.value = total_igv
             const item = document.getElementById(idDetalleVenta)
             tbodyDetalleVenta.removeChild(item)
+            cantDetallesVenta--
         }
+
+        //alerta
+        function alerta(title = 'faltan datos') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            return Toast.fire({
+                icon: 'warning',
+                title
+            })
+        }
+
+        const formCrearVenta = document.getElementById('formCrearVenta')
+        formCrearVenta.addEventListener('submit', (e) => {
+            e.preventDefault()
+            //verificar los datos obligatorios
+            const {
+                tipo_contrato,
+                bsd_personal_id,
+                razon_social,
+            } = e.target
+
+            if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(
+                'El tipo contrato es obligatorio')
+
+            if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
+
+            if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
+
+            if (cantDetallesVenta === 0) {
+                alerta('Detalles de venta es obligatorio')
+            }
+
+            formCrearVenta.submit()
+        })
     </script>
 @stop
