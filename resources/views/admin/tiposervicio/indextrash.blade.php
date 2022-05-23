@@ -17,16 +17,16 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Item</th>
                                 <th>Nombre de Tipo de Servicio</th>
-                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bsd_tiposervicio as $tiposervicio)
                                 <tr>
+                                    <td width="20px">{{ $loop->iteration }}</td>
                                     <td>{{ $tiposervicio->nom_tipo_servicio }}</td>
-                                    <td>{{ $tiposervicio->estado }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
                                             <form action="{{ route('admin.tiposervicio.restaurarTipoServicio', $tiposervicio) }}"

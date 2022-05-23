@@ -6,7 +6,7 @@
     <a href="{{ route('admin.clientes.index') }}" class="float-right mt-2">
         <i class="fas fa-chevron-circle-left"></i> Ver lista de clientes
     </a>
-    <h1 class="text-bold">Ver Clientes</h1>
+    <h1 class="text-bold">Ver Cliente</h1>
 @stop
 
 @section('content')
@@ -42,6 +42,7 @@
     </div>
 @stop
 
+
 @section('js')
     @if (session('success') == 'update')
         <script>
@@ -56,6 +57,14 @@
             Swal.fire({
                 icon: 'success',
                 title: 'El cliente se registró con éxito',
+            })
+        </script>
+    @endif
+    @if (session('success') == 'show')
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Detalles de cliente',
             })
         </script>
     @endif

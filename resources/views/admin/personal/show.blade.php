@@ -14,7 +14,16 @@
         <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
             <h5 class="flex-grow-1">Personal: <span class="badge badge-warning">{{ $personal->ape_paterno }}
                     {{ $personal->ape_materno }} {{ $personal->nom_personal }}</span></h5>
-            <a href="{{ route('admin.personal.edit', $personal) }}" class="btn btn-sm btn-success text-nowrap">
+
+
+            <form action="{{ route('admin.personal.generatePDF', $personal) }}" method="post">
+                @csrf
+                @method('POST')
+                <button type="submit" class="btn btn-sm btn-danger text-nowrap">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </form>
+            <a href="{{ route('admin.personal.edit', $personal) }}" class="btn btn-sm btn-success text-nowrap ml-2">
                 <i class="fas fa-pen"></i> Editar
             </a>
         </div>
@@ -33,7 +42,8 @@
                     <b style="min-width:200px; display: inline-block">Cargo:</b> {{ $personal->cargo }}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width: 200px; display: inline-block">Tipo de Personal:</b>{{ $personal->tipo_personal}}
+                    <b style="min-width: 200px; display: inline-block">Tipo de
+                        Personal:</b>{{ $personal->tipo_personal }}
                 </li>
                 <li class="list-group-item">
                     <b style="min-width:200px; display: inline-block">Tipo de Documento:</b>

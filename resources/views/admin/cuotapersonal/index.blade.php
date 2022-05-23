@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Listado de los Servicios')
+@section('title', 'Listado de las Cuotas Asignadas')
 
 @section('content_header')
-    <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.cuotas.create') }}">
-        <i class="fas fa-plus-circle"></i> Registrar Cuota
+    <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.cuotapersonal.create') }}">
+        <i class="fas fa-plus-circle"></i> Registrar Cuota Asignada
     </a>
-    <h1 class="text-bold">Cuotas</h1>
+    <h1 class="text-bold">Cuotas Asignada</h1>
 @stop
 
 @section('content')
-    @livewire('admin.cuota-index')
+    @livewire('admin.cuotapersonal-index')
 @stop
 
 @section('js')
@@ -18,7 +18,7 @@
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'La cuota se ha removido con éxito',
+                title: 'La cuota asignada se ha removido con éxito',
             })
         </script>
     @endif
@@ -27,7 +27,7 @@
         $('.form-borrar').submit(function(e) {
             e.preventDefault()
             Swal.fire({
-                title: 'Va a remover una cuota',
+                title: 'Va a remover una cuota asignada',
                 text: "Puede restaurarlo o eliminarlo para siempre en la opción: Removidos",
                 icon: 'warning',
                 showCancelButton: true,

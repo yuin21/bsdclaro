@@ -24,11 +24,13 @@ return new class extends Migration
             ->references("id")
             ->on("bsd_personal");
             $table->string('mes', 10);
+            $table->unique(['bsd_personal_id','mes','año']);
             $table->year('año');
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
             $table->timestamps();
+            
         });
     }
 

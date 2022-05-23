@@ -17,6 +17,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Item</th>
                                 <th>Tipo de Servicio</th>
                                 <th>Nombre de Plan</th>
                                 <th>Precio</th>
@@ -27,10 +28,10 @@
                         <tbody>
                             @foreach ($bsd_plan as $plan)
                                 <tr>
+                                    <td width="20px">{{ $loop->iteration }}</td>
                                     <td>{{ $plan->tiposervicio->nom_tipo_servicio }}</td>
                                     <td>{{ $plan->nombre_plan }}</td>
                                     <td>{{ $plan->precio }}</td>
-                                    <td>{{ $plan->estado }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
                                             <form action="{{ route('admin.plan.restaurarPlan', $plan) }}"

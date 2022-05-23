@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\VentaController;
 use App\Http\Controllers\Admin\NumeroLineaNuevaController;
 use App\Http\Controllers\Admin\EmpresaController;
+use App\Http\Controllers\Admin\CuotaPersonalController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -50,6 +51,7 @@ Route::get('removidos/personal', [PersonalController::class, 'indextrash'])->nam
 Route::put('personal/{personal}/destroylogico', [PersonalController::class, 'destroyLogico'])->name('admin.personal.destroyLogico');
 Route::put('personal/{personal}/restaurarPersonal', [PersonalController::class, 'restaurarPersonal'])->name('admin.personal.restaurarPersonal');
 Route::post('personal/{personal}/generarPDF', [PersonalController::class, 'generatePDF'])->name('admin.personal.generatePDF');
+Route::get('personal/pdf/allpersonal', [PersonalController::class, 'generatePDF_allPersonal'])->name('admin.personal.pdf.allpersonal');
 
 //Cliente
 Route::resource('clientes', ClienteController::class)->names('admin.clientes');
@@ -94,3 +96,9 @@ Route::resource('empresa', EmpresaController::class)->names('admin.empresa');
 Route::get('removidos/empresa', [EmpresaController::class, 'indextrash'])->name('admin.empresa.indextrash');
 Route::put('empresa/{empresa}/destroylogico', [EmpresaController::class, 'destroyLogico'])->name('admin.empresa.destroyLogico');
 Route::put('empresa/{empresa}/restaurarEmpresa', [EmpresaController::class, 'restaurarEmpresa'])->name('admin.empresa.restaurarEmpresa');
+
+//CuotaPersonal
+Route::resource('cuotapersonal', CuotaPersonalController::class)->names('admin.cuotapersonal');
+Route::get('removidos/cuotapersonal', [CuotaPersonalController::class, 'indextrash'])->name('admin.cuotapersonal.indextrash');
+Route::put('cuotapersonal/{cuotapersonal}/destroylogico', [CuotaPersonalController::class, 'destroyLogico'])->name('admin.cuotapersonal.destroyLogico');
+Route::put('cuotapersonal/{cuotapersonal}/restaurarCuotaPersonal', [CuotaPersonalController::class, 'restaurarCuotaPersonal'])->name('admin.cuotapersonal.restaurarCuotaPersonal');

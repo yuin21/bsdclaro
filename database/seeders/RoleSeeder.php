@@ -70,6 +70,10 @@ class RoleSeeder extends Seeder
         //seccion Número de linea nueva
         Permission::create(['name' => 'adminlte.numero_linea_nueva', 'description' => 'Ver sección: Número linea nueva'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.numero_linea_nueva.index', 'description' => 'Ver opción: Número linea nueva'])->syncRoles([$roleAdmin]);
+        
+        //seccion empresa
+        Permission::create(['name' => 'adminlte.cuotapersonal', 'description' => 'Ver sección: Cuota'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.cuotapersonal.index', 'description' => 'Ver opción: Asignar Cuota'])->syncRoles([$roleAdmin]);
 
     }
 }

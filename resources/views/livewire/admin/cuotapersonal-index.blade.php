@@ -1,50 +1,48 @@
 <div class="card">
     <div class="card-header">
-        <a class="btn btn-info mb-2" href="{{ route('admin.cuotas.indextrash') }}">
+        <a class="btn btn-info mb-2" href="{{ route('admin.cuotapersonal.indextrash') }}">
             <i class="fas fa-trash"></i> Removidos
         </a>
-        <input wire:model="search" class="form-control" type="text" placeholder="Busque por Personal la Cuota">
+        <input wire:model="search" class="form-control" type="text" placeholder="Busque por Apellido Paterno del Personal la Cuota">
     </div>
-    @if ($bsd_cuota->count())
+    @if ($bsd_cuota_personal->count())
         <div class="card-body">
             <div>
-                {{ $bsd_cuota->links() }}
+                {{ $bsd_cuota_personal->links() }}
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
-                            <th>Tipo de Consultor</th>
-                            <th>Tipo de Venta</th>
+                            <th>Item</th>
                             <th>Personal</th>
-                            <th>Cantidad de Cuota</th>
+                            <th>Cuota</th>
                             <th>Mes</th>
                             <th>Año</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                           </tr>
                     </thead>
                     <tbody>
-                        @foreach ($bsd_cuota as $cuota)
+                        @foreach ($bsd_cuota_personal as $cuotapersonal)
                             <tr>
-                                <td>{{ $cuota->tipo_consultor }}</td>
-                                <td>{{ $cuota->tipo_venta }}</td>
-                                <td>{{ $cuota->personal }}</td>
-                                <td>{{ $cuota->cantidad_cuota }}</td>
-                                <td>{{ $cuota->mes }}</td>
-                                <td>{{ $cuota->año }}</td>
-                                <td>{{ $cuota->estado }}</td>
+                                <td width="20px">{{ $loop->iteration }}</td>
+                                <td>{{ $cuotapersonal->personal->ape_paterno }}
+                                    {{ $cuotapersonal->personal->ape_materno }}
+                                    {{ $cuotapersonal->personal->nom_personal }}</td>
+                                <td>{{ $cuotapersonal->cuota->cuota }}</td>
+                                <td>{{ $cuotapersonal->mes }}</td>
+                                <td>{{ $cuotapersonal->año }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
-                                        <a href="{{ route('admin.cuotas.show', $cuota) }}"
+                                        <a href="{{ route('admin.cuotapersonal.show', $cuotapersonal) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver
                                         </a>
-                                        <a href="{{ route('admin.cuotas.edit', $cuota) }}"
+                                        <a href="{{ route('admin.cuotapersonal.edit', $cuotapersonal) }}"
                                             class="btn btn-success btn-sm text-nowrap">
                                             <i class="fas fa-pen"></i> Editar
                                         </a>
-                                        <form action="{{ route('admin.cuotas.destroyLogico', $cuota) }}"
+                                        <form action="{{ route('admin.cuotapersonal.destroyLogico', $cuotapersonal) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
@@ -62,7 +60,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de las cuotas</strong>
+            <strong>Sin datos de las cuotas asignadas</strong>
         </div>
     @endif
 </div>

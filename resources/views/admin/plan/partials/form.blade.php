@@ -8,19 +8,22 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('nombre_plan', 'Nombre de Plan') !!}
-    {!! Form::text('nombre_plan', null, ['class' => 'form-control']) !!}
+    <div class="row">
+        <div class="col-8">
+            {!! Form::label('nombre_plan', 'Nombre de Plan') !!}
+            {!! Form::text('nombre_plan', null, ['class' => 'form-control']) !!}
 
-    @error('nombre_plan')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
+            @error('nombre_plan')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="col-4">
+            {!! Form::label('precio', 'Precio') !!}
+            {!! Form::text('precio', null, ['class' => 'form-control']) !!}
 
-<div class="form-group">
-    {!! Form::label('precio', 'Precio') !!}
-    {!! Form::text('precio', null, ['class' => 'form-control']) !!}
-
-    @error('precio')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
+            @error('precio')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
 </div>

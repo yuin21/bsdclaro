@@ -3,6 +3,14 @@
         <a class="btn btn-info mb-2" href="{{ route('admin.personal.indextrash') }}">
             <i class="fas fa-trash"></i> Removidos
         </a>
+        <div class="float-right">
+            <form action="{{ route('admin.personal.pdf.allpersonal') }}">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-danger text-nowrap">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </form>
+        </div>
         <input wire:model="search" class="form-control" type="text" placeholder="Busque por apellido paterno">
     </div>
     @if ($bsd_personal->count())
@@ -14,6 +22,7 @@
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
+                            <th>Item</th>
                             <th>Personal</th>
                             <th>cargo</th>
                             <th>Tipo Per.</th>
@@ -22,13 +31,13 @@
                             <th>Direccion</th>
                             <th>Celular</th>
                             <th>Email</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($bsd_personal as $personal)
                             <tr>
+                                <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $personal->ape_paterno }} {{ $personal->ape_materno }}
                                     {{ $personal->nom_personal }}
                                 </td>
@@ -39,17 +48,16 @@
                                 <td>{{ $personal->direccion }}</td>
                                 <td>{{ $personal->celular }}</td>
                                 <td>{{ $personal->email }}</td>
-                                <td>{{ $personal->estado }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
-                                        <form action="{{ route('admin.personal.generatePDF', $personal) }}"
+                                        {{-- <form action="{{ route('admin.personal.generatePDF', $personal) }}"
                                             method="post">
                                             @csrf
                                             @method('POST')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
                                                 <i class="fas fa-file-pdf"></i> PDF
                                             </button>
-                                        </form>
+                                        </form> --}}
                                         <a href="{{ route('admin.personal.show', $personal) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver

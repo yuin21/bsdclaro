@@ -387,7 +387,14 @@ return [
                     'active' => ['admin/cuotas*'], 
                     'can' => 'admin.cuotas.index',
                 ],
-            ],  
+                [
+                    'text' => 'Asignar Cuota',  
+                    'route'  => 'admin.cuotapersonal.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/cuotapersonal*'], 
+                    'can' => 'admin.cuotapersonal.index',
+                ],
+            ],
         ],
         [
             'text'    => 'Cargas Masivas', 

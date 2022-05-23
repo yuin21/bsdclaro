@@ -21,4 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/personal', [PersonalApiController::class, 'search'])->name('api.personal.search');
-Route::get('/clientes', [ClienteApiController::class, 'search'])->name('api.clientes.search');
+Route::get('/clientes/searchLike', [ClienteApiController::class, 'searchLike'])->name('api.clientes.searchLike');
+Route::get('/clientes/search', [ClienteApiController::class, 'search'])->name('api.clientes.search');
+Route::get('/clientes/searchSunat', [ClienteApiController::class, 'searchSunat'])->name('api.clientes.searchSunat');

@@ -14,9 +14,11 @@
         <div class="card-body">
             {!! Form::open(['route' => 'admin.personal.store']) !!}
             @include('admin.personal.partials.form')
-            {!! Form::submit('Registrar Personal', ['class' => 'btn btn-primary']) !!}
-            <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
-            {!! Form::close() !!}
+            <div class="float-right">
+                {!! Form::submit('Registrar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @stop

@@ -17,6 +17,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Item</th>
                                 <th>Personal</th>
                                 <th>Cargo</th>
                                 <th>Tipo Per.</th>
@@ -25,13 +26,13 @@
                                 <th>Direccion</th>
                                 <th>Celular</th>
                                 <th>Email</th>
-                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($bsd_personal as $personal)
                                 <tr>
+                                    <td width="20px">{{ $loop->iteration }}</td>
                                     <td>{{ $personal->ape_paterno }} {{ $personal->ape_materno }}
                                         {{ $personal->nom_personal }}
                                     </td>
@@ -42,7 +43,6 @@
                                     <td>{{ $personal->direccion }}</td>
                                     <td>{{ $personal->celular }}</td>
                                     <td>{{ $personal->email }}</td>
-                                    <td>{{ $personal->estado }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
                                             <form action="{{ route('admin.personal.restaurarPersonal', $personal) }}"

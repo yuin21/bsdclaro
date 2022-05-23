@@ -14,18 +14,18 @@
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
+                            <th>Item</th>
                             <th>Tipo de Servicio</th>
                             <th>Nombre de Servicio</th>
-                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($bsd_servicio as $servicio)
                             <tr>
+                                <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $servicio->tiposervicio->nom_tipo_servicio }}</td>
                                 <td>{{ $servicio->nom_servicio }}</td>
-                                <td>{{ $servicio->estado }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.servicio.show', $servicio) }}"

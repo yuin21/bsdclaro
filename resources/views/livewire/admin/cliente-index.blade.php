@@ -14,6 +14,7 @@
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
+                            <th>Item</th>
                             <th>Ruc</th>
                             <th>Razón social</th>
                             <th>Número de celular</th>
@@ -27,6 +28,7 @@
                     <tbody>
                         @foreach ($bsd_cliente as $cliente)
                             <tr>
+                                <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $cliente->ruc }}</td>
                                 <td>{{ $cliente->razon_social}}</td>
                                 <td>{{ $cliente->num_celular}}</td>
