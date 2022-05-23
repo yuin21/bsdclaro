@@ -41,6 +41,8 @@ class PersonalController extends Controller
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> 'required|string|max:15|unique:bsd_personal', 
             'email'=> 'required|string|email|max:75|unique:bsd_personal',
+            'direccion' => 'max:300',
+            'celular' => 'max:30'
         ]);       
 
         $personal = BsdPersonal::create($request->all());
@@ -72,6 +74,8 @@ class PersonalController extends Controller
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> "required|string|max:15|unique:bsd_personal,nro_doc_iden,$personal->id", 
             'email'=> "required|string|email|max:75|unique:bsd_personal,email,$personal->id",
+            'direccion' => 'max:300',
+            'celular' => 'max:30'
         ]);
 
         $personal->update($request->all());

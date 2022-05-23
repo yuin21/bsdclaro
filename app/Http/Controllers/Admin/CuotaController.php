@@ -30,7 +30,7 @@ class CuotaController extends Controller
     {
 
         $request->validate([
-            'cuota' => 'required|numeric|unique:bsd_cuota,cuota',
+            'cuota' => 'required|numeric|max:9999999|unique:bsd_cuota,cuota',
         ]);
         //Obtener la sesion de usuario
         $user=Auth::user();
@@ -54,7 +54,7 @@ class CuotaController extends Controller
     public function update(Request $request, BsdCuota $cuota)
     {
         $request->validate([
-            'cuota' => "required|numeric|unique:bsd_cuota,cuota, $cuota->id",
+            'cuota' => "required|numeric|max:9999999|unique:bsd_cuota,cuota, $cuota->id",
         ]);
 
         $cuota->update($request->all());
