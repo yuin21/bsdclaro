@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('ruc', 'Ruc') !!}
-    {!! Form::text('ruc', null, ['class' => 'form-control']) !!}
+    {!! Form::text('ruc', null, ['class' => 'form-control', 'id' => 'ruc']) !!}
 
     @error('ruc')
         <span class="text-danger">{{ $message }}</span>
@@ -10,7 +10,7 @@
 
 <div class="form-group">
     {!! Form::label('razon_social', 'Razon Social') !!}
-    {!! Form::text('razon_social', null, ['class' => 'form-control']) !!}
+    {!! Form::text('razon_social', null, ['class' => 'form-control', 'id' => 'razon_social']) !!}
 
     @error('razon_social')
         <span class="text-danger">{{ $message }}</span>

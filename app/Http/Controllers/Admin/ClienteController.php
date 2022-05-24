@@ -26,7 +26,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'ruc' => 'required|string|max:11',
+            'ruc' => "required|string|max:11|unique:bsd_cliente",
             'razon_social'=> 'required|string|max:120' ,
             'num_celular'=> 'required|string|max:30',
             'direccion'=> 'required|string|max:90' ,
