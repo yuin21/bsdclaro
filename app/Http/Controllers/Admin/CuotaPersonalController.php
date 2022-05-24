@@ -51,7 +51,7 @@ class CuotaPersonalController extends Controller
 
         //dd($request);
         //dd($request);
-        $cuotapersonal = BsdCuotaPersonal::create($request->all());
+        $cuotapersonal = BsdCuotaPersonal::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
         return redirect()->route('admin.cuotapersonal.show', $cuotapersonal)->with('success','store'); 
     }
@@ -87,6 +87,8 @@ class CuotaPersonalController extends Controller
             'mes' => "required|string|max:10",
             'año' => "required|numeric|max:2069|min:1970",
         ]);
+        
+        $cuotapersonal->usuario_act = auth()->user()->name;
 
         $cuotapersonal->update($request->all());
 

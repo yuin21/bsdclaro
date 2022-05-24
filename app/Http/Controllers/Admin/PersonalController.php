@@ -42,8 +42,8 @@ class PersonalController extends Controller
             'nro_doc_iden'=> 'required|string|max:15|unique:bsd_personal', 
             'email'=> 'required|string|email|max:75|unique:bsd_personal',
         ]);       
-
-        $personal = BsdPersonal::create($request->all());
+        
+        $personal = BsdPersonal::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
         return redirect()->route('admin.personal.show', $personal)->with('success','store');       
     }
@@ -73,6 +73,8 @@ class PersonalController extends Controller
             'nro_doc_iden'=> "required|string|max:15|unique:bsd_personal,nro_doc_iden,$personal->id", 
             'email'=> "required|string|email|max:75|unique:bsd_personal,email,$personal->id",
         ]);
+
+        $personal->usuario_act = auth()->user()->name;
 
         $personal->update($request->all());
         return redirect()->route('admin.personal.show', $personal)->with('success', 'update');

@@ -33,11 +33,13 @@ class CuotaController extends Controller
             'cuota' => 'required|numeric|unique:bsd_cuota,cuota',
         ]);
         //Obtener la sesion de usuario
-        $user=Auth::user();
-        $name=$user->name;
-        //dd($user);
-        $cuota = BsdCuota::create($request->all());
-
+        //$user=Auth::user();
+        //$name=$user->name;
+        //$cuota = new BsdCuota();
+        //$cuota->setUsuario_reg($name);
+        //dd($cuota);
+        $cuota = BsdCuota::create($request->all()+ ['usuario_reg' => auth()->user()->name]);
+        //dd($cuota);
         return redirect()->route('admin.cuotas.show', $cuota)->with('success','store'); 
     }
 
@@ -56,9 +58,13 @@ class CuotaController extends Controller
         $request->validate([
             'cuota' => "required|numeric|unique:bsd_cuota,cuota, $cuota->id",
         ]);
-
+        
+        //dd($cuota);
+        $cuota->usuario_act = auth()->user()->name;
+        //dd($request->usuario_reg);
         $cuota->update($request->all());
-
+        //$cuota->update($request->all());
+        //$cuota->update();
         return redirect()->route('admin.cuotas.show', $cuota)->with('success', 'update');
     }
 

@@ -32,7 +32,7 @@ class ServicioController extends Controller
             'nom_servicio' => 'required|string|max:20|unique:bsd_servicio,nom_servicio',
         ]);       
 
-        $servicio = BsdServicio::create($request->all());
+        $servicio = BsdServicio::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
         return redirect()->route('admin.servicio.show', $servicio)->with('success','store'); 
     }
@@ -54,6 +54,8 @@ class ServicioController extends Controller
             'bsd_tipo_servicio_id' => 'required',
             'nom_servicio' => "required|string|max:20|unique:bsd_servicio,nom_servicio,$servicio->id",
         ]);  
+
+        $servicio->usuario_act = auth()->user()->name;
 
         $servicio->update($request->all());
         return redirect()->route('admin.servicio.show', $servicio)->with('success', 'update');

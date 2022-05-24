@@ -35,7 +35,7 @@ class PlanController extends Controller
             'precio' => 'required|numeric',
         ]);       
 
-        $plan = BsdPlan::create($request->all());
+        $plan = BsdPlan::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
         return redirect()->route('admin.plan.show', $plan)->with('success','store'); 
     }
@@ -61,6 +61,8 @@ class PlanController extends Controller
             'nombre_plan' => "required|string|max:120|unique:bsd_plan,nombre_plan,$plan->id",
             'precio' => "required|numeric",
         ]);   
+
+        $plan->usuario_act = auth()->user()->name;
 
         $plan->update($request->all());
         return redirect()->route('admin.plan.show', $plan)->with('success', 'update');

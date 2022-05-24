@@ -11,13 +11,16 @@ class BsdCuota extends Model
     protected $fillable = [
         'cuota',
         // 'estado',
-        // 'usuario_reg' ,
-        // 'usuario_act' ,
+        //'usuario_reg' ,
+        //'usuario_act' ,
         // 'created_at',
         // 'updated_at',
      ] ;
 
     protected $table='bsd_cuota';
 
+    //public function setUsuario_reg($usuario_reg){
+    //    $this->usuario_reg = $usuario_reg;
+    //}
     
 }
