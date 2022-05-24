@@ -33,7 +33,7 @@
             {!! Form::text('cargo', null, ['class' => 'form-control']) !!}
             @error('cargo')
                 <span class="text-danger">{{ $message }}</span>
-             @enderror
+            @enderror
         </div>
     </div>
 </div>
@@ -48,8 +48,8 @@
             @enderror
         </div>
         <div class="col-6">
-            {!! Form::label('tipo_doc_iden', 'Tipo de documento') !!}        
-            {!! Form::select('tipo_doc_iden', $tipos_doc, null, ['class' => 'form-control']) !!}
+            {!! Form::label('tipo_doc_iden', 'Tipo de documento') !!}
+            {!! Form::select('tipo_doc_iden', $tipos_doc, null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
             @error('tipo_doc_iden')
                 <span class="text-danger">{{ $message }}</span>
             @enderror

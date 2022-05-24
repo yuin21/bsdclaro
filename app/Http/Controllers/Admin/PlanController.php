@@ -32,7 +32,7 @@ class PlanController extends Controller
         $request->validate([
             'bsd_tipo_servicio_id' => 'required',
             'nombre_plan' => 'required|string|max:120|unique:bsd_plan,nombre_plan',
-            'precio' => 'required|numeric',
+            'precio' => 'required|numeric|max:9999999',
         ]);       
 
         $plan = BsdPlan::create($request->all() + ['usuario_reg' => auth()->user()->name]);
@@ -59,7 +59,7 @@ class PlanController extends Controller
         $request->validate([
             'bsd_tipo_servicio_id' => 'required',
             'nombre_plan' => "required|string|max:120|unique:bsd_plan,nombre_plan,$plan->id",
-            'precio' => "required|numeric",
+            'precio' => "required|max:9999999|numeric",
         ]);   
 
         $plan->usuario_act = auth()->user()->name;
