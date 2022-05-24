@@ -67,7 +67,7 @@
                         <div class="col-lg-4 ">
                             <div class="mb-2">
                                 {!! Form::label('fecha_entrega_te', 'Fecha Entrega BPO/VPO', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control']) !!}
+                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
                                 @error('fecha_entrega_te')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -269,27 +269,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <script>
-        // const formCrearVenta = document.getElementById('formCrearVenta')
-        // formCrearVenta.addEventListener('submit', (e) => {
-        //     e.preventDefault()
-        //     //verificar los datos obligatorios
-        //     const {
-        //         tipo_contrato,
-        //         bsd_personal_id,
-        //         razon_social,
-        //     } = e.target
-        //     const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
-
-        //     if (tbodyDetalleVenta.childNotes.length === 0) {
-        //         alerta('Detalles de venta es obligatorio')
-        //     }
-
-        //     console.log(tipo_contrato)
-        //     // submit
-        //     // formCrearVenta.submit()
-        // })
-    </script>
-    <script>
         // busqueda de personal
         $('#searchPersonal').autocomplete({
             source: function(request, response) {
@@ -404,6 +383,10 @@
         let total_sin_igv = 0
         const IGV = 1.18
 
+        // fecha actual en input 
+        const fecha = new Date();
+        $('#fecha_entrega_te').val(fecha.toJSON().slice(0, 10))
+
         //desabilitar select servicio y plan al iniciar
         $('#selectPlan').prop('disabled', true);
         $('#selectServicio').prop('disabled', true);
@@ -457,6 +440,12 @@
             }
         });
 
+        // seleccionar plan y mostrar su precio
+        $('#selectServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
+            $("#selectPlan").val('default');
+            $('#precioplan').val(0)
+            $('#selectPlan').selectpicker('refresh');
+        });
 
         // seleccionar plan y mostrar su precio
         selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
