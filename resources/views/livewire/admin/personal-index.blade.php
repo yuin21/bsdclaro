@@ -24,7 +24,7 @@
                         <tr>
                             <th>Item</th>
                             <th>Personal</th>
-                            <th>cargo</th>
+                            <th>Cargo</th>
                             <th>Tipo Per.</th>
                             <th>Tipo Doc.</th>
                             <th>Nro. Doc.</th>
@@ -60,18 +60,21 @@
                                         </form> --}}
                                         <a href="{{ route('admin.personal.show', $personal) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                            <i class="fas fa-eye"></i> Ver
+                                           <i class="fas fa-eye"></i>
+                                           {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.personal.edit', $personal) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i> Editar
+                                            <i class="fas fa-pen"></i>
+                                            {{-- Editar --}}
                                         </a>
                                         <form action="{{ route('admin.personal.destroyLogico', $personal) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Remover
+                                                <i class="fas fa-minus-circle"></i>
+                                                {{-- Remover --}}
                                             </button>
                                         </form>
                                     </div>

@@ -27,10 +27,10 @@
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('registrado_selforce', 'Registro en Selforce') !!}
-                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
+                            {!! Form::label('registrado_selforce', 'Registro en Saliforce') !!}
+                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
                             @error('registrado_selforce')
-                                <small class="text-danger">Registro en Selforce es obligatorio</small>
+                                <small class="text-danger">Registro en Saliforce es obligatorio</small>
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
@@ -134,8 +134,8 @@
                         {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
                     </div>
                     <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputCantidad', 'Cantidad', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                        {!! Form::label('inputCantidad', 'Cantidad/Ugis', ['style' => 'margin: 0; min-width:180px']) !!}
+                        {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'enabled' => 'enabled']) !!}
                     </div>
                     <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                         {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
@@ -148,12 +148,12 @@
                         <table class="table table-bordered table-hover">
                             <thead class="border">
                                 <tr>
-                                    <th>#</th>
+                                    <th>Item</th>
                                     <th>Tipo Servicio</th>
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad/Ugis</th>
                                     <th>Números de linea nueva</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
@@ -251,7 +251,7 @@
                 </div>
             </div>
             <div class="text-right pb-4">
-                {!! Form::submit('Registrar Venta', ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit('Registrar', ['class' => 'btn btn-primary btn-lg']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
             </div>
         </div>
@@ -588,7 +588,7 @@
             if (tipo_contrato.value.length > 20) return alerta(
                 'El campo tipo contrato no debe contener más de 20 caracteres')
 
-            if (!registrado_selforce.value) return alerta('El campo Registro en Selforce es obligatorio')
+            if (!registrado_selforce.value) return alerta('El campo Registro en Saliforce es obligatorio')
 
             if (!sot.value || isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
 

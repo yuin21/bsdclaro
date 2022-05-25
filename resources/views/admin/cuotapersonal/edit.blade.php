@@ -10,9 +10,8 @@
 @stop
 
 @section('content')
-    <div class="card">
-        
-        <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+    <div class="card">        
+        <div class="card-header d-flex flex-wrap justify-content-end align-items-center">
             <a href="{{ route('admin.cuotapersonal.show', $cuotapersonal) }}" class="btn btn-sm btn-info text-nowrap">
                 <i class="fas fa-eye"></i> Ver
             </a>
@@ -21,7 +20,7 @@
             {!! Form::model($cuotapersonal, ['route' => ['admin.cuotapersonal.update', $cuotapersonal], 'method' => 'put']) !!}
             @include('admin.cuotapersonal.partials.form')
             <div class="float-right">
-                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Actualizar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
                 {!! Form::close() !!}
             </div>

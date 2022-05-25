@@ -14,32 +14,40 @@
         <div class="card-body">
             {!! Form::open(['route' => 'admin.users.store']) !!}
             <div class="form-group">
-                {!! Form::label('name', 'Nombre') !!}
-                {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                @error('name')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
+                <div class="row">
+                    <div class="col-6">
+                        {!! Form::label('name', 'Nombre') !!}
+                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                        @error('name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        {!! Form::label('email', 'Correo') !!}
+                        {!! Form::text('email', null, ['class' => 'form-control']) !!}
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                {!! Form::label('email', 'Correo') !!}
-                {!! Form::text('email', null, ['class' => 'form-control']) !!}
-                @error('email')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group">
-                {!! Form::label('password', 'Contraseña') !!}
-                {!! Form::password('password', ['class' => 'form-control']) !!}
-                @error('password')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
-            <div class="form-group">
-                {!! Form::label('password_confirmation', 'Repetir contraseña') !!}
-                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
-                @error('password_confirmation')
-                    <small class="text-danger">{{ $message }}</small>
-                @enderror
+                <div class="row">
+                    <div class="col-6">
+                        {!! Form::label('password', 'Contraseña') !!}
+                        {!! Form::password('password', ['class' => 'form-control']) !!}
+                        @error('password')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        {!! Form::label('password_confirmation', 'Repetir contraseña') !!}
+                        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+                        @error('password_confirmation')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
             </div>
             {!! Form::label(null, 'Rol') !!}
             <div class="form-group border rounded-lg p-2">
@@ -52,9 +60,11 @@
                     </div>
                 @endforeach
             </div>
-            {!! Form::submit('Crear Usuario', ['class' => 'btn btn-primary']) !!}
-            <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
-            {!! Form::close() !!}
+            <div class="float-right">
+                {!! Form::submit('Registrar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @stop

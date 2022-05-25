@@ -27,7 +27,7 @@
                             {{ $venta->tipo_contrato }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Registro en Selforce: </span>
+                            <span class="text-bold tag-detalle">Registro en Saliforce: </span>
                             {{ $venta->registrado_selforce === 'N' ? 'NO' : 'SI' }}
                         </li>
                         <li class="list-group-item">
@@ -67,7 +67,7 @@
                         <table class="table table-bordered table-hover">
                             <thead class="border">
                                 <tr>
-                                    <th>#</th>
+                                    <th>Item</th>
                                     <th>Tipo Servicio</th>
                                     <th>Servicio</th>
                                     <th>Plan</th>

@@ -18,7 +18,7 @@
             <table class="table table-bordered table-hover">
                 <thead class="border">
                     <tr>
-                        <th>#</th>
+                        <th>Item</th>
                         <th>Fecha</th>
                         <th>Tipo de contrato</th>
                         <th>Acciones</th>
