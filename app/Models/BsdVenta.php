@@ -24,6 +24,7 @@ class BsdVenta extends Model
         'sot',
         'estado_te',
         'total',
+        
         // 'estado_venta',
         // 'estado',
         // 'usuario_reg' ,

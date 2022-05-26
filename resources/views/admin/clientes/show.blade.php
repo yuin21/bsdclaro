@@ -35,7 +35,7 @@
                     <b style="min-width:200px; display: inline-block">Distrito</b> {{ $cliente->distrito}}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Año:</b> {{ $cliente->tipo_cliente}}
+                    <b style="min-width:200px; display: inline-block">Tipo cliente:</b> {{ $cliente->tipo_cliente}}
                 </li>
             </ul>
         </div>
@@ -57,14 +57,6 @@
             Swal.fire({
                 icon: 'success',
                 title: 'El cliente se registró con éxito',
-            })
-        </script>
-    @endif
-    @if (session('success') == 'show')
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Detalles de cliente',
             })
         </script>
     @endif
