@@ -22,6 +22,7 @@ class BsdVenta extends Model
         'registrado_selforce',
         'solicitud',
         'sot',
+        'sec',
         'estado_te',
         'total',
         // 'estado_venta',

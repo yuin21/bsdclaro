@@ -37,6 +37,9 @@
                             <span class="text-bold tag-detalle">SOT: </span> {{ $venta->sot }}
                         </li>
                         <li class="list-group-item">
+                            <span class="text-bold tag-detalle">SEC: </span> {{ $venta->sec }}
+                        </li>
+                        <li class="list-group-item">
                             <span class="text-bold tag-detalle">Tipo BPO/VPO: </span>
                             {{ $venta->tipo_entrega_vpo_bpo === 'V' ? 'VPO' : 'BPO' }}
                         </li>
@@ -72,8 +75,9 @@
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad/UGIS</th>
                                     <th>Números de linea nueva</th>
+                                    <th>equipo/Producto</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
                                 </tr>
@@ -94,6 +98,7 @@
                                                 </span>
                                             @endforeach
                                         </td>
+                                        <td> {{ $detalle->equipo_producto }}</td>
                                         <td> {{ $detalle->cf_con_igv }}</td>
                                         <td> {{ $detalle->cf_sin_igv }}</td>
                                     </tr>

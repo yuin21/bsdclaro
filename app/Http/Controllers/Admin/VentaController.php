@@ -36,6 +36,7 @@ class VentaController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
             'tipo_contrato' => 'required|max:20',
             'bsd_personal_id' => 'required',
@@ -44,13 +45,16 @@ class VentaController extends Controller
             'planes' => 'required',
             'precioplanes' => 'required',
             'cantidades' => 'required',
+            'equipoproducto' => 'required|max:30',
             'total' => 'required',
             'razon_social' => 'required',
-            'sot' => 'numeric',
+            'sot' => 'string|size:8',
+            'sec' => 'required|string|size:8',
             'observaciones' => 'max:300',
             'observaciones_te' => 'max:300',
             'registrado_selforce' => 'required'
         ]);
+        //dd($request);
 
         // datos de los detalle de venta
         $tiposServicio = $request->get('tiposServicio');
@@ -58,6 +62,7 @@ class VentaController extends Controller
         $planes = $request->get('planes');
         $precioplanes = $request->get('precioplanes');
         $cantidades = $request->get('cantidades');
+        $equipoproducto = $request->get('equipoproducto');
         $subtotales_igv = $request->get('subtotales_igv');
         $subtotales_sinigv = $request->get('subtotales_sinigv');
         $numerosLineasNuevas = $request->get('numerosLineasNuevas');
@@ -84,6 +89,7 @@ class VentaController extends Controller
                 $detalleventa->bsd_servicio_id = $servicios[$i];
                 $detalleventa->bsd_tipo_servicio_id = $tiposServicio[$i];
                 $detalleventa->cantidad = $cantidades[$i];
+                $detalleventa->equipo_producto = $equipoproducto[$i];
                 $detalleventa->precio_plan = $precioplanes[$i];
                 $detalleventa->cf_con_igv = $subtotales_igv[$i];
                 $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];

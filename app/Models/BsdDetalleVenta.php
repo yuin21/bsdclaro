@@ -16,6 +16,7 @@ class BsdDetalleVenta extends Model
         'bsd_servicio_id',
         'bsd_tipo_servicio_id',
         'cantidad',
+        'equipo_producto',
         'precio_plan',
         'cf_con_igv',
         'cf_sin_igv',
