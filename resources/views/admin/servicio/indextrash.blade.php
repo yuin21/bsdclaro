@@ -18,8 +18,8 @@
                         <thead>
                             <tr>
                                 <th>Item</th>
-                                <th>Tipo de Servicio</th>
-                                <th>Nombre de Servicio</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>

@@ -15,8 +15,8 @@
                     <thead class="border">
                         <tr>
                             <th>Item</th>
-                            <th>Tipo de Servicio</th>
-                            <th>Nombre de Servicio</th>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de los servicios</strong>
+            <strong>Sin datos</strong>
         </div>
     @endif
 </div>

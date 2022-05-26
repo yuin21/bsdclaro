@@ -15,9 +15,9 @@
                     <thead class="border">
                         <tr>
                             <th>Item</th>
-                            <th>Tipo de Servicio</th>
-                            <th>Nombre de Plan</th>
-                            <th>Precio</th>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th style='text-align:center'>Precio</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -27,7 +27,7 @@
                                 <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $plan->tiposervicio->nom_tipo_servicio }}</td>
                                 <td>{{ $plan->nombre_plan }}</td>
-                                <td>{{ $plan->precio }}</td>
+                                <td style='text-align:center'>{{ $plan->precio }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.plan.show', $plan) }}"

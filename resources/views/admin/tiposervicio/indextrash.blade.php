@@ -18,7 +18,7 @@
                         <thead>
                             <tr>
                                 <th>Item</th>
-                                <th>Nombre de Tipo de Servicio</th>
+                                <th>Nombre</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>

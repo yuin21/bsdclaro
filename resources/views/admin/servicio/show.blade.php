@@ -14,10 +14,10 @@
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Tipo de Servicio:</b> {{ $servicio->tiposervicio->nom_tipo_servicio }}
+                    <b style="min-width:200px; display: inline-block">Tipo:</b> {{ $servicio->tiposervicio->nom_tipo_servicio }}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Nombre de Servicio:</b> {{ $servicio->nom_servicio }}
+                    <b style="min-width:200px; display: inline-block">Nombre:</b> {{ $servicio->nom_servicio }}
                 </li>
             </ul>
         </div>

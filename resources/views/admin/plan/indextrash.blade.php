@@ -18,8 +18,8 @@
                         <thead>
                             <tr>
                                 <th>Item</th>
-                                <th>Tipo de Servicio</th>
-                                <th>Nombre de Plan</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
                                 <th>Precio</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
