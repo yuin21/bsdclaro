@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right text-nowrap">
-        <i class="fas fa-plus-circle"></i> Crear Rol
+        <i class="fas fa-plus-circle"></i> Registrar Rol
     </a>
     <h1 class="font-weight-bold">Roles</h1>
 @stop
@@ -15,7 +15,7 @@
             <table class="table table-bordered table-hover">
                 <thead class="border">
                     <tr>
-                        <th>#</th>
+                        <th>Item</th>
                         <th>Rol</th>
                         <th>Acciones</th>
                     </tr>

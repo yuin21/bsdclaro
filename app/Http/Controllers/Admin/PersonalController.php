@@ -44,8 +44,8 @@ class PersonalController extends Controller
             'direccion' => 'max:300',
             'celular' => 'max:30'
         ]);       
-
-        $personal = BsdPersonal::create($request->all());
+        
+        $personal = BsdPersonal::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
         return redirect()->route('admin.personal.show', $personal)->with('success','store');       
     }
@@ -77,6 +77,8 @@ class PersonalController extends Controller
             'direccion' => 'max:300',
             'celular' => 'max:30'
         ]);
+
+        $personal->usuario_act = auth()->user()->name;
 
         $personal->update($request->all());
         return redirect()->route('admin.personal.show', $personal)->with('success', 'update');

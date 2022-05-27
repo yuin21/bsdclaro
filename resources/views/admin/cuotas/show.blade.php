@@ -10,7 +10,12 @@
 @stop
 
 @section('content')
-    <div class="card">        
+    <div class="card">
+        <div class="card-header d-flex flex-wrap justify-content-end align-items-center">
+            <a href="{{ route('admin.cuotas.edit', $cuota) }}" class="btn btn-sm btn-success text-nowrap ml-2">
+                <i class="fas fa-pen"></i> Editar
+            </a>
+        </div>         
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">

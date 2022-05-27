@@ -27,10 +27,10 @@
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('registrado_selforce', 'Registro en Selforce') !!}
-                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
+                            {!! Form::label('registrado_selforce', 'Registro en Saliforce') !!}
+                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
                             @error('registrado_selforce')
-                                <small class="text-danger">Registro en Selforce es obligatorio</small>
+                                <small class="text-danger">Registro en Saliforce es obligatorio</small>
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
@@ -39,14 +39,21 @@
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('sot', 'SOT') !!}
-                            {!! Form::text('sot', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
                             @error('sot')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('sec', 'SEC') !!}
+                            {!! Form::text('sec', null, ['class' => 'form-control']) !!}
+                            @error('sec')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
                             <div class="mb-2">
                                 {!! Form::label('tipo_entrega_vpo_bpo', 'Tipo BPO/VPO') !!}
                                 {!! Form::select('tipo_entrega_vpo_bpo', ['B' => 'BPO', 'V' => 'VPO'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
@@ -55,7 +62,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col-lg-3 col-sm-6">
                             <div class="mb-2">
                                 {!! Form::label('estado_te', 'Estado BPO/VPO') !!}
                                 {!! Form::select('estado_te', ['C' => 'conforme', 'N' => 'no conforme'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
@@ -64,29 +71,31 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-4 ">
+                        <div class="col-lg-3 ">
                             <div class="mb-2">
                                 {!! Form::label('fecha_entrega_te', 'Fecha Entrega BPO/VPO', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control']) !!}
+                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
                                 @error('fecha_entrega_te')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
-                        {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
-                        @error('observaciones_te')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-2">
-                        {!! Form::label('observaciones', 'Observación') !!}
-                        {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
-                        @error('observaciones')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
+                            {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
+                            @error('observaciones_te')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-6">
+                            {!! Form::label('observaciones', 'Observación') !!}
+                            {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
+                            @error('observaciones')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,17 +138,33 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputCantidad', 'Cantidad/Ugis', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputCantidad', 'Cantidad', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
-                    </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputEquipoProducto', 'Equipo/Producto', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
+                            </div>
+                        </div>
                     </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
@@ -148,13 +173,14 @@
                         <table class="table table-bordered table-hover">
                             <thead class="border">
                                 <tr>
-                                    <th>#</th>
+                                    <th>Item</th>
                                     <th>Tipo Servicio</th>
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad/Ugis</th>
                                     <th>Números de linea nueva</th>
+                                    <th>Equipo/Producto</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
                                     <th></th>
@@ -251,7 +277,7 @@
                 </div>
             </div>
             <div class="text-right pb-4">
-                {!! Form::submit('Registrar Venta', ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit('Registrar', ['class' => 'btn btn-primary btn-lg']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
             </div>
         </div>
@@ -268,27 +294,6 @@
     <script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
-    <script>
-        // const formCrearVenta = document.getElementById('formCrearVenta')
-        // formCrearVenta.addEventListener('submit', (e) => {
-        //     e.preventDefault()
-        //     //verificar los datos obligatorios
-        //     const {
-        //         tipo_contrato,
-        //         bsd_personal_id,
-        //         razon_social,
-        //     } = e.target
-        //     const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
-
-        //     if (tbodyDetalleVenta.childNotes.length === 0) {
-        //         alerta('Detalles de venta es obligatorio')
-        //     }
-
-        //     console.log(tipo_contrato)
-        //     // submit
-        //     // formCrearVenta.submit()
-        // })
-    </script>
     <script>
         // busqueda de personal
         $('#searchPersonal').autocomplete({
@@ -392,6 +397,7 @@
         const selectPlan = $('#selectPlan')
         const inputCantidad = document.getElementById('inputCantidad')
         const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
+        const inputEquipoProducto = document.getElementById('inputEquipoProducto')
         const btnAgregar = document.getElementById('btnAgregar')
         const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
         const inputTotal = document.getElementById('inputTotal')
@@ -403,6 +409,10 @@
         let total_igv = 0
         let total_sin_igv = 0
         const IGV = 1.18
+
+        // fecha actual en input 
+        const fecha = new Date();
+        $('#fecha_entrega_te').val(fecha.toJSON().slice(0, 10))
 
         //desabilitar select servicio y plan al iniciar
         $('#selectPlan').prop('disabled', true);
@@ -454,9 +464,31 @@
                 $('#precioplan').val(0)
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
+
+                //deshabilitar y limpiar SOT cuando se elija el tipo de servicio movil
+                if (tipoServicioName === 'movil') {
+                    $('#sot').val(null);
+                    $('#sot').attr("disabled", true);
+                    $('#inputCantidad').attr("disabled", true);
+                    $('#inputCantidad').val('0');
+                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
+                    $('#inputEquipoProducto').val(null);
+                } else {
+                    $('#sot').attr("disabled", false);
+                    $('#inputCantidad').attr("disabled", false);
+                    $('#inputCantidad').val('0');
+                    $('#inputNumerosLineasNuevas').val(null);
+                    $('#inputEquipoProducto').val(null);
+                }
             }
         });
 
+        // seleccionar plan y mostrar su precio
+        $('#selectServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
+            $("#selectPlan").val('default');
+            $('#precioplan').val(0)
+            $('#selectPlan').selectpicker('refresh');
+        });
 
         // seleccionar plan y mostrar su precio
         selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
@@ -468,7 +500,7 @@
         btnAgregar.addEventListener('click', () => {
 
             if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !
-                inputNumerosLineasNuevas.value) {
+                inputNumerosLineasNuevas.value || !inputEquipoProducto.value) {
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
@@ -482,6 +514,7 @@
             const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
             const numerosLineasNuevas = inputNumerosLineasNuevas.value
+            const equipoproducto = inputEquipoProducto.value
             const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
 
@@ -511,6 +544,7 @@
                 <td>
                     ${htmlNumerosLineaNueva}
                 </td>
+                <td>${equipoproducto}</td>
                 <td>${subtotal_igv}</td>
                 <td>${subtotal_sin_igv}</td>
                 <td width="30px">
@@ -524,6 +558,7 @@
                 <input type="hidden" name="precioplanes[]" value="${plan[2]}">
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
+                <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
                 <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
                 <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
             </tr>`
@@ -535,6 +570,7 @@
             inputCantidad.value = '0'
             $('#precioplan').val(0)
             inputNumerosLineasNuevas.value = ''
+            $('#inputEquipoProducto').val(null);
             $("#selectServicio").val('default');
             $("#selectPlan").val('default');
             $('#selectPlan').selectpicker('refresh');
@@ -543,10 +579,14 @@
 
         // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil
         inputNumerosLineasNuevas.addEventListener('input', (e) => {
-            if (!e.target.value.trim()) return inputCantidad.value = 0
-            const cantNumero = e.target.value.split(',').length
-            inputCantidad.value = cantNumero
+            obtenerGetCantidadDeNumeros(e.target.value)
         })
+
+        function obtenerGetCantidadDeNumeros(valorInputNumeroLinea) {
+            if (!valorInputNumeroLinea.trim()) return inputCantidad.val('0')
+            const cantNumero = valorInputNumeroLinea.split(',').length
+            $('#inputCantidad').val(cantNumero)
+        }
 
         // eliminar un detalle de venta de la lista
         function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
@@ -588,6 +628,7 @@
                 bsd_personal_id,
                 razon_social,
                 sot,
+                sec,
                 registrado_selforce,
                 observaciones_te,
                 observaciones
@@ -599,9 +640,11 @@
             if (tipo_contrato.value.length > 20) return alerta(
                 'El campo tipo contrato no debe contener más de 20 caracteres')
 
-            if (!registrado_selforce.value) return alerta('El campo Registro en Selforce es obligatorio')
+            if (!registrado_selforce.value) return alerta('El campo Registro en Saliforce es obligatorio')
 
-            if (!sot.value || isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
+            if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
+
+            if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
 
             if (observaciones_te.value.length > 300) return alerta(
                 'El campo observaciones BPO/VPO acepta máximo 300 caracteres')

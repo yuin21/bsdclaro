@@ -25,7 +25,7 @@ return new class extends Migration
             ->on("bsd_cliente");
             $table->timestamp('fecha_registro')->useCurrent();;
             $table->string('tipo_contrato', 20);
-            //$table->char('sec', 8); //Esta en Detalle_Pago 
+            $table->char('sec', 8); //Esta en Detalle_Pago 
             $table->char('tipo_entrega_vpo_bpo',1)->nullable()->comment('V or B');;
             $table->string('observaciones', 300)->nullable();
             $table->timestamp('fecha_entrega_te')->nullable();

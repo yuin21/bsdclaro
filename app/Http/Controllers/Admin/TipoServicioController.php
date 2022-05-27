@@ -30,7 +30,7 @@ class TipoServicioController extends Controller
             'nom_tipo_servicio' => 'required|string|max:15|unique:bsd_tipo_servicio,nom_tipo_servicio',
         ]);       
 
-        $tiposervicio = BsdTipoServicio::create($request->all());
+        $tiposervicio = BsdTipoServicio::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
         return redirect()->route('admin.tiposervicio.show', $tiposervicio)->with('success','store'); 
     }
@@ -51,6 +51,8 @@ class TipoServicioController extends Controller
         $request->validate([
             'nom_tipo_servicio' => "required|string|max:15|unique:bsd_tipo_servicio,nom_tipo_servicio, $tiposervicio->id",
         ]);
+
+        $tiposervicio->usuario_act = auth()->user()->name;
 
         $tiposervicio->update($request->all());
         return redirect()->route('admin.tiposervicio.show', $tiposervicio)->with('success', 'update');

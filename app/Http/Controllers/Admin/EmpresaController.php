@@ -35,7 +35,7 @@ class EmpresaController extends Controller
             'email'=> 'string|email|max:75|unique:bsd_empresa,email',
         ]);
         
-        $empresa = BsdEmpresa::create($request->all());
+        $empresa = BsdEmpresa::create($request->all() + ['usuario_reg' => auth()->user()->name]);
         return redirect()->route('admin.empresa.show', $empresa)->with('success','store'); 
     }
     
@@ -59,6 +59,8 @@ class EmpresaController extends Controller
             'celular' => 'string|max:30',
             'email'=> "string|email|max:75|unique:bsd_empresa,email, $empresa->id",
         ]); 
+        
+        $empresa->usuario_act = auth()->user()->name;
 
         $empresa->update($request->all());
 

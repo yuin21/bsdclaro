@@ -27,7 +27,7 @@
                             {{ $venta->tipo_contrato }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Registro en Selforce: </span>
+                            <span class="text-bold tag-detalle">Registro en Saliforce: </span>
                             {{ $venta->registrado_selforce === 'N' ? 'NO' : 'SI' }}
                         </li>
                         <li class="list-group-item">
@@ -35,6 +35,9 @@
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">SOT: </span> {{ $venta->sot }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">SEC: </span> {{ $venta->sec }}
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Tipo BPO/VPO: </span>
@@ -67,13 +70,14 @@
                         <table class="table table-bordered table-hover">
                             <thead class="border">
                                 <tr>
-                                    <th>#</th>
+                                    <th>Item</th>
                                     <th>Tipo Servicio</th>
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad/UGIS</th>
                                     <th>Números de linea nueva</th>
+                                    <th>equipo/Producto</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
                                 </tr>
@@ -94,6 +98,7 @@
                                                 </span>
                                             @endforeach
                                         </td>
+                                        <td> {{ $detalle->equipo_producto }}</td>
                                         <td> {{ $detalle->cf_con_igv }}</td>
                                         <td> {{ $detalle->cf_sin_igv }}</td>
                                     </tr>

@@ -10,9 +10,9 @@
 @stop
 
 @section('content')
-    <div class="card">
-        
+    <div class="card">        
         <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
+            <h5 class="flex-grow-1">Empresa: <span class="badge badge-warning">{{ $empresa->razon_social }}</span></h5>
             <a href="{{ route('admin.empresa.show', $empresa) }}" class="btn btn-sm btn-info text-nowrap">
                 <i class="fas fa-eye"></i> Ver
             </a>
@@ -21,7 +21,7 @@
             {!! Form::model($empresa, ['route' => ['admin.empresa.update', $empresa], 'method' => 'put']) !!}
             @include('admin.empresa.partials.form')
             <div class="float-right">
-                {!! Form::submit('Editar', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Actualizar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
                 {!! Form::close() !!}
             </div>
