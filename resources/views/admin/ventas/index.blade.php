@@ -20,6 +20,10 @@
                     <tr>
                         <th>Item</th>
                         <th>Fecha</th>
+                        <th>Personal</th>
+                        <th>Cliente</th>
+                        <th>SEC</th>
+                        <th>SOT</th>
                         <th>Tipo de contrato</th>
                         <th>Acciones</th>
                     </tr>
@@ -28,7 +32,12 @@
                     @foreach ($ventas as $venta)
                         <tr>
                             <td width="20px">{{ $loop->iteration }}</td>
-                            <td>{{ $venta->fecha_registro }}</td>
+                            <td>{{ $venta->fecha_registro }}
+                            </td>
+                            <td>{{ $venta->personal->nom_personal }} {{ $venta->personal->ape_paterno }}</td>
+                            <td>{{ $venta->cliente->ruc }} <br> {{ $venta->cliente->razon_social }} </td>
+                            <td>{{ $venta->sec }}</td>
+                            <td>{{ $venta->sot }}</td>
                             <td>{{ $venta->tipo_contrato }}</td>
                             <td width="260px">
                                 <div class="d-flex" style="gap: 10px">

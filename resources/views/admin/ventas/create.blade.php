@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('sot', 'SOT') !!}
-                            {!! Form::text('sot', null, ['class' => 'form-control', 'id'=>'sot']) !!}
+                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
                             @error('sot')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -81,19 +81,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
-                        {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
-                        @error('observaciones_te')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="mb-2">
-                        {!! Form::label('observaciones', 'Observación') !!}
-                        {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
-                        @error('observaciones')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
+                            {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
+                            @error('observaciones_te')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-6">
+                            {!! Form::label('observaciones', 'Observación') !!}
+                            {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
+                            @error('observaciones')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,21 +138,33 @@
                             </select>
                         </div>
                     </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputCantidad', 'Cantidad/Ugis', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputCantidad', 'Cantidad/Ugis', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
-                    </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
-                    </div>
-                    <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputEquipoProducto', 'Equipo/Producto', ['style' => 'margin: 0; min-width:180px']) !!}
-                        {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputEquipoProducto', 'Equipo/Producto', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
+                            </div>
+                        </div>
                     </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
@@ -411,11 +425,11 @@
             if (isSelected) {
                 const [tipoServicioID, tipoServicioName] = e.target.value.split(
                     '_') // formato tipo servicio: ID, NOMBRE
-                    
+
                 // habilitar los select
                 $('#selectPlan').prop('disabled', false);
                 $('#selectServicio').prop('disabled', false);
-                    
+
                 // filtrar select servicio
                 $("#selectServicio").val('default');
                 $.map($("#selectServicio option"), function(option) {
@@ -450,25 +464,25 @@
                 $('#precioplan').val(0)
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
-                        
+
                 //deshabilitar y limpiar SOT cuando se elija el tipo de servicio movil
-                if(tipoServicioName === 'movil'){
+                if (tipoServicioName === 'movil') {
                     $('#sot').val(null);
-                    $('#sot').attr("disabled",true);
-                    $('#inputCantidad').attr("disabled",true);
+                    $('#sot').attr("disabled", true);
+                    $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                     $('#inputEquipoProducto').val(null);
                 } else {
-                    $('#sot').attr("disabled",false);
-                    $('#inputCantidad').attr("disabled",false);
+                    $('#sot').attr("disabled", false);
+                    $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputNumerosLineasNuevas').val(null);
                     $('#inputEquipoProducto').val(null);
                 }
             }
         });
-        
+
         // seleccionar plan y mostrar su precio
         $('#selectServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             $("#selectPlan").val('default');
@@ -568,10 +582,10 @@
             obtenerGetCantidadDeNumeros(e.target.value)
         })
 
-        function obtenerGetCantidadDeNumeros(valorInputNumeroLinea){
+        function obtenerGetCantidadDeNumeros(valorInputNumeroLinea) {
             if (!valorInputNumeroLinea.trim()) return inputCantidad.val('0')
             const cantNumero = valorInputNumeroLinea.split(',').length
-            $('#inputCantidad').val(cantNumero)            
+            $('#inputCantidad').val(cantNumero)
         }
 
         // eliminar un detalle de venta de la lista
