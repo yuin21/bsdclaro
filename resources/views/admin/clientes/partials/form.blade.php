@@ -1,25 +1,9 @@
-<<<<<<< HEAD
 
 <div class="form-group">
     <div class="row">
         <div class="col-6">
         {!! Form::label('ruc', 'Ruc') !!}
         {!! Form::text('ruc', null, ['class' => 'form-control']) !!}
-=======
-<div class="form-group">
-    {!! Form::label('ruc', 'Ruc') !!}
-    {!! Form::text('ruc', null, ['class' => 'form-control', 'id' => 'ruc']) !!}
-
-    @error('ruc')
-        <span class="text-danger">{{ $message }}</span>
-    @enderror
-</div>
-
-
-<div class="form-group">
-    {!! Form::label('razon_social', 'Razon Social') !!}
-    {!! Form::text('razon_social', null, ['class' => 'form-control', 'id' => 'razon_social']) !!}
->>>>>>> f49521c20feef9f53e82fac43f2d3faa23b31ae5
 
         @error('ruc')
         <span class="text-danger">{{ $message }}</span>
