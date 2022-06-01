@@ -32,12 +32,13 @@
                                     <td>{{ $cuotapersonal->personal->ape_paterno }}
                                         {{ $cuotapersonal->personal->ape_materno }}
                                         {{ $cuotapersonal->personal->nom_personal }}</td>
-                                    <td>{{ $cuotapersonal->cuota->cuota }}</td>
+                                    <td>{{ number_format($cuotapersonal->cuota->cuota, 2) }}</td>
                                     <td>{{ $cuotapersonal->mes }}</td>
                                     <td>{{ $cuotapersonal->año }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
-                                            <form action="{{ route('admin.cuotapersonal.restaurarCuotaPersonal', $cuotapersonal) }}"
+                                            <form
+                                                action="{{ route('admin.cuotapersonal.restaurarCuotaPersonal', $cuotapersonal) }}"
                                                 method="post">
                                                 @csrf
                                                 @method('PUT')

@@ -15,11 +15,11 @@
             <a href="{{ route('admin.cuotas.edit', $cuota) }}" class="btn btn-sm btn-success text-nowrap ml-2">
                 <i class="fas fa-pen"></i> Editar
             </a>
-        </div>         
+        </div>
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Cuota:</b> {{ $cuota->cuota }}
+                    <b style="min-width:200px; display: inline-block">Cuota:</b> {{ number_format($cuota->cuota, 2) }}
                 </li>
             </ul>
         </div>

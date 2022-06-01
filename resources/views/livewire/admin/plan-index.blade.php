@@ -27,7 +27,9 @@
                                 <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $plan->tiposervicio->nom_tipo_servicio }}</td>
                                 <td>{{ $plan->nombre_plan }}</td>
-                                <td style='text-align:center'>{{ $plan->precio }}</td>
+                                <td style='text-align:center'>
+                                    {{ number_format($plan->precio, 2) }}
+                                </td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.plan.show', $plan) }}"

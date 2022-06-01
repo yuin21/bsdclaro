@@ -21,7 +21,6 @@
                                 <th>Tipo</th>
                                 <th>Nombre</th>
                                 <th>Precio</th>
-                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -31,19 +30,18 @@
                                     <td width="20px">{{ $loop->iteration }}</td>
                                     <td>{{ $plan->tiposervicio->nom_tipo_servicio }}</td>
                                     <td>{{ $plan->nombre_plan }}</td>
-                                    <td>{{ $plan->precio }}</td>
+                                    <td>{{ number_format($plan->precio, 2) }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
-                                            <form action="{{ route('admin.plan.restaurarPlan', $plan) }}"
-                                                method="post">
+                                            <form action="{{ route('admin.plan.restaurarPlan', $plan) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="btn btn-sm btn-info text-nowrap">
                                                     <i class="fas fa-plus-circle"></i> Restaurar
                                                 </button>
                                             </form>
-                                            <form action="{{ route('admin.plan.destroy', $plan) }}"
-                                                class="form-delete" method="post">
+                                            <form action="{{ route('admin.plan.destroy', $plan) }}" class="form-delete"
+                                                method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger text-nowrap">
