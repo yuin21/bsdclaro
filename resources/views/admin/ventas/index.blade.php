@@ -45,7 +45,7 @@
                                         class="btn btn-sm btn-info text-nowrap">
                                         <i class="fas fa-eye"></i> Ver
                                     </a>
-                                    <a href="{{ route('admin.ventas.show', $venta) }}"
+                                    <a href="{{ route('admin.ventas.tracking', $venta) }}"
                                         class="btn btn-sm btn-info text-nowrap">
                                         <i class="fas fa-eye"></i> Seguimiento
                                     </a>
