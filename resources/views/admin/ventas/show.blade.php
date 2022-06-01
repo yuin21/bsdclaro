@@ -24,14 +24,11 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Tipo de contrato: </span>
-                            {{ $venta->tipo_contrato }}
+                            {{ $venta->tipo_contrato === '' ? 'NO' : 'SI' }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Registro en Saliforce: </span>
-                            {{ $venta->registrado_selforce === 'N' ? 'NO' : 'SI' }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Solicitud: </span> {{ $venta->solicitud }}
+                            <span class="text-bold tag-detalle">Saliforce: </span>
+                            {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">SOT: </span> {{ $venta->sot }}
@@ -40,12 +37,8 @@
                             <span class="text-bold tag-detalle">SEC: </span> {{ $venta->sec }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Tipo BPO/VPO: </span>
-                            {{ $venta->tipo_entrega_vpo_bpo === 'V' ? 'VPO' : 'BPO' }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Estado BPO/VPO: </span>
-                            {{ $venta->estado_te === 'N' ? 'No conforme' : 'Conforme' }}
+                            <span class="text-bold tag-detalle">Estado: </span>
+                            {{ $venta->estado_venta === 'N' ? 'No conforme' : 'Conforme' }}
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Fecha entrega BPO/VPO: </span>
