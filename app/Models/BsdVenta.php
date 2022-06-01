@@ -65,4 +65,10 @@ class BsdVenta extends Model
                 return "No existen valores";
         }
     }
+    
+    public function getFechaEntrega(){
+        $fecha_entrega = $this->fecha_entrega;
+        $fecha = substr($fecha_entrega, 0, -9); 
+        return $fecha;
+    }
 }

@@ -71,6 +71,15 @@ class VentaController extends Controller
         $subtotales_igv = $request->get('subtotales_igv');
         $subtotales_sinigv = $request->get('subtotales_sinigv');
         $numerosLineasNuevas = $request->get('numerosLineasNuevas');
+        //Datos nulos de los detalles de venta        
+        $operador = $request->get('operador');
+        $estado_linea = $request->get('estado_linea');
+        $fecha_activado = $request->get('fechaactivado');
+        $fecha_liquidado = $request->get('fechaliquidado');
+        $status_100_por = $request->get('status_100_por');
+        $numero_proyecto = $request->get('numero_proyecto');
+        $fecha_instalacion = $request->get('fechainstalacion');
+        $hora = $request->get('horas');
 
         // try {
         //     DB::beginTransaction();
@@ -87,6 +96,7 @@ class VentaController extends Controller
             // 1. registrar venta
             $venta = BsdVenta::create($request->all());
             // 2. registrar detalles de venta
+            //dd($request);
             for ($i=0; $i < count($tiposServicio); $i++) {
                 $detalleventa = new BsdDetalleVenta();
                 $detalleventa->bsd_venta_id = $venta->id;
@@ -98,6 +108,15 @@ class VentaController extends Controller
                 $detalleventa->precio_plan = $precioplanes[$i];
                 $detalleventa->cf_con_igv = $subtotales_igv[$i];
                 $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];
+                // //campos nulos                
+                $detalleventa->operador = $operador[$i];
+                $detalleventa->estado_linea = $estado_linea[$i];
+                $detalleventa->fecha_activado = $fecha_activado[$i];
+                $detalleventa->fecha_liquidado = $fecha_liquidado[$i];
+                $detalleventa->status_100_por = $status_100_por[$i];
+                $detalleventa->numero_proyecto = $numero_proyecto[$i];
+                $detalleventa->fecha_instalacion = $fecha_instalacion[$i];
+                $detalleventa->hora = $hora[$i];
                 $detalleventa->save();
 
                 // 3. registrar numeros de linea nueva

@@ -183,6 +183,62 @@
                             </div>
                         </div>
                     </div>
+                     <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('operador', 'Operador', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('operador', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::select('estado_linea', ['A' => 'Activo','D' => 'Desactivo'], null, ['class' => 'form-control mt-2', 'id' => 'estadoLinea']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('fecha_activado', 'Fecha Activado', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::date('fecha_activado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_activado']) !!}
+                            </div>
+                         </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('fecha_liquidado', 'Fecha Liquidado', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::date('fecha_liquidado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_liquidado']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('status_100_por', 'Status 100%', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('status_100_por', null, ['class' => 'form-control mt-2', 'id' => 'inputStatus']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('numero_proyecto', 'Numero de Proyecto', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('numero_proyecto', null, ['class' => 'form-control mt-2', 'id' => 'inputNumeroProyecto']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('fecha_instalacion', 'Fecha Instalación', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::date('fecha_instalacion', null, ['class' => 'form-control mt-2', 'id' => 'fecha_instalacion']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('hora', 'Hora', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::time('hora', null, ['class' => 'form-control mt-2', 'id' => 'hora']) !!}
+                            </div>
+                        </div>
+                    </div> 
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
                 <div class="card-body">
@@ -200,6 +256,15 @@
                                     <th>Equipo/Producto</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
+ 
+                                    <th>Operador</th>
+                                    <th>Estado de Linea</th>
+                                    <th>Fecha Activado</th>
+                                    <th>Fecha Liquidado</th>
+                                    <th>Status 100%</th>
+                                    <th>Nro Proyecto</th>
+                                    <th>Fecha Instalacion</th>
+                                    <th>Hora</th> 
                                     <th></th>
                                 </tr>
                             </thead>
@@ -420,6 +485,15 @@
         const inputTotal = document.getElementById('inputTotal')
         const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
         const total = document.getElementById('total') // input hidden para mandar a registrar
+        //Agregar data de valores nulos          
+        const inputOperador = document.getElementById('inputOperador')
+        const estadoLinea = document.getElementById('estadoLinea')
+        const fecha_activado = document.getElementById('fecha_activado')
+        const fecha_liquidado = document.getElementById('fecha_liquidado')
+        const inputStatus = document.getElementById('inputStatus')
+        const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
+        const fecha_instalacion = document.getElementById('fecha_instalacion')
+        const hora = document.getElementById('hora')
 
         let cantDetallesVenta = 0 // parecido al cont
         let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
@@ -492,7 +566,6 @@
                     $('#fecha_entrega_te').attr("disabled", false);
                     $('#fecha_envio').attr("disabled", false);
                     $('#estado_venta').attr("disabled", false);
-                    $('#estado_venta').val('P');
                     $('#observacion').attr("disabled", false);
                     obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else {
@@ -503,6 +576,8 @@
                     $('#fecha_entrega_te').attr("disabled", true);
                     $('#fecha_envio').attr("disabled", true);
                     $('#estado_venta').attr("disabled", true);
+                    $('#estado_venta').val('P');
+                    $('#estado_venta').change();
                     $('#observacion').attr("disabled", true);
                     $('#inputNumerosLineasNuevas').val(null);
                 }
@@ -544,6 +619,15 @@
             const equipoproducto = inputEquipoProducto.value
             const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
+            // obtener data de valores nulos            
+            const operador = inputOperador.value
+            const estado_linea = estadoLinea.value.split('_')
+            const fechaactivado = fecha_activado.value
+            const fechaliquidado = fecha_liquidado.value
+            const status_100_por = inputStatus.value
+            const numero_proyecto = inputNumeroProyecto.value
+            const fechainstalacion = fecha_instalacion.value
+            const horas = hora.value
 
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
@@ -574,6 +658,16 @@
                 <td>${equipoproducto}</td>
                 <td>${subtotal_igv}</td>
                 <td>${subtotal_sin_igv}</td>
+   
+                <td>${operador}</td> 
+                <td>${estado_linea}</td> 
+                <td>${fechaactivado}</td> 
+                <td>${fechaliquidado}</td> 
+                <td>${status_100_por}</td> 
+                <td>${numero_proyecto}</td>    
+                <td>${fechainstalacion}</td>   
+                <td>${horas}</td>     
+
                 <td width="30px">
                     <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
                         <i class="fas fa-trash"></i>
@@ -587,7 +681,17 @@
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
                 <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
                 <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
-                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">  
+
+                <input type="hidden" name="operador[]" value="${operador}">
+                <input type="hidden" name="estado_linea[]" value="${estado_linea}">
+                <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
+                <input type="hidden" name="fechaliquidado[]" value="${fechaliquidado}">
+                <input type="hidden" name="status_100_por[]" value="${status_100_por}">
+                <input type="hidden" name="numero_proyecto[]" value="${numero_proyecto}">
+                <input type="hidden" name="fechainstalacion[]" value="${fechainstalacion}">
+                <input type="hidden" name="horas[]" value="${horas}">
+
             </tr>`
 
             inputTotal.value = total_igv
@@ -602,6 +706,16 @@
             $("#selectPlan").val('default');
             $('#selectPlan').selectpicker('refresh');
             $('#selectServicio').selectpicker('refresh');
+
+            $("#inputOperador").val(null);
+            $("#estadoLinea").val('A');
+            $("#fecha_activado").val('default');
+            $("#fecha_liquidado").val('default');
+            $("#inputStatus").val(null);
+            $("#inputNumeroProyecto").val(null);
+            $("#fecha_instalacion").val('default');
+            $("#hora").val('default');
+
         })
 
         // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil

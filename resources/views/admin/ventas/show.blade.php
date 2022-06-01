@@ -42,7 +42,7 @@
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Fecha entrega: </span>
-                            {{ $venta->fecha_entrega }}
+                            {{ $venta->getFechaEntrega() }}
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}
