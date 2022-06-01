@@ -15,7 +15,7 @@ class BsdVenta extends Model
         'bsd_cliente_id',
         'fecha_registro',
         'tipo_contrato',
-        'obs',
+        'observacion',
         'fecha_entrega',
         'salesforce',
         'sot',

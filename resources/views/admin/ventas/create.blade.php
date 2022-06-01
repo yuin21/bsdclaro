@@ -107,9 +107,9 @@
                             @enderror
                         </div>
                         <div class="col-lg-6 col-sm-6">
-                            {!! Form::label('obs', 'Observación') !!}
-                            {!! Form::text('obs', null, ['class' => 'form-control','id' => 'observacion']) !!}
-                            @error('obs')
+                            {!! Form::label('observacion', 'Observación') !!}
+                            {!! Form::text('observacion', null, ['class' => 'form-control','id' => 'observacion']) !!}
+                            @error('observacion')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -489,27 +489,24 @@
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
+                    $('#fecha_entrega_te').attr("disabled", false);
+                    $('#fecha_envio').attr("disabled", false);
+                    $('#estado_venta').attr("disabled", false);
+                    $('#estado_venta').val('P');
+                    $('#observacion').attr("disabled", false);
                     obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else {
                     $('#sot').attr("disabled", false);
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
-                    $('#inputNumerosLineasNuevas').val(null);
-                }
-
-                //Nuevas restricciones de campos
-                if(tipoServicioName == 'fija'){
                     $('#fecha_entrega_te').attr("disabled", true);
                     $('#fecha_envio').attr("disabled", true);
                     $('#estado_venta').attr("disabled", true);
                     $('#observacion').attr("disabled", true);
-                } else {
-                    $('#fecha_entrega_te').attr("disabled", false);
-                    $('#fecha_envio').attr("disabled", false);
-                    $('#estado_venta').attr("disabled", false);
-                    $('#observacion').attr("disabled", false);
+                    $('#inputNumerosLineasNuevas').val(null);
                 }
+
             }
         });
 
@@ -661,7 +658,7 @@
                 sec,
                 salesforce,
                 nro_oportunidad,
-                obs,
+                observacion,
                 estado_venta,
                 nivel_venta
             } = e.target
@@ -684,7 +681,7 @@
 
             if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
 
-            if (obs.value.length > 250) return alerta(
+            if (observacion.value.length > 250) return alerta(
                 'El campo observaciones  acepta máximo 250 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')

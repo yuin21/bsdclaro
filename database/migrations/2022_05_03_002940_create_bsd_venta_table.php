@@ -34,7 +34,7 @@ return new class extends Migration
             $table->timestamp('fecha_envio')->nullable();
             //Hasta aqui
             //$table->char('tipo_entrega_vpo_bpo',1)->nullable()->comment('V or B');;
-            $table->string('obs', 250)->nullable();
+            $table->string('observacion', 250)->nullable();
             $table->timestamp('fecha_entrega')->nullable();
             //$table->string('observaciones_te', 300)->nullable();
             $table->char('salesforce', 1)->comment('S (Si) or N (No)');//No se si se registra en selforce despues o durante la venta
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->char('sot', 8)->nullable();
             //$table->char('estado_te', 1)->nullable()->comment('C or N');
             $table->float('total');
-            $table->char('estado_venta', 1)->comment('P (Pendiente), E (Enviado), C (Conforme), N (No conforme)');
+            $table->char('estado_venta', 1)->default('P')->comment('P (Pendiente), E (Enviado), C (Conforme), N (No conforme)');
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();

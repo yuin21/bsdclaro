@@ -50,7 +50,7 @@ class VentaController extends Controller
             'razon_social' => 'required',
             'sot' => 'numeric',
             'sec' => 'required|numeric',
-            'obs' => 'max:250',
+            'observacion' => 'max:250',
             'salesforce' => 'required',
             'estado_venta' => 'required',
             'nro_oportunidad' => 'required|string|max:18',
