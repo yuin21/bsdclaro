@@ -38,18 +38,14 @@
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Estado: </span>
-                            {{ $venta->estado_venta === 'N' ? 'No conforme' : 'Conforme' }}
+                            {{ $venta->getEstado_Venta()}}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Fecha entrega BPO/VPO: </span>
-                            {{ $venta->fecha_entrega_te }}
+                            <span class="text-bold tag-detalle">Fecha entrega: </span>
+                            {{ $venta->fecha_entrega }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Observación BPO/VPO: </span>
-                            {{ $venta->observaciones_te }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observaciones }}
+                            <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}
                         </li>
                     </ul>
                 </div>

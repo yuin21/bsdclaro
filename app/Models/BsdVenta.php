@@ -50,4 +50,19 @@ class BsdVenta extends Model
     public function detallesventa(){
         return $this->hasMany('App\Models\BsdDetalleVenta');
     }
+
+    public function getEstado_Venta(){
+        switch($this->attributes['estado_venta']){
+            case "P":
+                return "Pendiente";
+            case "E":
+                return "Enviado";
+            case "C":
+                return "Conforme";
+            case "N":
+                return "No Conforme";
+            default:
+                return "No existen valores";
+        }
+    }
 }
