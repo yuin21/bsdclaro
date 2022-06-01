@@ -120,4 +120,13 @@ class VentaController extends Controller
     {
         return view('admin.ventas.show', compact('venta'));
     }
+    
+    public function tracking(BsdVenta $venta)
+    {
+        return view('admin.ventas.tracking', compact('venta'));
+    }
+
+    public function trackingUpdate(Request $request, BsdVenta $venta) {
+        return $request;
+    }
 }

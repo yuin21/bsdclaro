@@ -84,6 +84,9 @@ Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan']
 
 //Ventas
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
+Route::get('ventas/tracking/{venta}', [VentaController::class, 'tracking'])->name('admin.ventas.tracking');
+Route::put('ventas/tracking/{venta}/update', [VentaController::class, 'trackingUpdate'])->name('admin.ventas.tranckingupdate');
+
 
 //Numero_linea_nueva
 Route::resource('numero_linea_nueva', NumeroLineaNuevaController::class)->names('admin.numero_linea_nueva');
