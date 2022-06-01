@@ -19,80 +19,97 @@
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
-                            {!! Form::text('tipo_contrato', null, ['class' => 'form-control']) !!}
-                            @error('tipo_contrato')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('registrado_selforce', 'Registro en Saliforce') !!}
-                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
-                            @error('registrado_selforce')
-                                <small class="text-danger">Registro en Saliforce es obligatorio</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('solicitud', 'Solicitud') !!}
-                            {!! Form::text('solicitud', null, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('sot', 'SOT') !!}
-                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
-                            @error('sot')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-2 col-sm-6">
                             {!! Form::label('sec', 'SEC') !!}
                             {!! Form::text('sec', null, ['class' => 'form-control']) !!}
                             @error('sec')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="mb-2">
-                                {!! Form::label('tipo_entrega_vpo_bpo', 'Tipo BPO/VPO') !!}
-                                {!! Form::select('tipo_entrega_vpo_bpo', ['B' => 'BPO', 'V' => 'VPO'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
-                                @error('tipo_entrega_vpo_bpo')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
+                        <div class="col-lg-2 col-sm-6">
+                            {!! Form::label('sot', 'SOT') !!}
+                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
+                            @error('sot')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
+                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
+                            @error('nro_proyecto')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
+                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control']) !!}
+                            @error('tipo_contrato')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            {!! Form::label('salesforce', 'Saliforce') !!}
+                            {!! Form::select('salesforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
+                            @error('salesforce')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('nro_oportunidad', 'Nro. Oportunidad') !!}
+                            {!! Form::text('nro_oportunidad', null, ['class' => 'form-control']) !!}
+                            @error('nro_oportunidad')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('estado_te', 'Estado BPO/VPO') !!}
-                                {!! Form::select('estado_te', ['C' => 'conforme', 'N' => 'no conforme'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
-                                @error('estado_te')
+                                {!! Form::label('fecha_conforme', 'Fecha Conformidad', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_conforme', null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
+                                @error('fecha_conforme')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('fecha_entrega_te', 'Fecha Entrega BPO/VPO', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
-                                @error('fecha_entrega_te')
+                                {!! Form::label('fecha_envio', 'Fecha Envio', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_envio', null, ['class' => 'form-control', 'id' => 'fecha_envio']) !!}
+                                @error('fecha_envio')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="mb-2">
+                                {!! Form::label('fecha_entrega', 'Fecha Entrega', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_entrega', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
+                                @error('fecha_entrega')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-6">
-                            {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
-                            {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
-                            @error('observaciones_te')
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('estado_venta', 'Estado') !!}
+                            {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'id' => 'estado_venta']) !!}
+                            @error('estado_venta')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-6">
-                            {!! Form::label('observaciones', 'Observación') !!}
-                            {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
-                            @error('observaciones')
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('nivel_venta', 'Nivel Venta(%)') !!}
+                            {!! Form::select('nivel_venta', ['0' => '0%', '25' => '25%','50' => '50%','75' => '75%','100' => '100%'], null, ['class' => 'selectpicker form-control']) !!}
+                            @error('nivel_venta')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            {!! Form::label('obs', 'Observación') !!}
+                            {!! Form::text('obs', null, ['class' => 'form-control','id' => 'observacion']) !!}
+                            @error('obs')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -471,14 +488,27 @@
                     $('#sot').attr("disabled", true);
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
-                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                     $('#inputEquipoProducto').val(null);
+                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else {
                     $('#sot').attr("disabled", false);
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
-                    $('#inputNumerosLineasNuevas').val(null);
                     $('#inputEquipoProducto').val(null);
+                    $('#inputNumerosLineasNuevas').val(null);
+                }
+
+                //Nuevas restricciones de campos
+                if(tipoServicioName == 'fija'){
+                    $('#fecha_entrega_te').attr("disabled", true);
+                    $('#fecha_envio').attr("disabled", true);
+                    $('#estado_venta').attr("disabled", true);
+                    $('#observacion').attr("disabled", true);
+                } else {
+                    $('#fecha_entrega_te').attr("disabled", false);
+                    $('#fecha_envio').attr("disabled", false);
+                    $('#estado_venta').attr("disabled", false);
+                    $('#observacion').attr("disabled", false);
                 }
             }
         });
@@ -629,9 +659,11 @@
                 razon_social,
                 sot,
                 sec,
-                registrado_selforce,
-                observaciones_te,
-                observaciones
+                salesforce,
+                nro_oportunidad,
+                obs,
+                estado_venta,
+                nivel_venta
             } = e.target
 
             if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(
@@ -640,17 +672,20 @@
             if (tipo_contrato.value.length > 20) return alerta(
                 'El campo tipo contrato no debe contener más de 20 caracteres')
 
-            if (!registrado_selforce.value) return alerta('El campo Registro en Saliforce es obligatorio')
+            if (!salesforce.value) return alerta('El campo Registro en Saliforce es obligatorio')
+
+            if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
+
+            if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
+            
+            if (!nivel_venta.value) return alerta('El campo Nivel Venta es obligatorio')
 
             if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
 
             if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
 
-            if (observaciones_te.value.length > 300) return alerta(
-                'El campo observaciones BPO/VPO acepta máximo 300 caracteres')
-
-            if (observaciones.value.length > 300) return alerta(
-                'El campo observaciones  acepta máximo 300 caracteres')
+            if (obs.value.length > 250) return alerta(
+                'El campo observaciones  acepta máximo 250 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
 

@@ -48,11 +48,16 @@ class VentaController extends Controller
             'equipoproducto' => 'required|max:30',
             'total' => 'required',
             'razon_social' => 'required',
-            'sot' => 'string|size:8',
-            'sec' => 'required|string|size:8',
-            'observaciones' => 'max:300',
-            'observaciones_te' => 'max:300',
-            'registrado_selforce' => 'required'
+            'sot' => 'numeric',
+            'sec' => 'required|numeric',
+            'obs' => 'max:250',
+            'salesforce' => 'required',
+            'estado_venta' => 'required',
+            'nro_oportunidad' => 'required|string|max:18',
+            'nivel_venta' => 'required',
+            'nro_proyecto' => 'numeric'
+            //'fecha_conforme' => 'required',
+            //'fecha_envio' => 'required'
         ]);
         //dd($request);
 
