@@ -30,18 +30,18 @@
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.servicio.show', $servicio) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                            <i class="fas fa-eye"></i> Ver
+                                            <i class="fas fa-eye"></i> {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.servicio.edit', $servicio) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i> Editar
+                                            <i class="fas fa-pen"></i> {{-- Editar  --}}
                                         </a>
                                         <form action="{{ route('admin.servicio.destroyLogico', $servicio) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Remover
+                                                <i class="fas fa-minus-circle"></i> {{-- Remover  --}}
                                             </button>
                                         </form>
                                     </div>
@@ -54,7 +54,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos</strong>
+            <strong>Sin Registros</strong>
         </div>
     @endif
 </div>

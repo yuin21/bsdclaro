@@ -36,18 +36,21 @@
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.cuotapersonal.show', $cuotapersonal) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                            <i class="fas fa-eye"></i> Ver
+                                            <i class="fas fa-eye"></i>
+                                            {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.cuotapersonal.edit', $cuotapersonal) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i> Editar
+                                            <i class="fas fa-pen"></i>
+                                            {{-- Editar  --}}
                                         </a>
                                         <form action="{{ route('admin.cuotapersonal.destroyLogico', $cuotapersonal) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Remover
+                                                <i class="fas fa-minus-circle"></i>
+                                                {{-- Remover  --}}
                                             </button>
                                         </form>
                                     </div>
@@ -60,7 +63,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de las cuotas asignadas</strong>
+            <strong>Sin Registros</strong>
         </div>
     @endif
 </div>

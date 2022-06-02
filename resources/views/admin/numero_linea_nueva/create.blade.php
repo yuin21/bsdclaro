@@ -14,7 +14,7 @@
         <div class="card-body">
             {!! Form::open(['route' => 'admin.numero_linea_nueva.store']) !!}
             @include('admin.numero_linea_nueva.partials.form')
-            {!! Form::submit('Registrar linea nueva', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
             <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
             {!! Form::close() !!}
         </div>

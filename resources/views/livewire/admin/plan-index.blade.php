@@ -32,18 +32,21 @@
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.plan.show', $plan) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                            <i class="fas fa-eye"></i> Ver
+                                            <i class="fas fa-eye"></i> 
+                                            {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.plan.edit', $plan) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i> Editar
+                                            <i class="fas fa-pen"></i> 
+                                            {{-- Editar --}}
                                         </a>
                                         <form action="{{ route('admin.plan.destroyLogico', $plan) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Remover
+                                                <i class="fas fa-minus-circle"></i> 
+                                                {{-- Remover --}}
                                             </button>
                                         </form>
                                     </div>
@@ -56,7 +59,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de los planes</strong>
+            <strong>Sin Registros</strong>
         </div>
     @endif
 </div>

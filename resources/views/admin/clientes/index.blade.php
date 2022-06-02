@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.clientes.create') }}">
-        <i class="fas fa-plus-circle"></i> Registrar Clientes
+        <i class="fas fa-plus-circle"></i> Registrar 
     </a>
     <h1 class="text-bold">Clientes</h1>
 @stop

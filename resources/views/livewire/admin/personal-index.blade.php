@@ -87,7 +87,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de personal</strong>
+            <strong>Sin Registros</strong>
         </div>
     @endif
 </div>

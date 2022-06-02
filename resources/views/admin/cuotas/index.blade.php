@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.cuotas.create') }}">
-        <i class="fas fa-plus-circle"></i> Registrar Cuota
+        <i class="fas fa-plus-circle"></i> Registrar 
     </a>
     <h1 class="text-bold">Cuotas</h1>
 @stop

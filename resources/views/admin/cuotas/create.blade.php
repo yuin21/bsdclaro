@@ -11,10 +11,10 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body">
+        <div class="card-body ">
             {!! Form::open(['route' => 'admin.cuotas.store']) !!}
             @include('admin.cuotas.partials.form')
-            <div class="float-right">
+            <div class="row justify-content-center col-6 mx-auto">
                 {!! Form::submit('Registrar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
                 {!! Form::close() !!}
