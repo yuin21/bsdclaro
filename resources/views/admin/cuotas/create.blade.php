@@ -12,13 +12,25 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.cuotas.store']) !!}
-            @include('admin.cuotas.partials.form')
-            <div class="float-right">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
-                {!! Form::close() !!}
+            <div class="row mb-4 d-flex justify-content-around align-items-end">
+                <div class="col-lg-8 col-sm-6">
+                    {!! Form::open(['route' => 'admin.cuotas.store']) !!}
+                    @include('admin.cuotas.partials.form')
+                </div>
+                <div class="col-lg-4 col-md-6" id="botones">
+                    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                    <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
+@stop
+
+@section('css')
+<style>
+#botones    {
+    margin-bottom: 16px;
+    }
+</style>
 @stop
