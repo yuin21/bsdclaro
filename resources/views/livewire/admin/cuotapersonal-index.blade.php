@@ -19,7 +19,7 @@
                             <th>Personal</th>
                             <th>Cuota</th>
                             <th>Mes</th>
-                            <th class="flecha">Año</th>
+                            <th>Año</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -30,7 +30,7 @@
                                 <td>{{ $cuotapersonal->personal->ape_paterno }}
                                     {{ $cuotapersonal->personal->ape_materno }}
                                     {{ $cuotapersonal->personal->nom_personal }}</td>
-                                <td>{{ number_format($cuotapersonal->cuota->cuota, 2) }}</td>
+                                <td style="text-align: right;">{{ number_format($cuotapersonal->cuota->cuota, 2) }}</td>
                                 <td>{{ $cuotapersonal->mes }}</td>
                                 <td>{{ $cuotapersonal->año }}</td>
                                 <td width="270px">
@@ -67,7 +67,7 @@
     @endif
 </div>
 
-@section('css')
+{{-- @section('css')
     <style>
         table tr th {
             cursor: pointer;
@@ -130,4 +130,4 @@
             else element.addClass("desc");
         }
     </script>
-@endsection
+@endsection --}}

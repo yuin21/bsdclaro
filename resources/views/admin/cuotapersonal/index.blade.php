@@ -6,7 +6,7 @@
     <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.cuotapersonal.create') }}">
         <i class="fas fa-plus-circle"></i> Registrar Cuota Asignada
     </a>
-    <h1 class="text-bold">Cuotas Asignada</h1>
+    <h1 class="text-bold">Lista de Cuotas Asignada</h1>
 @stop
 
 @section('content')

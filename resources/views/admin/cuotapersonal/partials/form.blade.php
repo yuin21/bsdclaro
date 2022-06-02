@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-6">
             {!! Form::label('mes', 'Mes') !!}
-            {!! Form::text('mes', null, ['class' => 'form-control']) !!}
+            {!! Form::text('mes', null, ['class' => 'form-control', 'id'=>'mes']) !!}
         
             @error('mes')
                 <span class="text-danger">{{ $message }}</span>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-6">
             {!! Form::label('año', 'Año') !!}
-            {!! Form::text('año', null, ['class' => 'form-control']) !!}
+            {!! Form::text('año', null, ['class' => 'form-control', 'id'=>'año']) !!}
         
             @error('año')
                 <span class="text-danger">{{ $message }}</span>

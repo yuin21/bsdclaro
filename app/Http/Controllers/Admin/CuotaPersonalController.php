@@ -26,9 +26,9 @@ class CuotaPersonalController extends Controller
         $personal = $bsd_personal->pluck('PersonalFullName', 'id');
         //dd($personal);
         $bsd_cuota = BsdCuota::where('estado', 1)->orderBy('cuota')->get();
-        $cuota = $bsd_cuota->pluck('cuota', 'id');
+        $cuota = $bsd_cuota->pluck('CuotaRound', 'id');
         //dd($cuota);
-
+        
         return view('admin.cuotapersonal.create', compact('personal','cuota'));
     }
 
