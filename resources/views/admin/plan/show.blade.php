@@ -10,17 +10,18 @@
 @stop
 
 @section('content')
-    <div class="card">        
+    <div class="card">
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Tipo de Servicio:</b> {{ $plan->tiposervicio->nom_tipo_servicio }}
+                    <b style="min-width:200px; display: inline-block">Tipo de Servicio:</b>
+                    {{ $plan->tiposervicio->nom_tipo_servicio }}
                 </li>
                 <li class="list-group-item">
                     <b style="min-width:200px; display: inline-block">Nombre de Plan:</b> {{ $plan->nombre_plan }}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Precio:</b> {{ $plan->precio }}
+                    <b style="min-width:200px; display: inline-block">Precio:</b> {{ number_format($plan->precio, 2) }}
                 </li>
             </ul>
         </div>

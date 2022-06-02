@@ -14,7 +14,8 @@
         <div class="card-body ">
             {!! Form::open(['route' => 'admin.cuotas.store']) !!}
             @include('admin.cuotas.partials.form')
-            <div class="row justify-content-center col-6 mx-auto">
+            <div class="d-flex"></div>
+            <div class="row justify-content-center">
                 {!! Form::submit('Registrar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
                 {!! Form::close() !!}

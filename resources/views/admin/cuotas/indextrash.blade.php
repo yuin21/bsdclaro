@@ -17,7 +17,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Item</th>                                
+                                <th>Item</th>
                                 <th>Cuota</th>
                                 <th>Acciones</th>
                             </tr>
@@ -26,7 +26,7 @@
                             @foreach ($bsd_cuota as $cuota)
                                 <tr>
                                     <td width="20px">{{ $loop->iteration }}</td>
-                                    <td>{{ $cuota->cuota }}</td>
+                                    <td>{{ number_format($cuota->cuota, 2) }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
                                             <form action="{{ route('admin.cuotas.restaurarCuotas', $cuota) }}"

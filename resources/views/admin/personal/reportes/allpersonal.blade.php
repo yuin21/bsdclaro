@@ -8,7 +8,7 @@
     <title>Demo PDF de Personal</title>
     <style>
         body {
-            font-size: 12px;
+            font-size: 18px;
         }
 
         h1 {

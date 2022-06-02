@@ -13,13 +13,13 @@
                             <th>Item</th>
                             <th>Cuota</th>
                             <th>Acciones</th>
-                          </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach ($bsd_cuota as $cuota)
                             <tr>
                                 <td width="20px">{{ $loop->iteration }}</td>
-                                <td>{{ $cuota->cuota }}</td>
+                                <td>{{ number_format($cuota->cuota, 2) }}</td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.cuotas.show', $cuota) }}"

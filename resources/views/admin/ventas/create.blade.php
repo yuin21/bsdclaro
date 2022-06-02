@@ -19,80 +19,97 @@
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
-                            {!! Form::text('tipo_contrato', null, ['class' => 'form-control']) !!}
-                            @error('tipo_contrato')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('registrado_selforce', 'Registro en Saliforce') !!}
-                            {!! Form::select('registrado_selforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
-                            @error('registrado_selforce')
-                                <small class="text-danger">Registro en Saliforce es obligatorio</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('solicitud', 'Solicitud') !!}
-                            {!! Form::text('solicitud', null, ['class' => 'form-control']) !!}
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('sot', 'SOT') !!}
-                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
-                            @error('sot')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-2 col-sm-6">
                             {!! Form::label('sec', 'SEC') !!}
                             {!! Form::text('sec', null, ['class' => 'form-control']) !!}
                             @error('sec')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="mb-2">
-                                {!! Form::label('tipo_entrega_vpo_bpo', 'Tipo BPO/VPO') !!}
-                                {!! Form::select('tipo_entrega_vpo_bpo', ['B' => 'BPO', 'V' => 'VPO'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
-                                @error('tipo_entrega_vpo_bpo')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
+                        <div class="col-lg-2 col-sm-6">
+                            {!! Form::label('sot', 'SOT') !!}
+                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
+                            @error('sot')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
+                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
+                            @error('nro_proyecto')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
+                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control']) !!}
+                            @error('tipo_contrato')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            {!! Form::label('salesforce', 'Saliforce') !!}
+                            {!! Form::select('salesforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
+                            @error('salesforce')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('nro_oportunidad', 'Nro. Oportunidad') !!}
+                            {!! Form::text('nro_oportunidad', null, ['class' => 'form-control']) !!}
+                            @error('nro_oportunidad')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('estado_te', 'Estado BPO/VPO') !!}
-                                {!! Form::select('estado_te', ['C' => 'conforme', 'N' => 'no conforme'], null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
-                                @error('estado_te')
+                                {!! Form::label('fecha_conforme', 'Fecha Conformidad', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_conforme', null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
+                                @error('fecha_conforme')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('fecha_entrega_te', 'Fecha Entrega BPO/VPO', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_entrega_te', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
-                                @error('fecha_entrega_te')
+                                {!! Form::label('fecha_envio', 'Fecha Envio', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_envio', null, ['class' => 'form-control', 'id' => 'fecha_envio']) !!}
+                                @error('fecha_envio')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="mb-2">
+                                {!! Form::label('fecha_entrega', 'Fecha Entrega', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_entrega', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
+                                @error('fecha_entrega')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-6">
-                            {!! Form::label('observaciones_te', 'Observación BPO/VPO') !!}
-                            {!! Form::text('observaciones_te', null, ['class' => 'form-control']) !!}
-                            @error('observaciones_te')
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('estado_venta', 'Estado') !!}
+                            {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'id' => 'estado_venta']) !!}
+                            @error('estado_venta')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-6">
-                            {!! Form::label('observaciones', 'Observación') !!}
-                            {!! Form::text('observaciones', null, ['class' => 'form-control']) !!}
-                            @error('observaciones')
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('nivel_venta', 'Nivel Venta(%)') !!}
+                            {!! Form::select('nivel_venta', ['0' => '0%', '25' => '25%','50' => '50%','75' => '75%','100' => '100%'], null, ['class' => 'selectpicker form-control']) !!}
+                            @error('nivel_venta')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            {!! Form::label('observacion', 'Observación') !!}
+                            {!! Form::text('observacion', null, ['class' => 'form-control','id' => 'observacion']) !!}
+                            @error('observacion')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -166,6 +183,62 @@
                             </div>
                         </div>
                     </div>
+                     <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('operador', 'Operador', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('operador', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::select('estado_linea', ['A' => 'Activo','D' => 'Desactivo'], null, ['class' => 'form-control mt-2', 'id' => 'estadoLinea']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('fecha_activado', 'Fecha Activado', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::date('fecha_activado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_activado']) !!}
+                            </div>
+                         </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('fecha_liquidado', 'Fecha Liquidado', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::date('fecha_liquidado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_liquidado']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('status_100_por', 'Status 100%', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('status_100_por', null, ['class' => 'form-control mt-2', 'id' => 'inputStatus']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('numero_proyecto', 'Numero de Proyecto', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('numero_proyecto', null, ['class' => 'form-control mt-2', 'id' => 'inputNumeroProyecto']) !!}
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('fecha_instalacion', 'Fecha Instalación', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::date('fecha_instalacion', null, ['class' => 'form-control mt-2', 'id' => 'fecha_instalacion']) !!}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('hora', 'Hora', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::time('hora', null, ['class' => 'form-control mt-2', 'id' => 'hora']) !!}
+                            </div>
+                        </div>
+                    </div> 
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
                 <div class="card-body">
@@ -183,6 +256,13 @@
                                     <th>Equipo/Producto</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
+ 
+                                    <th>Operador</th>
+                                    <th>Estado de Linea</th>
+                                    <th>Fecha Activado</th>
+                                    <th>Fecha Liquidado</th>
+                                    <th>Fecha Instalacion</th>
+                                    <th>Hora</th> 
                                     <th></th>
                                 </tr>
                             </thead>
@@ -277,7 +357,7 @@
                 </div>
             </div>
             <div class="text-right pb-4">
-                {!! Form::submit('Registrar', ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary btn-lg']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
             </div>
         </div>
@@ -403,6 +483,15 @@
         const inputTotal = document.getElementById('inputTotal')
         const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
         const total = document.getElementById('total') // input hidden para mandar a registrar
+        //Agregar data de valores nulos          
+        const inputOperador = document.getElementById('inputOperador')
+        const estadoLinea = document.getElementById('estadoLinea')
+        const fecha_activado = document.getElementById('fecha_activado')
+        const fecha_liquidado = document.getElementById('fecha_liquidado')
+        //const inputStatus = document.getElementById('inputStatus')
+        //const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
+        const fecha_instalacion = document.getElementById('fecha_instalacion')
+        const hora = document.getElementById('hora')
 
         let cantDetallesVenta = 0 // parecido al cont
         let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
@@ -466,20 +555,33 @@
                 $('#selectServicio').selectpicker('refresh');
 
                 //deshabilitar y limpiar SOT cuando se elija el tipo de servicio movil
-                if (tipoServicioName === 'movil') {
+                if (tipoServicioName === 'Móvil') {
                     $('#sot').val(null);
                     $('#sot').attr("disabled", true);
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
-                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                     $('#inputEquipoProducto').val(null);
+                    $('#fecha_entrega_te').attr("readonly", false);
+                    $('#fecha_envio').attr("readonly", false);
+                    $('#estado_venta').attr("readonly", false);  
+                    $('#estado_venta').val("P");
+                    $('#estado_venta').change();                  
+                    $('#observacion').attr("readonly", false);
+                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else {
                     $('#sot').attr("disabled", false);
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
-                    $('#inputNumerosLineasNuevas').val(null);
                     $('#inputEquipoProducto').val(null);
+                    $('#fecha_entrega_te').attr("readonly", true);
+                    $('#fecha_envio').attr("readonly", true);
+                    $('#estado_venta').attr('disabled',true);
+                    $('#estado_venta').val('P');
+                    $('#estado_venta').change();                    
+                    $('#observacion').attr("readonly", true);
+                    $('#inputNumerosLineasNuevas').val(null);
                 }
+
             }
         });
 
@@ -517,6 +619,15 @@
             const equipoproducto = inputEquipoProducto.value
             const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
+            // obtener data de valores nulos            
+            const operador = inputOperador.value
+            const estado_linea = estadoLinea.value.split('_')
+            const fechaactivado = fecha_activado.value
+            const fechaliquidado = fecha_liquidado.value
+            //const status_100_por = inputStatus.value
+            //const numero_proyecto = inputNumeroProyecto.value
+            const fechainstalacion = fecha_instalacion.value
+            const horas = hora.value
 
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
@@ -547,6 +658,14 @@
                 <td>${equipoproducto}</td>
                 <td>${subtotal_igv}</td>
                 <td>${subtotal_sin_igv}</td>
+   
+                <td>${operador}</td> 
+                <td>${estado_linea}</td> 
+                <td>${fechaactivado}</td> 
+                <td>${fechaliquidado}</td> 
+                <td>${fechainstalacion}</td>   
+                <td>${horas}</td>     
+
                 <td width="30px">
                     <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
                         <i class="fas fa-trash"></i>
@@ -560,7 +679,15 @@
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
                 <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
                 <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
-                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">  
+
+                <input type="hidden" name="operador[]" value="${operador}">
+                <input type="hidden" name="estado_linea[]" value="${estado_linea}">
+                <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
+                <input type="hidden" name="fechaliquidado[]" value="${fechaliquidado}">
+                <input type="hidden" name="fechainstalacion[]" value="${fechainstalacion}">
+                <input type="hidden" name="horas[]" value="${horas}">
+
             </tr>`
 
             inputTotal.value = total_igv
@@ -575,6 +702,16 @@
             $("#selectPlan").val('default');
             $('#selectPlan').selectpicker('refresh');
             $('#selectServicio').selectpicker('refresh');
+
+            $("#inputOperador").val(null);
+            $("#estadoLinea").val('A');
+            $("#fecha_activado").val('default');
+            $("#fecha_liquidado").val('default');
+            //$("#inputStatus").val(null);
+            //$("#inputNumeroProyecto").val(null);
+            $("#fecha_instalacion").val('default');
+            $("#hora").val('default');
+
         })
 
         // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil
@@ -629,9 +766,12 @@
                 razon_social,
                 sot,
                 sec,
-                registrado_selforce,
-                observaciones_te,
-                observaciones
+                salesforce,
+                nro_oportunidad,
+                observacion,
+                estado_venta,
+                nivel_venta,
+                nro_proyecto
             } = e.target
 
             if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(
@@ -640,23 +780,33 @@
             if (tipo_contrato.value.length > 20) return alerta(
                 'El campo tipo contrato no debe contener más de 20 caracteres')
 
-            if (!registrado_selforce.value) return alerta('El campo Registro en Saliforce es obligatorio')
+            if (!salesforce.value) return alerta('El campo Saliforce es obligatorio')
+
+            if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
+            
+            if (nro_oportunidad.value.length > 18) return alerta(
+                'El campo nro_oportunidad  acepta máximo 18 caracteres')
+
+            if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
+            
+            if (!nivel_venta.value) return alerta('El campo Nivel Venta es obligatorio')
 
             if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
 
             if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
 
-            if (observaciones_te.value.length > 300) return alerta(
-                'El campo observaciones BPO/VPO acepta máximo 300 caracteres')
+            if (isNaN(nro_proyecto.value)) return alerta('El campo Nro Proyecto debe ser un número')
 
-            if (observaciones.value.length > 300) return alerta(
-                'El campo observaciones  acepta máximo 300 caracteres')
+            if (observacion.value.length > 250) return alerta(
+                'El campo observaciones  acepta máximo 250 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
 
             if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
 
             if (cantDetallesVenta === 0) return alerta('Detalles de venta es obligatorio')
+
+            $('#estado_venta').attr('disabled',false);
 
             formCrearVenta.submit()
         })

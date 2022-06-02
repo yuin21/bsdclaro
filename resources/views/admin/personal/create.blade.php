@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a href="{{ route('admin.personal.index') }}" class="float-right mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Ver lista de personal
+        <i class="fas fa-chevron-circle-left"></i> Ver lista del personal
     </a>
     <h1 class="text-bold">Crear Personal</h1>
 @stop

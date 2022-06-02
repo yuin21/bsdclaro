@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('bsd_tipo_servicio_id', 'Tipo de Servicio') !!}
-    {!! Form::select('bsd_tipo_servicio_id', $tiposervicios, null, ['class' => 'form-control']) !!}
+    {!! Form::select('bsd_tipo_servicio_id', $tiposervicios, null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
 
     @error('bsd_tipo_servicio_id')
         <span class="text-danger">{{ $message }}</span>

@@ -38,11 +38,11 @@ return new class extends Migration
             $table->string('equipo_producto', 30);
             $table->string('operador', 20)->nullable();
             $table->char('estado_linea', 1)->nullable()->comment('A or D'); //Entiendo que el estado es desactivado por defecto, pero cuando se registra la fecha de activado, este cambia a activado
-            $table->timestamp('fecha_activado')->nullable();
-            $table->timestamp('fecha_liquidado')->nullable();
-            $table->float('status_100_por')->nullable(); //Este en un campo que varia con el tiempo, no se si puede empezar con 0% por lo cuál mejor lo dejo nulo
-            $table->string('numero_proyecto', 45)->nullable();
-            $table->timestamp('fecha_instalacion')->nullable(); //No estoy seguro si primero se registra y luego pactan la fecha de instalación o eso se pacta en el registro
+            $table->date('fecha_activado')->nullable();
+            $table->date('fecha_liquidado')->nullable();
+            //$table->float('status_100_por')->nullable(); //Este en un campo que varia con el tiempo, no se si puede empezar con 0% por lo cuál mejor lo dejo nulo
+            //$table->string('numero_proyecto', 45)->nullable();
+            $table->date('fecha_instalacion')->nullable(); //No estoy seguro si primero se registra y luego pactan la fecha de instalación o eso se pacta en el registro
             $table->time('hora')->nullable(); //Lo mismo que arriba
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');

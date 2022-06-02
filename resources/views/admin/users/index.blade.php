@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-right text-nowrap">
-        <i class="fas fa-plus-circle"></i> Crear Usuario
+        <i class="fas fa-plus-circle"></i> Registrar
     </a>
     {{-- <button type="button" class="btn btn-primary float-right text-nowrap" data-toggle="modal"
         data-target="#admin_users_modals_create">

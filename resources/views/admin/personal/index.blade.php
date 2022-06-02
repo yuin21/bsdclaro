@@ -4,9 +4,9 @@
 
 @section('content_header')
     <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.personal.create') }}">
-        <i class="fas fa-plus-circle"></i> Registrar 
+        <i class="fas fa-plus-circle"></i> Registrar
     </a>
-    <h1 class="text-bold">Personal</h1>
+    <h1 class="text-bold">Lista del Personal</h1>
 @stop
 
 @section('content')

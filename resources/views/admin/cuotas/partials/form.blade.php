@@ -1,5 +1,5 @@
 <div class="form-group">
-    <div class="col-6 mx-auto">
+    <div class="col-6">
     {!! Form::label('cuota', 'Cuota') !!}
     {!! Form::text('cuota', null, ['class' => 'form-control']) !!}
 
