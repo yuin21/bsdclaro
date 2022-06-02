@@ -20,13 +20,13 @@ class BsdVenta extends Model
         'salesforce',
         'sot',
         'sec',
-        'total',
         'estado_venta',
         'nro_oportunidad',
         'nivel_venta',
         'nro_proyecto',
         'fecha_conforme',
-        'fecha_envio'
+        'fecha_envio',
+        'total',
         
         // 'estado_venta',
         // 'estado',
@@ -66,9 +66,15 @@ class BsdVenta extends Model
         }
     }
     
-    public function getFechaEntrega(){
-        $fecha_entrega = $this->fecha_entrega;
-        $fecha = substr($fecha_entrega, 0, -9); 
+    // public function getFechaEntrega(){
+    //     $fecha_entrega = $this->fecha_entrega;
+    //     $fecha = substr($fecha_entrega, 0, -9); 
+    //     return $fecha;
+    // }
+
+    public function getFechaRegistro(){
+        $fecha_registro = $this->fecha_registro;
+        $fecha = substr($fecha_registro, 0, -9); 
         return $fecha;
     }
 }

@@ -48,14 +48,14 @@ class VentaController extends Controller
             'equipoproducto' => 'required|max:30',
             'total' => 'required',
             'razon_social' => 'required',
-            'sot' => 'numeric',
+            'sot' => 'nullable|numeric',
             'sec' => 'required|numeric',
-            'observacion' => 'max:250',
+            'observacion' => 'nullable|max:250',
             'salesforce' => 'required',
             'estado_venta' => 'required',
             'nro_oportunidad' => 'required|string|max:18',
             'nivel_venta' => 'required',
-            'nro_proyecto' => 'numeric'
+            'nro_proyecto' => 'nullable|numeric'
             //'fecha_conforme' => 'required',
             //'fecha_envio' => 'required'
         ]);
@@ -76,8 +76,8 @@ class VentaController extends Controller
         $estado_linea = $request->get('estado_linea');
         $fecha_activado = $request->get('fechaactivado');
         $fecha_liquidado = $request->get('fechaliquidado');
-        $status_100_por = $request->get('status_100_por');
-        $numero_proyecto = $request->get('numero_proyecto');
+        //$status_100_por = $request->get('status_100_por');
+        //$numero_proyecto = $request->get('numero_proyecto');
         $fecha_instalacion = $request->get('fechainstalacion');
         $hora = $request->get('horas');
 
@@ -113,8 +113,8 @@ class VentaController extends Controller
                 $detalleventa->estado_linea = $estado_linea[$i];
                 $detalleventa->fecha_activado = $fecha_activado[$i];
                 $detalleventa->fecha_liquidado = $fecha_liquidado[$i];
-                $detalleventa->status_100_por = $status_100_por[$i];
-                $detalleventa->numero_proyecto = $numero_proyecto[$i];
+                //$detalleventa->status_100_por = $status_100_por[$i];
+                //$detalleventa->numero_proyecto = $numero_proyecto[$i];
                 $detalleventa->fecha_instalacion = $fecha_instalacion[$i];
                 $detalleventa->hora = $hora[$i];
                 $detalleventa->save();

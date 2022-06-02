@@ -76,8 +76,7 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
-                    <h5 class="flex-grow-1">Venta: <span
-                            class="badge badge-warning">{{ $venta->fecha_registro }}</span>
+                    <h5 class="flex-grow-1">Venta: <span class="badge badge-warning">{{ $venta->fecha_registro }}</span>
                     </h5>
                     {{-- <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-sm btn-success text-nowrap">
                         <i class="fas fa-pen"></i> Editar
@@ -87,7 +86,7 @@
                     <ul class="list-group">
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Tipo de contrato: </span>
-                            {{ $venta->tipo_contrato === '' ? 'NO' : 'SI' }}
+                            {{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Saliforce: </span>
@@ -100,12 +99,29 @@
                             <span class="text-bold tag-detalle">SEC: </span> {{ $venta->sec }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Estado: </span>
-                            {{ $venta->getEstado_Venta() }}
+                            <span class="text-bold tag-detalle">Nro. Proyecto: </span> {{ $venta->nro_proyecto }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Fecha entrega: </span>
+                            <span class="text-bold tag-detalle">Nro. Oportunidad: </span> {{ $venta->nro_oportunidad }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Estado: </span>
+                            {{ $venta->getEstado_Venta()}}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Fecha Conformidad: </span>
+                            {{ $venta->fecha_conforme }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Fecha Envio: </span>
+                            {{ $venta->fecha_envio }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Fecha Entrega: </span>
                             {{ $venta->fecha_entrega }}
+                        </li>
+                        <li class="list-group-item">
+                            <span class="text-bold tag-detalle">Nivel de Venta%: </span> {{ $venta->nivel_venta }} %
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}
@@ -129,7 +145,13 @@
                                     <th>Precio Plan</th>
                                     <th>Cantidad/UGIS</th>
                                     <th>Números de linea nueva</th>
-                                    <th>equipo/Producto</th>
+                                    <th>Equipo/Producto</th>
+                                    <th>Operador</th>
+                                    <th>Estado de Linea</th>
+                                    <th>Fecha de Activado</th>
+                                    <th>Fecha Liquidado</th>
+                                    <th>Fecha de Instalación</th>
+                                    <th>Hora</th>
                                     <th>Total</th>
                                     <th>Sin IGV</th>
                                 </tr>
@@ -151,6 +173,12 @@
                                             @endforeach
                                         </td>
                                         <td> {{ $detalle->equipo_producto }}</td>
+                                        <td> {{ $detalle->operador }}</td>
+                                        <td> {{ $detalle->estado_linea }}</td>
+                                        <td> {{ $detalle->fecha_activado }}</td>
+                                        <td> {{ $detalle->fecha_liquidado }}</td>
+                                        <td> {{ $detalle->fecha_instalacion }}</td>
+                                        <td> {{ $detalle->hora }}</td>
                                         <td> {{ $detalle->cf_con_igv }}</td>
                                         <td> {{ $detalle->cf_sin_igv }}</td>
                                     </tr>

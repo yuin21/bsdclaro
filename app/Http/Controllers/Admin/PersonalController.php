@@ -41,7 +41,7 @@ class PersonalController extends Controller
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> 'required|string|max:15|unique:bsd_personal', 
             'email'=> 'required|string|email|max:75|unique:bsd_personal',
-            'direccion' => 'max:300',
+            'direccion' => 'required|max:300',
             'celular' => 'max:30'
         ]);       
         

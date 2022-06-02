@@ -211,7 +211,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('status_100_por', 'Status 100%', ['style' => 'margin: 0; min-width:180px']) !!}
@@ -224,7 +224,7 @@
                                 {!! Form::text('numero_proyecto', null, ['class' => 'form-control mt-2', 'id' => 'inputNumeroProyecto']) !!}
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row">
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
@@ -261,8 +261,6 @@
                                     <th>Estado de Linea</th>
                                     <th>Fecha Activado</th>
                                     <th>Fecha Liquidado</th>
-                                    <th>Status 100%</th>
-                                    <th>Nro Proyecto</th>
                                     <th>Fecha Instalacion</th>
                                     <th>Hora</th> 
                                     <th></th>
@@ -490,8 +488,8 @@
         const estadoLinea = document.getElementById('estadoLinea')
         const fecha_activado = document.getElementById('fecha_activado')
         const fecha_liquidado = document.getElementById('fecha_liquidado')
-        const inputStatus = document.getElementById('inputStatus')
-        const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
+        //const inputStatus = document.getElementById('inputStatus')
+        //const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
         const fecha_instalacion = document.getElementById('fecha_instalacion')
         const hora = document.getElementById('hora')
 
@@ -557,28 +555,30 @@
                 $('#selectServicio').selectpicker('refresh');
 
                 //deshabilitar y limpiar SOT cuando se elija el tipo de servicio movil
-                if (tipoServicioName === 'movil') {
+                if (tipoServicioName === 'Móvil') {
                     $('#sot').val(null);
                     $('#sot').attr("disabled", true);
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
-                    $('#fecha_entrega_te').attr("disabled", false);
-                    $('#fecha_envio').attr("disabled", false);
-                    $('#estado_venta').attr("disabled", false);
-                    $('#observacion').attr("disabled", false);
+                    $('#fecha_entrega_te').attr("readonly", false);
+                    $('#fecha_envio').attr("readonly", false);
+                    $('#estado_venta').attr("readonly", false);  
+                    $('#estado_venta').val("P");
+                    $('#estado_venta').change();                  
+                    $('#observacion').attr("readonly", false);
                     obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else {
                     $('#sot').attr("disabled", false);
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
-                    $('#fecha_entrega_te').attr("disabled", true);
-                    $('#fecha_envio').attr("disabled", true);
-                    $('#estado_venta').attr("disabled", true);
+                    $('#fecha_entrega_te').attr("readonly", true);
+                    $('#fecha_envio').attr("readonly", true);
+                    $('#estado_venta').attr('disabled',true);
                     $('#estado_venta').val('P');
-                    $('#estado_venta').change();
-                    $('#observacion').attr("disabled", true);
+                    $('#estado_venta').change();                    
+                    $('#observacion').attr("readonly", true);
                     $('#inputNumerosLineasNuevas').val(null);
                 }
 
@@ -624,8 +624,8 @@
             const estado_linea = estadoLinea.value.split('_')
             const fechaactivado = fecha_activado.value
             const fechaliquidado = fecha_liquidado.value
-            const status_100_por = inputStatus.value
-            const numero_proyecto = inputNumeroProyecto.value
+            //const status_100_por = inputStatus.value
+            //const numero_proyecto = inputNumeroProyecto.value
             const fechainstalacion = fecha_instalacion.value
             const horas = hora.value
 
@@ -663,8 +663,6 @@
                 <td>${estado_linea}</td> 
                 <td>${fechaactivado}</td> 
                 <td>${fechaliquidado}</td> 
-                <td>${status_100_por}</td> 
-                <td>${numero_proyecto}</td>    
                 <td>${fechainstalacion}</td>   
                 <td>${horas}</td>     
 
@@ -687,8 +685,6 @@
                 <input type="hidden" name="estado_linea[]" value="${estado_linea}">
                 <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
                 <input type="hidden" name="fechaliquidado[]" value="${fechaliquidado}">
-                <input type="hidden" name="status_100_por[]" value="${status_100_por}">
-                <input type="hidden" name="numero_proyecto[]" value="${numero_proyecto}">
                 <input type="hidden" name="fechainstalacion[]" value="${fechainstalacion}">
                 <input type="hidden" name="horas[]" value="${horas}">
 
@@ -711,8 +707,8 @@
             $("#estadoLinea").val('A');
             $("#fecha_activado").val('default');
             $("#fecha_liquidado").val('default');
-            $("#inputStatus").val(null);
-            $("#inputNumeroProyecto").val(null);
+            //$("#inputStatus").val(null);
+            //$("#inputNumeroProyecto").val(null);
             $("#fecha_instalacion").val('default');
             $("#hora").val('default');
 
@@ -774,7 +770,8 @@
                 nro_oportunidad,
                 observacion,
                 estado_venta,
-                nivel_venta
+                nivel_venta,
+                nro_proyecto
             } = e.target
 
             if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(
@@ -783,9 +780,12 @@
             if (tipo_contrato.value.length > 20) return alerta(
                 'El campo tipo contrato no debe contener más de 20 caracteres')
 
-            if (!salesforce.value) return alerta('El campo Registro en Saliforce es obligatorio')
+            if (!salesforce.value) return alerta('El campo Saliforce es obligatorio')
 
             if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
+            
+            if (nro_oportunidad.value.length > 18) return alerta(
+                'El campo nro_oportunidad  acepta máximo 18 caracteres')
 
             if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
             
@@ -795,6 +795,8 @@
 
             if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
 
+            if (isNaN(nro_proyecto.value)) return alerta('El campo Nro Proyecto debe ser un número')
+
             if (observacion.value.length > 250) return alerta(
                 'El campo observaciones  acepta máximo 250 caracteres')
 
@@ -803,6 +805,8 @@
             if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
 
             if (cantDetallesVenta === 0) return alerta('Detalles de venta es obligatorio')
+
+            $('#estado_venta').attr('disabled',false);
 
             formCrearVenta.submit()
         })

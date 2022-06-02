@@ -30,12 +30,12 @@ return new class extends Migration
             $table->string('nro_oportunidad',18);
             $table->smallInteger('nivel_venta');
             $table->char('nro_proyecto', 10)->nullable();
-            $table->timestamp('fecha_conforme')->nullable();
-            $table->timestamp('fecha_envio')->nullable();
+            $table->date('fecha_conforme')->nullable();
+            $table->date('fecha_envio')->nullable();
             //Hasta aqui
             //$table->char('tipo_entrega_vpo_bpo',1)->nullable()->comment('V or B');;
             $table->string('observacion', 250)->nullable();
-            $table->timestamp('fecha_entrega')->nullable();
+            $table->date('fecha_entrega')->nullable();
             //$table->string('observaciones_te', 300)->nullable();
             $table->char('salesforce', 1)->comment('S (Si) or N (No)');//No se si se registra en selforce despues o durante la venta
             //$table->string('solicitud', 200)->nullable();
