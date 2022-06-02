@@ -357,7 +357,7 @@
                 </div>
             </div>
             <div class="text-right pb-4">
-                {!! Form::submit('Registrar', ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary btn-lg']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
             </div>
         </div>

@@ -4,7 +4,7 @@
 
 @section('content_header')
     <a href="{{ route('admin.ventas.create') }}" class="btn btn-primary float-right text-nowrap">
-        <i class="fas fa-plus-circle"></i> Registrar Venta
+        <i class="fas fa-plus-circle"></i> Registrar
     </a>
     <h1 class="text-bold">Lista De Ventas</h1>
 @stop
