@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BsdPersonal;
 use App\Imports\TipoDoc;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
+
 use Symfony\Contracts\Service\Attribute\Required;
 
 class PersonalController extends Controller
@@ -121,6 +122,7 @@ class PersonalController extends Controller
     {
         $bsd_personal = BsdPersonal::all();
         $pdf = PDF::loadView('admin.personal.reportes.allpersonal', compact('bsd_personal'));
+        
         return $pdf->download('personal.pdf');       
     }
 }

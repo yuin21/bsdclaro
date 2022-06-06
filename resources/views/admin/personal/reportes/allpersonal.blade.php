@@ -8,7 +8,7 @@
     <title>Demo PDF de Personal</title>
     <style>
         body {
-            font-size: 18px;
+            font-size: 15px;
         }
 
         h1 {
@@ -38,13 +38,19 @@
 </head>
 
 <body>
-    <h1>Reporte personal</h1>
+    <h1 style="text-align:center">Lista personal</h1>
+    <?php
+    date_default_timezone_set('America/Lima')
+    ?>
+    <p style="text-align:right">Fecha impresion: {{ $date = date('Y/m/d h:i A')}}</p>
+    <hr color="#000000">
+    
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Personal</th>
-                <th>cargo</th>
+                <th>Cargo</th>
                 <th>Tipo Per.</th>
                 <th>Tipo Doc.</th>
                 <th>Nro. Doc.</th>
@@ -52,6 +58,7 @@
                 <th>Celular</th>
                 <th>Email</th>
             </tr>
+            
         </thead>
         <tbody>
             @foreach ($bsd_personal as $personal)
@@ -74,3 +81,22 @@
 </body>
 
 </html>
+
+
+<style>
+    .page-break {
+        page-break-after: always;
+    }
+    </style>
+    <hr color="#000000">
+    <p style="text-align:right">Pagina 1</p>
+    <div class="page-break"></div>
+    
+    <script type="text/php">
+       if ( isset($pdf) ) {
+            $pdf->page_script('
+                $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
+                $pdf->text(270, 730, "Pagina $PAGE_NUM de $PAGE_COUNT", $font, 10);
+            ');
+        }
+    </script>
