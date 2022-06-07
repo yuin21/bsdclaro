@@ -100,10 +100,9 @@
                                     <th>Estado de Linea</th>
                                     <th>Fecha de Activado</th>
                                     <th>Fecha Liquidado</th>
-                                    <th>Fecha de Instalación</th>
                                     <th>Hora</th>
-                                    <th>Total</th>
                                     <th>Sin IGV</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody id="tbodyDetalleVenta">
@@ -127,10 +126,9 @@
                                         <td> {{ $detalle->estado_linea }}</td>
                                         <td> {{ $detalle->fecha_activado }}</td>
                                         <td> {{ $detalle->fecha_liquidado }}</td>
-                                        <td> {{ $detalle->fecha_instalacion }}</td>
                                         <td> {{ $detalle->hora }}</td>
-                                        <td> {{ $detalle->cf_con_igv }}</td>
                                         <td> {{ $detalle->cf_sin_igv }}</td>
+                                        <td> {{ $detalle->cf_con_igv }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -27,7 +27,7 @@ class BsdDetalleVenta extends Model
         'fecha_liquidado',
         //'status_100_por',
         //'numero_proyecto',
-        'fecha_instalacion',
+        //'fecha_instalacion',
         'hora',
         // 'estado',
         // 'usuario_reg' ,

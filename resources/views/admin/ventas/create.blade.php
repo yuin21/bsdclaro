@@ -18,7 +18,8 @@
                     <p class="h5 text-bold">Datos generales</p>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-4 d-flex justify-content-around">
+                    <div class="row mb-4" id="div_venta">
+                    {{-- <div class="row mb-4"> --}}
                         <div class="col-lg-2 col-sm-6" >
                             {!! Form::label('sec', 'SEC') !!}
                             {!! Form::text('sec', null, ['class' => 'form-control']) !!}
@@ -30,6 +31,13 @@
                             {!! Form::label('sot', 'SOT') !!}
                             {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
                             @error('sot')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6" id="div_nro_proyecto">
+                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
+                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
+                            @error('nro_proyecto')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -54,8 +62,8 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row">
+                    {{-- </div>
+                    <div class="row"> --}}
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('avance_oportunidad', 'Avance de Oport.') !!}
                             {!! Form::select('avance_oportunidad', ['10' => '10%', '50' => '50%','90' => '90%','100' => '100%'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
@@ -90,15 +98,8 @@
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-lg-3 col-sm-6" id="div_nro_proyecto">
-                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
-                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
-                            @error('nro_proyecto')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                    {{-- </div>
+                    <div class="row mt-2"> --}}
                         <div class="col-lg-3 ">
                             <div class="mb-2">
                                 {!! Form::label('fecha_entrega', 'Fecha Envio de Exp.', ['class' => 'text-nowrap']) !!}
@@ -115,7 +116,7 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-lg-6 col-sm-6">
+                        <div class="col-lg-6 col-sm-6" id="div_observacion">
                             {!! Form::label('observacion', 'Observación') !!}
                             {!! Form::text('observacion', null, ['class' => 'form-control','id' => 'observacion']) !!}
                             @error('observacion')
@@ -168,7 +169,7 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan']) !!}
+                                {!! Form::text('precioplan', number_format(0,2), ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan']) !!}
                             </div>
                         </div>
                         <div class="col-6">
@@ -202,13 +203,13 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {{-- {!! Form::select('estado_linea', ['A' => 'Activos','C' => 'Créditos','P'=>'Pendientes de Instalación'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
-                                 --}}
-                                <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
+                                {!! Form::select('estado_linea', ['A' => 'Activos','C' => 'Créditos','P'=>'Pendientes de Instalación'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
+                                
+                                {{-- <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
                                     <option value="A">Activos</option>
                                     <option value="C">Créditos</option>
                                     <option value="P">Pendientes de Instalación</option>
-                                </select>
+                                </select> --}}
                             </div>
                         </div>
                     </div>
@@ -219,7 +220,7 @@
                                 {!! Form::date('fecha_activado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_activado']) !!}
                             </div>
                          </div>
-                        <div class="col-6">
+                        <div class="col-6" id="div_fecha_liquidado">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('fecha_liquidado', 'Fecha Liquidado', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::date('fecha_liquidado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_liquidado']) !!}
@@ -241,13 +242,13 @@
                         </div>
                     </div> --}}
                     <div class="row">
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('fecha_instalacion', 'Fecha Instalación', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::date('fecha_instalacion', null, ['class' => 'form-control mt-2', 'id' => 'fecha_instalacion']) !!}
                             </div>
-                        </div>
-                        <div class="col-6">
+                        </div> --}}
+                        <div class="col-6" id="div_hora">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('hora', 'Hora', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::time('hora', null, ['class' => 'form-control mt-2', 'id' => 'hora']) !!}
@@ -269,15 +270,16 @@
                                     <th>Cantidad/Ugis</th>
                                     <th>Números de linea nueva</th>
                                     <th>Equipo/Producto</th>
-                                    <th>Total</th>
-                                    <th>Sin IGV</th>
- 
+                                    
                                     <th>Operador</th>
                                     <th>Estado de Linea</th>
                                     <th>Fecha Activado</th>
                                     <th>Fecha Liquidado</th>
-                                    <th>Fecha Instalacion</th>
                                     <th>Hora</th> 
+                                    
+                                    <th>Sin IGV</th>
+                                    <th>Total</th>
+ 
                                     <th></th>
                                 </tr>
                             </thead>
@@ -386,11 +388,27 @@
     <style>
     #precioplan{
         font-weight: bold; 
+        text-align: right;
     }
     #inputCantidad{
         text-align: right;
     }
-    #precioplan{
+    #dv_precioplan{
+        text-align: right;
+    }
+    #dv_cantidad{
+        text-align: right;
+    }
+    #dv_subtotal_sin_igv{
+        text-align: right;
+    }
+    #dv_subtotal_igv{
+        text-align: right;
+    }
+    #inputTotal_sin_igv{
+        text-align: right;
+    }
+    #inputTotal{
         text-align: right;
     }
     </style>
@@ -535,15 +553,6 @@
         $('#selectPlan').selectpicker('refresh');
         $('#selectServicio').selectpicker('refresh');
 
-        // $('#prepend').on('click', function () {
-        //     let $lider_list = $('#estadoLinea option');
-
-        //     $('#estadoLinea').prepend($('<option />', {
-        //         text: 'I: Líder ' + ($lider_list.length + 1),
-        //         value: $lider_list.length + 1,
-        //     }));
-        // });
-
         // habilitar select servicio y plan cuando se elige un tipo de servicio
         $('#selectTipoServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             if (isSelected) {
@@ -587,39 +596,21 @@
                 })
 
                 // filtrar select servicio
-                $("#estado_Linea").val('default');
-                // $.map($("#estado_Linea option"), function(option) {
-                //     const value = option.value
-                //     if (value) {
-                //         //const estadoLinea = value.split('_') // formato servicio: ID , NOMBRE, ID_TIPO_SERVICIO
-                //         if (tipoServicioName == 'Móvil' && value == 'P') {
-                //             $(`#estado_Linea option[value='${value}']`).hide()
-                //         } else {
-                //             $(`#estado_Linea option[value='${value}']`).show()
-                //         }
-                //     }
-                //     return option;
-                // })
                 $('#precioplan').val(0)
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
-                //$('#estado_Linea').selectpicker('refresh');
-    
+                //Acomodar los campos
+                $('#div_venta').addClass('d-flex justify-content-around');
                 //deshabilitar y limpiar campos cuando se elija el tipo de servicio movil
                 if (tipoServicioName === 'Móvil') {
                     //$('#sot').val(null);
                     //$('#sot').attr("disabled", true);
-                    //$('#estado_Linea').append('<option value="o" selected="selected">Opción</option>');  
-                    $("#estado_Linea").find("option[value='P']").hide();
-                    $('#estado_Linea').selectpicker('refresh');
-                    //$("#estado_Linea").children().remove().end().append('<option selected value="whatever">text</option>');
-                    //Resetear y poblar.
-                    //$("#estado_Linea").empty();
-                    //$('#estado_Linea').prop('selectedIndex',0);
-                    //$('#estado_Linea')[0].options.length = 0;
-
                     $('#div_sot').hide();
                     $('#div_nro_proyecto').hide();
+                    $('#div_fecha_liquidado').hide();
+                    $('#div_hora').hide();
+                    $('#div_observacion').removeClass('col-lg-3').addClass('col-lg-6');
+                    //$('#div_observacion').toggleClass('pull-left');
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
@@ -629,12 +620,16 @@
                     $('#estado_venta').val("P");
                     $('#estado_venta').change();                  
                     $('#observacion').attr("readonly", false);  
-                    //$('#inputOperador').append('<option value="d">ddd</option>'); 
+                    //$("#estadoLinea").find("option[value='P']").hide();
+                    //$('#estadoLinea').selectpicker('refresh');
                     obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
-                } else {
+                } else if (tipoServicioName === 'Fija'){
                     //$('#sot').attr("disabled", false);
                     $('#div_sot').show();
                     $('#div_nro_proyecto').show();
+                    $('#div_fecha_liquidado').show();
+                    $('#div_hora').show();
+                    $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
@@ -644,11 +639,8 @@
                     $('#estado_venta').val('P');
                     $('#estado_venta').change();                    
                     $('#observacion').attr("readonly", true);
-                    //$('#inputOperador').selectmenu("refresh");
-                    $("#estado_Linea").find("option[value='P']").show();
-                    $('#estado_Linea').selectpicker('refresh'); 
-                    //$('#estadoLinea').val("C");
-                    //$('#estadoLinea').change();  
+                    //$("#estadoLinea").find("option[value='P']").show();
+                    //$('#estadoLinea').selectpicker('refresh'); 
                     $('#inputNumerosLineasNuevas').val(null);
                 }
 
@@ -705,7 +697,7 @@
             const fechaliquidado = fecha_liquidado.value
             //const status_100_por = inputStatus.value
             //const numero_proyecto = inputNumeroProyecto.value
-            const fechainstalacion = fecha_instalacion.value
+            //const fechainstalacion = fecha_instalacion.value
             const horas = hora.value
 
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
@@ -729,21 +721,21 @@
                 <td>${tipoServicio[1]}</td>
                 <td>${servicio[1]}</td>
                 <td>${plan[1]}</td>
-                <td>${plan[2]}</td>
-                <td>${cantidad}</td>
+                <td id="dv_precioplan">${plan[2]}</td>
+                <td id="dv_cantidad">${cantidad}</td>
                 <td>
                     ${htmlNumerosLineaNueva}
                 </td>
                 <td>${equipoproducto}</td>
-                <td>${subtotal_igv}</td>
-                <td>${subtotal_sin_igv}</td>
    
                 <td>${operador}</td> 
                 <td>${estado_linea}</td> 
                 <td>${fechaactivado}</td> 
-                <td>${fechaliquidado}</td> 
-                <td>${fechainstalacion}</td>   
-                <td>${horas}</td>     
+                <td>${fechaliquidado}</td>  
+                <td>${horas}</td>
+
+                <td id="dv_subtotal_sin_igv">${subtotal_sin_igv}</td>
+                <td id="dv_subtotal_igv">${subtotal_igv}</td>     
 
                 <td width="30px">
                     <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
@@ -757,15 +749,15 @@
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
                 <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
-                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
-                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">  
 
                 <input type="hidden" name="operador[]" value="${operador}">
                 <input type="hidden" name="estado_linea[]" value="${estado_linea}">
                 <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
                 <input type="hidden" name="fechaliquidado[]" value="${fechaliquidado}">
-                <input type="hidden" name="fechainstalacion[]" value="${fechainstalacion}">
                 <input type="hidden" name="horas[]" value="${horas}">
+                
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}"> 
+                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}"> 
 
             </tr>`
 
@@ -783,12 +775,12 @@
             $('#selectServicio').selectpicker('refresh');
 
             $("#inputOperador").val(null);
-            $("#estadoLinea").val('A');
+            $("#estadoLinea").val('default');
             $("#fecha_activado").val('default');
             $("#fecha_liquidado").val('default');
             //$("#inputStatus").val(null);
             //$("#inputNumeroProyecto").val(null);
-            $("#fecha_instalacion").val('default');
+            //$("#fecha_instalacion").val('default');
             $("#hora").val('default');
 
         })
