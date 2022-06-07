@@ -23,6 +23,7 @@
                             <th>Provincia</th>
                             <th>Distrito</th>
                             <th>Tipo de Cliente</th>
+                            <th>Acciones</th>
                           </tr>
                     </thead>
                     <tbody>
@@ -41,18 +42,20 @@
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.clientes.show', $cliente) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                            <i class="fas fa-eye"></i> Ver
+                                            <i class="fas fa-eye"></i> Ver  
                                         </a>
                                         <a href="{{ route('admin.clientes.edit', $cliente) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i> Editar
+                                            <i class="fas fa-pen"></i>Editar
+                                            
                                         </a>
                                         <form action="{{ route('admin.clientes.destroyLogico', $cliente) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Remover
+                                                <i class="fas fa-minus-circle"></i>Remover
+                                                
                                             </button>
                                         </form>
                                     </div>

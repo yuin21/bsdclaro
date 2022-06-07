@@ -35,10 +35,12 @@
                                         <a href="{{ route('admin.plan.show', $plan) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver
+                                            {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.plan.edit', $plan) }}"
                                             class="btn btn-success btn-sm text-nowrap">
                                             <i class="fas fa-pen"></i> Editar
+                                            {{-- Editar --}}
                                         </a>
                                         <form action="{{ route('admin.plan.destroyLogico', $plan) }}"
                                             class="form-borrar" method="post">
@@ -46,6 +48,7 @@
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
                                                 <i class="fas fa-minus-circle"></i> Remover
+                                                {{-- Remover --}}
                                             </button>
                                         </form>
                                     </div>
@@ -58,7 +61,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de los planes</strong>
+            <strong>Sin Registros</strong>
         </div>
     @endif
 </div>
