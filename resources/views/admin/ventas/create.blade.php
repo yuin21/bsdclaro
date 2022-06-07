@@ -585,21 +585,38 @@
                     }
                     return option;
                 })
+
+                // filtrar select servicio
+                $("#estado_Linea").val('default');
+                // $.map($("#estado_Linea option"), function(option) {
+                //     const value = option.value
+                //     if (value) {
+                //         //const estadoLinea = value.split('_') // formato servicio: ID , NOMBRE, ID_TIPO_SERVICIO
+                //         if (tipoServicioName == 'Móvil' && value == 'P') {
+                //             $(`#estado_Linea option[value='${value}']`).hide()
+                //         } else {
+                //             $(`#estado_Linea option[value='${value}']`).show()
+                //         }
+                //     }
+                //     return option;
+                // })
                 $('#precioplan').val(0)
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
+                //$('#estado_Linea').selectpicker('refresh');
     
-                //deshabilitar y limpiar SOT cuando se elija el tipo de servicio movil
+                //deshabilitar y limpiar campos cuando se elija el tipo de servicio movil
                 if (tipoServicioName === 'Móvil') {
                     //$('#sot').val(null);
                     //$('#sot').attr("disabled", true);
                     //$('#estado_Linea').append('<option value="o" selected="selected">Opción</option>');  
-                    //$("#estado_Linea").find("option[value='A']").remove().end();
+                    $("#estado_Linea").find("option[value='P']").hide();
+                    $('#estado_Linea').selectpicker('refresh');
                     //$("#estado_Linea").children().remove().end().append('<option selected value="whatever">text</option>');
                     //Resetear y poblar.
                     //$("#estado_Linea").empty();
                     //$('#estado_Linea').prop('selectedIndex',0);
-                    $('#estado_Linea')[0].options.length = 0;
+                    //$('#estado_Linea')[0].options.length = 0;
 
                     $('#div_sot').hide();
                     $('#div_nro_proyecto').hide();
@@ -627,7 +644,9 @@
                     $('#estado_venta').val('P');
                     $('#estado_venta').change();                    
                     $('#observacion').attr("readonly", true);
-                    $('#inputOperador').selectmenu("refresh");  
+                    //$('#inputOperador').selectmenu("refresh");
+                    $("#estado_Linea").find("option[value='P']").show();
+                    $('#estado_Linea').selectpicker('refresh'); 
                     //$('#estadoLinea').val("C");
                     //$('#estadoLinea').change();  
                     $('#inputNumerosLineasNuevas').val(null);
