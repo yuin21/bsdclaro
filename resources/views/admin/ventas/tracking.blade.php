@@ -34,9 +34,9 @@
                 </div>
                 <div class="col-lg-3 ">
                     <div class="mb-2">
-                        {!! Form::label('fecha_envio', 'Fecha Envio', ['class' => 'text-nowrap']) !!}
-                        {!! Form::date('fecha_envio', $venta->fecha_envio ? Carbon\Carbon::parse($venta->fecha_envio)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
-                        @error('fecha_envio')
+                        {!! Form::label('fecha_avance_oportunidad', 'Fecha de Avance de Oportunidad', ['class' => 'text-nowrap']) !!}
+                        {!! Form::date('fecha_avance_oportunidad', $venta->fecha_avance_oportunidad ? Carbon\Carbon::parse($venta->fecha_avance_oportunidad)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
+                        @error('fecha_avance_oportunidad')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -113,15 +113,15 @@
                             {{ $venta->fecha_conforme }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Fecha Envio: </span>
-                            {{ $venta->fecha_envio }}
+                            <span class="text-bold tag-detalle">Fecha de Avance de Oportunidad: </span>
+                            {{ $venta->fecha_avance_oportunidad }}
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Fecha Entrega: </span>
                             {{ $venta->fecha_entrega }}
                         </li>
                         <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Nivel de Venta%: </span> {{ $venta->nivel_venta }} %
+                            <span class="text-bold tag-detalle">Avance de Oportunidad: </span> {{ $venta->avance_oportunidad }} %
                         </li>
                         <li class="list-group-item">
                             <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}

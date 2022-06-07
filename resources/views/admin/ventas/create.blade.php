@@ -18,15 +18,15 @@
                     <p class="h5 text-bold">Datos generales</p>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-lg-2 col-sm-6">
+                    <div class="row mb-4 d-flex justify-content-around">
+                        <div class="col-lg-2 col-sm-6" >
                             {!! Form::label('sec', 'SEC') !!}
                             {!! Form::text('sec', null, ['class' => 'form-control']) !!}
                             @error('sec')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-lg-2 col-sm-6">
+                        <div class="col-lg-2 col-sm-6" id="div_sot">
                             {!! Form::label('sot', 'SOT') !!}
                             {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
                             @error('sot')
@@ -34,34 +34,52 @@
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
-                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
-                            @error('nro_proyecto')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
                             {!! Form::label('tipo_contrato', 'Tipo de Contrato') !!}
-                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control']) !!}
+                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
                             @error('tipo_contrato')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="col-lg-2 col-sm-6">
-                            {!! Form::label('salesforce', 'Saliforce') !!}
-                            {!! Form::select('salesforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control']) !!}
+                            {!! Form::label('salesforce', 'Salesforce') !!}
+                            {!! Form::select('salesforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
                             @error('salesforce')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('nro_oportunidad', 'Nro. Oportunidad') !!}
                             {!! Form::text('nro_oportunidad', null, ['class' => 'form-control']) !!}
                             @error('nro_oportunidad')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('avance_oportunidad', 'Avance de Oport.') !!}
+                            {!! Form::select('avance_oportunidad', ['10' => '10%', '50' => '50%','90' => '90%','100' => '100%'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            @error('avance_oportunidad')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="mb-2">
+                                {!! Form::label('fecha_avance_oportunidad', 'Fecha Avance Oport.', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_avance_oportunidad', null, ['class' => 'form-control', 'id' => 'fecha_avance_oportunidad']) !!}
+                                @error('fecha_avance_oportunidad')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-3 ">
+                            <div class="mb-2">
+                                {!! Form::label('fecha_oportunidad_ganada', 'Fecha Avance Ganada', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_oportunidad_ganada', null, ['class' => 'form-control', 'id' => 'fecha_oportunidad_ganada']) !!}
+                                @error('fecha_oportunidad_ganada')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-lg-3 ">
                             <div class="mb-2">
@@ -72,37 +90,28 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-3 ">
-                            <div class="mb-2">
-                                {!! Form::label('fecha_envio', 'Fecha Envio', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_envio', null, ['class' => 'form-control', 'id' => 'fecha_envio']) !!}
-                                @error('fecha_envio')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-3 col-sm-6" id="div_nro_proyecto">
+                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
+                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
+                            @error('nro_proyecto')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('fecha_entrega', 'Fecha Entrega', ['class' => 'text-nowrap']) !!}
+                                {!! Form::label('fecha_entrega', 'Fecha Envio de Exp.', ['class' => 'text-nowrap']) !!}
                                 {!! Form::date('fecha_entrega', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
                                 @error('fecha_entrega')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row mt-2">
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('estado_venta', 'Estado') !!}
+                            {!! Form::label('estado_venta', 'Estado de Expediente') !!}
                             {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'id' => 'estado_venta']) !!}
                             @error('estado_venta')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('nivel_venta', 'Nivel Venta(%)') !!}
-                            {!! Form::select('nivel_venta', ['0' => '0%', '25' => '25%','50' => '50%','75' => '75%','100' => '100%'], null, ['class' => 'selectpicker form-control']) !!}
-                            @error('nivel_venta')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -159,7 +168,7 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('precioplan', 'Precio del plan', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan', 'disabled' => 'disabled']) !!}
+                                {!! Form::text('precioplan', 0, ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan']) !!}
                             </div>
                         </div>
                         <div class="col-6">
@@ -193,7 +202,13 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::select('estado_linea', ['A' => 'Activo','D' => 'Desactivo'], null, ['class' => 'form-control mt-2', 'id' => 'estadoLinea']) !!}
+                                {{-- {!! Form::select('estado_linea', ['A' => 'Activos','C' => 'Créditos','P'=>'Pendientes de Instalación'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
+                                 --}}
+                                <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
+                                    <option value="A">Activos</option>
+                                    <option value="C">Créditos</option>
+                                    <option value="P">Pendientes de Instalación</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -270,14 +285,14 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
+                        {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
+                        {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                    </div>
                     <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
                         {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
                         {!! Form::text('inputTotal', null, ['class' => 'form-control text-danger', 'id' => 'inputTotal', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                         {!! Form::hidden('total', null) !!}
-                    </div>
-                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                     </div>
                 </div>
                 <div class="card-footer">
@@ -368,6 +383,17 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <style>
+    #precioplan{
+        font-weight: bold; 
+    }
+    #inputCantidad{
+        text-align: right;
+    }
+    #precioplan{
+        text-align: right;
+    }
+    </style>
 @stop
 
 @section('js')
@@ -500,14 +526,23 @@
         const IGV = 1.18
 
         // fecha actual en input 
-        const fecha = new Date();
-        $('#fecha_entrega_te').val(fecha.toJSON().slice(0, 10))
+        // const fecha = new Date();
+        // $('#fecha_entrega_te').val(fecha.toJSON().slice(0, 10))
 
         //desabilitar select servicio y plan al iniciar
         $('#selectPlan').prop('disabled', true);
         $('#selectServicio').prop('disabled', true);
         $('#selectPlan').selectpicker('refresh');
         $('#selectServicio').selectpicker('refresh');
+
+        // $('#prepend').on('click', function () {
+        //     let $lider_list = $('#estadoLinea option');
+
+        //     $('#estadoLinea').prepend($('<option />', {
+        //         text: 'I: Líder ' + ($lider_list.length + 1),
+        //         value: $lider_list.length + 1,
+        //     }));
+        // });
 
         // habilitar select servicio y plan cuando se elige un tipo de servicio
         $('#selectTipoServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
@@ -553,43 +588,68 @@
                 $('#precioplan').val(0)
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
-
+    
                 //deshabilitar y limpiar SOT cuando se elija el tipo de servicio movil
                 if (tipoServicioName === 'Móvil') {
-                    $('#sot').val(null);
-                    $('#sot').attr("disabled", true);
+                    //$('#sot').val(null);
+                    //$('#sot').attr("disabled", true);
+                    //$('#estado_Linea').append('<option value="o" selected="selected">Opción</option>');  
+                    //$("#estado_Linea").find("option[value='A']").remove().end();
+                    //$("#estado_Linea").children().remove().end().append('<option selected value="whatever">text</option>');
+                    //Resetear y poblar.
+                    //$("#estado_Linea").empty();
+                    //$('#estado_Linea').prop('selectedIndex',0);
+                    $('#estado_Linea')[0].options.length = 0;
+
+                    $('#div_sot').hide();
+                    $('#div_nro_proyecto').hide();
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
                     $('#fecha_entrega_te').attr("readonly", false);
-                    $('#fecha_envio').attr("readonly", false);
+                    $('#fecha_avance_oportunidad').attr("readonly", false);
                     $('#estado_venta').attr("readonly", false);  
                     $('#estado_venta').val("P");
                     $('#estado_venta').change();                  
-                    $('#observacion').attr("readonly", false);
+                    $('#observacion').attr("readonly", false);  
+                    //$('#inputOperador').append('<option value="d">ddd</option>'); 
                     obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else {
-                    $('#sot').attr("disabled", false);
+                    //$('#sot').attr("disabled", false);
+                    $('#div_sot').show();
+                    $('#div_nro_proyecto').show();
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
                     $('#fecha_entrega_te').attr("readonly", true);
-                    $('#fecha_envio').attr("readonly", true);
+                    $('#fecha_avance_oportunidad').attr("readonly", true);
                     $('#estado_venta').attr('disabled',true);
                     $('#estado_venta').val('P');
                     $('#estado_venta').change();                    
                     $('#observacion').attr("readonly", true);
+                    $('#inputOperador').selectmenu("refresh");  
+                    //$('#estadoLinea').val("C");
+                    //$('#estadoLinea').change();  
                     $('#inputNumerosLineasNuevas').val(null);
                 }
 
             }
         });
 
-        // seleccionar plan y mostrar su precio
+        // seleccionar servicio
         $('#selectServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             $("#selectPlan").val('default');
-            $('#precioplan').val(0)
+            $('#precioplan').val(0);
             $('#selectPlan').selectpicker('refresh');
+            //Deshabilitar Operador si se elije Portabilidad
+            const dataPlan = e.target.value.split('_'); // formato: Id, nombre, precio 
+            if(dataPlan[1] == 'Portabilidad'){
+                $('#inputOperador').attr("readonly", false); 
+            }    else{
+                $('#inputOperador').attr("readonly", true);
+                $('#inputOperador').val('');   
+                $('#inputOperador').val(null);   
+            }        
         });
 
         // seleccionar plan y mostrar su precio
@@ -770,7 +830,7 @@
                 nro_oportunidad,
                 observacion,
                 estado_venta,
-                nivel_venta,
+                avance_oportunidad,
                 nro_proyecto
             } = e.target
 
@@ -780,7 +840,7 @@
             if (tipo_contrato.value.length > 20) return alerta(
                 'El campo tipo contrato no debe contener más de 20 caracteres')
 
-            if (!salesforce.value) return alerta('El campo Saliforce es obligatorio')
+            if (!salesforce.value) return alerta('El campo Salesforce es obligatorio')
 
             if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
             
@@ -789,7 +849,7 @@
 
             if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
             
-            if (!nivel_venta.value) return alerta('El campo Nivel Venta es obligatorio')
+            if (!avance_oportunidad.value) return alerta('El campo Avance de Oportunidad es obligatorio')
 
             if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
 
@@ -797,8 +857,8 @@
 
             if (isNaN(nro_proyecto.value)) return alerta('El campo Nro Proyecto debe ser un número')
 
-            if (observacion.value.length > 250) return alerta(
-                'El campo observaciones  acepta máximo 250 caracteres')
+            if (observacion.value.length > 350) return alerta(
+                'El campo observaciones  acepta máximo 350 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
 

@@ -57,15 +57,19 @@
                                     {{ $venta->fecha_conforme }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Fecha Envio: </span>
-                                    {{ $venta->fecha_envio }}
+                                    <span class="text-bold tag-detalle">Fecha de Avance de Oportunidad: </span>
+                                    {{ $venta->fecha_avance_oportunidad }}
                                 </li>
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Fecha Entrega: </span>
                                     {{ $venta->fecha_entrega }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Nivel de Venta%: </span> {{ $venta->nivel_venta }} %
+                                    <span class="text-bold tag-detalle">Fecha Oportunidad Ganada: </span>
+                                    {{ $venta->fecha_oportunidad_ganada }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Avance de Oportunidad: </span> {{ $venta->avance_oportunidad }} %
                                 </li>
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}

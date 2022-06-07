@@ -28,13 +28,15 @@ return new class extends Migration
             $table->char('sec', 8); //Esta en Detalle_Pago
             //valores nuevos agregados desde aca
             $table->string('nro_oportunidad',18);
-            $table->smallInteger('nivel_venta');
+            $table->smallInteger('avance_oportunidad');
             $table->char('nro_proyecto', 10)->nullable();
             $table->date('fecha_conforme')->nullable();
-            $table->date('fecha_envio')->nullable();
+            $table->date('fecha_avance_oportunidad')->nullable();
+            $table->date('fecha_oportunidad_ganada')->nullable();
+            //Hasta aqui
             //Hasta aqui
             //$table->char('tipo_entrega_vpo_bpo',1)->nullable()->comment('V or B');;
-            $table->string('observacion', 250)->nullable();
+            $table->string('observacion', 350)->nullable();
             $table->date('fecha_entrega')->nullable();
             //$table->string('observaciones_te', 300)->nullable();
             $table->char('salesforce', 1)->comment('S (Si) or N (No)');//No se si se registra en selforce despues o durante la venta

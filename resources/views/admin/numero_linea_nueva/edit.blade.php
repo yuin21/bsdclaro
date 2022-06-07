@@ -20,7 +20,7 @@
         <div class="card-body">
             {!! Form::model($numero_linea_nueva, ['route' => ['admin.numero_linea_nueva.update', $numero_linea_nueva], 'method' => 'put']) !!}
             @include('admin.numero_linea_nueva.partials.form')
-            {!! Form::submit('Editar Linea', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Actualizar', ['class' => 'btn btn-primary']) !!}
             <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
             {!! Form::close() !!}
         </div>

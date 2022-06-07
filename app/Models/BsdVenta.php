@@ -22,10 +22,11 @@ class BsdVenta extends Model
         'sec',
         'estado_venta',
         'nro_oportunidad',
-        'nivel_venta',
+        'avance_oportunidad',
         'nro_proyecto',
         'fecha_conforme',
-        'fecha_envio',
+        'fecha_avance_oportunidad',
+        'fecha_oportunidad_ganada',
         'total',
         
         // 'estado_venta',

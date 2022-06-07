@@ -50,14 +50,15 @@ class VentaController extends Controller
             'razon_social' => 'required',
             'sot' => 'nullable|numeric',
             'sec' => 'required|numeric',
-            'observacion' => 'nullable|max:250',
+            'observacion' => 'nullable|max:350',
             'salesforce' => 'required',
             'estado_venta' => 'required',
             'nro_oportunidad' => 'required|string|max:18',
-            'nivel_venta' => 'required',
+            'avance_oportunidad' => 'required',
             'nro_proyecto' => 'nullable|numeric'
+            //'fecha_oportunidad_ganada'=>'required',
             //'fecha_conforme' => 'required',
-            //'fecha_envio' => 'required'
+            //'fecha_avance_oportunidad' => 'required'
         ]);
         //dd($request);
 
@@ -147,7 +148,7 @@ class VentaController extends Controller
 
     public function trackingUpdate(Request $request, BsdVenta $venta) {
         $venta->fecha_conforme = $request->fecha_conforme;
-        $venta->fecha_envio = $request->fecha_envio;
+        $venta->fecha_avance_oportunidad = $request->fecha_avance_oportunidad;
         $venta->fecha_entrega = $request->fecha_entrega;
         $venta->observacion = $request->observacion;
         $venta->estado_venta = $request->estado_venta;
