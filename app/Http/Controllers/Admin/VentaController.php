@@ -79,7 +79,7 @@ class VentaController extends Controller
         $fecha_liquidado = $request->get('fechaliquidado');
         //$status_100_por = $request->get('status_100_por');
         //$numero_proyecto = $request->get('numero_proyecto');
-        $fecha_instalacion = $request->get('fechainstalacion');
+        //$fecha_instalacion = $request->get('fechainstalacion');
         $hora = $request->get('horas');
 
         // try {
@@ -116,7 +116,7 @@ class VentaController extends Controller
                 $detalleventa->fecha_liquidado = $fecha_liquidado[$i];
                 //$detalleventa->status_100_por = $status_100_por[$i];
                 //$detalleventa->numero_proyecto = $numero_proyecto[$i];
-                $detalleventa->fecha_instalacion = $fecha_instalacion[$i];
+                //$detalleventa->fecha_instalacion = $fecha_instalacion[$i];
                 $detalleventa->hora = $hora[$i];
                 $detalleventa->save();
 

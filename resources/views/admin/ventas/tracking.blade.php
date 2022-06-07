@@ -14,7 +14,48 @@
         <div class="card-body">
             {!! Form::model($venta, ['route' => ['admin.ventas.tranckingupdate', $venta], 'method' => 'put']) !!}
             <div class="row">
-                <div class="col-lg-3 ">
+                <div class="col-lg-2 col-sm-6">
+                    {!! Form::label('nro_oportunidad', 'Nro. Oportunidad') !!}
+                    {!! Form::text('nro_oportunidad', null, ['class' => 'form-control']) !!}
+                    @error('nro_oportunidad')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="col-lg-2 ">
+                    <div class="mb-2">
+                        {!! Form::label('fecha_avance_oportunidad', 'Fecha Avance Oport.', ['class' => 'text-nowrap']) !!}
+                        {!! Form::date('fecha_avance_oportunidad', $venta->fecha_avance_oportunidad ? Carbon\Carbon::parse($venta->fecha_avance_oportunidad)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
+                        @error('fecha_avance_oportunidad')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-2 ">
+                    <div class="mb-2">
+                        {!! Form::label('fecha_oportunidad_ganada', 'Fecha Avance Ganada', ['class' => 'text-nowrap']) !!}
+                        {!! Form::date('fecha_oportunidad_ganada', $venta->fecha_oportunidad_ganada ? Carbon\Carbon::parse($venta->fecha_oportunidad_ganada)->format('Y-m-d') : null, ['class' => 'form-control', 'id' => 'fecha_oportunidad_ganada']) !!}
+                        @error('fecha_oportunidad_ganada')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6">
+                    {!! Form::label('avance_oportunidad', 'Avance de Oport.') !!}
+                    {!! Form::select('avance_oportunidad', ['10' => '10%', '50' => '50%','90' => '90%','100' => '100%'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                    @error('avance_oportunidad')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="col-lg-2 ">
+                    <div class="mb-2">
+                        {!! Form::label('fecha_entrega', 'Fecha Envio de Exp.', ['class' => 'text-nowrap']) !!}
+                        {!! Form::date('fecha_entrega', $venta->fecha_entrega ? Carbon\Carbon::parse($venta->fecha_entrega)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
+                        @error('fecha_entrega')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                {{-- <div class="col-lg-3 ">
                     <div class="mb-2">
                         {!! Form::label('fecha_registro', 'Fecha Registro', ['class' => 'text-nowrap']) !!}
                         {!! Form::date('fecha_registro', $venta->fecha_registro ? Carbon\Carbon::parse($venta->fecha_registro)->format('Y-m-d') : null, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
@@ -22,8 +63,10 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                </div>
-                <div class="col-lg-3 ">
+                </div> --}}
+            </div>
+            <div class="row">
+                <div class="col-lg-2 ">
                     <div class="mb-2">
                         {!! Form::label('fecha_conforme', 'Fecha Conformidad', ['class' => 'text-nowrap']) !!}
                         {!! Form::date('fecha_conforme', $venta->fecha_conforme ? Carbon\Carbon::parse($venta->fecha_conforme)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
@@ -32,37 +75,17 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-lg-3 ">
-                    <div class="mb-2">
-                        {!! Form::label('fecha_avance_oportunidad', 'Fecha de Avance de Oportunidad', ['class' => 'text-nowrap']) !!}
-                        {!! Form::date('fecha_avance_oportunidad', $venta->fecha_avance_oportunidad ? Carbon\Carbon::parse($venta->fecha_avance_oportunidad)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
-                        @error('fecha_avance_oportunidad')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
+                <div class="col-lg-2 col-sm-6">
+                    {!! Form::label('estado_venta', 'Estado') !!}
+                    {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control']) !!}
+                    @error('estado_venta')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
-                <div class="col-lg-3 ">
-                    <div class="mb-2">
-                        {!! Form::label('fecha_entrega', 'Fecha Entrega', ['class' => 'text-nowrap']) !!}
-                        {!! Form::date('fecha_entrega', $venta->fecha_entrega ? Carbon\Carbon::parse($venta->fecha_entrega)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
-                        @error('fecha_entrega')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-8 col-sm-6">
                     {!! Form::label('observacion', 'Observación') !!}
                     {!! Form::text('observacion', null, ['class' => 'form-control']) !!}
                     @error('observacion')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    {!! Form::label('estado_venta', 'Estado') !!}
-                    {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control']) !!}
-                    @error('estado_venta')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>

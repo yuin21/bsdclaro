@@ -25,6 +25,7 @@
                         <th>SEC</th>
                         <th>SOT</th>
                         <th>Tipo de contrato</th>
+                        <th>Est. Avance</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -39,18 +40,21 @@
                             <td>{{ $venta->sec }}</td>
                             <td>{{ $venta->sot }}</td>
                             <td>{{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}</td>
+                            <td id="avance_oportunidad">{{ $venta->avance_oportunidad }}%</td>
                             <td width="260px">
                                 <div class="d-flex" style="gap: 10px">
                                     <a href="{{ route('admin.ventas.show', $venta) }}"
                                         class="btn btn-sm btn-info text-nowrap">
                                         <i class="fas fa-eye"></i> Ver
                                     </a>
-                                    <a href="{{ route('admin.ventas.tracking', $venta) }}"
-                                        class="btn btn-sm btn-info text-nowrap">
+                                        <a href="{{ route('admin.ventas.tracking', $venta) }}"
+                                        class="btn btn-sm btn-info text-nowrap" id="Seguimiento"
+                                        <?php if ($venta->avance_oportunidad !== 100){ ?> style="display: none;" <?php   } ?>>
                                         <i class="fas fa-eye"></i> Seguimiento
-                                    </a>
+                                        </a>                                  
                                 </div>
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -58,3 +62,15 @@
         </div>
     </div>
 @stop
+
+{{-- Nota: Creo que lo ideal es hacerlo en un apartado, no dentro del mismo codigo html, pero lo intente no habia podido
+    Debido al tiempo se quedará así pero falta revisar esta parte. style="display: none;
+     @section('js')
+    <script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#ver_avance_oportunidad').val('bye')
+        });
+        $(window).on("load", $('#ver_avance_oportunidad').val('bye'));
+    </script>
+@endsection --}}
