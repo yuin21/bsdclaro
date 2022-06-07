@@ -84,6 +84,7 @@ class PlanController extends Controller
 
     public function destroyLogico(BsdPlan $plan)
     {
+        //dd($plan);
         $plan->estado = 0;
         $plan->save();
         return redirect()->route('admin.plan.index')->with('success','destroyLogico');       

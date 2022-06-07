@@ -33,7 +33,7 @@
                 <div class="col-lg-2 ">
                     <div class="mb-2">
                         {!! Form::label('fecha_oportunidad_ganada', 'Fecha Avance Ganada', ['class' => 'text-nowrap']) !!}
-                        {!! Form::date('fecha_oportunidad_ganada', $venta->fecha_oportunidad_ganada ? Carbon\Carbon::parse($venta->fecha_oportunidad_ganada)->format('Y-m-d') : null, ['class' => 'form-control', 'id' => 'fecha_oportunidad_ganada']) !!}
+                        {!! Form::date('fecha_oportunidad_ganada', $venta->fecha_oportunidad_ganada ? Carbon\Carbon::parse($venta->fecha_oportunidad_ganada)->format('Y-m-d') : null, ['class' => 'form-control']) !!}
                         @error('fecha_oportunidad_ganada')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -106,50 +106,62 @@
                     </a> --}}
                 </div>
                 <div class="card-body">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Tipo de contrato: </span>
-                            {{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Saliforce: </span>
-                            {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">SOT: </span> {{ $venta->sot }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">SEC: </span> {{ $venta->sec }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Nro. Proyecto: </span> {{ $venta->nro_proyecto }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Nro. Oportunidad: </span> {{ $venta->nro_oportunidad }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Estado: </span>
-                            {{ $venta->getEstado_Venta()}}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Fecha Conformidad: </span>
-                            {{ $venta->fecha_conforme }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Fecha de Avance de Oportunidad: </span>
-                            {{ $venta->fecha_avance_oportunidad }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Fecha Entrega: </span>
-                            {{ $venta->fecha_entrega }}
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Avance de Oportunidad: </span> {{ $venta->avance_oportunidad }} %
-                        </li>
-                        <li class="list-group-item">
-                            <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}
-                        </li>
-                    </ul>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Tipo de contrato: </span>
+                                    {{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Saliforce: </span>
+                                    {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">SOT: </span> {{ $venta->sot }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">SEC: </span> {{ $venta->sec }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Nro. Proyecto: </span> {{ $venta->nro_proyecto }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Nro. Oportunidad: </span> {{ $venta->nro_oportunidad }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Estado: </span>
+                                    {{ $venta->getEstado_Venta()}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Fecha Conformidad: </span>
+                                    {{ $venta->fecha_conforme }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Fecha de Avance de Oportunidad: </span>
+                                    {{ $venta->fecha_avance_oportunidad }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Fecha Entrega: </span>
+                                    {{ $venta->fecha_entrega }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Fecha Avance Ganada: </span>
+                                    {{ $venta->fecha_oportunidad_ganada }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Avance de Oportunidad: </span> {{ $venta->avance_oportunidad }} %
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Observación: </span> {{ $venta->observacion }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card">
@@ -173,10 +185,9 @@
                                     <th>Estado de Linea</th>
                                     <th>Fecha de Activado</th>
                                     <th>Fecha Liquidado</th>
-                                    <th>Fecha de Instalación</th>
                                     <th>Hora</th>
-                                    <th>Total</th>
                                     <th>Sin IGV</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody id="tbodyDetalleVenta">
@@ -186,8 +197,8 @@
                                         <td> {{ $detalle->tipoServicio->nom_tipo_servicio }}</td>
                                         <td> {{ $detalle->servicio->nom_servicio }}</td>
                                         <td> {{ $detalle->plan->nombre_plan }}</td>
-                                        <td> {{ $detalle->plan->precio }}</td>
-                                        <td> {{ $detalle->cantidad }}</td>
+                                        <td class="tag-number" id="precio"> {{ number_format($detalle->plan->precio, 2) }}</td>
+                                        <td class="tag-number" id="cantidad"> {{ $detalle->cantidad }}</td>
                                         <td>
                                             @foreach ($detalle->numerosLineaNueva as $numero)
                                                 <span class="badge bg-secondary">
@@ -197,13 +208,12 @@
                                         </td>
                                         <td> {{ $detalle->equipo_producto }}</td>
                                         <td> {{ $detalle->operador }}</td>
-                                        <td> {{ $detalle->estado_linea }}</td>
+                                        <td> {{ $detalle->getEstado_Linea() }}</td>
                                         <td> {{ $detalle->fecha_activado }}</td>
                                         <td> {{ $detalle->fecha_liquidado }}</td>
-                                        <td> {{ $detalle->fecha_instalacion }}</td>
                                         <td> {{ $detalle->hora }}</td>
-                                        <td> {{ $detalle->cf_con_igv }}</td>
-                                        <td> {{ $detalle->cf_sin_igv }}</td>
+                                        <td class="tag-number" id="total_sin_igv"> {{ number_format($detalle->cf_sin_igv, 2) }}</td>
+                                        <td class="tag-number" id="total_con_igv"> {{ number_format($detalle->cf_con_igv, 2) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -211,7 +221,7 @@
                     </div>
                     <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
                         {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('inputTotal', $venta->total, ['class' => 'form-control text-danger', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                        {!! Form::text('inputTotal', number_format($venta->total, 2), ['class' => 'form-control text-danger', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                     </div>
                     <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
                         {!! Form::label('inputTotal_sin_igv', 'Total sin igv', ['style' => 'margin: 0']) !!}
@@ -262,3 +272,16 @@
         </script>
     @endif
 @stop
+
+@section('css')
+    <style>
+        .tag-detalle {
+            display: inline-block;
+            min-width: 190px;
+        }
+        .tag-number{
+            text-align: right;
+        }
+    </style>
+@stop
+
