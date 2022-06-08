@@ -15,10 +15,6 @@ return new class extends Migration
     {
         Schema::create('bsd_detalle_pago', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('bsd_personal_id')->unsigned();
-            $table->foreign('bsd_personal_id')
-            ->references("id")
-            ->on("bsd_personal");
             $table->bigInteger('bsd_pago_id')->unsigned();
             $table->foreign('bsd_pago_id')
             ->references("id")
