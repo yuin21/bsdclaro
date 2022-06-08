@@ -11,7 +11,14 @@ class HomeController extends Controller
     public function index(){
         $year = date("Y");
         $lastYear = $year - 1;
-        // $ventas = BsdVenta::get();
-        return view('admin.index');
+        //$ventas_currentYear = BsdVenta::select('id', 'total', 'fecha_registro')->whereYear('fecha_registro', $year)->get();
+        $ventas_currentYear = BsdVenta::select('bsd_venta.id', 'total', 'fecha_registro', 'bsd_personal_id', 'nom_personal', 'ape_paterno', 'ape_materno')
+            ->join('bsd_personal', 'bsd_venta.bsd_personal_id', '=', 'bsd_personal.id')
+            ->whereYear('fecha_registro', $year)->get();
+        $ventas_lastYear = BsdVenta::select('bsd_venta.id', 'total', 'fecha_registro', 'bsd_personal_id', 'nom_personal', 'ape_paterno', 'ape_materno')
+            ->join('bsd_personal', 'bsd_venta.bsd_personal_id', '=', 'bsd_personal.id')
+            ->whereYear('fecha_registro', $lastYear)->get();
+        
+        return view('admin.index', compact('year', 'lastYear', 'ventas_currentYear', 'ventas_lastYear'));
     }
 }
