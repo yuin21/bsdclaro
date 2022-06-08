@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6">
                     {!! Form::label('fecha_registro', 'Fecha Registro', ['class' => 'text-nowrap']) !!}
-                    {!! Form::date('fecha_registro', $request ? $request->fecha_registro : null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
+                    {!! Form::date('fecha_registro', isset($request) ? $request->fecha_registro : null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
                     @error('fecha_registro')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="col-lg-6 col-sm-6">
                     {!! Form::label('estado_venta', 'Estado') !!}
-                    {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], $request ? $request->estado_venta : null, ['class' => 'selectpicker form-control']) !!}
+                    {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], isset($request) ? $request->estado_venta : null, ['class' => 'selectpicker form-control']) !!}
                     @error('estado_venta')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
