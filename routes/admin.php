@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\VentaController;
 use App\Http\Controllers\Admin\NumeroLineaNuevaController;
 use App\Http\Controllers\Admin\EmpresaController;
 use App\Http\Controllers\Admin\CuotaPersonalController;
+use App\Http\Controllers\Admin\ReportesController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -107,3 +108,8 @@ Route::resource('cuotapersonal', CuotaPersonalController::class)->names('admin.c
 Route::get('removidos/cuotapersonal', [CuotaPersonalController::class, 'indextrash'])->name('admin.cuotapersonal.indextrash');
 Route::put('cuotapersonal/{cuotapersonal}/destroylogico', [CuotaPersonalController::class, 'destroyLogico'])->name('admin.cuotapersonal.destroyLogico');
 Route::put('cuotapersonal/{cuotapersonal}/restaurarCuotaPersonal', [CuotaPersonalController::class, 'restaurarCuotaPersonal'])->name('admin.cuotapersonal.restaurarCuotaPersonal');
+
+//Reportes
+Route::get('reportes/ventasDiarias', [ReportesController::class, 'index_ventasDiarias'])->name('admin.reportes.indexVentasDiarias');
+Route::post('reportes/ventasDiarias/buscar', [ReportesController::class, 'search'])->name('admin.reportes.search');
+Route::post('reportes/{venta}/generarPDF', [ReportesController::class, 'generatePDF'])->name('admin.reportes.generatePDF');

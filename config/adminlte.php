@@ -320,7 +320,7 @@ return [
                 [
                     'text' => 'Ventas Diarias',                            
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
+                    'route'     => 'admin.reportes.indexVentasDiarias',            
                 ],
                 [
                     'text' => 'Ventas por consultor',                            
