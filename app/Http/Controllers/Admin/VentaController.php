@@ -22,8 +22,8 @@ class VentaController extends Controller
 
     public function index()
     {
-        $ventas = BsdVenta::paginate(15);
-        return view('admin.ventas.index', compact('ventas'));
+        $bsd_venta = BsdVenta::where('estado', 1)->paginate(15);
+        return view('admin.ventas.index', compact('bsd_venta'));
     }
 
     public function create()
@@ -147,13 +147,38 @@ class VentaController extends Controller
     }
 
     public function trackingUpdate(Request $request, BsdVenta $venta) {
-        $venta->fecha_conforme = $request->fecha_conforme;
+        $venta->nro_oportunidad = $request->nro_oportunidad;
         $venta->fecha_avance_oportunidad = $request->fecha_avance_oportunidad;
+        $venta->fecha_oportunidad_ganada = $request->fecha_oportunidad_ganada;
+        $venta->avance_oportunidad = $request->avance_oportunidad;
         $venta->fecha_entrega = $request->fecha_entrega;
-        $venta->observacion = $request->observacion;
+        $venta->fecha_conforme = $request->fecha_conforme;
         $venta->estado_venta = $request->estado_venta;
+        $venta->observacion = $request->observacion;
 
         $venta->save();
         return redirect()->route('admin.ventas.tracking', $venta)->with('success', 'update');
+    }
+
+    public function indextrash()
+    {
+        $bsd_venta = BsdVenta::where('estado', 0)->get();
+        return view('admin.ventas.indextrash', compact('bsd_venta'));
+    }
+
+
+    public function destroyLogico(BsdVenta $ventas)
+    {
+        //dd($venta);
+        $ventas->estado = 0;
+        $ventas->save();
+        return redirect()->route('admin.ventas.index')->with('success','destroyLogico');       
+    }
+
+    public function restaurarVenta(BsdVenta $ventas)
+    {
+        $ventas->estado = 1;
+        $ventas->save();
+        return redirect()->route('admin.ventas.indextrash')->with('success','restaurar');       
     }
 }

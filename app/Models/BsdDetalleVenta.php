@@ -51,4 +51,16 @@ class BsdDetalleVenta extends Model
     public function numerosLineaNueva(){
         return $this->hasMany('App\Models\BsdNumeroLineaNueva', 'bsd_detalle_venta_id');
     }
+    public function getEstado_Linea(){
+        switch($this->attributes['estado_linea']){
+            case "P":
+                return "Pendientes de Instalación";
+            case "C":
+                return "Créditos";
+            case "A":
+                return "Activos";
+            default:
+                return "No existen valores";
+        }
+    }
 }

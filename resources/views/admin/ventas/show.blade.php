@@ -44,14 +44,14 @@
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Nro. Oportunidad: </span> {{ $venta->nro_oportunidad }}
                                 </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <ul class="list-group">
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Estado: </span>
                                     {{ $venta->getEstado_Venta()}}
                                 </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <ul class="list-group">
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Fecha Conformidad: </span>
                                     {{ $venta->fecha_conforme }}
@@ -65,7 +65,7 @@
                                     {{ $venta->fecha_entrega }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Fecha Oportunidad Ganada: </span>
+                                    <span class="text-bold tag-detalle">Fecha Avance Ganadaa: </span>
                                     {{ $venta->fecha_oportunidad_ganada }}
                                 </li>
                                 <li class="list-group-item">
@@ -112,8 +112,8 @@
                                         <td> {{ $detalle->tipoServicio->nom_tipo_servicio }}</td>
                                         <td> {{ $detalle->servicio->nom_servicio }}</td>
                                         <td> {{ $detalle->plan->nombre_plan }}</td>
-                                        <td> {{ $detalle->plan->precio }}</td>
-                                        <td> {{ $detalle->cantidad }}</td>
+                                        <td class="tag-number" id="precio"> {{ number_format($detalle->plan->precio, 2) }}</td>
+                                        <td class="tag-number" id="cantidad"> {{ $detalle->cantidad }}</td>
                                         <td>
                                             @foreach ($detalle->numerosLineaNueva as $numero)
                                                 <span class="badge bg-secondary">
@@ -123,12 +123,12 @@
                                         </td>
                                         <td> {{ $detalle->equipo_producto }}</td>
                                         <td> {{ $detalle->operador }}</td>
-                                        <td> {{ $detalle->estado_linea }}</td>
+                                        <td> {{ $detalle->getEstado_Linea() }}</td>
                                         <td> {{ $detalle->fecha_activado }}</td>
                                         <td> {{ $detalle->fecha_liquidado }}</td>
                                         <td> {{ $detalle->hora }}</td>
-                                        <td> {{ $detalle->cf_sin_igv }}</td>
-                                        <td> {{ $detalle->cf_con_igv }}</td>
+                                        <td class="tag-number" id="total_sin_igv"> {{ number_format($detalle->cf_sin_igv, 2) }}</td>
+                                        <td class="tag-number" id="total_con_igv"> {{ number_format($detalle->cf_con_igv, 2) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
                         {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('inputTotal', $venta->total, ['class' => 'form-control text-danger', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                        {!! Form::text('inputTotal', number_format($venta->total, 2), ['class' => 'form-control text-danger', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                     </div>
                     <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
                         {!! Form::label('inputTotal_sin_igv', 'Total sin igv', ['style' => 'margin: 0']) !!}
@@ -182,6 +182,8 @@
             display: inline-block;
             min-width: 190px;
         }
-
+        .tag-number{
+            text-align: right;
+        }
     </style>
 @stop

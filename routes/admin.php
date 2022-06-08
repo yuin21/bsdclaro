@@ -86,7 +86,9 @@ Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan']
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
 Route::get('ventas/tracking/{venta}', [VentaController::class, 'tracking'])->name('admin.ventas.tracking');
 Route::put('ventas/tracking/{venta}/update', [VentaController::class, 'trackingUpdate'])->name('admin.ventas.tranckingupdate');
-
+Route::get('removidos/ventas', [VentaController::class, 'indextrash'])->name('admin.ventas.indextrash');
+Route::put('ventas/{ventas}/destroylogico', [VentaController::class, 'destroyLogico'])->name('admin.ventas.destroyLogico');
+Route::put('ventas/{ventas}/restaurarVenta', [VentaController::class, 'restaurarVenta'])->name('admin.ventas.restaurarVenta');
 
 //Numero_linea_nueva
 Route::resource('numero_linea_nueva', NumeroLineaNuevaController::class)->names('admin.numero_linea_nueva');
