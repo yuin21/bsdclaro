@@ -53,7 +53,7 @@
                         <div class="col-lg-6 col-sm-6">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Fecha Conformidad: </span>
+                                    <span class="text-bold tag-detalle">Fecha Fecha de Exp.: </span>
                                     {{ $venta->fecha_conforme }}
                                 </li>
                                 <li class="list-group-item">
@@ -99,7 +99,7 @@
                                     <th>Operador</th>
                                     <th>Estado de Linea</th>
                                     <th>Fecha de Activado</th>
-                                    <th>Fecha Liquidado</th>
+                                    {{-- <th>Fecha Liquidado</th> --}}
                                     <th>Hora</th>
                                     <th>Sin IGV</th>
                                     <th>Total</th>
@@ -125,7 +125,7 @@
                                         <td> {{ $detalle->operador }}</td>
                                         <td> {{ $detalle->getEstado_Linea() }}</td>
                                         <td> {{ $detalle->fecha_activado }}</td>
-                                        <td> {{ $detalle->fecha_liquidado }}</td>
+                                        {{-- <td> {{ $detalle->fecha_liquidado }}</td> --}}
                                         <td> {{ $detalle->hora }}</td>
                                         <td class="tag-number" id="total_sin_igv"> {{ number_format($detalle->cf_sin_igv, 2) }}</td>
                                         <td class="tag-number" id="total_con_igv"> {{ number_format($detalle->cf_con_igv, 2) }}</td>

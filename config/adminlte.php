@@ -308,7 +308,8 @@ return [
                 [
                     'text' => 'Pagos',                            
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
+                    // 'active' => ['admin/pagos*'], 
+                    // 'route' => 'admin.pagos.index',           
                 ],       
             ],  
         ], 

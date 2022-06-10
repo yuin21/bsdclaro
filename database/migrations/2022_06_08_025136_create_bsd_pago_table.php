@@ -15,18 +15,14 @@ return new class extends Migration
     {
         Schema::create('bsd_pago', function (Blueprint $table) {
             $table->id();
-
             $table->bigInteger('bsd_cuota_personal_id')->unsigned();
             $table->foreign('bsd_cuota_personal_id')
             ->references("id")
             ->on("bsd_cuota_personal");
-
             $table->bigInteger('bsd_venta_id')->unsigned();
             $table->foreign('bsd_venta_id')
             ->references("id")
-            ->on("bsd_venta");
-
-            
+            ->on("bsd_venta");            
             $table->float('porcentaje_comision');
             $table->float('comision_consultor');
             $table->char('estado_carpeta', 1)->comment('C or N'); 

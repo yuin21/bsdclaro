@@ -4,122 +4,89 @@
 
 @section('content_header')
     <a href="{{ route('admin.ventas.index') }}" class="float-right mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Ver lista de ventas
+        <i class="fas fa-chevron-circle-left"></i> Ver lista de Pagos
     </a>
-    <h1 class="text-bold">Registrar venta</h1>
+    <h1 class="text-bold">Registrar Pago</h1>
 @stop
 
 @section('content')
     {!! Form::open(['route' => 'admin.ventas.store', 'id' => 'formCrearVenta']) !!}
     <div class="row">
-        <div class="col-8">
-            <div class="card" id="div_datos_generales">
+        <div class="col-12">
+            <div class="card">
                 <div class="card-header">
                     <p class="h5 text-bold">Datos generales</p>
                 </div>
-                <div class="card-body" id="">
-                    <div class="row mb-4 d-flex justify-content-around" id="div_venta">
+                <div class="card-body">
+                    <div class="row mb-4">
                     {{-- <div class="row mb-4"> --}}
-                        <div class="col-lg-2 col-sm-6" >
-                            {!! Form::label('sec', 'SEC*') !!}
-                            {!! Form::text('sec', null, ['class' => 'form-control']) !!}
-                            @error('sec')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-2 col-sm-6" id="div_sot">
-                            {!! Form::label('sot', 'SOT') !!}
-                            {!! Form::text('sot', null, ['class' => 'form-control', 'id' => 'sot']) !!}
-                            @error('sot')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6" id="div_nro_proyecto">
-                            {!! Form::label('nro_proyecto', 'Nro. Proyecto') !!}
-                            {!! Form::text('nro_proyecto', null, ['class' => 'form-control']) !!}
-                            @error('nro_proyecto')
+                        <div class="col-lg-3 col-sm-6" >
+                            {!! Form::label('bsd_cuota_personal_id', 'Personal') !!}
+                            <select name="bsd_cuota_personal_id" id="cuotapersonal" class="selectpicker form-control"
+                                title="Seleccionar Personal">
+                                @foreach ($cuotaspersonal as $cuotapersonal)
+                                    <option value="{{ $cuotapersonal->id }}">
+                                        {{ $cuotapersonal->personal->getFullNameAttribute() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('bsd_cuota_personal_id')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('tipo_contrato', 'Tipo de Contrato*') !!}
-                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('tipo_contrato')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-2 col-sm-6">
-                            {!! Form::label('salesforce', 'Salesforce*') !!}
-                            {!! Form::select('salesforce', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('salesforce')
+                            {!! Form::label('bsd_venta_id', 'Total de Venta') !!}
+                            <select name="bsd_venta_id" id="venta" class="selectpicker form-control"
+                                title="Seleccionar Venta">
+                                @foreach ($ventas as $venta)
+                                    <option value="{{ $venta->id }}">
+                                        {{ $venta->total}}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('bsd_venta_id')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('nro_oportunidad', 'Nro. Oportunidad*') !!}
-                            {!! Form::text('nro_oportunidad', null, ['class' => 'form-control']) !!}
-                            @error('nro_oportunidad')
+                            {!! Form::label('porcentaje_comision', '% Comision') !!}
+                            {!! Form::select('porcentaje_comision', ['70' => '70 %', '80' => '80 %', '90' => '90 %', '100' => '100 %'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            @error('porcentaje_comision')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
-                        </div>
-                    {{-- </div>
-                    <div class="row"> --}}
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('avance_oportunidad', 'Avance de Oport.*') !!}
-                            {!! Form::select('avance_oportunidad', ['10' => '10%', '50' => '50%','90' => '90%','100' => '100%'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('avance_oportunidad')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 ">
-                            <div class="mb-2">
-                                {!! Form::label('fecha_avance_oportunidad', 'Fecha Avance Oport.', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_avance_oportunidad', null, ['class' => 'form-control', 'id' => 'fecha_avance_oportunidad']) !!}
-                                @error('fecha_avance_oportunidad')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-3 ">
-                            <div class="mb-2">
-                                {!! Form::label('fecha_oportunidad_ganada', 'Fecha Oport. Ganada', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_oportunidad_ganada', null, ['class' => 'form-control', 'id' => 'fecha_oportunidad_ganada']) !!}
-                                @error('fecha_oportunidad_ganada')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-3 ">
-                            <div class="mb-2">
-                                {!! Form::label('fecha_conforme', 'Fecha de Exp.', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_conforme', null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
-                                @error('fecha_conforme')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-                    {{-- </div>
-                    <div class="row mt-2"> --}}
-                        <div class="col-lg-3 ">
-                            <div class="mb-2">
-                                {!! Form::label('fecha_entrega', 'Fecha Envio de Exp.', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_entrega', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
-                                @error('fecha_entrega')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('estado_venta', 'Estado de Expediente*') !!}
-                            {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'id' => 'estado_venta']) !!}
-                            @error('estado_venta')
+                            {!! Form::label('comision_consultor', 'Comisión Consultor') !!}
+                            {!! Form::text('comision_consultor', null, ['class' => 'form-control']) !!}
+                            @error('comision_consultor')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-lg-6 col-sm-6" id="div_observacion">
-                            {!! Form::label('observacion', 'Observación') !!}
-                            {!! Form::text('observacion', null, ['class' => 'form-control','id' => 'observacion']) !!}
-                            @error('observacion')
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('estado_carpeta', 'Estado Carpeta') !!}
+                            {!! Form::select('estado_carpeta', ['C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            @error('estado_carpeta')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('pago_1er_recibo', 'Pago 1er Recibo') !!}
+                            {!! Form::select('pago_1er_recibo', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            @error('pago_1er_recibo')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('pago_dace', 'Pago Dace') !!}
+                            {!! Form::select('pago_dace', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            @error('pago_dace')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            {!! Form::label('abono_consultor', 'Abono Consultor') !!}
+                            {!! Form::select('abono_consultor', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            @error('abono_consultor')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -128,128 +95,111 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <p class="h5 text-bold">Detalles de venta</p>
+                    <p class="h5 text-bold">Detalles de Pago</p>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-3">
-                            <select name="selectTipoServicio" id="selectTipoServicio" class="selectpicker form-control"
-                            title="Seleccionar Tipo Servicio*">
-                                @foreach ($tiposservicio as $tiposervicio)
-                                    <option value="{{ $tiposervicio->id }}_{{ $tiposervicio->nom_tipo_servicio }}">
-                                        {{ $tiposervicio->nom_tipo_servicio }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-3">
-                            <select name="selectServicio" id="selectServicio" class="selectpicker form-control"
-                                title="Seleccionar Servicio*">
-                                @foreach ($servicios as $servicio)
-                                    <option
-                                        value="{{ $servicio->id }}_{{ $servicio->nom_servicio }}_{{ $servicio->bsd_tipo_servicio_id }}">
-                                        {{ $servicio->nom_servicio }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        {{-- <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('bsd_detalle_venta_id', 'Detalle Venta', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('bsd_detalle_venta_id', null, ['class' => 'form-control mt-2']) !!}
+                            </div>
+                        </div> --}}
+                        <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('selectTipoServicio', 'Tipo Servicio', ['style' => 'margin: 0; min-width:180px']) !!}
+                                <select name="selectTipoServicio" id="selectTipoServicio" class="selectpicker form-control"
+                                    title="Seleccionar tipo de servicio">
+                                    @foreach ($tiposservicios as $tiposervicio)
+                                        <option value="{{ $tiposervicio->id }}_{{ $tiposervicio->nom_tipo_servicio }}">
+                                            {{ $tiposervicio->nom_tipo_servicio }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="col-6">
-                            <select name="selectPlan" id="selectPlan" class="selectpicker form-control"
-                                title="Seleccionar Plan*">
-                                @foreach ($planes as $plan)
-                                    <option
-                                        value="{{ $plan->id }}_{{ $plan->nombre_plan }}_{{ $plan->precio }}_{{ $plan->bsd_tipo_servicio_id }}">
-                                        {{ $plan->nombre_plan }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('selectServicio', 'Servicio', ['style' => 'margin: 0; min-width:180px']) !!}
+                                <select name="selectServicio" id="selectServicio" class="selectpicker form-control"
+                                    title="Seleccionar servicio">
+                                    @foreach ($servicios as $servicio)
+                                        <option
+                                            value="{{ $servicio->id }}_{{ $servicio->nom_servicio }}_{{ $servicio->bsd_tipo_servicio_id }}">
+                                            {{ $servicio->nom_servicio }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('precioplan', 'Precio del plan*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('precioplan', number_format(0,2), ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan']) !!}
+                                {!! Form::label('selectPlan', 'Plan', ['style' => 'margin: 0; min-width:180px']) !!}
+                                <select name="selectPlan" id="selectPlan" class="selectpicker form-control"
+                                    title="Seleccionar plan">
+                                    @foreach ($planes as $plan)
+                                        <option
+                                            value="{{ $plan->id }}_{{ $plan->nombre_plan }}_{{ $plan->precio }}_{{ $plan->bsd_tipo_servicio_id }}">
+                                            {{ $plan->nombre_plan }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputCantidad', 'Cantidad/Ugis*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                                {!! Form::label('cuota', 'Cuota', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('cuota', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas']) !!}
                             </div>
                         </div>
-                        <div class="col-6" id="div_inputNumerosLineasNuevas">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
+                                {!! Form::label('comision_consultor', 'Comision Consultor', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('comision_consultor', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputEquipoProducto', 'Equipo/Producto*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
+                                {!! Form::label('sub_total', 'Sub Total', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('sub_total', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                         </div>
-                        <div class="col-6" id="div_operador">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('operador', 'Operador', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('operador', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
-                            </div>
-                        </div>
+                    </div>
+                     <div class="row">
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::select('estado_linea', ['P'=>'Pendientes de Instalación','C' => 'Créditos','R'=>'Áreas','A' => 'Activo'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
-                                
-                                {{-- <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
-                                    <option value="A">Activos</option>
-                                    <option value="C">Créditos</option>
-                                    <option value="P">Pendientes de Instalación</option>
-                                </select> --}}
+                                {!! Form::label('porcentaje_cump_dic', '% Cump Dic', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('porcentaje_cump_dic', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                         </div>
-                       <div class="col-6" id="div_fecha_activado">
+                       <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('fecha_activado', 'Fecha Activado', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::date('fecha_activado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_activado']) !!}
+                                {!! Form::label('sum_total_ventas', 'Suma Total Ventas', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('sum_total_ventas', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                          </div>
-                        {{-- <div class="col-6" id="div_fecha_liquidado">
+                    </div>
+                    <div class="row">
+                        <div class="col-6" id="div_fecha_liquidado">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('fecha_liquidado', 'Fecha Liquidado', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::date('fecha_liquidado', null, ['class' => 'form-control mt-2', 'id' => 'fecha_liquidado']) !!}
-                            </div>
-                        </div> --}}
-                    {{-- <div class="row">
-                        <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('status_100_por', 'Status 100%', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('status_100_por', null, ['class' => 'form-control mt-2', 'id' => 'inputStatus']) !!}
+                                {!! Form::label('sum_renta_total_ventas', 'Suma Renta Total Ventas', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('sum_renta_total_ventas', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" id="div_fecha_liquidado">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('numero_proyecto', 'Numero de Proyecto', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('numero_proyecto', null, ['class' => 'form-control mt-2', 'id' => 'inputNumeroProyecto']) !!}
+                                {!! Form::label('sum_comision_bruta_dace', 'Comision Bruta Dace', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('sum_comision_bruta_dace', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                         </div>
-                    </div> --}}
-                        {{-- <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('fecha_instalacion', 'Fecha Instalación', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::date('fecha_instalacion', null, ['class' => 'form-control mt-2', 'id' => 'fecha_instalacion']) !!}
-                            </div>
-                        </div> --}}
-                        <div class="col-6" id="div_hora">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('hora', 'Hora', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::time('hora', null, ['class' => 'form-control mt-2', 'id' => 'hora']) !!}
-                            </div>
-                        </div>
-                    </div> 
+                    </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead class="border">
@@ -293,25 +243,10 @@
                     @error('tiposServicio')
                         <span class="text-danger">El detalle de venta es obligatorio</span>
                     @enderror
-                    {{-- @error('servicios') 
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                    @error('planes')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                    @error('precioplanes')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                    @error('cantidades')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                    @error('total')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror --}}
-                </div>
+                </div> --}}
             </div>
         </div>
-        <div class="col-4">
+        {{-- <div class="col-4">
             <div class="card">
                 <div class="card-header">
                     <p class="h5 text-bold">Personal</p>
@@ -348,7 +283,6 @@
                     <div class="form-group">
                         {!! Form::label('searchCliente', 'RUC') !!}
                         {!! Form::hidden('bsd_cliente_id', null, ['id' => 'bsd_cliente_id']) !!}
-                        {{-- {!! Form::hidden('razon_social', null, ['id' => 'razon_social']) !!} --}}
                         <div class="input-group">
                             {!! Form::text('searchCliente', null, ['class' => 'form-control', 'id' => 'searchCliente']) !!}
                             <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
@@ -369,7 +303,7 @@
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary btn-lg']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
             </div>
-        </div>
+        </div> --}}
     </div>
     {!! Form::close() !!}
 @stop
@@ -523,10 +457,10 @@
         const inputOperador = document.getElementById('inputOperador')
         const estadoLinea = document.getElementById('estadoLinea')
         const fecha_activado = document.getElementById('fecha_activado')
-        //const fecha_liquidado = document.getElementById('fecha_liquidado')
+        const fecha_liquidado = document.getElementById('fecha_liquidado')
         //const inputStatus = document.getElementById('inputStatus')
         //const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
-        //const fecha_instalacion = document.getElementById('fecha_instalacion')
+        const fecha_instalacion = document.getElementById('fecha_instalacion')
         const hora = document.getElementById('hora')
 
         let cantDetallesVenta = 0 // parecido al cont
@@ -544,31 +478,28 @@
         $('#selectServicio').prop('disabled', true);
         $('#selectPlan').selectpicker('refresh');
         $('#selectServicio').selectpicker('refresh');
-        $('#inputOperador').attr("readonly", true);     
-        
-        $('#div_datos_generales').hide();
 
         // habilitar select servicio y plan cuando se elige un tipo de servicio
         $('#selectTipoServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             if (isSelected) {
                 const [tipoServicioID, tipoServicioName] = e.target.value.split(
                     '_') // formato tipo servicio: ID, NOMBRE
-                //document.write(tipoServicioName.replace(/ /g, ""))
+
                 // habilitar los select
                 $('#selectPlan').prop('disabled', false);
                 $('#selectServicio').prop('disabled', false);
 
                 // filtrar select servicio
-                $("#selectServicio").val('default');                
+                $("#selectServicio").val('default');
                 $.map($("#selectServicio option"), function(option) {
                     const value = option.value
                     if (value) {
                         const servicio = value.split('_') // formato servicio: ID , NOMBRE, ID_TIPO_SERVICIO
                         const helper = "#selectServicio option[value=" + value + "]"
                         if (tipoServicioID !== servicio[2]) {
-                            $(`#selectServicio option[value='${value}']`).hide()
+                            $("#selectServicio option[value=" + value + "]").hide()
                         } else {
-                            $(`#selectServicio option[value='${value}']`).show()
+                            $("#selectServicio option[value=" + value + "]").show()
                         }
                     }
                     return option;
@@ -578,7 +509,8 @@
                 $.map($("#selectPlan option"), function(option) {
                     const value = option.value
                     if (value) {
-                        const plan = value.split('_') // formato plan: Id, nombre, precio, ID_TIPO_SERVICIO
+                        const plan = value.split(
+                            '_') // formato plan: Id, nombre, precio, ID_TIPO_SERVICIO
                         const helper = "#selectPlan option[value=" + value + "]"
                         if (tipoServicioID !== plan[3]) {
                             $(`#selectPlan option[value='${value}']`).hide()
@@ -594,58 +526,48 @@
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
                 //Acomodar los campos
-                $('#div_datos_generales').show();
-                //$('#div_venta').addClass('d-flex justify-content-around');
+                $('#div_venta').addClass('d-flex justify-content-around');
                 //deshabilitar y limpiar campos cuando se elija el tipo de servicio movil
                 if (tipoServicioName === 'Móvil') {
                     //$('#sot').val(null);
                     //$('#sot').attr("disabled", true);
                     $('#div_sot').hide();
                     $('#div_nro_proyecto').hide();
-                    //$('#div_fecha_liquidado').hide();
+                    $('#div_fecha_liquidado').hide();
                     $('#div_hora').hide();
                     $('#div_observacion').removeClass('col-lg-3').addClass('col-lg-6');
                     //$('#div_observacion').toggleClass('pull-left');
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
-                    //$('#fecha_entrega_te').attr("readonly", false);
-                    //$('#fecha_avance_oportunidad').attr("readonly", false);
-                    //$('#estado_venta').attr("readonly", false);  
+                    $('#fecha_entrega_te').attr("readonly", false);
+                    $('#fecha_avance_oportunidad').attr("readonly", false);
+                    $('#estado_venta').attr("readonly", false);  
                     $('#estado_venta').val("P");
                     $('#estado_venta').change();                  
-                    //$('#observacion').attr("readonly", false);  
-                    $("#estadoLinea").find("option[value='R']").show();
-                    $('#estadoLinea').selectpicker('refresh');
-                    $('#div_inputNumerosLineasNuevas').show();
-                    $('#div_fecha_activado').hide();
-                    $('#div_operador').show();
-                    //obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
+                    $('#observacion').attr("readonly", false);  
+                    //$("#estadoLinea").find("option[value='P']").hide();
+                    //$('#estadoLinea').selectpicker('refresh');
+                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
                 } else if (tipoServicioName === 'Fija'){
                     //$('#sot').attr("disabled", false);
                     $('#div_sot').show();
                     $('#div_nro_proyecto').show();
-                    //Porque se anula en los dos?
-                    //$('#div_fecha_liquidado').hide();
+                    $('#div_fecha_liquidado').show();
                     $('#div_hora').show();
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputEquipoProducto').val(null);
-                    //$('#fecha_entrega_te').attr("readonly", true);
-                    //$('#fecha_avance_oportunidad').attr("readonly", true);
-                    //$('#estado_venta').attr('disabled',true);
+                    $('#fecha_entrega_te').attr("readonly", true);
+                    $('#fecha_avance_oportunidad').attr("readonly", true);
+                    $('#estado_venta').attr('disabled',true);
                     $('#estado_venta').val('P');
                     $('#estado_venta').change();                    
-                    //$('#observacion').attr("readonly", true);
-                    $("#estadoLinea").find("option[value='R']").hide();
-                    $('#estadoLinea').selectpicker('refresh'); 
-                    $('#inputNumerosLineasNuevas').val('');
-                    $('#div_inputNumerosLineasNuevas').hide();
-                    $('#div_fecha_activado').show();
-                    $('#div_operador').hide();
-                } else{
-                    $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
+                    $('#observacion').attr("readonly", true);
+                    //$("#estadoLinea").find("option[value='P']").show();
+                    //$('#estadoLinea').selectpicker('refresh'); 
+                    $('#inputNumerosLineasNuevas').val(null);
                 }
 
             }
@@ -660,7 +582,6 @@
             const dataPlan = e.target.value.split('_'); // formato: Id, nombre, precio 
             if(dataPlan[1] == 'Portabilidad'){
                 $('#inputOperador').attr("readonly", false); 
-                $('#inputOperador').val('');   
             }    else{
                 $('#inputOperador').attr("readonly", true);
                 $('#inputOperador').val('');   
@@ -676,7 +597,9 @@
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
-            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !inputEquipoProducto.value) {
+
+            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !
+                inputNumerosLineasNuevas.value || !inputEquipoProducto.value) {
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
@@ -686,13 +609,6 @@
 
             // obtener la data
             const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
-            if(tipoServicio[1] =='Móvil' && !inputNumerosLineasNuevas.value){
-                alerta('Faltan datos en el detalle de venta a agregar')
-                return Toast.fire({
-                    icon: 'warning',
-                    title: 'Faltan datos'
-                })
-            };
             const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
             const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
@@ -704,7 +620,7 @@
             const operador = inputOperador.value
             const estado_linea = estadoLinea.value.split('_')
             const fechaactivado = fecha_activado.value
-            //const fechaliquidado = fecha_liquidado.value
+            const fechaliquidado = fecha_liquidado.value
             //const status_100_por = inputStatus.value
             //const numero_proyecto = inputNumeroProyecto.value
             //const fechainstalacion = fecha_instalacion.value
@@ -741,6 +657,7 @@
                 <td>${operador}</td> 
                 <td>${estado_linea}</td> 
                 <td>${fechaactivado}</td> 
+                <td>${fechaliquidado}</td>  
                 <td>${horas}</td>
 
                 <td id="dv_subtotal_sin_igv">${subtotal_sin_igv}</td>
@@ -762,6 +679,7 @@
                 <input type="hidden" name="operador[]" value="${operador}">
                 <input type="hidden" name="estado_linea[]" value="${estado_linea}">
                 <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
+                <input type="hidden" name="fechaliquidado[]" value="${fechaliquidado}">
                 <input type="hidden" name="horas[]" value="${horas}">
                 
                 <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}"> 
@@ -784,7 +702,6 @@
 
             $("#inputOperador").val(null);
             $("#estadoLinea").val('default');
-            $("#estadoLinea").change();
             $("#fecha_activado").val('default');
             $("#fecha_liquidado").val('default');
             //$("#inputStatus").val(null);
@@ -886,7 +803,7 @@
 
             if (cantDetallesVenta === 0) return alerta('Detalles de venta es obligatorio')
 
-            //$('#estado_venta').attr('disabled',false);
+            $('#estado_venta').attr('disabled',false);
 
             formCrearVenta.submit()
         })

@@ -27,5 +27,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @stop
 @section('js')
+    <script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <script>
+        const cargo = document.getElementById('cargo')
+        $('#cargo').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
+            if (isSelected) {
+                const cargoName = e.target.value
+                //document.write(cargoName)
+                if (cargoName === 'Supervisor') {
+                    $('#div_tipo_personal').show();
+                } else {
+                    $('#div_tipo_personal').hide();
+                }
+
+            }
+        });
+    </script>
 @stop

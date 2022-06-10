@@ -76,7 +76,7 @@ class VentaController extends Controller
         $operador = $request->get('operador');
         $estado_linea = $request->get('estado_linea');
         $fecha_activado = $request->get('fechaactivado');
-        $fecha_liquidado = $request->get('fechaliquidado');
+        //$fecha_liquidado = $request->get('fechaliquidado');
         //$status_100_por = $request->get('status_100_por');
         //$numero_proyecto = $request->get('numero_proyecto');
         //$fecha_instalacion = $request->get('fechainstalacion');
@@ -113,7 +113,7 @@ class VentaController extends Controller
                 $detalleventa->operador = $operador[$i];
                 $detalleventa->estado_linea = $estado_linea[$i];
                 $detalleventa->fecha_activado = $fecha_activado[$i];
-                $detalleventa->fecha_liquidado = $fecha_liquidado[$i];
+                //$detalleventa->fecha_liquidado = $fecha_liquidado[$i];
                 //$detalleventa->status_100_por = $status_100_por[$i];
                 //$detalleventa->numero_proyecto = $numero_proyecto[$i];
                 //$detalleventa->fecha_instalacion = $fecha_instalacion[$i];
@@ -122,12 +122,16 @@ class VentaController extends Controller
 
                 // 3. registrar numeros de linea nueva
                 $numeros = explode(',', $numerosLineasNuevas[$i]);
+                //dd($numeros);
                 for ($j=0; $j < count($numeros); $j++) {
+                    if($numeros[$j] != '' || $numeros[$j] != null){
                     $numerolineanueva = new BsdNumeroLineaNueva();
                     $numerolineanueva->bsd_detalle_venta_id = $detalleventa->id;
                     $numerolineanueva->numero_linea_nueva = trim($numeros[$j]);
                     $numerolineanueva->save();
+                    }
                 }
+                                
             }
         //     DB::commit();
         // } catch (\Throwable $th) {

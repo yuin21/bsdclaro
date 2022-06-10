@@ -27,7 +27,7 @@ class TipoServicioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom_tipo_servicio' => 'required|string|max:15|unique:bsd_tipo_servicio,nom_tipo_servicio',
+            'nom_tipo_servicio' => 'required|string|max:50|unique:bsd_tipo_servicio,nom_tipo_servicio',
         ]);       
 
         $tiposervicio = BsdTipoServicio::create($request->all() + ['usuario_reg' => auth()->user()->name]);
@@ -49,7 +49,7 @@ class TipoServicioController extends Controller
     public function update(Request $request, BsdTipoServicio $tiposervicio)
     {
         $request->validate([
-            'nom_tipo_servicio' => "required|string|max:15|unique:bsd_tipo_servicio,nom_tipo_servicio, $tiposervicio->id",
+            'nom_tipo_servicio' => "required|string|max:50|unique:bsd_tipo_servicio,nom_tipo_servicio, $tiposervicio->id",
         ]);
 
         $tiposervicio->usuario_act = auth()->user()->name;

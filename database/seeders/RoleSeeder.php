@@ -75,5 +75,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'adminlte.cuotapersonal', 'description' => 'Ver sección: Cuota'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.cuotapersonal.index', 'description' => 'Ver opción: Asignar Cuota'])->syncRoles([$roleAdmin]);
 
+        // seccion pagos
+        Permission::create(['name' => 'adminlte.pagos', 'description' => 'Ver sección: Pagos'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        //Permission::create(['name' => 'admin.ventas.index'])->syncRoles([$roleAdmin]);
     }
 }

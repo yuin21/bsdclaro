@@ -20,9 +20,11 @@
         <div class="card-body">
             {!! Form::model($tiposervicio, ['route' => ['admin.tiposervicio.update', $tiposervicio], 'method' => 'put']) !!}
             @include('admin.tiposervicio.partials.form')
-            {!! Form::submit('Actualizar', ['class' => 'btn btn-primary']) !!}
-            <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
-            {!! Form::close() !!}
+            <div class="float-right">
+                {!! Form::submit('Actualizar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 @stop

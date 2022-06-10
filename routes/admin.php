@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\NumeroLineaNuevaController;
 use App\Http\Controllers\Admin\EmpresaController;
 use App\Http\Controllers\Admin\CuotaPersonalController;
 use App\Http\Controllers\Admin\ReportesController;
+use App\Http\Controllers\Admin\PagoController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -113,3 +114,11 @@ Route::put('cuotapersonal/{cuotapersonal}/restaurarCuotaPersonal', [CuotaPersona
 Route::get('reportes/ventasDiarias', [ReportesController::class, 'index_ventasDiarias'])->name('admin.reportes.indexVentasDiarias');
 Route::post('reportes/ventasDiarias/buscar', [ReportesController::class, 'search'])->name('admin.reportes.search');
 Route::post('reportes/{venta}/generarPDF', [ReportesController::class, 'generatePDF'])->name('admin.reportes.generatePDF');
+
+//Pagos
+Route::resource('pagos', PagoController::class)->only(['index', 'create', 'store', 'show'])->names('admin.pagos');
+Route::get('pagos/tracking/{pago}', [PagoController::class, 'tracking'])->name('admin.pagos.tracking');
+Route::put('pagos/tracking/{pago}/update', [PagoController::class, 'trackingUpdate'])->name('admin.pagos.tranckingupdate');
+Route::get('removidos/pagos', [PagoController::class, 'indextrash'])->name('admin.pagos.indextrash');
+Route::put('pagos/{pago}/destroylogico', [PagoController::class, 'destroyLogico'])->name('admin.pagos.destroyLogico');
+Route::put('pagos/{pago}/restaurarVenta', [PagoController::class, 'restaurarPago'])->name('admin.pagos.restaurarPago');

@@ -38,12 +38,13 @@ class PersonalController extends Controller
             'ape_paterno' => 'required|string|max:25',
             'ape_materno'=> 'nullable|string|max:25',
             'cargo' => 'required|string|max:75',
-            'tipo_personal' => 'required|string|max:15',
+            'usuario_sisact' => 'nullable|string|max:50',
+            'tipo_personal' => 'nullable|string|max:15',
             'tipo_doc_iden'=> 'required|string|max:30',
-            'nro_doc_iden'=> 'required|string|max:15|unique:bsd_personal', 
+            'nro_doc_iden'=> 'required|numeric|digits_between:9,15|unique:bsd_personal', 
             'email'=> 'required|string|email|max:75|unique:bsd_personal',
             'direccion' => 'nullable|max:300',
-            'celular' => 'required|max:30'
+            'celular' => 'nullable|string|max:30'
         ]);       
         
         $personal = BsdPersonal::create($request->all() + ['usuario_reg' => auth()->user()->name]);
@@ -71,12 +72,13 @@ class PersonalController extends Controller
             'ape_paterno' => 'required|string|max:25',
             'ape_materno'=> 'nullable|string|max:25',
             'cargo' => 'required|string|max:75',
-            'tipo_personal' => 'required|string|max:15',
+            'usuario_sisact' => 'nullable|string|max:50',
+            'tipo_personal' => 'nullable|string|max:15',
             'tipo_doc_iden'=> 'required|string|max:30',
             'nro_doc_iden'=> "required|string|max:15|unique:bsd_personal,nro_doc_iden,$personal->id", 
             'email'=> "required|string|email|max:75|unique:bsd_personal,email,$personal->id",
             'direccion' => 'nullable|max:300',
-            'celular' => 'required|max:30'
+            'celular' => 'nullable|max:30'
         ]);
 
         $personal->usuario_act = auth()->user()->name;

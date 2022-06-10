@@ -24,18 +24,18 @@
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.cuotas.show', $cuota) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                            <i class="fas fa-eye"></i> {{-- Ver  --}}
+                                            <i class="fas fa-eye"></i> Ver
                                         </a>
                                         <a href="{{ route('admin.cuotas.edit', $cuota) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i> {{-- Editar  --}}
+                                            <i class="fas fa-pen"></i> Editar
                                         </a>
                                         <form action="{{ route('admin.cuotas.destroyLogico', $cuota) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> {{-- remover  --}}
+                                                <i class="fas fa-minus-circle"></i> Remover
                                             </button>
                                         </form>
                                     </div>

@@ -24,7 +24,7 @@ class BsdDetalleVenta extends Model
         'operador',
         'estado_linea',
         'fecha_activado',
-        'fecha_liquidado',
+        //'fecha_liquidado',
         //'status_100_por',
         //'numero_proyecto',
         //'fecha_instalacion',
@@ -58,7 +58,11 @@ class BsdDetalleVenta extends Model
             case "C":
                 return "Créditos";
             case "A":
-                return "Activos";
+                return "Activo";
+            case "R":
+                return "Áreas";
+            case "":
+                return "";
             default:
                 return "No existen valores";
         }
