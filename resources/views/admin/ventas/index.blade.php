@@ -55,7 +55,7 @@
                                         </a>
                                         <a href="{{ route('admin.ventas.tracking', $venta) }}"
                                         class="btn btn-sm btn-info text-nowrap" id="Seguimiento"
-                                        <?php if ($venta->avance_oportunidad !== 100){ ?> style="display: none;" <?php   } ?>>
+                                        <?php if ($venta->avance_oportunidad > 100){ ?> style="display: none;" <?php   } ?>>
                                             <i class="fas fa-eye"></i> Seguimiento
                                         </a>  
                                         <form action="{{ route('admin.ventas.destroyLogico', $venta) }}"
