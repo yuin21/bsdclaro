@@ -199,7 +199,7 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::select('estado_linea', ['P'=>'Pendientes de Instalación','C' => 'Créditos','R'=>'Áreas','A' => 'Activo'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
+                                {!! Form::select('estado_linea', ['P'=>'Pendiente de Aprobación del Cliente','C' => 'Créditos','R'=>'Áreas','A' => 'Activo'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
                                 
                                 {{-- <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
                                     <option value="A">Activos</option>
