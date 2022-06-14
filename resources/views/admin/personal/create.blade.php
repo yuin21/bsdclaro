@@ -36,7 +36,7 @@
             if (isSelected) {
                 const cargoName = e.target.value
                 //document.write(cargoName)
-                if (cargoName === 'Supervisor') {
+                if (cargoName === 'Consultor') {
                     $('#div_tipo_personal').show();
                 } else {
                     $('#div_tipo_personal').hide();

@@ -19,6 +19,11 @@ class BsdPago extends Model
         'pago_1er_recibo',
         'pago_dace',
         'abono_consultor',
+        'total_pago',
+        'porcentaje_cump_dic',
+        'sum_total_ventas',
+        'sum_renta_total_ventas',
+        'sum_comision_bruta_dace',
 
         // 'estado',
         // 'usuario_reg' ,

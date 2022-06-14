@@ -13,14 +13,14 @@
     <div class="card">
         <div class="card-body">
             {!! Form::open(['route' => 'admin.clientes.store']) !!}
-            <div class="mb-2 d-flex" style="gap:10px">
+            {{-- <div class="mb-2 d-flex" style="gap:10px">
                 <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
                     style="border-radius: 0 3px 3px 0; opacity: 0.8">Buscar RUC SUNAT <i class="fas fa-search"></i></button>
                 <div id="cliente_loading" class="text-danger d-none">
                     <div class="spinner-border text-danger float-rigth" role="status">
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @include('admin.clientes.partials.form')
             <div class="float-right">
             {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}

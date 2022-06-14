@@ -11,85 +11,166 @@
 
 @section('content')
     {!! Form::open(['route' => 'admin.ventas.store', 'id' => 'formCrearVenta']) !!}
+    
     <div class="row">
         <div class="col-12">
+            <div class="row">
+                <div class="card col-lg-4">
+                    <div class="card-header row">
+                        <div class="col-lg-6 col-sm-6" > 
+                            <div class="h5 text-bold" id='buscar_p'>Buscar Personal</div>
+                        </div> 
+                        <div class="col-lg-6 col-sm-6" >                      
+                            {!! Form::date('fecha_actual', null, ['class' => 'form-control mt-2', 'id' => 'fecha_actual']) !!}
+                        </div>
+                    </div>
+                    <div class="card-body col-lg-12">
+                        <div class="form-group">
+                            {!! Form::label('searchPersonal', 'Apellidos y nombre') !!}
+                            {!! Form::hidden('bsd_personal_id', null, ['id' => 'bsd_personal_id']) !!}
+                            <div class="input-group">
+                                {!! Form::text('searchPersonal', null, ['class' => 'form-control', 'id' => 'searchPersonal']) !!}
+                                <button type="button" id="btnSearchVenta" class="btn btn-outline-secondary"
+                                        style="border-radius: 0 3px 3px 0; opacity: 0.6"><i class="fas fa-search"></i></button>
+                            </div>
+                            {{-- <div class="input-group mt-2">
+                                <span class="input-group-text">cargo</span>
+                                {!! Form::text('personal_cargo', null, ['class' => 'form-control', 'id' => 'personal_cargo', 'readonly']) !!}
+                            </div> --}}
+                            @error('bsd_personal_id')
+                                <small class="text-danger">El personal es obligatorio</small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="card col-lg-8">
+                    <div class="card-header row">
+                        <div class="col-lg-6 col-sm-6" > 
+                            <div class="h5 text-bold" id='buscar_p'>Datos generales</div>
+                        </div> 
+                        <div class="col-lg-6 col-sm-6" >                      
+                            {!! Form::hidden('aux', null, ['class' => 'form-control mt-2', 'id' => 'aux']) !!}
+                        </div>
+                    </div> 
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('porcentaje_comision', '% Comision') !!}
+                                {!! Form::select('porcentaje_comision', ['70' => '70 %', '80' => '80 %', '90' => '90 %', '100' => '100 %'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                                @error('porcentaje_comision')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('comision_consultor', 'Comisión Consultor') !!}
+                                {!! Form::text('comision_consultor', null, ['class' => 'form-control']) !!}
+                                @error('comision_consultor')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('estado_carpeta', 'Estado Carpeta') !!}
+                                {!! Form::select('estado_carpeta', ['C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                                @error('estado_carpeta')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('pago_1er_recibo', 'Pago 1er Recibo') !!}
+                                {!! Form::select('pago_1er_recibo', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                                @error('pago_1er_recibo')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('pago_dace', 'Pago Dace') !!}
+                                {!! Form::select('pago_dace', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                                @error('pago_dace')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('abono_consultor', 'Abono Consultor') !!}
+                                {!! Form::select('abono_consultor', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                                @error('abono_consultor')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-header">
-                    <p class="h5 text-bold">Datos generales</p>
+                    <p class="h5 text-bold">Ventas</p>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-4">
-                    {{-- <div class="row mb-4"> --}}
-                        <div class="col-lg-3 col-sm-6" >
-                            {!! Form::label('bsd_cuota_personal_id', 'Personal') !!}
-                            <select name="bsd_cuota_personal_id" id="cuotapersonal" class="selectpicker form-control"
-                                title="Seleccionar Personal">
-                                @foreach ($cuotaspersonal as $cuotapersonal)
-                                    <option value="{{ $cuotapersonal->id }}">
-                                        {{ $cuotapersonal->personal->getFullNameAttribute() }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('bsd_cuota_personal_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('bsd_venta_id', 'Total de Venta') !!}
-                            <select name="bsd_venta_id" id="venta" class="selectpicker form-control"
-                                title="Seleccionar Venta">
-                                @foreach ($ventas as $venta)
-                                    <option value="{{ $venta->id }}">
-                                        {{ $venta->total}}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('bsd_venta_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('porcentaje_comision', '% Comision') !!}
-                            {!! Form::select('porcentaje_comision', ['70' => '70 %', '80' => '80 %', '90' => '90 %', '100' => '100 %'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('porcentaje_comision')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('comision_consultor', 'Comisión Consultor') !!}
-                            {!! Form::text('comision_consultor', null, ['class' => 'form-control']) !!}
-                            @error('comision_consultor')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('estado_carpeta', 'Estado Carpeta') !!}
-                            {!! Form::select('estado_carpeta', ['C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('estado_carpeta')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('pago_1er_recibo', 'Pago 1er Recibo') !!}
-                            {!! Form::select('pago_1er_recibo', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('pago_1er_recibo')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('pago_dace', 'Pago Dace') !!}
-                            {!! Form::select('pago_dace', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('pago_dace')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                            {!! Form::label('abono_consultor', 'Abono Consultor') !!}
-                            {!! Form::select('abono_consultor', ['S' => 'Si', 'N' => 'No'], null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
-                            @error('abono_consultor')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="table_venta">
+                            <thead class="border">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Cliente</th>
+                                    <th>RUC</th>
+                                    <th>Estado</th>
+                                    <th>SEC</th>
+                                    <th>Sin IGV</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_venta">
+                                {{-- @foreach ($ventas as $venta)
+                                    <tr>
+                                        <td width="20px">{{ $loop->iteration }}</td>
+                                        <td>{{ $venta->personal->nom_personal }} {{ $venta->personal->ape_paterno }}</td>
+                                        <td>{{ $venta->cliente->razon_social }}</td>
+                                        <td>{{ $venta->cliente->ruc }}</td>
+                                        <td>{{ $venta->getEstado_Venta() }}</td>
+                                        <td>{{ round($venta->total / 1.18, 2) }}</td>
+                                        <td>{{ number_format($venta->total, 2) }}</td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <p class="h5 text-bold">Detalle de Ventas</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="border">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Tipo Servicio</th>
+                                    <th>Servicio</th>
+                                    <th>Plan</th>
+                                    <th>Precio Plan</th>
+                                    <th>Cantidad/UGIS</th>
+                                    <th>Números de linea nueva</th>
+                                    <th>Estado de Linea</th>
+                                    <th>Fecha de Activado</th>
+                                    <th>Sin IGV</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_detalle_venta">
+                                {{-- @foreach ($ventas as $venta)
+                                    <tr>
+                                        <td width="20px">{{ $loop->iteration }}</td>
+                                        <td>{{ $venta->personal->nom_personal }} {{ $venta->personal->ape_paterno }}</td>
+                                        <td>{{ $venta->cliente->razon_social }}</td>
+                                        <td>{{ $venta->cliente->ruc }}</td>
+                                        <td>{{ $venta->getEstado_Venta() }}</td>
+                                        <td>{{ round($venta->total / 1.18, 2) }}</td>
+                                        <td>{{ number_format($venta->total, 2) }}</td>
+                                    </tr>
+                                @endforeach --}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -107,51 +188,8 @@
                         </div> --}}
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('selectTipoServicio', 'Tipo Servicio', ['style' => 'margin: 0; min-width:180px']) !!}
-                                <select name="selectTipoServicio" id="selectTipoServicio" class="selectpicker form-control"
-                                    title="Seleccionar tipo de servicio">
-                                    @foreach ($tiposservicios as $tiposervicio)
-                                        <option value="{{ $tiposervicio->id }}_{{ $tiposervicio->nom_tipo_servicio }}">
-                                            {{ $tiposervicio->nom_tipo_servicio }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('selectServicio', 'Servicio', ['style' => 'margin: 0; min-width:180px']) !!}
-                                <select name="selectServicio" id="selectServicio" class="selectpicker form-control"
-                                    title="Seleccionar servicio">
-                                    @foreach ($servicios as $servicio)
-                                        <option
-                                            value="{{ $servicio->id }}_{{ $servicio->nom_servicio }}_{{ $servicio->bsd_tipo_servicio_id }}">
-                                            {{ $servicio->nom_servicio }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('selectPlan', 'Plan', ['style' => 'margin: 0; min-width:180px']) !!}
-                                <select name="selectPlan" id="selectPlan" class="selectpicker form-control"
-                                    title="Seleccionar plan">
-                                    @foreach ($planes as $plan)
-                                        <option
-                                            value="{{ $plan->id }}_{{ $plan->nombre_plan }}_{{ $plan->precio }}_{{ $plan->bsd_tipo_servicio_id }}">
-                                            {{ $plan->nombre_plan }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('cuota', 'Cuota', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('cuota', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas']) !!}
+                                {!! Form::text('cuota', null, ['class' => 'form-control mt-2', 'id' => 'cuota']) !!}
                             </div>
                         </div>
                     </div>
@@ -199,111 +237,8 @@
                     </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
-                {{-- <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                            <thead class="border">
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Tipo Servicio</th>
-                                    <th>Servicio</th>
-                                    <th>Plan</th>
-                                    <th>Precio Plan</th>
-                                    <th>Cantidad/Ugis</th>
-                                    <th>Números de linea nueva</th>
-                                    <th>Equipo/Producto</th>
-                                    
-                                    <th>Operador</th>
-                                    <th>Estado de Linea</th>
-                                    <th>Fecha Activado</th>
-                                    <th>Fecha Liquidado</th>
-                                    <th>Hora</th> 
-                                    
-                                    <th>Sin IGV</th>
-                                    <th>Total</th>
- 
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyDetalleVenta">
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
-                    </div>
-                    <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
-                        {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('inputTotal', null, ['class' => 'form-control text-danger', 'id' => 'inputTotal', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
-                        {!! Form::hidden('total', null) !!}
-                    </div>
-                </div>
-                <div class="card-footer">
-                    @error('tiposServicio')
-                        <span class="text-danger">El detalle de venta es obligatorio</span>
-                    @enderror
-                </div> --}}
             </div>
         </div>
-        {{-- <div class="col-4">
-            <div class="card">
-                <div class="card-header">
-                    <p class="h5 text-bold">Personal</p>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        {!! Form::label('searchPersonal', 'Apellidos y nombre') !!}
-                        {!! Form::hidden('bsd_personal_id', null, ['id' => 'bsd_personal_id']) !!}
-                        {!! Form::text('searchPersonal', null, ['class' => 'form-control', 'id' => 'searchPersonal']) !!}
-                        <div class="input-group mt-2">
-                            <span class="input-group-text">cargo</span>
-                            {!! Form::text('personal_cargo', null, ['class' => 'form-control', 'id' => 'personal_cargo', 'readonly']) !!}
-                        </div>
-                        @error('bsd_personal_id')
-                            <small class="text-danger">El personal es obligatorio</small>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex">
-                        <p class="h5 text-bold" style="flex-grow: 1">Cliente</p>
-                        <div id="cliente_loading" class="text-danger d-none">
-                            <span class="text-danger mr-2">
-                                buscando SUNAT
-                            </span>
-                            <div class="spinner-border text-danger float-rigth" role="status">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        {!! Form::label('searchCliente', 'RUC') !!}
-                        {!! Form::hidden('bsd_cliente_id', null, ['id' => 'bsd_cliente_id']) !!}
-                        <div class="input-group">
-                            {!! Form::text('searchCliente', null, ['class' => 'form-control', 'id' => 'searchCliente']) !!}
-                            <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
-                                style="border-radius: 0 3px 3px 0; opacity: 0.6"><i class="fas fa-search"></i></button>
-                        </div>
-
-                        <div class="input-group mt-2">
-                            <span class="input-group-text">razón social</span>
-                            {!! Form::text('razon_social', null, ['class' => 'form-control', 'id' => 'razon_social', 'readonly']) !!}
-                        </div>
-                        @error('razon_social')
-                            <small class="text-danger">El cliente es obligatorio</small>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="text-right pb-4">
-                {!! Form::submit('Guardar', ['class' => 'btn btn-primary btn-lg']) !!}
-                <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
-            </div>
-        </div> --}}
     </div>
     {!! Form::close() !!}
 @stop
@@ -337,6 +272,9 @@
     #inputTotal{
         text-align: right;
     }
+    #buscar_p{
+        margin-top: 15px;
+    }
     </style>
 @stop
 
@@ -359,119 +297,110 @@
                     }
                 })
             },
+            
             select: function(evento, selected) {
                 $('#bsd_personal_id').val(selected.item.id);
-                $('#personal_cargo').val(selected.item.cargo)
+                //$('#personal_cargo').val(selected.item.cargo);
             }
         })
-        $("#searchPersonal").keypress(function(e) {
-            var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) {
-                e.preventDefault()
-                if (e.target.value === '') {
-                    $('#bsd_personal_id').val('');
-                    $('#personal_cargo').val('')
-                }
-            }
-        });
 
-        // busqueda de cliente
+        // busqueda de venta
 
         $(document).ready(function() {
-            $('#btnSearchCliente').click(function(e) {
-                handleSearchClient()
+            $('#btnSearchVenta').click(function(e) {
+                handleSearchVenta()
             })
-            $("#searchCliente").keypress(function(e) {
+            $("#searchPersonal").keypress(function(e) {
                 var code = (e.keyCode ? e.keyCode : e.which);
                 if (code == 13) {
                     e.preventDefault();
-                    handleSearchClient()
-                }
+                    handleSearchVenta()
+               }
             });
         });
 
-        function handleSearchClient() {
+        function handleSearchVenta() {
             $.ajax({
                 type: 'GET',
-                url: '{{ route('api.clientes.search') }}',
+                url: '{{ route('api.ventas.search') }}',
                 data: {
-                    term: $("#searchCliente").val()
+                    term: $("#bsd_personal_id").val(),
+                    fech: $("#fecha_actual").val()
                 },
                 success: function(response) {
-                    if (response && response.length > 0) {
-                        $('#bsd_cliente_id').val(response[0].id);
-                        $('#razon_social').val(response[0].razon_social)
-                    } else {
-                        $('#bsd_cliente_id').val('');
-                        $('#razon_social').val('')
-                        if ($("#searchCliente").val().length > 0) {
-                            handleSearchClient_sunat()
-                        }
+                    $("#tbody_venta").html("");
+                    for(var i=0; i<response.length; i++){
+                        var tr = `<tr>
+                        <td>`+(i + 1)+`</td>
+                        <td>`+response[i][i].razonsocial+`</td>
+                        <td>`+response[i][i].ruc+`</td>
+                        <td>`+response[i][i].estadoventa+`</td>
+                        <td>`+response[i][i].sec+`</td>
+                        <td>`+response[i][i].total_sin_igv+`</td>
+                        <td>`+response[i][i].total+`</td>
+                        <td class="td_id_venta" style="display:none;">`+response[i][i].id+`</td>
+                        </tr>`;
+                        $("#tbody_venta").append(tr)
                     }
                 },
                 error: function(response) {
-                    $('#bsd_cliente_id').val('');
-                    $('#razon_social').val('')
-                }
-            });
-        }
-
-        function handleSearchClient_sunat() {
-            $('#cliente_loading').removeClass('d-none')
-            $.ajax({
-                type: 'GET',
-                url: '{{ route('api.clientes.searchSunat') }}',
-                data: {
-                    term: $("#searchCliente").val()
-                },
-                success: function(response) {
-                    $('#cliente_loading').addClass('d-none')
-                    const data = JSON.parse(response)
-                    const razonSocial = data.result.razon_social
-                    if (data && data.result && razonSocial) {
-                        $('#bsd_cliente_id').val(null); // null porque se registrara un nuevo cliente
-                        $('#razon_social').val(razonSocial)
+                    $("#tbody_venta").html("");
+                    for(var i=0; i<response.length; i++){
+                        var tr = `<tr>
+                        <td>`+(i + 1)+`</td>
+                        <td>`+response[i][i].razonsocial+`</td>
+                        <td>`+response[i][i].ruc+`</td>
+                        <td>`+response[i][i].estadoventa+`</td>
+                        <td>`+response[i][i].sec+`</td>
+                        <td>`+response[i][i].total_sin_igv+`</td>
+                        <td>`+response[i][i].total+`</td>
+                        <td class="td_id_venta" style="display:none;">`+response[i][i].id+`</td>
+                        </tr>`;
+                        $("#tbody_venta").append(tr)
                     }
-                },
-                error: function(response) {
-                    $('#cliente_loading').addClass('d-none')
-                    $('#bsd_cliente_id').val('');
-                    $('#razon_social').val('')
                 }
             });
         }
+        $(document).ready(function() {
+            $(document).on("click", "#table_venta tbody tr", function() {
+                var data = $(this).find(".td_id_venta").html();
+                $("#cuota").val(data)
+            });
+        });
+        
     </script>
     <script>
-        const selectTipoServicio = document.getElementById('selectTipoServicio')
-        const selectServicio = document.getElementById('selectServicio')
-        const selectPlan = $('#selectPlan')
-        const inputCantidad = document.getElementById('inputCantidad')
-        const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
-        const inputEquipoProducto = document.getElementById('inputEquipoProducto')
-        const btnAgregar = document.getElementById('btnAgregar')
-        const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
-        const inputTotal = document.getElementById('inputTotal')
-        const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
-        const total = document.getElementById('total') // input hidden para mandar a registrar
-        //Agregar data de valores nulos          
-        const inputOperador = document.getElementById('inputOperador')
-        const estadoLinea = document.getElementById('estadoLinea')
-        const fecha_activado = document.getElementById('fecha_activado')
-        const fecha_liquidado = document.getElementById('fecha_liquidado')
-        //const inputStatus = document.getElementById('inputStatus')
-        //const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
-        const fecha_instalacion = document.getElementById('fecha_instalacion')
-        const hora = document.getElementById('hora')
+        // const selectTipoServicio = document.getElementById('selectTipoServicio')
+        // const selectServicio = document.getElementById('selectServicio')
+        // const selectPlan = $('#selectPlan')
+        // const inputCantidad = document.getElementById('inputCantidad')
+        // const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
+        // const inputEquipoProducto = document.getElementById('inputEquipoProducto')
+        // const btnAgregar = document.getElementById('btnAgregar')
+        // const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
+        // const inputTotal = document.getElementById('inputTotal')
+        // const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
+        // const total = document.getElementById('total') // input hidden para mandar a registrar
+        // //Agregar data de valores nulos          
+        // const inputOperador = document.getElementById('inputOperador')
+        // const estadoLinea = document.getElementById('estadoLinea')
+        // const fecha_activado = document.getElementById('fecha_activado')
+        // const fecha_liquidado = document.getElementById('fecha_liquidado')
+        // //const inputStatus = document.getElementById('inputStatus')
+        // //const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
+        // const fecha_instalacion = document.getElementById('fecha_instalacion')
+        // const hora = document.getElementById('hora')
 
-        let cantDetallesVenta = 0 // parecido al cont
-        let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
-        let total_igv = 0
-        let total_sin_igv = 0
-        const IGV = 1.18
+        // let cantDetallesVenta = 0 // parecido al cont
+        // let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
+        // let total_igv = 0
+        // let total_sin_igv = 0
+        // const IGV = 1.18
 
-        // fecha actual en input 
-        // const fecha = new Date();
-        // $('#fecha_entrega_te').val(fecha.toJSON().slice(0, 10))
+        //fecha actual en input 
+        const fecha = new Date();
+        $('#fecha_actual').val(fecha.toJSON().slice(0, 10))
+        
 
         //desabilitar select servicio y plan al iniciar
         $('#selectPlan').prop('disabled', true);

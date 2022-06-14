@@ -41,7 +41,7 @@ class PersonalController extends Controller
             'usuario_sisact' => 'nullable|string|max:50',
             'tipo_personal' => 'nullable|string|max:15',
             'tipo_doc_iden'=> 'required|string|max:30',
-            'nro_doc_iden'=> 'required|numeric|digits_between:9,15|unique:bsd_personal', 
+            'nro_doc_iden'=> 'required|numeric|digits_between:8,15|unique:bsd_personal', 
             'email'=> 'required|string|email|max:75|unique:bsd_personal',
             'direccion' => 'nullable|max:300',
             'celular' => 'nullable|string|max:30'

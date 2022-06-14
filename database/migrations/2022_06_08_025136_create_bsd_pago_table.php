@@ -29,6 +29,11 @@ return new class extends Migration
             $table->char('pago_1er_recibo', 1)->comment('S or N');
             $table->char('pago_dace', 1)->comment('S or N');
             $table->char('abono_consultor', 1)->comment('S or N');
+            $table->float('total_pago');
+            $table->float('porcentaje_cump_dic');
+            $table->float('sum_total_ventas');
+            $table->float('sum_renta_total_ventas');
+            $table->float('sum_comision_bruta_dace');
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();
