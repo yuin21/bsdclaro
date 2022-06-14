@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BsdVenta;
-use App\Models\BsdPersonal;
 
 
 class VentaApiController extends Controller

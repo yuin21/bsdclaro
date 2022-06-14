@@ -337,7 +337,7 @@
                         <p class="h5 text-bold" style="flex-grow: 1">Cliente</p>
                         <div id="cliente_loading" class="text-danger d-none">
                             <span class="text-danger mr-2">
-                                buscando SUNAT
+                                Buscando SUNAT
                             </span>
                             <div class="spinner-border text-danger float-rigth" role="status">
                             </div>

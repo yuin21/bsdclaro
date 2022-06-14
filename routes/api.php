@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PersonalApiController;
 use App\Http\Controllers\Api\ClienteApiController;
 use App\Http\Controllers\Api\VentaApiController;
+use App\Http\Controllers\Api\DetalleVentaApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::get('/clientes/searchLike', [ClienteApiController::class, 'searchLike'])-
 Route::get('/clientes/search', [ClienteApiController::class, 'search'])->name('api.clientes.search');
 Route::get('/clientes/searchSunat', [ClienteApiController::class, 'searchSunat'])->name('api.clientes.searchSunat');
 Route::get('/venta', [VentaApiController::class, 'search'])->name('api.ventas.search');
+Route::get('/detalleventa', [DetalleVentaApiController::class, 'search'])->name('api.detallesventas.search');

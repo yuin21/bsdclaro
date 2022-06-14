@@ -30,13 +30,15 @@ class PagoController extends Controller
         //$tiposservicios = BsdTipoServicio::where('estado', 1)->get();
         //$servicios = BsdServicio::where('estado', 1)->get();
         //$planes = BsdPlan::where('estado', 1)->get();
-        // $prevDatas = BsdVenta::join("bsd_personal", "bsd_personal.id", "=", "bsd_venta.bsd_personal_id")
-        //     ->join("bsd_cliente", "bsd_cliente.id", "=", "bsd_venta.bsd_cliente_id")
-        //     ->selectRaw('bsd_personal.ape_paterno, bsd_personal.ape_materno, bsd_personal.nom_personal, CONCAT(bsd_personal.ape_paterno, " ", bsd_personal.ape_materno, " ", bsd_personal.nom_personal) as fullname, 
-        //     bsd_personal.id as id_personal, bsd_venta.id, bsd_venta.estado_venta, bsd_venta.total, bsd_venta.sec, bsd_cliente.razon_social, bsd_cliente.ruc, bsd_venta.fecha_registro, Date_format(fecha_registro,"%Y-%m-%d") as fecha')
-        //     ->where('bsd_venta.estado', 1)->where('bsd_personal.id',1)
+        // $prevData = BsdDetalleVenta::join("bsd_venta", "bsd_venta.id", "=", "bsd_detalle_venta.bsd_venta_id")
+        //     ->join("bsd_plan", "bsd_plan.id", "=", "bsd_detalle_venta.bsd_plan_id")
+        //     ->join("bsd_servicio", "bsd_servicio.id", "=", "bsd_detalle_venta.bsd_servicio_id")
+        //     ->join("bsd_tipo_servicio", "bsd_tipo_servicio.id", "=", "bsd_detalle_venta.bsd_tipo_servicio_id")
+        //     ->selectRaw('bsd_detalle_venta.id, bsd_tipo_servicio.nom_tipo_servicio, bsd_servicio.nom_servicio, bsd_plan.nombre_plan,
+        //     bsd_detalle_venta.fecha_activado, bsd_detalle_venta.estado_linea, bsd_detalle_venta.cf_sin_igv')
+        //     ->where('bsd_detalle_venta.estado', 1)->where('bsd_venta.id',5)
         //     ->get();
-        // $prevData = $prevDatas->where('fecha','2022-06-10');
+        
         return view('admin.pagos.create', compact('ventas', 'cuotaspersonal','detallesventas'));
     }
 

@@ -31,6 +31,16 @@
     </div>
 @stop
 
+@section('css')
+    <style>
+        #cliente_loading{
+            width: 160px;
+            height: 40px;
+            gap:10px
+        }
+    </style>
+@endsection
+
 @section('js')
     <script>
         // busqueda de RUC para obtener Razon social

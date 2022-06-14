@@ -150,14 +150,14 @@
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
                                     <th>Cantidad/UGIS</th>
-                                    <th>Números de linea nueva</th>
+                                    {{-- <th>Números de linea nueva</th> --}}
                                     <th>Estado de Linea</th>
                                     <th>Fecha de Activado</th>
                                     <th>Sin IGV</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
-                            <tbody id="table_detalle_venta">
+                            <tbody id="tbody_detalle_venta">
                                 {{-- @foreach ($ventas as $venta)
                                     <tr>
                                         <td width="20px">{{ $loop->iteration }}</td>
@@ -360,13 +360,63 @@
                     }
                 }
             });
-        }
+        } 
+        // busqueda de venta
         $(document).ready(function() {
             $(document).on("click", "#table_venta tbody tr", function() {
                 var data = $(this).find(".td_id_venta").html();
                 $("#cuota").val(data)
+                handleSearchDetalleVenta()
             });
-        });
+        });     
+
+        function handleSearchDetalleVenta() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('api.detallesventas.search') }}',
+                data: {
+                    term: $("#cuota").val(),
+                },
+                success: function(response) {
+                    $("#tbody_detalle_venta").html("");
+                    for(var i=0; i<response.length; i++){
+                        var tr = `<tr>
+                        <td>`+(i + 1)+`</td>
+                        <td>`+response[i][i].tiposervicio+`</td>
+                        <td>`+response[i][i].servicio+`</td>
+                        <td>`+response[i][i].plan+`</td>
+                        <td>`+response[i][i].precioplan+`</td>
+                        <td>`+response[i][i].cantidad+`</td>
+                        <td>`+response[i][i].estadolinea+`</td>
+                        <td>`+response[i][i].fechaactivado+`</td>
+                        <td>`+response[i][i].cf_sin_igv+`</td>
+                        <td>`+response[i][i].cf_con_igv+`</td>
+                        <td class="td_id_venta" style="display:none;">`+response[i][i].id+`</td>
+                        </tr>`;
+                        $("#tbody_detalle_venta").append(tr)
+                    }
+                },
+                error: function(response) {
+                    $("#tbody_detalle_venta").html("");
+                    for(var i=0; i<response.length; i++){
+                        var tr = `<tr>
+                        <td>`+(i + 1)+`</td>
+                        <td>`+response[i][i].tiposervicio+`</td>
+                        <td>`+response[i][i].servicio+`</td>
+                        <td>`+response[i][i].plan+`</td>
+                        <td>`+response[i][i].precioplan+`</td>
+                        <td>`+response[i][i].cantidad+`</td>
+                        <td>`+response[i][i].estadolinea+`</td>
+                        <td>`+response[i][i].fechaactivado+`</td>
+                        <td>`+response[i][i].cf_sin_igv+`</td>
+                        <td>`+response[i][i].cf_con_igv+`</td>
+                        <td class="td_id_venta" style="display:none;">`+response[i][i].id+`</td>
+                        </tr>`;
+                        $("#tbody_detalle_venta").append(tr)
+                    }
+                }
+            });
+        }
         
     </script>
     <script>

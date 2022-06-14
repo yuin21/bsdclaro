@@ -4,55 +4,64 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\BsdVenta;
+use App\Models\BsdDetalleVenta;
 use App\Models\BsdPersonal;
 
 
-class VentaApiController extends Controller
+class DetalleVentaApiController extends Controller
 {
     public function search(Request $request)
     {
         $search = $request->get('term');
-        $searchfech = $request->get('fech');
 
-        $prevDatas = BsdVenta::join("bsd_personal", "bsd_personal.id", "=", "bsd_venta.bsd_personal_id")
-            ->join("bsd_cliente", "bsd_cliente.id", "=", "bsd_venta.bsd_cliente_id")
-            ->selectRaw('bsd_personal.ape_paterno, bsd_personal.ape_materno, bsd_personal.nom_personal, CONCAT(bsd_personal.ape_paterno, " ", bsd_personal.ape_materno, " ", bsd_personal.nom_personal) as fullname, 
-            bsd_personal.id as id_personal, bsd_venta.id, bsd_venta.estado_venta, bsd_venta.total, bsd_venta.sec, bsd_cliente.razon_social, bsd_cliente.ruc, Date_format(fecha_registro,"%Y-%m-%d") as fecha')
-            ->where('bsd_venta.estado', 1)->where('bsd_personal.id',$search)
+        $prevData = BsdDetalleVenta::join("bsd_venta", "bsd_venta.id", "=", "bsd_detalle_venta.bsd_venta_id")
+            ->join("bsd_plan", "bsd_plan.id", "=", "bsd_detalle_venta.bsd_plan_id")
+            ->join("bsd_servicio", "bsd_servicio.id", "=", "bsd_detalle_venta.bsd_servicio_id")
+            ->join("bsd_tipo_servicio", "bsd_tipo_servicio.id", "=", "bsd_detalle_venta.bsd_tipo_servicio_id")
+            ->selectRaw('bsd_detalle_venta.id, bsd_tipo_servicio.nom_tipo_servicio, bsd_servicio.nom_servicio, bsd_plan.nombre_plan,
+            bsd_detalle_venta.precio_plan, bsd_detalle_venta.cantidad ,bsd_detalle_venta.fecha_activado, bsd_detalle_venta.estado_linea, 
+            bsd_detalle_venta.cf_sin_igv, bsd_detalle_venta.cf_con_igv')
+            ->where('bsd_detalle_venta.estado', 1)->where('bsd_venta.id',$search)
             ->get();
 
-        $prevData = $prevDatas->where('fecha',$searchfech);
-        //dd($prevData);
-        // $ventas = [];
-        $ventas = collect([]);
+        // $prevDataNumeros = BsdDetalleVenta::join("bsd_numero_linea_nueva", "bsd_numero_linea_nueva.bsd_detalle_venta_id", "=", "bsd_detalle_venta.id")
+        // ->selectRaw('bsd_detalle_venta.id as dv_id, bsd_numero_linea_nueva.numero_linea_nueva')
+        // ->where('bsd_numero_linea_nueva.estado', 1)->where('bsd_detalle_venta.estado', 1)->get();
+
+        // // $ventas = [];
+        $detallesventas = collect([]);
 
         foreach ($prevData as $data) {
-            $venta[] = [
+            $detalleventa[] = [
                 'id' => $data->id,
-                'label' => $data->fullname,
-                'estadoventa' => $this->getEstado_Venta($data->estado_venta),
-                'total' => number_format($data->total,2),
-                'total_sin_igv' => round($data->total/ 1.18, 2),
-                'razonsocial' => $data->razon_social,
-                'ruc' => $data->ruc,
-                'sec' => $data->sec,
+                'label' => $data->nom_tipo_servicio,
+                'tiposervicio' => $data->nom_tipo_servicio,
+                'servicio' => $data->nom_servicio,
+                'plan' => $data->nombre_plan,
+                'precioplan' => $data->precio_plan,
+                'cantidad' => $data->cantidad,
+                'estadolinea' => $this->getEstado_Linea($data->estado_linea),
+                'fechaactivado' => $data->fecha_activado,
+                'cf_sin_igv' => number_format($data->cf_sin_igv, 2),
+                'cf_con_igv' => number_format($data->cf_con_igv,2),
             ];
-            $ventas->push($venta);
+            $detallesventas->push($detalleventa);
         }
 
-        return $ventas;
+        return $detallesventas;
     }
-    public function getEstado_Venta($estadoventa){
-        switch($estadoventa){
+    public function getEstado_Linea($estadolinea){
+        switch($estadolinea){
             case "P":
-                return "Pendiente";
-            case "E":
-                return "Enviado";
+                return "Pendientes de Instalación";
             case "C":
-                return "Conforme";
-            case "N":
-                return "No Conforme";
+                return "Créditos";
+            case "A":
+                return "Activo";
+            case "R":
+                return "Áreas";
+            case "":
+                return "";
             default:
                 return "No existen valores";
         }

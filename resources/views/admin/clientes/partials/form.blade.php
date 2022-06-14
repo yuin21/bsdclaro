@@ -1,21 +1,24 @@
-
-            
 <div class="form-group">
     <div class="row">
         <div class="col-6">
-        {!! Form::label('ruc', 'Ruc*') !!}
-        <div class="input-group">
-            {!! Form::text('ruc', null, ['class' => 'form-control']) !!}
-            <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
-                style="border-radius: 0 3px 3px 0; opacity: 0.8"><i class="fas fa-search"></i></button>
-            <div id="cliente_loading" class="text-danger d-none">
-                <div class="spinner-border text-danger float-rigth" role="status">
+            <div class="d-flex">
+                {!! Form::label('ruc', 'Ruc*') !!}
+                <div id="cliente_loading" class="text-danger d-none" style="margin-left:10px;">
+                    <span class="text-danger mr-2">
+                        Buscando SUNAT
+                    </span>
+                    <div class="spinner-border text-danger float-rigth" role="status" id="spinner">
+                    </div>
                 </div>
             </div>
-        </div>
-        @error('ruc')
-        <span class="text-danger">{{ $message }}</span>
-        @enderror
+            <div class="input-group">
+                {!! Form::text('ruc', null, ['class' => 'form-control']) !!}
+                <button type="button" id="btnSearchCliente" class="btn btn-outline-secondary"
+                    style="border-radius: 0 3px 3px 0; opacity: 0.8"><i class="fas fa-search"></i></button>
+            </div>
+            @error('ruc')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
         </div>
         <div class="col-6">
             {!! Form::label('razon_social', 'Razon Social*') !!}
