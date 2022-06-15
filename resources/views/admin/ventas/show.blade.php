@@ -123,7 +123,7 @@
                                         </td>
                                         <td> {{ $detalle->equipo_producto }}</td>
                                         <td> {{ $detalle->operador }}</td>
-                                        <td> {{ $detalle->getEstado_Linea() }}</td>
+                                        <td> {{ $detalle->estadoLinea->nombre_estado_linea }}</td>
                                         <td> {{ $detalle->fecha_activado }}</td>
                                         {{-- <td> {{ $detalle->fecha_liquidado }}</td> --}}
                                         <td> {{ $detalle->hora }}</td>
@@ -134,13 +134,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
-                        {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
-                        {!! Form::text('inputTotal', number_format($venta->total, 2), ['class' => 'form-control text-danger', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
-                    </div>
                     <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
                         {!! Form::label('inputTotal_sin_igv', 'Total sin igv', ['style' => 'margin: 0']) !!}
                         {!! Form::text('inputTotal_sin_igv', round($venta->total / 1.18, 2), ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
+                        {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
+                        {!! Form::text('inputTotal', number_format($venta->total, 2), ['class' => 'form-control text-danger', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
                     </div>
                 </div>
             </div>

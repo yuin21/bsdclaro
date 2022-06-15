@@ -12,6 +12,7 @@ use App\Models\BsdPlan;
 use App\Models\BsdServicio;
 use App\Models\BsdNumeroLineaNueva;
 use App\Models\BsdCliente;
+use App\Models\BsdEstadoLinea;
 
 class VentaController extends Controller
 {
@@ -31,7 +32,8 @@ class VentaController extends Controller
         $tiposservicio = BsdTipoServicio::where('estado', 1)->get();
         $planes = BsdPlan::where('estado', 1)->get();
         $servicios = BsdServicio::where('estado', 1)->get();
-        return view('admin.ventas.create', compact('tiposservicio', 'planes', 'servicios'));
+        $estadoslinea = BsdEstadoLinea::where('estado', 1)->get();
+        return view('admin.ventas.create', compact('tiposservicio', 'planes', 'servicios', 'estadoslinea'));
     }
 
     public function store(Request $request)
@@ -111,7 +113,7 @@ class VentaController extends Controller
                 $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];
                 // //campos nulos                
                 $detalleventa->operador = $operador[$i];
-                $detalleventa->estado_linea = $estado_linea[$i];
+                $detalleventa->bsd_estado_linea_id = $estado_linea[$i];
                 $detalleventa->fecha_activado = $fecha_activado[$i];
                 //$detalleventa->fecha_liquidado = $fecha_liquidado[$i];
                 //$detalleventa->status_100_por = $status_100_por[$i];

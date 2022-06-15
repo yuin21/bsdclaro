@@ -11,6 +11,7 @@
 
 @section('content')
     {!! Form::open(['route' => 'admin.ventas.store', 'id' => 'formCrearVenta']) !!}
+
     <div class="row">
         <div class="col-8">
             <div class="card" id="div_datos_generales">
@@ -188,13 +189,17 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin-top: 15px; min-width:180px']) !!}
-                                {!! Form::select('estado_linea', ['P'=>'Pendiente de Aprobación del Cliente','C' => 'Créditos','R'=>'Áreas','A' => 'Activo'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione'],  ['style' =>  'margin-top: 17px'] ) !!}
-                                
-                                {{-- <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
-                                    <option value="A">Activos</option>
-                                    <option value="C">Créditos</option>
-                                    <option value="P">Pendientes de Instalación</option>
-                                </select> --}}
+                                {{-- {!! Form::select('estado_linea', $estadoslinea, null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione'],  ['style' =>  'margin-top: 17px'] ) !!}
+                                 --}}
+                                <select name="estado_linea" id="estadoLinea" class="selectpicker form-control"
+                                title="Seleccionar">
+                                    @foreach ($estadoslinea as $estado)
+                                        <option
+                                            value="{{ $estado->id }}_{{ $estado->nombre_estado_linea }}_{{ $estado->bsd_tipo_servicio_id }}">
+                                            {{ $estado->nombre_estado_linea }}
+                                        </option>
+                                    @endforeach 
+                                </select>
                             </div>
                         </div>
                         <div class="col-6" >
@@ -544,8 +549,10 @@
         //desabilitar select servicio y plan al iniciar
         $('#selectPlan').prop('disabled', true);
         $('#selectServicio').prop('disabled', true);
+        $('#estadoLinea').prop('disabled', true);
         $('#selectPlan').selectpicker('refresh');
         $('#selectServicio').selectpicker('refresh');
+        $('#estadoLinea').selectpicker('refresh');
         $('#inputOperador').attr("readonly", true);     
         
         $('#div_datos_generales').hide();
@@ -559,6 +566,7 @@
                 // habilitar los select
                 $('#selectPlan').prop('disabled', false);
                 $('#selectServicio').prop('disabled', false);
+                $('#estadoLinea').prop('disabled', false);
 
                 // filtrar select servicio
                 $("#selectServicio").val('default');                
@@ -575,6 +583,21 @@
                     }
                     return option;
                 })
+                // filtrar select estado linea
+                $("#estadoLinea").val('default');                
+                $.map($("#estadoLinea option"), function(option) {
+                    const value = option.value
+                    if (value) {
+                        const estado = value.split('_') // formato servicio: ID , NOMBRE, ID_TIPO_SERVICIO
+                        const helper = "#estadoLinea option[value=" + value + "]"
+                        if (tipoServicioID !== estado[2]) {
+                            $(`#estadoLinea option[value='${value}']`).hide()
+                        } else {
+                            $(`#estadoLinea option[value='${value}']`).show()
+                        }
+                    }
+                    return option;
+                }) 
                 // filtrar select plan
                 $("#selectPlan").val('default');
                 $.map($("#selectPlan option"), function(option) {
@@ -591,10 +614,11 @@
                     return option;
                 })
 
-                // filtrar select servicio
+                // refrescar los campos generales
                 $('#precioplan').val(0)
                 $('#selectPlan').selectpicker('refresh');
                 $('#selectServicio').selectpicker('refresh');
+                $('#estadoLinea').selectpicker('refresh');
                 //Acomodar los campos
                 $('#div_datos_generales').show();
                 //$('#div_venta').addClass('d-flex justify-content-around');
@@ -708,7 +732,7 @@
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
             // obtener data de valores nulos            
             const operador = inputOperador.value
-            const estado_linea = estadoLinea.value.split('_')
+            const estado_linea = estadoLinea.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
             const fechaactivado = fecha_activado.value
             //const fechaliquidado = fecha_liquidado.value
             //const status_100_por = inputStatus.value
@@ -745,7 +769,7 @@
                 <td>${equipoproducto}</td>
    
                 <td>${operador}</td> 
-                <td>${estado_linea}</td> 
+                <td>${estado_linea[1]}</td> 
                 <td>${fechaactivado}</td> 
                 <td>${horas}</td>
 
@@ -766,7 +790,7 @@
                 <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
 
                 <input type="hidden" name="operador[]" value="${operador}">
-                <input type="hidden" name="estado_linea[]" value="${estado_linea}">
+                <input type="hidden" name="estado_linea[]" value="${estado_linea[0]}">
                 <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
                 <input type="hidden" name="horas[]" value="${horas}">
                 
@@ -785,8 +809,10 @@
             $('#inputEquipoProducto').val(null);
             $("#selectServicio").val('default');
             $("#selectPlan").val('default');
+            $("#estadolinea").val('default');
             $('#selectPlan').selectpicker('refresh');
             $('#selectServicio').selectpicker('refresh');
+            $('#estadolinea').selectpicker('refresh');
 
             $("#inputOperador").val(null);
             $("#estadoLinea").val('default');
