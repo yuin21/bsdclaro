@@ -91,9 +91,9 @@
                         </div>
                         <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('fecha_conforme', 'Fecha de Exp.', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_conforme', null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
-                                @error('fecha_conforme')
+                                {!! Form::label('fecha_entrega', 'Fecha Envio de Exp.', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_entrega', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
+                                @error('fecha_entrega')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
@@ -102,12 +102,13 @@
                     <div class="row mt-2"> --}}
                         <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('fecha_entrega', 'Fecha Envio de Exp.', ['class' => 'text-nowrap']) !!}
-                                {!! Form::date('fecha_entrega', null, ['class' => 'form-control', 'id' => 'fecha_entrega_te']) !!}
-                                @error('fecha_entrega')
+                                {!! Form::label('fecha_conforme', 'Fecha de Exp.', ['class' => 'text-nowrap']) !!}
+                                {!! Form::date('fecha_conforme', null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
+                                @error('fecha_conforme')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                            
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('estado_venta', 'Estado de Expediente*') !!}
@@ -186,26 +187,27 @@
                         </div>
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputEquipoProducto', 'Equipo/Producto*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
-                            </div>
-                        </div>
-                        <div class="col-6" id="div_operador">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('operador', 'Operador', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('operador', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::select('estado_linea', ['P'=>'Pendiente de Aprobación del Cliente','C' => 'Créditos','R'=>'Áreas','A' => 'Activo'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione']) !!}
+                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin-top: 15px; min-width:180px']) !!}
+                                {!! Form::select('estado_linea', ['P'=>'Pendiente de Aprobación del Cliente','C' => 'Créditos','R'=>'Áreas','A' => 'Activo'], null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione'],  ['style' =>  'margin-top: 17px'] ) !!}
                                 
                                 {{-- <select class="selectpicker form-control" name="estado_linea" title="Seleccione" id="estado_Linea">
                                     <option value="A">Activos</option>
                                     <option value="C">Créditos</option>
                                     <option value="P">Pendientes de Instalación</option>
                                 </select> --}}
+                            </div>
+                        </div>
+                        <div class="col-6" >
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputEquipoProducto', 'Equipo/Producto*', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
+                            </div>
+                            
+                        </div>
+                        <div class="col-6" id="div_operador">                            
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('operador', 'Operador', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('operador', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                         </div>
                        <div class="col-6" id="div_fecha_activado">
@@ -660,9 +662,13 @@
             const dataPlan = e.target.value.split('_'); // formato: Id, nombre, precio 
             if(dataPlan[1] == 'Portabilidad'){
                 $('#inputOperador').attr("readonly", false); 
+             //  $('#inputOperador').show();
+                 $('#div_operador').show();
                 $('#inputOperador').val('');   
             }    else{
-                $('#inputOperador').attr("readonly", true);
+               $('#inputOperador').attr("readonly", true);
+               // $('#inputOperador').hide();
+                $('#div_operador').hide();
                 $('#inputOperador').val('');   
                 $('#inputOperador').val(null);   
             }        
