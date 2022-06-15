@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\Admin\TipoServicioController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\EstadoLineaController;
 use App\Http\Controllers\Admin\VentaController;
 use App\Http\Controllers\Admin\NumeroLineaNuevaController;
 use App\Http\Controllers\Admin\EmpresaController;
@@ -83,6 +84,12 @@ Route::resource('plan', PlanController::class)->names('admin.plan');
 Route::get('removidos/plan', [PlanController::class, 'indextrash'])->name('admin.plan.indextrash');
 Route::put('plan/{plan}/destroylogico', [PlanController::class, 'destroyLogico'])->name('admin.plan.destroyLogico');
 Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan'])->name('admin.plan.restaurarPlan');
+
+//Estado de las líneas de tipo de servicio
+Route::resource('estado_linea', EstadolineaController::class)->names('admin.estado_linea');
+Route::get('removidos/estado_linea', [EstadolineaController::class, 'indextrash'])->name('admin.estado_linea.indextrash');
+Route::put('estado_lineas/{estado_linea}/destroylogico', [EstadolineaController::class, 'destroyLogico'])->name('admin.estado_linea.destroyLogico');
+Route::put('estado_lineas/{estado_linea}/restauraEstadolinea', [EstadolineaController::class, 'restauraEstadolinea'])->name('admin.estado_linea.restauraEstadolinea');
 
 //Ventas
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');

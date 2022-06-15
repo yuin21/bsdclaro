@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
         $roleAdmin = Role::create(['name' => 'Administrador']);
         $roleConsu = Role::create(['name' => 'Consultor']);
         $roleVende = Role::create(['name' => 'Vendedor']);
+        $roleVende = Role::create(['name' => 'Mesa de Control']);
 
         // seccion Usuarios
         Permission::create(['name' => 'adminlte.usuarios', 'description' => 'Ver sección: Usuarios'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
@@ -62,6 +63,10 @@ class RoleSeeder extends Seeder
         //seccion plan
         Permission::create(['name' => 'adminlte.plan', 'description' => 'Ver sección: Plan'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.plan.index', 'description' => 'Ver opción: Registro Plan'])->syncRoles([$roleAdmin]);
+
+        //seccion Estado de las Líneas
+        Permission::create(['name' => 'adminlte.estadolinea', 'description' => 'Ver sección: Estado de Líneas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.estado_linea.index', 'description' => 'Ver opción: Registro Estado de Líneas'])->syncRoles([$roleAdmin]);
 
         //seccion empresa
         Permission::create(['name' => 'adminlte.empresa', 'description' => 'Ver sección: Empresa'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion

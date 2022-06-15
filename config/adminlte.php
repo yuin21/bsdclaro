@@ -272,6 +272,13 @@ return [
                     'can' => 'admin.servicio.index',
                 ],
                 [
+                    'text' => 'Estados de las Lineas',  
+                    'route'  => 'admin.estado_linea.index',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'active' => ['admin/estado_linea*'], 
+                    'can' => 'admin.estado_linea.index'
+                ],
+                [
                     'text' => 'Planes',  
                     'route'  => 'admin.plan.index',
                     'icon'  => 'far fa-fw fa-dot-circle',

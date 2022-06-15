@@ -21,5 +21,9 @@ class TipoServicioSeeder extends Seeder
         BsdTipoServicio::create([
             'nom_tipo_servicio' => 'Fija',
         ]);
+        BsdTipoServicio::create([
+            'nom_tipo_servicio' => 'Internet Dedicado',
+        ]);
+        
     }
 }

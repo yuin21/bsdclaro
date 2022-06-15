@@ -43,5 +43,9 @@ class ServicioSeeder extends Seeder
             'bsd_tipo_servicio_id'=> 2,
             'nom_servicio' => 'OLO'
         ]);
+        BsdServicio::create([
+            'bsd_tipo_servicio_id'=> 3,
+            'nom_servicio' => 'Fibra Óptica'
+        ]);        
     }
 }
