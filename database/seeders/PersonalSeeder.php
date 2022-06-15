@@ -32,7 +32,7 @@ class PersonalSeeder extends Seeder
           'nom_personal' => 'Ruben' ,
           'ape_paterno'  => 'Arribasplata',
           'ape_materno' => 'Aponte',
-          'usuario_sisac'=> 'D99941294',
+          'usuario_sisact'=> 'D99941294',
           'cargo' => 'Consultor' ,
           'tipo_personal' => 'Regular',
           'tipo_doc_iden' => 'CEX',
