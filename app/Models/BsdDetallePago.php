@@ -33,7 +33,7 @@ class BsdDetallePago extends Model
      ] ;
      
 
-    protected $table='bsd_detalle_venta';
+    protected $table='bsd_detalle_pago';
 
     public function pago(){
         return $this->belongsTo('App\Models\BsdPago', 'bsd_pago_id');
@@ -47,15 +47,15 @@ class BsdDetallePago extends Model
         return $this->belongsTo('App\Models\BsdDetalleVenta', 'bsd_detalle_venta_id');
     }
 
-    public function tiposervicio(){
-        return $this->belongsTo('App\Models\BsdTipoServicio', 'bsd_tipo_servicio_id');
-    }
+    // public function tiposervicio(){
+    //     return $this->belongsTo('App\Models\BsdTipoServicio', 'bsd_tipo_servicio_id');
+    // }
 
-    public function servicio(){
-        return $this->belongsTo('App\Models\BsdServicio', 'bsd_servicio_id');
-    }
+    // public function servicio(){
+    //     return $this->belongsTo('App\Models\BsdServicio', 'bsd_servicio_id');
+    // }
 
-    public function plan(){
-        return $this->belongsTo('App\Models\BsdPlan', 'bsd_plan_id');
-    }
+    // public function plan(){
+    //     return $this->belongsTo('App\Models\BsdPlan', 'bsd_plan_id');
+    // }
 }

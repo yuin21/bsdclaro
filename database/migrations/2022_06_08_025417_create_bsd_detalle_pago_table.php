@@ -26,10 +26,10 @@ return new class extends Migration
             ->references("id")
             ->on("bsd_venta");
 
-            // $table->bigInteger('bsd_detalle_venta_id')->unsigned();
-            // $table->foreign('bsd_detalle_venta_id')
-            // ->references("id")
-            // ->on("bsd_detalle_venta");
+            $table->bigInteger('bsd_detalle_venta_id')->unsigned();
+            $table->foreign('bsd_detalle_venta_id')
+            ->references("id")
+            ->on("bsd_detalle_venta");
 
             // $table->bigInteger('bsd_tipo_servicio_id')->unsigned();
             // $table->foreign('bsd_tipo_servicio_id')

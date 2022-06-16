@@ -96,6 +96,34 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('porcentaje_cump_dic', '% Cump Dic') !!}
+                                {!! Form::text('porcentaje_cump_dic', null, ['class' => 'form-control']) !!}
+                                @error('porcentaje_cump_dic')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('sum_total_ventas', 'Suma Total Ventas') !!}
+                                {!! Form::text('sum_total_ventas', null, ['class' => 'form-control']) !!}
+                                @error('sum_total_ventas')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('sum_renta_total_ventas', 'Suma Renta Total Ventas') !!}
+                                {!! Form::text('sum_renta_total_ventas', null, ['class' => 'form-control']) !!}
+                                @error('sum_renta_total_ventas')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('sum_comision_bruta_dace', 'Comision Bruta Dace') !!}
+                                {!! Form::text('sum_comision_bruta_dace', null, ['class' => 'form-control']) !!}
+                                @error('sum_comision_bruta_dace')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -150,7 +178,7 @@
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
                                     <th>Cantidad/UGIS</th>
-                                    {{-- <th>Números de linea nueva</th> --}}
+                                    <th>Números de linea nueva</th>
                                     <th>Estado de Linea</th>
                                     <th>Fecha de Activado</th>
                                     <th>Sin IGV</th>
@@ -206,35 +234,7 @@
                                 {!! Form::text('sub_total', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
                             </div>
                         </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('porcentaje_cump_dic', '% Cump Dic', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('porcentaje_cump_dic', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
-                            </div>
-                        </div>
-                       <div class="col-6">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('sum_total_ventas', 'Suma Total Ventas', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('sum_total_ventas', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
-                            </div>
-                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6" id="div_fecha_liquidado">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('sum_renta_total_ventas', 'Suma Renta Total Ventas', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('sum_renta_total_ventas', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
-                            </div>
-                        </div>
-                        <div class="col-6" id="div_fecha_liquidado">
-                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('sum_comision_bruta_dace', 'Comision Bruta Dace', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('sum_comision_bruta_dace', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
-                            </div>
-                        </div>
-                    </div>
+                    </div>                    
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
             </div>
@@ -387,6 +387,7 @@
                         <td>`+response[i][i].plan+`</td>
                         <td>`+response[i][i].precioplan+`</td>
                         <td>`+response[i][i].cantidad+`</td>
+                        <td>`+response[i][i].numerolineanueva+`</td>
                         <td>`+response[i][i].estadolinea+`</td>
                         <td>`+response[i][i].fechaactivado+`</td>
                         <td>`+response[i][i].cf_sin_igv+`</td>
@@ -406,6 +407,7 @@
                         <td>`+response[i][i].plan+`</td>
                         <td>`+response[i][i].precioplan+`</td>
                         <td>`+response[i][i].cantidad+`</td>
+                        <td>`+response[i][i].numerolineanueva+`</td>
                         <td>`+response[i][i].estadolinea+`</td>
                         <td>`+response[i][i].fechaactivado+`</td>
                         <td>`+response[i][i].cf_sin_igv+`</td>
