@@ -10,7 +10,7 @@
 @stop
 
 @section('content')
-    {!! Form::open(['route' => 'admin.ventas.store', 'id' => 'formCrearVenta']) !!}
+    {!! Form::open(['route' => 'admin.pagos.store', 'id' => 'formCrearPago']) !!}
     
     <div class="row">
         <div class="col-12">
@@ -48,9 +48,6 @@
                         <div class="col-lg-6 col-sm-6" > 
                             <div class="h5 text-bold" id='buscar_p'>Datos generales</div>
                         </div> 
-                        <div class="col-lg-6 col-sm-6" >                      
-                            {!! Form::hidden('aux', null, ['class' => 'form-control mt-2', 'id' => 'aux']) !!}
-                        </div>
                     </div> 
                     <div class="card-body">
                         <div class="row mb-4">
@@ -160,6 +157,7 @@
                                 @endforeach --}}
                             </tbody>
                         </table>
+                        {!! Form::hidden('bsd_venta_id', null, ['id' => 'bsd_venta_id']) !!}
                     </div>
                 </div>
             </div>
@@ -169,7 +167,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="table_detalle_venta">
                             <thead class="border">
                                 <tr>
                                     <th>Item</th>
@@ -199,6 +197,7 @@
                                 @endforeach --}}
                             </tbody>
                         </table>
+                        {!! Form::hidden('bsd_detalle_venta_id', null, ['id' => 'bsd_detalle_venta_id']) !!}
                     </div>
                 </div>
             </div>
@@ -214,30 +213,50 @@
                                 {!! Form::text('bsd_detalle_venta_id', null, ['class' => 'form-control mt-2']) !!}
                             </div>
                         </div> --}}
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('cuota', 'Cuota', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('cuota', null, ['class' => 'form-control mt-2', 'id' => 'cuota']) !!}
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('comision_consultor', 'Comision Consultor', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('comision_consultor', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
+                                {!! Form::label('comision_consultor2', 'Comision Consultor', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('comision_consultor2', null, ['class' => 'form-control mt-2', 'id' => 'ComisionConsultor']) !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('sub_total', 'Sub Total', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('sub_total', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
+                                {!! Form::text('sub_total', null, ['class' => 'form-control mt-2', 'id' => 'SubTotal']) !!}
                             </div>
-                        </div>
+                        </div>                    
                     </div>                    
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="border">
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Cliente</th>
+                                    <th>Cuota</th>                                     
+                                    <th>Comision Consultor</th>
+                                    <th>Sub Total</th> 
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_detalle_pago">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="text-center pb-4">
+            {!! Form::submit('Guardar', ['class' => 'btn btn-primary btn-lg']) !!}
+            <a href="{{ url()->previous() }}" class="btn btn-danger btn-lg ml-1">Cancelar</a>
         </div>
     </div>
     {!! Form::close() !!}
@@ -365,7 +384,7 @@
         $(document).ready(function() {
             $(document).on("click", "#table_venta tbody tr", function() {
                 var data = $(this).find(".td_id_venta").html();
-                $("#cuota").val(data)
+                $("#bsd_venta_id").val(data)
                 handleSearchDetalleVenta()
             });
         });     
@@ -375,7 +394,7 @@
                 type: 'GET',
                 url: '{{ route('api.detallesventas.search') }}',
                 data: {
-                    term: $("#cuota").val(),
+                    term: $("#bsd_venta_id").val(),
                 },
                 success: function(response) {
                     $("#tbody_detalle_venta").html("");
@@ -392,7 +411,7 @@
                         <td>`+response[i][i].fechaactivado+`</td>
                         <td>`+response[i][i].cf_sin_igv+`</td>
                         <td>`+response[i][i].cf_con_igv+`</td>
-                        <td class="td_id_venta" style="display:none;">`+response[i][i].id+`</td>
+                        <td class="td_id_detalle_venta" style="display:none;">`+response[i][i].id+`</td>
                         </tr>`;
                         $("#tbody_detalle_venta").append(tr)
                     }
@@ -412,307 +431,90 @@
                         <td>`+response[i][i].fechaactivado+`</td>
                         <td>`+response[i][i].cf_sin_igv+`</td>
                         <td>`+response[i][i].cf_con_igv+`</td>
-                        <td class="td_id_venta" style="display:none;">`+response[i][i].id+`</td>
+                        <td class="td_id_detalle_venta" style="display:none;">`+response[i][i].id+`</td>
                         </tr>`;
                         $("#tbody_detalle_venta").append(tr)
                     }
                 }
             });
         }
+        // busqueda de detalle venta
+        $(document).ready(function() {
+            $(document).on("click", "#table_detalle_venta tbody tr", function() {
+                var data = $(this).find(".td_id_detalle_venta").html();
+                $("#bsd_detalle_venta_id").val(data)
+            });
+        }); 
         
     </script>
     <script>
-        // const selectTipoServicio = document.getElementById('selectTipoServicio')
-        // const selectServicio = document.getElementById('selectServicio')
-        // const selectPlan = $('#selectPlan')
-        // const inputCantidad = document.getElementById('inputCantidad')
-        // const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
-        // const inputEquipoProducto = document.getElementById('inputEquipoProducto')
-        // const btnAgregar = document.getElementById('btnAgregar')
-        // const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
+        const cuota = document.getElementById('cuota')
+        const ComisionConsultor = document.getElementById('ComisionConsultor')
+        const SubTotal = document.getElementById('SubTotal')
+        const btnAgregar = document.getElementById('btnAgregar')
+        const tbodyDetallePago = document.getElementById('tbody_detalle_pago')
+        const DetalleVentaID = document.getElementById('bsd_detalle_venta_id')
         // const inputTotal = document.getElementById('inputTotal')
-        // const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
-        // const total = document.getElementById('total') // input hidden para mandar a registrar
-        // //Agregar data de valores nulos          
-        // const inputOperador = document.getElementById('inputOperador')
-        // const estadoLinea = document.getElementById('estadoLinea')
-        // const fecha_activado = document.getElementById('fecha_activado')
-        // const fecha_liquidado = document.getElementById('fecha_liquidado')
-        // //const inputStatus = document.getElementById('inputStatus')
-        // //const inputNumeroProyecto = document.getElementById('inputNumeroProyecto')
-        // const fecha_instalacion = document.getElementById('fecha_instalacion')
-        // const hora = document.getElementById('hora')
 
-        // let cantDetallesVenta = 0 // parecido al cont
-        // let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
-        // let total_igv = 0
-        // let total_sin_igv = 0
-        // const IGV = 1.18
+        let cantDetallesPago = 0 // parecido al cont
+        let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
 
         //fecha actual en input 
         const fecha = new Date();
-        $('#fecha_actual').val(fecha.toJSON().slice(0, 10))
-        
-
-        //desabilitar select servicio y plan al iniciar
-        $('#selectPlan').prop('disabled', true);
-        $('#selectServicio').prop('disabled', true);
-        $('#selectPlan').selectpicker('refresh');
-        $('#selectServicio').selectpicker('refresh');
-
-        // habilitar select servicio y plan cuando se elige un tipo de servicio
-        $('#selectTipoServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
-            if (isSelected) {
-                const [tipoServicioID, tipoServicioName] = e.target.value.split(
-                    '_') // formato tipo servicio: ID, NOMBRE
-
-                // habilitar los select
-                $('#selectPlan').prop('disabled', false);
-                $('#selectServicio').prop('disabled', false);
-
-                // filtrar select servicio
-                $("#selectServicio").val('default');
-                $.map($("#selectServicio option"), function(option) {
-                    const value = option.value
-                    if (value) {
-                        const servicio = value.split('_') // formato servicio: ID , NOMBRE, ID_TIPO_SERVICIO
-                        const helper = "#selectServicio option[value=" + value + "]"
-                        if (tipoServicioID !== servicio[2]) {
-                            $("#selectServicio option[value=" + value + "]").hide()
-                        } else {
-                            $("#selectServicio option[value=" + value + "]").show()
-                        }
-                    }
-                    return option;
-                })
-                // filtrar select plan
-                $("#selectPlan").val('default');
-                $.map($("#selectPlan option"), function(option) {
-                    const value = option.value
-                    if (value) {
-                        const plan = value.split(
-                            '_') // formato plan: Id, nombre, precio, ID_TIPO_SERVICIO
-                        const helper = "#selectPlan option[value=" + value + "]"
-                        if (tipoServicioID !== plan[3]) {
-                            $(`#selectPlan option[value='${value}']`).hide()
-                        } else {
-                            $(`#selectPlan option[value='${value}']`).show()
-                        }
-                    }
-                    return option;
-                })
-
-                // filtrar select servicio
-                $('#precioplan').val(0)
-                $('#selectPlan').selectpicker('refresh');
-                $('#selectServicio').selectpicker('refresh');
-                //Acomodar los campos
-                $('#div_venta').addClass('d-flex justify-content-around');
-                //deshabilitar y limpiar campos cuando se elija el tipo de servicio movil
-                if (tipoServicioName === 'Móvil') {
-                    //$('#sot').val(null);
-                    //$('#sot').attr("disabled", true);
-                    $('#div_sot').hide();
-                    $('#div_nro_proyecto').hide();
-                    $('#div_fecha_liquidado').hide();
-                    $('#div_hora').hide();
-                    $('#div_observacion').removeClass('col-lg-3').addClass('col-lg-6');
-                    //$('#div_observacion').toggleClass('pull-left');
-                    $('#inputCantidad').attr("disabled", true);
-                    $('#inputCantidad').val('0');
-                    $('#inputEquipoProducto').val(null);
-                    $('#fecha_entrega_te').attr("readonly", false);
-                    $('#fecha_avance_oportunidad').attr("readonly", false);
-                    $('#estado_venta').attr("readonly", false);  
-                    $('#estado_venta').val("P");
-                    $('#estado_venta').change();                  
-                    $('#observacion').attr("readonly", false);  
-                    //$("#estadoLinea").find("option[value='P']").hide();
-                    //$('#estadoLinea').selectpicker('refresh');
-                    obtenerGetCantidadDeNumeros($('#inputNumerosLineasNuevas').val());
-                } else if (tipoServicioName === 'Fija'){
-                    //$('#sot').attr("disabled", false);
-                    $('#div_sot').show();
-                    $('#div_nro_proyecto').show();
-                    $('#div_fecha_liquidado').show();
-                    $('#div_hora').show();
-                    $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
-                    $('#inputCantidad').attr("disabled", false);
-                    $('#inputCantidad').val('0');
-                    $('#inputEquipoProducto').val(null);
-                    $('#fecha_entrega_te').attr("readonly", true);
-                    $('#fecha_avance_oportunidad').attr("readonly", true);
-                    $('#estado_venta').attr('disabled',true);
-                    $('#estado_venta').val('P');
-                    $('#estado_venta').change();                    
-                    $('#observacion').attr("readonly", true);
-                    //$("#estadoLinea").find("option[value='P']").show();
-                    //$('#estadoLinea').selectpicker('refresh'); 
-                    $('#inputNumerosLineasNuevas').val(null);
-                }
-
-            }
-        });
-
-        // seleccionar servicio
-        $('#selectServicio').on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
-            $("#selectPlan").val('default');
-            $('#precioplan').val(0);
-            $('#selectPlan').selectpicker('refresh');
-            //Deshabilitar Operador si se elije Portabilidad
-            const dataPlan = e.target.value.split('_'); // formato: Id, nombre, precio 
-            if(dataPlan[1] == 'Portabilidad'){
-                $('#inputOperador').attr("readonly", false); 
-            }    else{
-                $('#inputOperador').attr("readonly", true);
-                $('#inputOperador').val('');   
-                $('#inputOperador').val(null);   
-            }        
-        });
-
-        // seleccionar plan y mostrar su precio
-        selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
-            const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio 
-            $('#precioplan').val(dataPlan[2])
-        });
+        $('#fecha_actual').val(fecha.toJSON().slice(0, 10))        
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
 
-            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !
-                inputNumerosLineasNuevas.value || !inputEquipoProducto.value) {
-                alerta('Faltan datos en el detalle de venta a agregar')
+            if (!cuota.value || !ComisionConsultor.value || !SubTotal.value || !DetalleVentaID.value) {
+                alerta('Faltan datos en el detalle de pago a agregar')
                 return Toast.fire({
                     icon: 'warning',
                     title: 'Faltan datos'
                 })
             }
 
-            // obtener la data
-            const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
-            const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
-            const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
-            const cantidad = inputCantidad.value
-            const numerosLineasNuevas = inputNumerosLineasNuevas.value
-            const equipoproducto = inputEquipoProducto.value
-            const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
-            const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
-            // obtener data de valores nulos            
-            const operador = inputOperador.value
-            const estado_linea = estadoLinea.value.split('_')
-            const fechaactivado = fecha_activado.value
-            const fechaliquidado = fecha_liquidado.value
-            //const status_100_por = inputStatus.value
-            //const numero_proyecto = inputNumeroProyecto.value
-            //const fechainstalacion = fecha_instalacion.value
-            const horas = hora.value
-
+            // obtener la data        
+            const cuotas = cuota.value
+            const ComisionConsultores = ComisionConsultor.value
+            const SubTotales = SubTotal.value
+            const DetallesVentaID = DetalleVentaID.value
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
-            cantDetallesVenta++
-            total_igv = Number((total_igv + subtotal_igv).toFixed(2))
-            total_sin_igv = Number((total_igv / IGV).toFixed(2))
+            cantDetallesPago++
 
-            let htmlNumerosLineaNueva = ''
-            numerosLineasNuevas.split(',').map(num => {
-                htmlNumerosLineaNueva += `
-                    <span class="badge bg-secondary">
-                        ${num.trim()}
-                    </span>
-                `
-            })
-
-            tbodyDetalleVenta.innerHTML += `
-            <tr id="detalleventa_${cont}">
+            tbodyDetallePago.innerHTML += `
+            <tr id="detallepago_${cont}">
                 <td width="20px">${cont}</td>
-                <td>${tipoServicio[1]}</td>
-                <td>${servicio[1]}</td>
-                <td>${plan[1]}</td>
-                <td id="dv_precioplan">${plan[2]}</td>
-                <td id="dv_cantidad">${cantidad}</td>
-                <td>
-                    ${htmlNumerosLineaNueva}
-                </td>
-                <td>${equipoproducto}</td>
+                <td>${DetallesVentaID}</td>
+                <td>${cuotas}</td>
    
-                <td>${operador}</td> 
-                <td>${estado_linea}</td> 
-                <td>${fechaactivado}</td> 
-                <td>${fechaliquidado}</td>  
-                <td>${horas}</td>
-
-                <td id="dv_subtotal_sin_igv">${subtotal_sin_igv}</td>
-                <td id="dv_subtotal_igv">${subtotal_igv}</td>     
+                <td>${ComisionConsultores}</td> 
+                <td>${SubTotales}</td>    
 
                 <td width="30px">
-                    <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
+                    <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detallepago_${cont}")'>
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
-                <input type="hidden" name="tiposServicio[]" value="${tipoServicio[0]}">
-                <input type="hidden" name="servicios[]" value="${servicio[0]}">
-                <input type="hidden" name="planes[]" value="${plan[0]}">
-                <input type="hidden" name="precioplanes[]" value="${plan[2]}">
-                <input type="hidden" name="cantidades[]" value="${cantidad}">
-                <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
-                <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
-
-                <input type="hidden" name="operador[]" value="${operador}">
-                <input type="hidden" name="estado_linea[]" value="${estado_linea}">
-                <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
-                <input type="hidden" name="fechaliquidado[]" value="${fechaliquidado}">
-                <input type="hidden" name="horas[]" value="${horas}">
-                
-                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}"> 
-                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}"> 
-
+                <input type="hidden" name="detalleventa[]" value="${DetallesVentaID}">
+                <input type="hidden" name="cuotas[]" value="${cuotas}">
+                <input type="hidden" name="ComisionConsultores[]" value="${ComisionConsultores}">
+                <input type="hidden" name="SubTotales[]" value="${SubTotales}">
             </tr>`
 
-            inputTotal.value = total_igv
-            inputTotal_sin_igv.value = total_sin_igv
-            total.value = total_igv
             //limpiar inputs
-            inputCantidad.value = '0'
-            $('#precioplan').val(0)
-            inputNumerosLineasNuevas.value = ''
-            $('#inputEquipoProducto').val(null);
-            $("#selectServicio").val('default');
-            $("#selectPlan").val('default');
-            $('#selectPlan').selectpicker('refresh');
-            $('#selectServicio').selectpicker('refresh');
-
-            $("#inputOperador").val(null);
-            $("#estadoLinea").val('default');
-            $("#fecha_activado").val('default');
-            $("#fecha_liquidado").val('default');
-            //$("#inputStatus").val(null);
-            //$("#inputNumeroProyecto").val(null);
-            //$("#fecha_instalacion").val('default');
-            $("#hora").val('default');
+            $('#cuota').val(0)
+            $('#ComisionConsultor').val(0)
+            $('#SubTotal').val(0)
 
         })
-
-        // calcular la cantidad a partir de la cantidad de numeros ingresados cuando es movil
-        inputNumerosLineasNuevas.addEventListener('input', (e) => {
-            obtenerGetCantidadDeNumeros(e.target.value)
-        })
-
-        function obtenerGetCantidadDeNumeros(valorInputNumeroLinea) {
-            if (!valorInputNumeroLinea.trim()) return inputCantidad.val('0')
-            const cantNumero = valorInputNumeroLinea.split(',').length
-            $('#inputCantidad').val(cantNumero)
-        }
 
         // eliminar un detalle de venta de la lista
-        function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
-            total_igv = Number((total_igv - subtotal_igv).toFixed(2))
-            total_sin_igv = Number((total_igv / IGV).toFixed(2))
-            inputTotal.value = total_igv
-            inputTotal_sin_igv.value = total_sin_igv
-            total.value = total_igv
-            const item = document.getElementById(idDetalleVenta)
-            tbodyDetalleVenta.removeChild(item)
-            cantDetallesVenta--
+        function handleDeleteDetalleVenta(idDetallePago) {
+            const item = document.getElementById(idDetallePago)
+            tbodyDetallePago.removeChild(item)
+            cantDetallesPago--
         }
 
         //alerta
@@ -734,59 +536,85 @@
             })
         }
 
-        const formCrearVenta = document.getElementById('formCrearVenta')
-        formCrearVenta.addEventListener('submit', (e) => {
+        const formCrearPago = document.getElementById('formCrearPago')
+        formCrearPago.addEventListener('submit', (e) => {
             e.preventDefault()
             //verificar los datos obligatorios
             const {
-                tipo_contrato,
-                bsd_personal_id,
-                razon_social,
-                sot,
-                sec,
-                salesforce,
-                nro_oportunidad,
-                observacion,
-                estado_venta,
-                avance_oportunidad,
-                nro_proyecto
+                bsd_cuota_personal_id,
+                bsd_venta_id,
+                porcentaje_comision,
+                comision_consultor,
+                estado_carpeta,
+                pago_1er_recibo,
+                pago_dace,
+                abono_consultor,
+                total_pago,
+                porcentaje_cump_dic,
+                sum_total_ventas,
+                sum_renta_total_ventas,
+                sum_comision_bruta_dace
             } = e.target
 
-            if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(
-                'El campo tipo contrato es obligatorio')
+            if (!porcentaje_comision.value || !porcentaje_comision.value.trim()) return alerta(
+                'El campo Porcentaje Comision es obligatorio')
 
-            if (tipo_contrato.value.length > 20) return alerta(
-                'El campo tipo contrato no debe contener más de 20 caracteres')
+            if (!comision_consultor.value || !comision_consultor.value.trim()) return alerta(
+                'El campo Comision Consultor es obligatorio')
 
-            if (!salesforce.value) return alerta('El campo Salesforce es obligatorio')
+            if (!estado_carpeta.value || !estado_carpeta.value.trim()) return alerta(
+                'El campo Estado Carpeta es obligatorio')
 
-            if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
+            if (!pago_1er_recibo.value || !pago_1er_recibo.value.trim()) return alerta(
+                'El campo Pago 1er Recibo es obligatorio')
+                
+            if (!pago_dace.value || !pago_dace.value.trim()) return alerta(
+                'El campo Pago Dace es obligatorio')
+
+            if (!abono_consultor.value || !abono_consultor.value.trim()) return alerta(
+                'El campo Abono Consultor es obligatorio')
             
-            if (nro_oportunidad.value.length > 18) return alerta(
-                'El campo nro_oportunidad  acepta máximo 18 caracteres')
-
-            if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
+            //if (!total_pago.value || !total_pago.value.trim()) return alerta(
+            //    'El campo Total Pago es obligatorio')
             
-            if (!avance_oportunidad.value) return alerta('El campo Avance de Oportunidad es obligatorio')
+            if (!porcentaje_cump_dic.value) return alerta(
+                'El campo Porcentaje Cumplimiento Dic es obligatorio')
+            
+            if (!sum_total_ventas.value) return alerta(
+                'El campo Suma Total de Ventas es obligatorio')
+            
+            if (!sum_renta_total_ventas.value) return alerta(
+                'El campo Suma Renta Total de Ventas es obligatorio')
+            
+            if (!sum_comision_bruta_dace.value) return alerta(
+                'El campo Suma Comision Bruta es obligatorio')
+            // if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
+            
+            // if (nro_oportunidad.value.length > 18) return alerta(
+            //     'El campo nro_oportunidad  acepta máximo 18 caracteres')
 
-            if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
+            // if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
+            
+            // if (!avance_oportunidad.value) return alerta('El campo Avance de Oportunidad es obligatorio')
 
-            if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
+            // if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
 
-            if (isNaN(nro_proyecto.value)) return alerta('El campo Nro Proyecto debe ser un número')
+            // if (!sec.value || isNaN(sec.value)) return alerta('El campo SEC debe ser un número')
 
-            if (observacion.value.length > 350) return alerta(
-                'El campo observaciones  acepta máximo 350 caracteres')
+            // if (isNaN(nro_proyecto.value)) return alerta('El campo Nro Proyecto debe ser un número')
+
+            // if (observacion.value.length > 350) return alerta(
+            //     'El campo observaciones  acepta máximo 350 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
 
-            if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
+            // if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
 
-            if (cantDetallesVenta === 0) return alerta('Detalles de venta es obligatorio')
+            if (cantDetallesPago === 0) return alerta('Detalles de pago es obligatorio')
 
-            $('#estado_venta').attr('disabled',false);
+            // $('#estado_venta').attr('disabled',false);
 
-            formCrearVenta.submit()
+            formCrearPago.submit()
         })
     </script>
 @stop

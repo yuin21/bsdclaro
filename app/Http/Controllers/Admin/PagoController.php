@@ -27,25 +27,15 @@ class PagoController extends Controller
         $ventas = BsdVenta::where('estado', 1)->get();
         $cuotaspersonal = BsdCuotaPersonal::where('estado', 1)->get();
         $detallesventas = BsdDetalleVenta::where('estado', 1)->get();
-        //$tiposservicios = BsdTipoServicio::where('estado', 1)->get();
-        //$servicios = BsdServicio::where('estado', 1)->get();
-        //$planes = BsdPlan::where('estado', 1)->get();
-        // $prevData = BsdDetalleVenta::join("bsd_venta", "bsd_venta.id", "=", "bsd_detalle_venta.bsd_venta_id")
-        //     ->join("bsd_plan", "bsd_plan.id", "=", "bsd_detalle_venta.bsd_plan_id")
-        //     ->join("bsd_servicio", "bsd_servicio.id", "=", "bsd_detalle_venta.bsd_servicio_id")
-        //     ->join("bsd_tipo_servicio", "bsd_tipo_servicio.id", "=", "bsd_detalle_venta.bsd_tipo_servicio_id")
-        //     ->selectRaw('bsd_detalle_venta.id, bsd_tipo_servicio.nom_tipo_servicio, bsd_servicio.nom_servicio, bsd_plan.nombre_plan,
-        //     bsd_detalle_venta.fecha_activado, bsd_detalle_venta.estado_linea, bsd_detalle_venta.cf_sin_igv')
-        //     ->where('bsd_detalle_venta.estado', 1)->where('bsd_venta.id',5)
-        //     ->get();
         
         return view('admin.pagos.create', compact('ventas', 'cuotaspersonal','detallesventas'));
     }
 
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
-            'bsd_cuota_personal_id' => 'required',
+            //'bsd_cuota_personal_id' => 'required',
             'bsd_venta_id' => 'required',
             'porcentaje_comision' => 'required|numeric',
             'comision_consultor' => 'required|numeric',
@@ -53,7 +43,7 @@ class PagoController extends Controller
             'pago_1er_recibo' => 'required',
             'pago_dace' => 'required',
             'abono_consultor' => 'required',
-            'total_pago' => 'required',
+            //'total_pago' => 'required',
             'porcentaje_cump_dic' => 'required',
             'sum_total_ventas' => 'required',
             'sum_renta_total_ventas' => 'required',
@@ -61,18 +51,11 @@ class PagoController extends Controller
         ]);
 
         // datos de los detalle de pagos
-        $ventas = $request->get('ventas');
-        $detalleventas = $request->get('detalleventas');
-        //$tiposervicios = $request->get('tiposervicios');
-        //$servicios = $request->get('servicios');
-        //$planes = $request->get('planes');
-        $cuota = $request->get('cuota');
-        $comision_consultor = $request->get('comision_consultor');
-        $sub_total = $request->get('sub_total');  
-        //$porcentaje_cump_dic = $request->get('porcentaje_cump_dic');
-        //$sum_total_ventas = $request->get('sum_total_ventas');
-        //$sum_renta_total_ventas = $request->get('sum_renta_total_ventas');
-        //$sum_comision_bruta_dace = $request->get('sum_comision_bruta_dace');
+        $ventas = $request->get('bsd_venta_id');
+        $detalleventas = $request->get('detalleventa');
+        $cuota = $request->get('cuotas');
+        $comision_consultor = $request->get('ComisionConsultores');
+        $sub_total = $request->get('SubTotales'); 
 
         // 1. registrar pago
         $pago = BsdPago::create($request->all());
@@ -81,18 +64,11 @@ class PagoController extends Controller
         for ($i=0; $i < count($detalleventas); $i++) {
             $detallepago = new BsdDetallePago();
             $detallepago->bsd_pago_id = $pago->id;
-            $detallepago->bsd_venta_id = $ventas->id;
-            //$detallepago->bsd_plan_id = $planes[$i];
-            //$detallepago->bsd_servicio_id = $servicios[$i];
-            //$detallepago->bsd_tipo_servicio_id = $tiposervicios[$i];
+            $detallepago->bsd_venta_id = $ventas;
             $detallepago->bsd_detalle_venta_id = $detalleventas[$i];
             $detallepago->cuota = $cuota[$i];
             $detallepago->comision_consultor = $comision_consultor[$i];
             $detallepago->sub_total = $sub_total[$i];
-            //$detallepago->porcentaje_cump_dic = $porcentaje_cump_dic[$i];
-            //$detallepago->sum_total_ventas = $sum_total_ventas[$i];
-            //$detallepago->sum_renta_total_ventas = $sum_renta_total_ventas[$i];
-            //$detallepago->sum_comision_bruta_dace = $sum_comision_bruta_dace[$i];
             $detallepago->save();
         }
         return redirect()->route('admin.pagos.show', $pago)->with('success','store'); 
