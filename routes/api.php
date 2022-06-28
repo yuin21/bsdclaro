@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\PersonalApiController;
 use App\Http\Controllers\Api\ClienteApiController;
 use App\Http\Controllers\Api\VentaApiController;
 use App\Http\Controllers\Api\DetalleVentaApiController;
+use App\Http\Controllers\Api\CuotaPersonalApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,4 @@ Route::get('/clientes/search', [ClienteApiController::class, 'search'])->name('a
 Route::get('/clientes/searchSunat', [ClienteApiController::class, 'searchSunat'])->name('api.clientes.searchSunat');
 Route::get('/venta', [VentaApiController::class, 'search'])->name('api.ventas.search');
 Route::get('/detalleventa', [DetalleVentaApiController::class, 'search'])->name('api.detallesventas.search');
+Route::get('/cuotapersonal', [CuotaPersonalApiController::class, 'search'])->name('api.cuotapersonal.search');

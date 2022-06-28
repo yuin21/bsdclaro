@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class PagoController extends Controller
 {
-    
+
     public function index()
     {
         $bsd_pago = BsdPago::where('estado', 1)->paginate(15);
@@ -27,7 +27,7 @@ class PagoController extends Controller
         $ventas = BsdVenta::where('estado', 1)->get();
         $cuotaspersonal = BsdCuotaPersonal::where('estado', 1)->get();
         $detallesventas = BsdDetalleVenta::where('estado', 1)->get();
-        
+
         return view('admin.pagos.create', compact('ventas', 'cuotaspersonal','detallesventas'));
     }
 
@@ -35,7 +35,7 @@ class PagoController extends Controller
     {
         //dd($request);
         $request->validate([
-            //'bsd_cuota_personal_id' => 'required',
+            'bsd_cuota_personal_id' => 'required',
             'bsd_venta_id' => 'required',
             'porcentaje_comision' => 'required|numeric',
             'comision_consultor' => 'required|numeric',
@@ -55,10 +55,14 @@ class PagoController extends Controller
         $detalleventas = $request->get('detalleventa');
         $cuota = $request->get('cuotas');
         $comision_consultor = $request->get('ComisionConsultores');
-        $sub_total = $request->get('SubTotales'); 
+        $sub_total = $request->get('SubTotales');
+
+        $porcentaje_cump_dic = $request->get('porcentaje_cump_dic');
+        $sum_total_ventas = $request->get('sum_total_ventas');
+        $total_pago = $porcentaje_cump_dic*$sum_total_ventas;
 
         // 1. registrar pago
-        $pago = BsdPago::create($request->all());
+        $pago = BsdPago::create($request->all() + ['total_pago' => $total_pago]);
         // 2. registrar detalles de pago
         //dd($request);
         for ($i=0; $i < count($detalleventas); $i++) {
@@ -71,7 +75,7 @@ class PagoController extends Controller
             $detallepago->sub_total = $sub_total[$i];
             $detallepago->save();
         }
-        return redirect()->route('admin.pagos.show', $pago)->with('success','store'); 
+        return redirect()->route('admin.pagos.show', $pago)->with('success','store');
     }
 
     public function show(BsdPago $pago)

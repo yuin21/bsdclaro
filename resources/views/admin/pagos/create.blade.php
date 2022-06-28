@@ -11,17 +11,19 @@
 
 @section('content')
     {!! Form::open(['route' => 'admin.pagos.store', 'id' => 'formCrearPago']) !!}
-    
+
     <div class="row">
         <div class="col-12">
             <div class="row">
                 <div class="card col-lg-4">
                     <div class="card-header row">
-                        <div class="col-lg-6 col-sm-6" > 
+                        <div class="col-lg-6 col-sm-6" >
                             <div class="h5 text-bold" id='buscar_p'>Buscar Personal</div>
-                        </div> 
-                        <div class="col-lg-6 col-sm-6" >                      
+                        </div>
+                        <div class="col-lg-6 col-sm-6" >
                             {!! Form::date('fecha_actual', null, ['class' => 'form-control mt-2', 'id' => 'fecha_actual']) !!}
+                            {!! Form::hidden('mes', null, ['id' => 'mes']) !!}
+                            {!! Form::hidden('año', null, ['id' => 'año']) !!}
                         </div>
                     </div>
                     <div class="card-body col-lg-12">
@@ -45,10 +47,10 @@
                 </div>
                 <div class="card col-lg-8">
                     <div class="card-header row">
-                        <div class="col-lg-6 col-sm-6" > 
+                        <div class="col-lg-6 col-sm-6" >
                             <div class="h5 text-bold" id='buscar_p'>Datos generales</div>
-                        </div> 
-                    </div> 
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-lg-4 col-sm-6">
@@ -217,6 +219,7 @@
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('cuota', 'Cuota', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('cuota', null, ['class' => 'form-control mt-2', 'id' => 'cuota']) !!}
+                                {!! Form::hidden('bsd_cuota_personal_id', null, ['id' => 'bsd_cuota_personal_id']) !!}
                             </div>
                         </div>
                         <div class="col-4">
@@ -230,8 +233,8 @@
                                 {!! Form::label('sub_total', 'Sub Total', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('sub_total', null, ['class' => 'form-control mt-2', 'id' => 'SubTotal']) !!}
                             </div>
-                        </div>                    
-                    </div>                    
+                        </div>
+                    </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
                 <div class="card-body">
@@ -241,9 +244,9 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Cliente</th>
-                                    <th>Cuota</th>                                     
+                                    <th>Cuota</th>
                                     <th>Comision Consultor</th>
-                                    <th>Sub Total</th> 
+                                    <th>Sub Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -267,7 +270,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <style>
     #precioplan{
-        font-weight: bold; 
+        font-weight: bold;
         text-align: right;
     }
     #inputCantidad{
@@ -316,7 +319,7 @@
                     }
                 })
             },
-            
+
             select: function(evento, selected) {
                 $('#bsd_personal_id').val(selected.item.id);
                 //$('#personal_cargo').val(selected.item.cargo);
@@ -329,7 +332,7 @@
             $('#btnSearchVenta').click(function(e) {
                 handleSearchVenta()
             })
-            $("#searchPersonal").keypress(function(e) {
+            $("#btnSearchVenta").keypress(function(e) {
                 var code = (e.keyCode ? e.keyCode : e.which);
                 if (code == 13) {
                     e.preventDefault();
@@ -379,7 +382,7 @@
                     }
                 }
             });
-        } 
+        }
         // busqueda de venta
         $(document).ready(function() {
             $(document).on("click", "#table_venta tbody tr", function() {
@@ -387,7 +390,7 @@
                 $("#bsd_venta_id").val(data)
                 handleSearchDetalleVenta()
             });
-        });     
+        });
 
         function handleSearchDetalleVenta() {
             $.ajax({
@@ -444,8 +447,48 @@
                 var data = $(this).find(".td_id_detalle_venta").html();
                 $("#bsd_detalle_venta_id").val(data)
             });
-        }); 
-        
+        });
+
+        // busqueda de cuentas
+
+        $(document).ready(function() {
+            $('#btnSearchVenta').click(function(e) {
+                handleSearchCuotas()
+            })
+            $("#btnSearchVenta").keypress(function(e) {
+                var code = (e.keyCode ? e.keyCode : e.which);
+                if (code == 13) {
+                    e.preventDefault();
+                    handleSearchCuotas()
+               }
+            });
+        });
+
+        function handleSearchCuotas() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('api.cuotapersonal.search') }}',
+                data: {
+                    per: $("#bsd_personal_id").val(),
+                    mes: $("#mes").val(),
+                    año: $("#año").val()
+                },
+                success: function(response) {
+                    if (response && response.length > 0) {
+                        $('#cuota').val(response[0].cuota);
+                        $('#bsd_cuota_personal_id').val(response[0].id)
+                    } else {
+                        $('#cuota').val('');
+                        $('#bsd_cuota_personal_id').val('')
+                    }
+                },
+                error: function(response) {
+                    $('#cuota').val('');
+                    $('#bsd_cuota_personal_id').val('')
+                }
+            });
+        }
+
     </script>
     <script>
         const cuota = document.getElementById('cuota')
@@ -454,14 +497,21 @@
         const btnAgregar = document.getElementById('btnAgregar')
         const tbodyDetallePago = document.getElementById('tbody_detalle_pago')
         const DetalleVentaID = document.getElementById('bsd_detalle_venta_id')
+        const CuotaPersonalID = document.getElementById('bsd_cuota_personal_id')
         // const inputTotal = document.getElementById('inputTotal')
 
         let cantDetallesPago = 0 // parecido al cont
         let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
 
-        //fecha actual en input 
+        //fecha actual en input
         const fecha = new Date();
-        $('#fecha_actual').val(fecha.toJSON().slice(0, 10))        
+        $('#fecha_actual').val(fecha.toJSON().slice(0, 10))
+        const mes = fecha.toLocaleString('default', { month: 'long' })
+        $('#mes').val(mes)
+        const año = fecha.getFullYear()
+        $('#año').val(año)
+
+        $('#cuota').attr("readonly", true);
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
@@ -474,11 +524,12 @@
                 })
             }
 
-            // obtener la data        
+            // obtener la data
             const cuotas = cuota.value
             const ComisionConsultores = ComisionConsultor.value
             const SubTotales = SubTotal.value
             const DetallesVentaID = DetalleVentaID.value
+            const CuotasPersonalID = CuotaPersonalID.value
             // mostrar en la tabla y en inputs ocultos para formar un array que luego se envie al hacer submit
             cont++
             cantDetallesPago++
@@ -488,9 +539,9 @@
                 <td width="20px">${cont}</td>
                 <td>${DetallesVentaID}</td>
                 <td>${cuotas}</td>
-   
-                <td>${ComisionConsultores}</td> 
-                <td>${SubTotales}</td>    
+
+                <td>${ComisionConsultores}</td>
+                <td>${SubTotales}</td>
 
                 <td width="30px">
                     <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detallepago_${cont}")'>
@@ -498,13 +549,13 @@
                     </button>
                 </td>
                 <input type="hidden" name="detalleventa[]" value="${DetallesVentaID}">
+                <input type="hidden" name="cuotapersonal[]" value="${CuotasPersonalID}">
                 <input type="hidden" name="cuotas[]" value="${cuotas}">
                 <input type="hidden" name="ComisionConsultores[]" value="${ComisionConsultores}">
                 <input type="hidden" name="SubTotales[]" value="${SubTotales}">
             </tr>`
 
             //limpiar inputs
-            $('#cuota').val(0)
             $('#ComisionConsultor').val(0)
             $('#SubTotal').val(0)
 
@@ -567,34 +618,34 @@
 
             if (!pago_1er_recibo.value || !pago_1er_recibo.value.trim()) return alerta(
                 'El campo Pago 1er Recibo es obligatorio')
-                
+
             if (!pago_dace.value || !pago_dace.value.trim()) return alerta(
                 'El campo Pago Dace es obligatorio')
 
             if (!abono_consultor.value || !abono_consultor.value.trim()) return alerta(
                 'El campo Abono Consultor es obligatorio')
-            
+
             //if (!total_pago.value || !total_pago.value.trim()) return alerta(
             //    'El campo Total Pago es obligatorio')
-            
+
             if (!porcentaje_cump_dic.value) return alerta(
                 'El campo Porcentaje Cumplimiento Dic es obligatorio')
-            
+
             if (!sum_total_ventas.value) return alerta(
                 'El campo Suma Total de Ventas es obligatorio')
-            
+
             if (!sum_renta_total_ventas.value) return alerta(
                 'El campo Suma Renta Total de Ventas es obligatorio')
-            
+
             if (!sum_comision_bruta_dace.value) return alerta(
                 'El campo Suma Comision Bruta es obligatorio')
             // if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
-            
+
             // if (nro_oportunidad.value.length > 18) return alerta(
             //     'El campo nro_oportunidad  acepta máximo 18 caracteres')
 
             // if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
-            
+
             // if (!avance_oportunidad.value) return alerta('El campo Avance de Oportunidad es obligatorio')
 
             // if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')
@@ -607,6 +658,8 @@
             //     'El campo observaciones  acepta máximo 350 caracteres')
 
             if (!bsd_personal_id.value || !bsd_personal_id.value.trim()) return alerta('El Personal es obligatorio')
+
+            if (!bsd_cuota_personal_id.value) return alerta('La cuota es obligatoria')
 
             // if (!razon_social.value || !razon_social.value.trim()) return alerta('El Cliente es obligatorio')
 

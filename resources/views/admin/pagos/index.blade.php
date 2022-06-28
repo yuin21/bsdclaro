@@ -40,8 +40,8 @@
                         @foreach ($bsd_pago as $pago)
                             <tr>
                                 <td width="20px">{{ $loop->iteration }}</td>
-                                <td>{{ $pago->cuota_personal->personal->nom_personal }}
-                                    {{ $pago->cuota_personal->personal->ape_paterno }}
+                                <td>{{ $pago->cuotapersonal->personal->nom_personal }}
+                                    {{ $pago->cuotapersonal->personal->ape_paterno }}
                                 </td>
                                 <td>{{ $pago->venta->total }}</td>
                                 <td>{{ $pago->porcentaje_comision }}</td>
@@ -76,7 +76,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>            
+            </div>
         @else
             <div class="card-body">
                 <strong>Sin Registros</strong>
