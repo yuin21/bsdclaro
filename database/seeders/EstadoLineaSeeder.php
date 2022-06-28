@@ -39,5 +39,17 @@ class EstadoLineaSeeder extends Seeder
         'bsd_tipo_servicio_id' => 2,
         'nombre_estado_linea' => 'Créditos',
        ]);
+       BsdEstadoLinea::create([
+        'bsd_tipo_servicio_id' => 3,
+        'nombre_estado_linea' => 'Pendiente de instalación',
+       ]);
+       BsdEstadoLinea::create([
+        'bsd_tipo_servicio_id' => 3,
+        'nombre_estado_linea' => 'Activo',
+       ]);
+       BsdEstadoLinea::create([
+        'bsd_tipo_servicio_id' => 3,
+        'nombre_estado_linea' => 'Créditos',
+       ]);
     }
 }

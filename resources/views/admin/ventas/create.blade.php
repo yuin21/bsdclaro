@@ -42,6 +42,13 @@
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
+                        <div class="col-lg-3 col-sm-6" id="div_solicitud">
+                            {!! Form::label('solicitud', 'solicitud') !!}
+                            {!! Form::text('solicitud', null, ['class' => 'form-control']) !!}
+                            @error('solicitud')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('tipo_contrato', 'Tipo de Contrato*') !!}
                             {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
@@ -103,7 +110,7 @@
                     <div class="row mt-2"> --}}
                         <div class="col-lg-3 ">
                             <div class="mb-2">
-                                {!! Form::label('fecha_conforme', 'Fecha de Exp.', ['class' => 'text-nowrap']) !!}
+                                {!! Form::label('fecha_conforme', 'Fecha Confor. Exp.', ['class' => 'text-nowrap']) !!}
                                 {!! Form::date('fecha_conforme', null, ['class' => 'form-control', 'id' => 'fecha_conforme']) !!}
                                 @error('fecha_conforme')
                                     <small class="text-danger">{{ $message }}</small>
@@ -651,6 +658,7 @@
                     //$('#sot').attr("disabled", false);
                     $('#div_sot').show();
                     $('#div_nro_proyecto').show();
+                    $('#div_solicitud').hide();
                     //Porque se anula en los dos?
                     //$('#div_fecha_liquidado').hide();
                     $('#div_hora').show();
@@ -670,7 +678,31 @@
                     $('#div_inputNumerosLineasNuevas').hide();
                     $('#div_fecha_activado').show();
                     $('#div_operador').hide();
-                } else{
+                }  else if (tipoServicioName === 'Internet Dedicado'){
+                    $('#div_sot').show();
+                    $('#div_nro_proyecto').show();
+                    $('#div_solicitud').show();
+                    //Porque se anula en los dos?
+                    //$('#div_fecha_liquidado').hide();
+                    $('#div_hora').show();
+                    $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
+                    $('#inputCantidad').attr("disabled", false);
+                    $('#inputCantidad').val('0');
+                    $('#inputEquipoProducto').val(null);
+                    //$('#fecha_entrega_te').attr("readonly", true);
+                    //$('#fecha_avance_oportunidad').attr("readonly", true);
+                    //$('#estado_venta').attr('disabled',true);
+                    $('#estado_venta').val('P');
+                    $('#estado_venta').change();                    
+                    //$('#observacion').attr("readonly", true);
+                    $("#estadoLinea").find("option[value='R']").hide();
+                    $('#estadoLinea').selectpicker('refresh'); 
+                    $('#inputNumerosLineasNuevas').val('');
+                    $('#div_inputNumerosLineasNuevas').hide();
+                    $('#div_fecha_activado').show();
+                    $('#div_operador').hide();
+                }
+                else{
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
                 }
 
@@ -883,7 +915,8 @@
                 observacion,
                 estado_venta,
                 avance_oportunidad,
-                nro_proyecto
+                nro_proyecto,
+                solicitud
             } = e.target
 
             if (!tipo_contrato.value || !tipo_contrato.value.trim()) return alerta(

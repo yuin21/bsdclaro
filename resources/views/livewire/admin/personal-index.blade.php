@@ -60,12 +60,12 @@
                                         </form> --}}
                                         <a href="{{ route('admin.personal.show', $personal) }}"
                                             class="btn btn-sm btn-info text-nowrap">
-                                           <i class="fas fa-eye"></i>
+                                           <i class="fas fa-eye"></i>Ver
                                            {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.personal.edit', $personal) }}"
                                             class="btn btn-success btn-sm text-nowrap">
-                                            <i class="fas fa-pen"></i>
+                                            <i class="fas fa-pen"></i>Editar
                                             {{-- Editar --}}
                                         </a>
                                         <form action="{{ route('admin.personal.destroyLogico', $personal) }}"
@@ -73,7 +73,7 @@
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i>
+                                                <i class="fas fa-minus-circle"></i>Remover
                                                 {{-- Remover --}}
                                             </button>
                                         </form>

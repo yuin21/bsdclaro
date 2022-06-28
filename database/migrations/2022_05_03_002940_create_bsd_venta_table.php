@@ -40,7 +40,7 @@ return new class extends Migration
             $table->date('fecha_entrega')->nullable();
             //$table->string('observaciones_te', 300)->nullable();
             $table->char('salesforce', 1)->comment('S (Si) or N (No)');//No se si se registra en selforce despues o durante la venta
-            //$table->string('solicitud', 200)->nullable();
+            $table->string('solicitud', 50)->nullable();
             $table->char('sot', 8)->nullable();
             //$table->char('estado_te', 1)->nullable()->comment('C or N');
             $table->float('total');

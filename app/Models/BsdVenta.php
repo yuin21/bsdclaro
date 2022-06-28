@@ -24,6 +24,7 @@ class BsdVenta extends Model
         'nro_oportunidad',
         'avance_oportunidad',
         'nro_proyecto',
+        'solicitud',
         'fecha_conforme',
         'fecha_avance_oportunidad',
         'fecha_oportunidad_ganada',

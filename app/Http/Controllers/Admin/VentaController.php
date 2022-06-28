@@ -56,6 +56,7 @@ class VentaController extends Controller
             'salesforce' => 'required',
             'estado_venta' => 'required',
             'nro_oportunidad' => 'required|string|max:18',
+            'solicitud'=>'string|max:50',
             'avance_oportunidad' => 'required',
             'nro_proyecto' => 'nullable|numeric'
             //'fecha_oportunidad_ganada'=>'required',
