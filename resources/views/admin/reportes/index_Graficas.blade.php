@@ -3,10 +3,10 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Bienvenido</h1>
+    <h1>Gráficas</h1>
 @stop
 
-{{-- @section('content')
+@section('content')
     <div class="row">
         <div class="col-lg-6">
             <div class="graph_content">
@@ -225,4 +225,4 @@
             margin-bottom: 20px;
         }
     </style>
-@stop --}}
+@stop

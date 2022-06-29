@@ -121,6 +121,7 @@ Route::put('cuotapersonal/{cuotapersonal}/restaurarCuotaPersonal', [CuotaPersona
 Route::get('reportes/ventasDiarias', [ReportesController::class, 'index_ventasDiarias'])->name('admin.reportes.indexVentasDiarias');
 Route::post('reportes/ventasDiarias/buscar', [ReportesController::class, 'search'])->name('admin.reportes.search');
 Route::post('reportes/{venta}/generarPDF', [ReportesController::class, 'generatePDF'])->name('admin.reportes.generatePDF');
+Route::get('reportes/graficas', [ReportesController::class, 'indexGraficas'])->name('admin.reportes.indexGraficas');
 
 //Pagos
 Route::resource('pagos', PagoController::class)->only(['index', 'create', 'store', 'show'])->names('admin.pagos');

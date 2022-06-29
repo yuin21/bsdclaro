@@ -15,15 +15,15 @@ class ImportBaseRenuevaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.import_baserenueva.index');
+        $this->middleware('can:admin.import_baserenueva.indexf');
     }
-    
-    
+
+
     public function index()
     {
         $data = BsdBaseRenueva::simplePaginate(15);
         return view('admin.importbaserenueva.index', compact('data'));
-        
+
     }
 
     public function parseImport(CsvImportRequest $request)

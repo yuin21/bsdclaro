@@ -12,7 +12,7 @@ class CuotaPersonalController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.cuotapersonal.index');
+        $this->middleware('can:admin.cuotapersonal.indexf');
     }
 
     public function index()
@@ -28,7 +28,7 @@ class CuotaPersonalController extends Controller
         $bsd_cuota = BsdCuota::where('estado', 1)->orderBy('cuota')->get();
         $cuota = $bsd_cuota->pluck('CuotaRound', 'id');
         //dd($cuota);
-        
+
         return view('admin.cuotapersonal.create', compact('personal','cuota'));
     }
 
@@ -37,7 +37,7 @@ class CuotaPersonalController extends Controller
         //dd($this->getMes('mes'));
         $mes = $request->mes;
         $año = $request->año;
-        //dd($request);    
+        //dd($request);
         $request->validate([
             'bsd_personal_id' => "required|unique:bsd_cuota_personal,bsd_personal_id,null,
             id,mes,$mes,año,$año",
@@ -53,7 +53,7 @@ class CuotaPersonalController extends Controller
         //dd($request);
         $cuotapersonal = BsdCuotaPersonal::create($request->all() + ['usuario_reg' => auth()->user()->name]);
 
-        return redirect()->route('admin.cuotapersonal.show', $cuotapersonal)->with('success','store'); 
+        return redirect()->route('admin.cuotapersonal.show', $cuotapersonal)->with('success','store');
     }
 
     public function show(BsdCuotaPersonal $cuotapersonal)
@@ -87,7 +87,7 @@ class CuotaPersonalController extends Controller
             'mes' => "required|string|max:10",
             'año' => "required|numeric|max:2069|min:1970",
         ]);
-        
+
         $cuotapersonal->usuario_act = auth()->user()->name;
 
         $cuotapersonal->update($request->all());
@@ -98,7 +98,7 @@ class CuotaPersonalController extends Controller
     public function destroy(BsdCuotaPersonal $cuotapersonal)
     {
         $cuotapersonal->delete();
-        return redirect()->route('admin.cuotapersonal.indextrash')->with('success','destroy'); 
+        return redirect()->route('admin.cuotapersonal.indextrash')->with('success','destroy');
     }
 
     public function indextrash()
@@ -112,14 +112,14 @@ class CuotaPersonalController extends Controller
     {
         $cuotapersonal->estado = 0;
         $cuotapersonal->save();
-        return redirect()->route('admin.cuotapersonal.index')->with('success','destroyLogico');       
+        return redirect()->route('admin.cuotapersonal.index')->with('success','destroyLogico');
     }
 
     public function restaurarCuotaPersonal(BsdCuotaPersonal $cuotapersonal)
     {
         $cuotapersonal->estado = 1;
         $cuotapersonal->save();
-        return redirect()->route('admin.cuotapersonal.indextrash')->with('success','restaurar');       
+        return redirect()->route('admin.cuotapersonal.indextrash')->with('success','restaurar');
     }
 
 }

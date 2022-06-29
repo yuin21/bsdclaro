@@ -238,353 +238,362 @@ return [
             'route'  => 'admin.perfil.index',
             'icon' => 'fas fa-fw fa-user-circle',
         ],
-        [       
-            'text'    => 'Registros', 
+        [
+            'text'    => 'Registros',
             'icon'    => 'fas fa-file-alt',
-            'can' => '',           
+            'can' => 'adminlte.registros',
             'submenu' => [
                 [
-                    'text' => 'Personal',  
+                    'text' => 'Personal',
                     'route'  => 'admin.personal.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/personal*'], 
+                    'active' => ['admin/personal*'],
                     'can' => 'admin.personal.index',
                 ],
                 [
                     'text' => 'Clientes',
-                    'route'  => 'admin.clientes.index',  
+                    'route'  => 'admin.clientes.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/clientes*'], 
-                    'can' => 'admin.personal.index',
+                    'active' => ['admin/clientes*'],
+                    'can' => 'admin.clientes.index',
                 ],
                 [
-                    'text' => 'Tipo de Servicio',  
+                    'text' => 'Tipo de Servicio',
                     'route'  => 'admin.tiposervicio.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/tiposervicio*'], 
+                    'active' => ['admin/tiposervicio*'],
                     'can' => 'admin.tiposervicio.index',
                 ],
                 [
-                    'text' => 'Servicios',  
+                    'text' => 'Servicios',
                     'route'  => 'admin.servicio.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/servicio*'], 
+                    'active' => ['admin/servicio*'],
                     'can' => 'admin.servicio.index',
                 ],
                 [
-                    'text' => 'Estados de las Lineas',  
+                    'text' => 'Estados de las Lineas',
                     'route'  => 'admin.estado_linea.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/estado_linea*'], 
+                    'active' => ['admin/estado_linea*'],
                     'can' => 'admin.estado_linea.index'
                 ],
                 [
-                    'text' => 'Planes',  
+                    'text' => 'Planes',
                     'route'  => 'admin.plan.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/plan*'], 
+                    'active' => ['admin/plan*'],
                     'can' => 'admin.plan.index',
                 ],
                 [
-                    'text' => 'Cuotas',  
+                    'text' => 'Cuotas',
                     'route'  => 'admin.cuotas.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/cuotas*'], 
+                    'active' => ['admin/cuotas*'],
                     'can' => 'admin.cuotas.index',
                 ],
                 [
-                    'text' => 'Asignar Cuotas',  
+                    'text' => 'Asignar Cuotas',
                     'route'  => 'admin.cuotapersonal.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/cuotapersonal*'], 
-                    'can' => 'admin.cuotapersonal.index',
+                    'active' => ['admin/cuotapersonal*'],
+                    'can' => 'admin.cuotapersonal.indexf',
                 ],
-            ],  
-        ], 
-        [       
-            'text'    => 'Procesos', 
+            ],
+        ],
+        [
+            'text'    => 'Procesos',
             'icon'    => 'fas fa-file-alt',
-            'can' => '',           
+            'can' => 'adminlte.procesos',
             'submenu' => [
                 [
-                    'text' => 'Ventas',  
+                    'text' => 'Ventas',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/ventas*'], 
-                    'route' => 'admin.ventas.index',          
-                ],         
-                [
-                    'text' => 'Pagos',                            
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/pagos*'], 
-                    'route' => 'admin.pagos.index',           
-                ],       
-            ],  
-        ], 
-        [
-            'text'    => 'Reportes', 
-            'icon'    => 'fas fa-file-alt',
-            'can' => 'adminlte.reportes',           
-            'submenu' => [                          
-                [
-                    'text' => 'Ventas Diarias',                            
-                    'icon'  => 'far fa-fw fa-dot-circle',
-                    'route'     => 'admin.reportes.indexVentasDiarias',            
+                    'active' => ['admin/ventas*'],
+                    'route' => 'admin.ventas.index',
+                    'can' => 'admin.ventas.index',
                 ],
                 [
-                    'text' => 'Ventas por consultor',                            
+                    'text' => 'Pagos',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',            
+                    'active' => ['admin/pagos*'],
+                    'route' => 'admin.pagos.index',
+                    'can' => 'admin.pagos.indexf',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Reportes',
+            'icon'    => 'fas fa-file-alt',
+            'can' => 'adminlte.reportes',
+            'submenu' => [
+                [
+                    'text' => 'Ventas Diarias',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'route'     => 'admin.reportes.indexVentasDiarias',
+                    'can' => 'admin.reportes.indexVentasDiarias',
+                ],
+                [
+                    'text' => 'Ventas por consultor',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'url'     => '#',
+                ],
+                [
+                    'text' => 'Gráficas',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'route'     => 'admin.reportes.indexGraficas',
+                    'can' => 'admin.reportes.indexfGraficas',
                 ],
             ]
         ],
-        [       
-            'text'    => 'Configuración', 
+        [
+            'text'    => 'Configuración',
             'icon'    => 'fas fa-fw fa-address-book',
-            'can' => '',           
-            'submenu' => [               
+            'can' => '',
+            'submenu' => [
                 [
-                    'text' => 'Empresa',  
+                    'text' => 'Empresa',
                     'route'  => 'admin.empresa.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/empresa*'], 
+                    'active' => ['admin/empresa*'],
                     'can' => 'admin.empresa.index',
                 ],
                 [
-                    'text' => 'Roles', 
+                    'text' => 'Roles',
                     'route'  => 'admin.roles.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/roles*'],  
-                    'can' => 'admin.roles.index',       
+                    'active' => ['admin/roles*'],
+                    'can' => 'admin.roles.index',
                 ],
                 [
-                    'text'  => 'Usuarios', 
+                    'text'  => 'Usuarios',
                     'route' => 'admin.users.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/users*'],   
-                    'can'   => 'admin.users.index',      
+                    'active' => ['admin/users*'],
+                    'can'   => 'admin.users.index',
                 ],
-                'submenu' => [ 
-                    'text'    => 'Cargas Masivas', 
+                'submenu' => [
+                    'text'    => 'Cargas Masivas',
                     'icon'    => "fas fa-fw fa-file-csv",
-                    'active' => ['admin/cargasmasivas*'], 
-                    'can' => 'adminlte.cargasmasivas', 
-                    'submenu' => [                          
+                    'active' => ['admin/cargasmasivas*'],
+                    'can' => 'admin.cargasmasivas',
+                    'submenu' => [
                         [
-                            'text' => 'Base Fija', 
+                            'text' => 'Base Fija',
                             'route' => 'admin.importbasefija.index',
                             'icon'  => 'far fa-fw fa-dot-circle',
                             'active' => ['admin/import_basefija*'],
-                            'can'   => 'admin.import_basefija.index',      
+                            'can'   => 'admin.import_basefija.index',
                         ],
                         [
-                            'text' => 'Base Movil',   
+                            'text' => 'Base Movil',
                             'route' => 'admin.importbasemovil.index',
                             'icon'  => 'far fa-fw fa-dot-circle',
                             'active' => ['admin/import_basemovil*'],
-                            'can'   => 'admin.import_basemovil.index',      
+                            'can'   => 'admin.import_basemovil.index',
                         ],
-                        [   'text' => 'Base Renueva',  
+                        [   'text' => 'Base Renueva',
                             'route' => 'admin.importbaserenueva.index',
                             'icon'  => 'far fa-fw fa-dot-circle',
                             'active' => ['admin/import_baserenueva*'],
-                            'can'   => 'admin.import_baserenueva.index',   
+                            'can'   => 'admin.import_baserenueva.indexf',
                         ],
                     ],
                 ],
-               
-            ],  
-        ], 
-     
+
+            ],
+        ],
+
        /*
         [
             'text' => 'Usuarios',
             'icon' => 'fas fa-fw fa-user',
-            'active' => ['admin/users*'],   
+            'active' => ['admin/users*'],
             'can' => 'adminlte.usuarios',
-            'submenu' => [    
+            'submenu' => [
                 [
-                    'text'  => 'Registro de Usuarios', 
+                    'text'  => 'Registro de Usuarios',
                     'route' => 'admin.users.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/users*'],   
-                    'can'   => 'admin.users.index',      
+                    'active' => ['admin/users*'],
+                    'can'   => 'admin.users.index',
                 ],
                 [
-                    'text' => 'Registro de roles', 
+                    'text' => 'Registro de roles',
                     'route'  => 'admin.roles.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/roles*'],  
-                    'can' => 'admin.roles.index',       
+                    'active' => ['admin/roles*'],
+                    'can' => 'admin.roles.index',
                 ],
             ]
         ],*/
-      
-    
+
+
        /* [
             'text' => 'Tipo de Servicio',
             'url'  => '/user/tiposervicio',
             'icon' => 'fas fa-list',
-            'active' => ['admin/tiposervicio*'], 
-            'can' => 'adminlte.tiposervicio', 
+            'active' => ['admin/tiposervicio*'],
+            'can' => 'adminlte.tiposervicio',
             'submenu' => [
                 [
-                    'text' => 'Registro Tipo de Servicio',  
+                    'text' => 'Registro Tipo de Servicio',
                     'route'  => 'admin.tiposervicio.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/tiposervicio*'], 
+                    'active' => ['admin/tiposervicio*'],
                     'can' => 'admin.tiposervicio.index',
                 ],
-            ],  
-        ], 
+            ],
+        ],
         [
             'text' => 'Número de linea nueva',
             'url'  => '/user/numero_linea_nueva',
             'icon' => 'fas fa-list',
-            'active' => ['admin/numero_linea_nueva*'], 
-            'can' => 'adminlte.numero_linea_nueva', 
+            'active' => ['admin/numero_linea_nueva*'],
+            'can' => 'adminlte.numero_linea_nueva',
             'submenu' => [
                 [
-                    'text' => 'Registro de los números',  
+                    'text' => 'Registro de los números',
                     'route'  => 'admin.numero_linea_nueva.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/numero_linea_nueva*'], 
+                    'active' => ['admin/numero_linea_nueva*'],
                     'can' => 'admin.numero_linea_nueva.index',
                 ],
-            ],  
-        ], 
+            ],
+        ],
 
         [
             'text' => 'Servicio',
             'url'  => '/user/servicio',
             'icon' => 'fas fa-book',
-            'active' => ['admin/servicio*'], 
-            'can' => 'adminlte.servicio', 
+            'active' => ['admin/servicio*'],
+            'can' => 'adminlte.servicio',
             'submenu' => [
                 [
-                    'text' => 'Registro Servicio',  
+                    'text' => 'Registro Servicio',
                     'route'  => 'admin.servicio.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/servicio*'], 
+                    'active' => ['admin/servicio*'],
                     'can' => 'admin.servicio.index',
                 ],
-            ],  
-        ], 
+            ],
+        ],
         [
             'text' => 'Plan',
             'url'  => '/user/plan',
             'icon' => 'fas fa-file',
-            'active' => ['admin/plan*'], 
-            'can' => 'adminlte.plan', 
+            'active' => ['admin/plan*'],
+            'can' => 'adminlte.plan',
             'submenu' => [
                 [
-                    'text' => 'Registro Plan',  
+                    'text' => 'Registro Plan',
                     'route'  => 'admin.plan.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/plan*'], 
+                    'active' => ['admin/plan*'],
                     'can' => 'admin.plan.index',
                 ],
-            ],  
-        ], 
+            ],
+        ],
         [
             'text' => 'Empresa',
             'url'  => '/user/empresa',
             'icon' => 'fas fa-building',
-            'active' => ['admin/empresa*'], 
-            'can' => 'adminlte.empresa', 
+            'active' => ['admin/empresa*'],
+            'can' => 'adminlte.empresa',
             'submenu' => [
                 [
-                    'text' => 'Registro Empresa',  
+                    'text' => 'Registro Empresa',
                     'route'  => 'admin.empresa.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/empresa*'], 
+                    'active' => ['admin/empresa*'],
                     'can' => 'admin.empresa.index',
                 ],
-            ],  
+            ],
         ],
        [
             'text' => 'Cuota',
             'url'  => '/user/cuotas',
             'icon' => 'fas fa-file',
-            'active' => ['admin/cuotas*'], 
-            'can' => 'adminlte.cuotas', 
+            'active' => ['admin/cuotas*'],
+            'can' => 'adminlte.cuotas',
             'submenu' => [
                 [
-                    'text' => 'Registro Cuota',  
+                    'text' => 'Registro Cuota',
                     'route'  => 'admin.cuotas.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/cuotas*'], 
+                    'active' => ['admin/cuotas*'],
                     'can' => 'admin.cuotas.index',
                 ],
                 [
-                    'text' => 'Asignar Cuota',  
+                    'text' => 'Asignar Cuota',
                     'route'  => 'admin.cuotapersonal.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/cuotapersonal*'], 
+                    'active' => ['admin/cuotapersonal*'],
                     'can' => 'admin.cuotapersonal.index',
                 ],
             ],
         ],*//*
         [
-            'text'    => 'Cargas Masivas', 
+            'text'    => 'Cargas Masivas',
             'icon'    => "fas fa-fw fa-file-csv",
-            'active' => ['admin/cargasmasivas*'], 
-            'can' => 'adminlte.cargasmasivas', 
-            'submenu' => [                          
+            'active' => ['admin/cargasmasivas*'],
+            'can' => 'adminlte.cargasmasivas',
+            'submenu' => [
                 [
-                    'text' => 'Base Fija', 
+                    'text' => 'Base Fija',
                     'route' => 'admin.importbasefija.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'active' => ['admin/import_basefija*'],
-                    'can'   => 'admin.import_basefija.index',      
+                    'can'   => 'admin.import_basefija.index',
                 ],
                 [
-                    'text' => 'Base Movil',   
+                    'text' => 'Base Movil',
                     'route' => 'admin.importbasemovil.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'active' => ['admin/import_basemovil*'],
-                    'can'   => 'admin.import_basemovil.index',      
+                    'can'   => 'admin.import_basemovil.index',
                 ],
-                [   'text' => 'Base Renueva',  
+                [   'text' => 'Base Renueva',
                     'route' => 'admin.importbaserenueva.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'active' => ['admin/import_baserenueva*'],
-                    'can'   => 'admin.import_baserenueva.index',   
+                    'can'   => 'admin.import_baserenueva.index',
                 ],
             ],
         ],
         [
-            'text'    => 'Ventas', 
+            'text'    => 'Ventas',
             'icon'    => 'fas fa-archive',
-            'active' => ['admin/ventas*'],          
-            'submenu' => [  
+            'active' => ['admin/ventas*'],
+            'submenu' => [
                 [
-                    'text' => 'Registro de ventas',  
+                    'text' => 'Registro de ventas',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'active' => ['admin/ventas*'], 
-                    'route' => 'admin.ventas.index',          
-                ],                        
+                    'active' => ['admin/ventas*'],
+                    'route' => 'admin.ventas.index',
+                ],
             ]
         ],*/
-       
-         
+
+
          [
-            'text'    => 'Herramientas', 
-            'icon'    => 'fas fa-cog',  
-            'submenu' => [                          
+            'text'    => 'Herramientas',
+            'icon'    => 'fas fa-cog',
+            'submenu' => [
                 [
-                    'text' => 'Calculadora',                            
+                    'text' => 'Calculadora',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => 'https://web2.0calc.es',
                     'target' => '_blank'
-                ],  
+                ],
                 [
-                    'text' => 'Cálculo del IGV',                            
+                    'text' => 'Cálculo del IGV',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'url'     => 'https://feelingperu.com/calculadora-igv-peru/',
                     'target' => '_blank'
-                ], 
+                ],
 
-                
+
                 ]
             ],
     ],
