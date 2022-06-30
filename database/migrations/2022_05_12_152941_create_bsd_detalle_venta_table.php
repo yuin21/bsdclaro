@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bsd_detalle_venta', function (Blueprint $table) {            
+        Schema::create('bsd_detalle_venta', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bsd_venta_id')->unsigned();
             $table->foreign('bsd_venta_id')
@@ -31,13 +31,14 @@ return new class extends Migration
             $table->foreign('bsd_tipo_servicio_id')
             ->references("id")
             ->on("bsd_tipo_servicio");
-            
+
             $table->bigInteger('bsd_estado_linea_id')->unsigned();
             $table->foreign('bsd_estado_linea_id')
             ->references("id")
             ->on("bsd_estado_linea");
 
             $table->smallInteger('cantidad');
+            //$table->smallInteger('ugis');
             $table->float('precio_plan');
             $table->float('cf_con_igv');
             $table->float('cf_sin_igv');

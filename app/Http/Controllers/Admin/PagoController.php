@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 class PagoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.pagos.indexf');
+    }
 
     public function index()
     {

@@ -18,7 +18,7 @@ class VentaController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:admin.cuotas.index');
+        $this->middleware('can:admin.ventas.index');
     }
 
     public function index()
@@ -56,7 +56,7 @@ class VentaController extends Controller
             'salesforce' => 'required',
             'estado_venta' => 'required',
             'nro_oportunidad' => 'required|string|max:18',
-            'solicitud'=>'string|max:50',
+            'solicitud'=>'max:50',
             'avance_oportunidad' => 'required',
             'nro_proyecto' => 'nullable|numeric'
             //'fecha_oportunidad_ganada'=>'required',
@@ -75,7 +75,7 @@ class VentaController extends Controller
         $subtotales_igv = $request->get('subtotales_igv');
         $subtotales_sinigv = $request->get('subtotales_sinigv');
         $numerosLineasNuevas = $request->get('numerosLineasNuevas');
-        //Datos nulos de los detalles de venta        
+        //Datos nulos de los detalles de venta
         $operador = $request->get('operador');
         $estado_linea = $request->get('estado_linea');
         $fecha_activado = $request->get('fechaactivado');
@@ -112,7 +112,7 @@ class VentaController extends Controller
                 $detalleventa->precio_plan = $precioplanes[$i];
                 $detalleventa->cf_con_igv = $subtotales_igv[$i];
                 $detalleventa->cf_sin_igv = $subtotales_sinigv[$i];
-                // //campos nulos                
+                // //campos nulos
                 $detalleventa->operador = $operador[$i];
                 $detalleventa->bsd_estado_linea_id = $estado_linea[$i];
                 $detalleventa->fecha_activado = $fecha_activado[$i];
@@ -134,20 +134,20 @@ class VentaController extends Controller
                     $numerolineanueva->save();
                     }
                 }
-                                
+
             }
         //     DB::commit();
         // } catch (\Throwable $th) {
         //     DB::rollback();
         // }
-        return redirect()->route('admin.ventas.show', $venta)->with('success','store'); 
+        return redirect()->route('admin.ventas.show', $venta)->with('success','store');
     }
 
     public function show(BsdVenta $venta)
     {
         return view('admin.ventas.show', compact('venta'));
     }
-    
+
     public function tracking(BsdVenta $venta)
     {
         return view('admin.ventas.tracking', compact('venta'));
@@ -179,13 +179,13 @@ class VentaController extends Controller
         //dd($venta);
         $ventas->estado = 0;
         $ventas->save();
-        return redirect()->route('admin.ventas.index')->with('success','destroyLogico');       
+        return redirect()->route('admin.ventas.index')->with('success','destroyLogico');
     }
 
     public function restaurarVenta(BsdVenta $ventas)
     {
         $ventas->estado = 1;
         $ventas->save();
-        return redirect()->route('admin.ventas.indextrash')->with('success','restaurar');       
+        return redirect()->route('admin.ventas.indextrash')->with('success','restaurar');
     }
 }

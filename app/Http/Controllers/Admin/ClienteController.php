@@ -10,7 +10,7 @@ class ClienteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
+        $this->middleware('can:admin.clientes.index');
     }
 
     public function index()
@@ -24,7 +24,7 @@ class ClienteController extends Controller
         $tipos_cliente  = $tipos_cliente ->pluck('name', 'cod');
         return view('admin.clientes.create', compact('tipos_cliente'));
     }
-   
+
     public function store(Request $request)
     {
         $request->validate([
@@ -35,7 +35,7 @@ class ClienteController extends Controller
 
         $cliente= BsdCliente::create($request->all());
 
-        return redirect()->route('admin.clientes.show', $cliente)->with('success','store'); 
+        return redirect()->route('admin.clientes.show', $cliente)->with('success','store');
     }
 
     public function show(BsdCliente $cliente)
@@ -57,7 +57,7 @@ class ClienteController extends Controller
             'ruc' => 'required|string|max:11',
             'razon_social'=> 'required|string|max:120' ,
             'num_celular'=> 'required|string|max:30',
-            
+
         ]);
 
         $cliente->update($request->all());
@@ -68,7 +68,7 @@ class ClienteController extends Controller
     public function destroy(BsdCliente $cliente)
     {
         $cliente->delete();
-        return redirect()->route('admin.clientes.indextrash')->with('success','destroy'); 
+        return redirect()->route('admin.clientes.indextrash')->with('success','destroy');
     }
     public function indextrash()
     {
@@ -81,13 +81,13 @@ class ClienteController extends Controller
     {
         $cliente->estado = 0;
         $cliente->save();
-        return redirect()->route('admin.clientes.index')->with('success','destroyLogico');       
+        return redirect()->route('admin.clientes.index')->with('success','destroyLogico');
     }
 
     public function restaurarCliente(BsdCliente $cliente)
     {
         $cliente->estado = 1;
         $cliente->save();
-        return redirect()->route('admin.clientes.indextrash')->with('success','restaurar');       
+        return redirect()->route('admin.clientes.indextrash')->with('success','restaurar');
     }
 }

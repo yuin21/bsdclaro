@@ -43,7 +43,7 @@
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6" id="div_solicitud">
-                            {!! Form::label('solicitud', 'solicitud') !!}
+                            {!! Form::label('solicitud', 'Solicitud') !!}
                             {!! Form::text('solicitud', null, ['class' => 'form-control']) !!}
                             @error('solicitud')
                                 <small class="text-danger">{{ $message }}</small>
@@ -116,7 +116,7 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
-                            
+
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('estado_venta', 'Estado de Expediente*') !!}
@@ -187,6 +187,12 @@
                                 {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
                             </div>
                         </div>
+                        {{-- <div class="col-6">
+                            <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
+                                {!! Form::label('inputUgis', 'Ugis*', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::text('inputUgis', 0, ['class' => 'form-control mt-2', 'id' => 'inputUgis', 'placeholder' => 'ugis', 'disabled' => 'disabled']) !!}
+                            </div>
+                        </div> --}}
                         <div class="col-6" id="div_inputNumerosLineasNuevas">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva*', ['style' => 'margin: 0; min-width:180px']) !!}
@@ -205,7 +211,7 @@
                                             value="{{ $estado->id }}_{{ $estado->nombre_estado_linea }}_{{ $estado->bsd_tipo_servicio_id }}">
                                             {{ $estado->nombre_estado_linea }}
                                         </option>
-                                    @endforeach 
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -214,9 +220,9 @@
                                 {!! Form::label('inputEquipoProducto', 'Equipo/Producto*', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
                             </div>
-                            
+
                         </div>
-                        <div class="col-6" id="div_operador">                            
+                        <div class="col-6" id="div_operador">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('operador', 'Operador', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('operador', null, ['class' => 'form-control mt-2', 'id' => 'inputOperador']) !!}
@@ -260,7 +266,7 @@
                                 {!! Form::time('hora', null, ['class' => 'form-control mt-2', 'id' => 'hora']) !!}
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     {!! Form::button('Agregar', ['class' => 'btn btn-success btn-sm mt-2', 'id' => 'btnAgregar']) !!}
                 </div>
                 <div class="card-body">
@@ -276,16 +282,16 @@
                                     <th>Cantidad/Ugis</th>
                                     <th>Números de linea nueva</th>
                                     <th>Equipo/Producto</th>
-                                    
+
                                     <th>Operador</th>
                                     <th>Estado de Linea</th>
                                     <th>Fecha Activado</th>
                                     <th>Fecha Liquidado</th>
-                                    <th>Hora</th> 
-                                    
+                                    <th>Hora</th>
+
                                     <th>Sin IGV</th>
                                     <th>Total</th>
- 
+
                                     <th></th>
                                 </tr>
                             </thead>
@@ -307,7 +313,7 @@
                     @error('tiposServicio')
                         <span class="text-danger">El detalle de venta es obligatorio</span>
                     @enderror
-                    {{-- @error('servicios') 
+                    {{-- @error('servicios')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                     @error('planes')
@@ -393,12 +399,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <style>
     #precioplan{
-        font-weight: bold; 
+        font-weight: bold;
         text-align: right;
     }
     #inputCantidad{
         text-align: right;
     }
+    /* #inputUgis{
+        text-align: right;
+    } */
     #dv_precioplan{
         text-align: right;
     }
@@ -526,6 +535,7 @@
         const selectServicio = document.getElementById('selectServicio')
         const selectPlan = $('#selectPlan')
         const inputCantidad = document.getElementById('inputCantidad')
+        // const inputUgis = document.getElementById('inputUgis')
         const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
         const inputEquipoProducto = document.getElementById('inputEquipoProducto')
         const btnAgregar = document.getElementById('btnAgregar')
@@ -533,7 +543,7 @@
         const inputTotal = document.getElementById('inputTotal')
         const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
         const total = document.getElementById('total') // input hidden para mandar a registrar
-        //Agregar data de valores nulos          
+        //Agregar data de valores nulos
         const inputOperador = document.getElementById('inputOperador')
         const estadoLinea = document.getElementById('estadoLinea')
         const fecha_activado = document.getElementById('fecha_activado')
@@ -549,7 +559,7 @@
         let total_sin_igv = 0
         const IGV = 1.18
 
-        // fecha actual en input 
+        // fecha actual en input
         // const fecha = new Date();
         // $('#fecha_entrega_te').val(fecha.toJSON().slice(0, 10))
 
@@ -560,8 +570,8 @@
         $('#selectPlan').selectpicker('refresh');
         $('#selectServicio').selectpicker('refresh');
         $('#estadoLinea').selectpicker('refresh');
-        $('#inputOperador').attr("readonly", true);     
-        
+        $('#inputOperador').attr("readonly", true);
+
         $('#div_datos_generales').hide();
 
         // habilitar select servicio y plan cuando se elige un tipo de servicio
@@ -576,7 +586,7 @@
                 $('#estadoLinea').prop('disabled', false);
 
                 // filtrar select servicio
-                $("#selectServicio").val('default');                
+                $("#selectServicio").val('default');
                 $.map($("#selectServicio option"), function(option) {
                     const value = option.value
                     if (value) {
@@ -591,7 +601,7 @@
                     return option;
                 })
                 // filtrar select estado linea
-                $("#estadoLinea").val('default');                
+                $("#estadoLinea").val('default');
                 $.map($("#estadoLinea option"), function(option) {
                     const value = option.value
                     if (value) {
@@ -604,7 +614,7 @@
                         }
                     }
                     return option;
-                }) 
+                })
                 // filtrar select plan
                 $("#selectPlan").val('default');
                 $.map($("#selectPlan option"), function(option) {
@@ -628,6 +638,7 @@
                 $('#estadoLinea').selectpicker('refresh');
                 //Acomodar los campos
                 $('#div_datos_generales').show();
+                $('#div_solicitud').hide();
                 //$('#div_venta').addClass('d-flex justify-content-around');
                 //deshabilitar y limpiar campos cuando se elija el tipo de servicio movil
                 if (tipoServicioName === 'Móvil') {
@@ -644,10 +655,10 @@
                     $('#inputEquipoProducto').val(null);
                     //$('#fecha_entrega_te').attr("readonly", false);
                     //$('#fecha_avance_oportunidad').attr("readonly", false);
-                    //$('#estado_venta').attr("readonly", false);  
+                    //$('#estado_venta').attr("readonly", false);
                     $('#estado_venta').val("P");
-                    $('#estado_venta').change();                  
-                    //$('#observacion').attr("readonly", false);  
+                    $('#estado_venta').change();
+                    //$('#observacion').attr("readonly", false);
                     $("#estadoLinea").find("option[value='R']").show();
                     $('#estadoLinea').selectpicker('refresh');
                     $('#div_inputNumerosLineasNuevas').show();
@@ -670,10 +681,10 @@
                     //$('#fecha_avance_oportunidad').attr("readonly", true);
                     //$('#estado_venta').attr('disabled',true);
                     $('#estado_venta').val('P');
-                    $('#estado_venta').change();                    
+                    $('#estado_venta').change();
                     //$('#observacion').attr("readonly", true);
                     $("#estadoLinea").find("option[value='R']").hide();
-                    $('#estadoLinea').selectpicker('refresh'); 
+                    $('#estadoLinea').selectpicker('refresh');
                     $('#inputNumerosLineasNuevas').val('');
                     $('#div_inputNumerosLineasNuevas').hide();
                     $('#div_fecha_activado').show();
@@ -693,10 +704,10 @@
                     //$('#fecha_avance_oportunidad').attr("readonly", true);
                     //$('#estado_venta').attr('disabled',true);
                     $('#estado_venta').val('P');
-                    $('#estado_venta').change();                    
+                    $('#estado_venta').change();
                     //$('#observacion').attr("readonly", true);
                     $("#estadoLinea").find("option[value='R']").hide();
-                    $('#estadoLinea').selectpicker('refresh'); 
+                    $('#estadoLinea').selectpicker('refresh');
                     $('#inputNumerosLineasNuevas').val('');
                     $('#div_inputNumerosLineasNuevas').hide();
                     $('#div_fecha_activado').show();
@@ -715,25 +726,31 @@
             $('#precioplan').val(0);
             $('#selectPlan').selectpicker('refresh');
             //Deshabilitar Operador si se elije Portabilidad
-            const dataPlan = e.target.value.split('_'); // formato: Id, nombre, precio 
+            const dataPlan = e.target.value.split('_'); // formato: Id, nombre, precio
             if(dataPlan[1] == 'Portabilidad'){
-                $('#inputOperador').attr("readonly", false); 
+                $('#inputOperador').attr("readonly", false);
              //  $('#inputOperador').show();
                  $('#div_operador').show();
-                $('#inputOperador').val('');   
+                $('#inputOperador').val('');
             }    else{
                $('#inputOperador').attr("readonly", true);
                // $('#inputOperador').hide();
                 $('#div_operador').hide();
-                $('#inputOperador').val('');   
-                $('#inputOperador').val(null);   
-            }        
+                $('#inputOperador').val('');
+                $('#inputOperador').val(null);
+            }
         });
 
         // seleccionar plan y mostrar su precio
         selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
-            const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio 
+            const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio
             $('#precioplan').val(dataPlan[2])
+            const tipoServicio = selectTipoServicio.value.split('_')
+            if(tipoServicio[1]=='Fija'){
+                //$('#inputCantidad').val(dataPlan[1])
+                const cantPlanes = dataPlan[1].split('+').length
+                $('#inputCantidad').val(cantPlanes)
+            }
         });
 
         // agregar detalle de venta a la lista
@@ -758,11 +775,19 @@
             const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
             const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
+            //Validar Cantidad/UGIS
+            if(tipoServicio[1] =='Móvil'){
+                subtotal = Number((plan[2] * cantidad).toFixed(2))
+            } else if (tipoServicio[1] =='Fija'){
+                subtotal = Number((plan[2] * 1).toFixed(2))
+            }
             const numerosLineasNuevas = inputNumerosLineasNuevas.value
             const equipoproducto = inputEquipoProducto.value
-            const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
+            const subtotal_igv = subtotal
+            console.log(subtotal_igv)
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
-            // obtener data de valores nulos            
+
+            // obtener data de valores nulos
             const operador = inputOperador.value
             const estado_linea = estadoLinea.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
             const fechaactivado = fecha_activado.value
@@ -799,14 +824,14 @@
                     ${htmlNumerosLineaNueva}
                 </td>
                 <td>${equipoproducto}</td>
-   
-                <td>${operador}</td> 
-                <td>${estado_linea[1]}</td> 
-                <td>${fechaactivado}</td> 
+
+                <td>${operador}</td>
+                <td>${estado_linea[1]}</td>
+                <td>${fechaactivado}</td>
                 <td>${horas}</td>
 
                 <td id="dv_subtotal_sin_igv">${subtotal_sin_igv}</td>
-                <td id="dv_subtotal_igv">${subtotal_igv}</td>     
+                <td id="dv_subtotal_igv">${subtotal_igv}</td>
 
                 <td width="30px">
                     <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
@@ -825,9 +850,9 @@
                 <input type="hidden" name="estado_linea[]" value="${estado_linea[0]}">
                 <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
                 <input type="hidden" name="horas[]" value="${horas}">
-                
-                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}"> 
-                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}"> 
+
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
+                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
 
             </tr>`
 
@@ -928,12 +953,12 @@
             if (!salesforce.value) return alerta('El campo Salesforce es obligatorio')
 
             if (!nro_oportunidad.value) return alerta('El campo Nro. Oportunidad es obligatorio')
-            
+
             if (nro_oportunidad.value.length > 18) return alerta(
                 'El campo nro_oportunidad  acepta máximo 18 caracteres')
 
             if (!estado_venta.value) return alerta('El campo Estado Venta es obligatorio')
-            
+
             if (!avance_oportunidad.value) return alerta('El campo Avance de Oportunidad es obligatorio')
 
             if (sot.value && isNaN(sot.value)) return alerta('El campo SOT debe ser un número')

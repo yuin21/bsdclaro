@@ -10,6 +10,11 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class ReportesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:adminlte.reportes');
+    }
+
     public function index_ventasDiarias(){
         return view('admin.reportes.index_ventasDiarias');
     }

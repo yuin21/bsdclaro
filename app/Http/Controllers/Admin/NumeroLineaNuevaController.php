@@ -10,7 +10,7 @@ class NumeroLineaNuevaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
+        //$this->middleware('can:admin.personal.index');
     }
 
     public function index()
@@ -22,7 +22,7 @@ class NumeroLineaNuevaController extends Controller
     public function create()
     {
         $detalle_venta= BsdDetalleVenta::pluck('operador','id');
-        
+
         return view('admin.numero_linea_nueva.create',compact('detalle_venta'));
 
     }
@@ -31,11 +31,11 @@ class NumeroLineaNuevaController extends Controller
     {
         $request->validate([
             'numero_linea_nueva' => 'required|string|max:13',
-        ]);       
+        ]);
 
         $numero_linea_nueva= BsdNumero_linea_nueva::create($request->all());
 
-        return redirect()->route('admin.numero_linea_nueva.show', $numero_linea_nueva)->with('success','store'); 
+        return redirect()->route('admin.numero_linea_nueva.show', $numero_linea_nueva)->with('success','store');
     }
 
     public function show(BsdNumero_linea_nueva $numero_linea_nueva)
@@ -69,19 +69,19 @@ class NumeroLineaNuevaController extends Controller
     {
         $numero_linea_nueva->estado = 0;
         $numero_linea_nueva->save();
-        return redirect()->route('admin.numero_linea_nueva.index')->with('success','destroyLogico');       
+        return redirect()->route('admin.numero_linea_nueva.index')->with('success','destroyLogico');
     }
 
     public function destroy(BsdNumero_linea_nueva $numero_linea_nueva)
-    {   
+    {
         $numero_linea_nueva->delete();
-        return redirect()->route('admin.numero_linea_nueva.indextrash')->with('success','destroy');  
+        return redirect()->route('admin.numero_linea_nueva.indextrash')->with('success','destroy');
     }
 
     public function restaurarNumero(BsdNumero_linea_nueva $numero_linea_nueva)
     {
         $numero_linea_nueva->estado = 1;
         $numero_linea_nueva->save();
-        return redirect()->route('admin.numero_linea_nueva.indextrash')->with('success','restaurar');       
+        return redirect()->route('admin.numero_linea_nueva.indextrash')->with('success','restaurar');
     }
 }
