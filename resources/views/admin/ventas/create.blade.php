@@ -43,7 +43,7 @@
                             @enderror
                         </div>
                         <div class="col-lg-3 col-sm-6" id="div_solicitud">
-                            {!! Form::label('solicitud', 'Solicitud') !!}
+                            {!! Form::label('solicitud', 'Nro. Solicitud') !!}
                             {!! Form::text('solicitud', null, ['class' => 'form-control']) !!}
                             @error('solicitud')
                                 <small class="text-danger">{{ $message }}</small>
@@ -118,7 +118,7 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-sm-6" id="div_estado_venta">
                             {!! Form::label('estado_venta', 'Estado de Expediente*') !!}
                             {!! Form::select('estado_venta', ['P' => 'Pendiente', 'E' => 'Enviado', 'C' => 'Conforme', 'N' => 'No Conforme'], null, ['class' => 'selectpicker form-control', 'id' => 'estado_venta']) !!}
                             @error('estado_venta')
@@ -183,16 +183,16 @@
                         </div>
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputCantidad', 'Cantidad/Ugis*', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::label('inputCantidad', 'Cantidad*', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
                             </div>
                         </div>
-                        {{-- <div class="col-6">
+                        <div class="col-6" id="div_ugis">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputUgis', 'Ugis*', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::label('inputUgis', 'Ugis', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputUgis', 0, ['class' => 'form-control mt-2', 'id' => 'inputUgis', 'placeholder' => 'ugis', 'disabled' => 'disabled']) !!}
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="col-6" id="div_inputNumerosLineasNuevas">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva*', ['style' => 'margin: 0; min-width:180px']) !!}
@@ -215,7 +215,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6" >
+                        <div class="col-6" id="div_equipoproducto">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('inputEquipoProducto', 'Equipo/Producto*', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputEquipoProducto', null, ['class' => 'form-control mt-2', 'id' => 'inputEquipoProducto']) !!}
@@ -279,14 +279,14 @@
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad/Ugis</th>
+                                    <th>Cantidad</th>
+                                    <th>Ugis</th>
                                     <th>Números de linea nueva</th>
                                     <th>Equipo/Producto</th>
 
                                     <th>Operador</th>
                                     <th>Estado de Linea</th>
                                     <th>Fecha Activado</th>
-                                    <th>Fecha Liquidado</th>
                                     <th>Hora</th>
 
                                     <th>Sin IGV</th>
@@ -405,9 +405,9 @@
     #inputCantidad{
         text-align: right;
     }
-    /* #inputUgis{
+    #inputUgis{
         text-align: right;
-    } */
+    }
     #dv_precioplan{
         text-align: right;
     }
@@ -535,7 +535,7 @@
         const selectServicio = document.getElementById('selectServicio')
         const selectPlan = $('#selectPlan')
         const inputCantidad = document.getElementById('inputCantidad')
-        // const inputUgis = document.getElementById('inputUgis')
+        const inputUgis = document.getElementById('inputUgis')
         const inputNumerosLineasNuevas = document.getElementById('inputNumerosLineasNuevas')
         const inputEquipoProducto = document.getElementById('inputEquipoProducto')
         const btnAgregar = document.getElementById('btnAgregar')
@@ -649,10 +649,15 @@
                     //$('#div_fecha_liquidado').hide();
                     $('#div_hora').hide();
                     $('#div_observacion').removeClass('col-lg-3').addClass('col-lg-6');
+                    $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-6');
+                    $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                     //$('#div_observacion').toggleClass('pull-left');
                     $('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
+                    $('#div_equipoproducto').show();
                     $('#inputEquipoProducto').val(null);
+                    $('#inputUgis').val(null);
+                    $('#div_ugis').hide();
                     //$('#fecha_entrega_te').attr("readonly", false);
                     //$('#fecha_avance_oportunidad').attr("readonly", false);
                     //$('#estado_venta').attr("readonly", false);
@@ -674,8 +679,13 @@
                     //$('#div_fecha_liquidado').hide();
                     $('#div_hora').show();
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
+                    $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-3');
+                    $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
+                    $('#div_ugis').show();
+                    $('#inputUgis').val('0');
+                    $('#div_equipoproducto').show();
                     $('#inputEquipoProducto').val(null);
                     //$('#fecha_entrega_te').attr("readonly", true);
                     //$('#fecha_avance_oportunidad').attr("readonly", true);
@@ -696,9 +706,13 @@
                     //Porque se anula en los dos?
                     //$('#div_fecha_liquidado').hide();
                     $('#div_hora').show();
-                    $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
+                    $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-8');
+                    $('#div_estado_venta').removeClass('col-lg-3').addClass('col-lg-4');
                     $('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
+                    $('#inputUgis').val(null);
+                    $('#div_ugis').hide();
+                    $('#div_equipoproducto').hide();
                     $('#inputEquipoProducto').val(null);
                     //$('#fecha_entrega_te').attr("readonly", true);
                     //$('#fecha_avance_oportunidad').attr("readonly", true);
@@ -749,13 +763,13 @@
             if(tipoServicio[1]=='Fija'){
                 //$('#inputCantidad').val(dataPlan[1])
                 const cantPlanes = dataPlan[1].split('+').length
-                $('#inputCantidad').val(cantPlanes)
+                $('#inputUgis').val(cantPlanes)
             }
         });
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
-            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !inputEquipoProducto.value) {
+            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value) {
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
@@ -772,19 +786,20 @@
                     title: 'Faltan datos'
                 })
             };
+            if(tipoServicio[1] =='Fija' && !inputEquipoProducto.value){
+                alerta('Faltan datos en el detalle de venta a agregar')
+                return Toast.fire({
+                    icon: 'warning',
+                    title: 'Faltan datos'
+                })
+            };
             const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
             const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
-            //Validar Cantidad/UGIS
-            if(tipoServicio[1] =='Móvil'){
-                subtotal = Number((plan[2] * cantidad).toFixed(2))
-            } else if (tipoServicio[1] =='Fija'){
-                subtotal = Number((plan[2] * 1).toFixed(2))
-            }
+            const ugis = inputUgis.value
             const numerosLineasNuevas = inputNumerosLineasNuevas.value
             const equipoproducto = inputEquipoProducto.value
-            const subtotal_igv = subtotal
-            console.log(subtotal_igv)
+            const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
 
             // obtener data de valores nulos
@@ -820,6 +835,7 @@
                 <td>${plan[1]}</td>
                 <td id="dv_precioplan">${plan[2]}</td>
                 <td id="dv_cantidad">${cantidad}</td>
+                <td>${ugis}</td>
                 <td>
                     ${htmlNumerosLineaNueva}
                 </td>
@@ -843,6 +859,7 @@
                 <input type="hidden" name="planes[]" value="${plan[0]}">
                 <input type="hidden" name="precioplanes[]" value="${plan[2]}">
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
+                <input type="hidden" name="ugises[]" value="${ugis}">
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
                 <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
 
@@ -864,6 +881,7 @@
             $('#precioplan').val(0)
             inputNumerosLineasNuevas.value = ''
             $('#inputEquipoProducto').val(null);
+            $('#inputUgis').val('0');
             $("#selectServicio").val('default');
             $("#selectPlan").val('default');
             $("#estadolinea").val('default');

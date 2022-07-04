@@ -17,6 +17,7 @@ class BsdDetalleVenta extends Model
         'bsd_tipo_servicio_id',
         'bsd_estado_linea_id',
         'cantidad',
+        'ugis',
         'equipo_producto',
         'precio_plan',
         'cf_con_igv',
@@ -34,9 +35,9 @@ class BsdDetalleVenta extends Model
         // 'usuario_reg' ,
         // 'usuario_act' ,
         // 'created_at',
-        // 'updated_at',  
+        // 'updated_at',
      ] ;
-     
+
 
     protected $table='bsd_detalle_venta';
 

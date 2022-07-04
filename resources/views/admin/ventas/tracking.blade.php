@@ -127,16 +127,19 @@
                                     <span class="text-bold tag-detalle">Nro. Proyecto: </span> {{ $venta->nro_proyecto }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Nro. Oportunidad: </span> {{ $venta->nro_oportunidad }}
+                                    <span class="text-bold tag-detalle">Nro. Solicitud: </span> {{ $venta->solicitud }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Estado: </span>
-                                    {{ $venta->getEstado_Venta()}}
+                                    <span class="text-bold tag-detalle">Nro. Oportunidad: </span> {{ $venta->nro_oportunidad }}
                                 </li>
                             </ul>
                         </div>
                         <div class="col-lg-6 col-sm-6">
                             <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="text-bold tag-detalle">Estado: </span>
+                                    {{ $venta->getEstado_Venta()}}
+                                </li>
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Fecha Conformidad: </span>
                                     {{ $venta->fecha_conforme }}
@@ -178,7 +181,8 @@
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad/UGIS</th>
+                                    <th>Cantidad</th>
+                                    <th>UGIS</th>
                                     <th>Números de linea nueva</th>
                                     <th>Equipo/Producto</th>
                                     <th>Operador</th>
@@ -199,6 +203,7 @@
                                         <td> {{ $detalle->plan->nombre_plan }}</td>
                                         <td class="tag-number" id="precio"> {{ number_format($detalle->plan->precio, 2) }}</td>
                                         <td class="tag-number" id="cantidad"> {{ $detalle->cantidad }}</td>
+                                        <td class="tag-number" id="ugis"> {{ $detalle->ugis }}</td>
                                         <td>
                                             @foreach ($detalle->numerosLineaNueva as $numero)
                                                 <span class="badge bg-secondary">

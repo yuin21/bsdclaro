@@ -71,6 +71,7 @@ class VentaController extends Controller
         $planes = $request->get('planes');
         $precioplanes = $request->get('precioplanes');
         $cantidades = $request->get('cantidades');
+        $ugises = $request->get('ugises');
         $equipoproducto = $request->get('equipoproducto');
         $subtotales_igv = $request->get('subtotales_igv');
         $subtotales_sinigv = $request->get('subtotales_sinigv');
@@ -108,6 +109,7 @@ class VentaController extends Controller
                 $detalleventa->bsd_servicio_id = $servicios[$i];
                 $detalleventa->bsd_tipo_servicio_id = $tiposServicio[$i];
                 $detalleventa->cantidad = $cantidades[$i];
+                $detalleventa->ugis = $ugises[$i];
                 $detalleventa->equipo_producto = $equipoproducto[$i];
                 $detalleventa->precio_plan = $precioplanes[$i];
                 $detalleventa->cf_con_igv = $subtotales_igv[$i];
