@@ -269,9 +269,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <style>
-    .hilight{
-        background-color: aquamarine;
-    }
     #precioplan{
         font-weight: bold;
         text-align: right;
@@ -386,16 +383,22 @@
                 }
             });
         }
+
+        var ultimaFila = null;
+        var colorOriginal;
         // busqueda de venta
         $(document).ready(function() {
             $(document).on("click", "#table_venta tbody tr", function() {
                 var data = $(this).find(".td_id_venta").html();
                 $("#bsd_venta_id").val(data)
-                //var resaltado = $(this).find(".hilight").html();
-               // $("#ComisionConsultor").val(data)
-               // $(this).addClass('hilight');
                 handleSearchDetalleVenta()
-                //$(this).removeClass('hilight');
+                //Pintar la fila seleccionada
+                if (ultimaFila != null) {
+                    ultimaFila.css('background-color', colorOriginal)
+                }
+                colorOriginal = $(this).css('background-color');
+                $(this).css('background-color', 'aquamarine');
+                ultimaFila = $(this);
             });
         });
 
@@ -448,11 +451,20 @@
                 }
             });
         }
+        var ultimaFila2 = null;
+        var colorOriginal2;
         // busqueda de detalle venta
         $(document).ready(function() {
             $(document).on("click", "#table_detalle_venta tbody tr", function() {
                 var data = $(this).find(".td_id_detalle_venta").html();
                 $("#bsd_detalle_venta_id").val(data)
+                //Pintar la fila seleccionada
+                if (ultimaFila2 != null) {
+                    ultimaFila2.css('background-color', colorOriginal2)
+                }
+                colorOriginal2 = $(this).css('background-color');
+                $(this).css('background-color', 'aquamarine');
+                ultimaFila2 = $(this);
             });
         });
 
