@@ -336,7 +336,8 @@ return [
                 [
                     'text' => 'Ventas por consultor',
                     'icon'  => 'far fa-fw fa-dot-circle',
-                    'url'     => '#',
+                    'route'     => 'admin.reportes.indexVentasConsultor',
+                    'can' => 'admin.reportes.indexVentasConsultor',
                 ],
                 [
                     'text' => 'Gráficas',

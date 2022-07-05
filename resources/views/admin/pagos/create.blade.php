@@ -269,6 +269,9 @@
     <link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <style>
+    .hilight{
+        background-color: aquamarine;
+    }
     #precioplan{
         font-weight: bold;
         text-align: right;
@@ -388,7 +391,11 @@
             $(document).on("click", "#table_venta tbody tr", function() {
                 var data = $(this).find(".td_id_venta").html();
                 $("#bsd_venta_id").val(data)
+                //var resaltado = $(this).find(".hilight").html();
+               // $("#ComisionConsultor").val(data)
+               // $(this).addClass('hilight');
                 handleSearchDetalleVenta()
+                //$(this).removeClass('hilight');
             });
         });
 

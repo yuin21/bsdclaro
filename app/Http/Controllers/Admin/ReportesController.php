@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BsdPersonal;
 use Illuminate\Http\Request;
 use App\Models\BsdVenta;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -56,5 +57,34 @@ class ReportesController extends Controller
             ->whereYear('fecha_registro', $lastYear)->get();
 
         return view('admin.reportes.index_Graficas', compact('year', 'lastYear', 'ventas_currentYear', 'ventas_lastYear'));
+    }
+
+    public function index_ventasConsultor(){
+        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        $personal = $bsd_personal->pluck('PersonalFullName', 'id');
+
+        return view('admin.reportes.index_ventasConsultor', compact('personal'));
+    }
+
+    public function searchConsultor(Request $request) {
+        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        $personal = $bsd_personal->pluck('PersonalFullName', 'id');
+      //  dd($request);
+
+      $bsd_venta = null;
+      if ( $request->fecha_registro == null) {
+        $bsd_venta = BsdVenta::where('estado', 1)
+        ->where('estado_venta', $request->estado_venta)
+        ->where('bsd_personal_id',$request->personal)
+        ->paginate(15);
+      } else  {
+        $bsd_venta = BsdVenta::where('estado', 1)
+        ->where('estado_venta', $request->estado_venta)
+        ->whereDate('fecha_registro', $request->fecha_registro)
+        ->where('bsd_personal_id',$request->personal)
+        ->paginate(15);
+      }
+      //dd($bsd_venta);
+      return view('admin.reportes.index_ventasConsultor', compact('bsd_venta', 'request','personal'));
     }
 }
