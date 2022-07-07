@@ -101,4 +101,26 @@ class PagoController extends Controller
     {
         //
     }
+
+    public function indextrash()
+    {
+        $bsd_pago = BsdPago::where('estado', 0)->get();
+        return view('admin.pagos.indextrash', compact('bsd_pago'));
+    }
+
+
+    public function destroyLogico(BsdPago $pago)
+    {
+        //dd($pago);
+        $pago->estado = 0;
+        $pago->save();
+        return redirect()->route('admin.pagos.index')->with('success','destroyLogico');
+    }
+
+    public function restaurarPago(BsdPago $pago)
+    {
+        $pago->estado = 1;
+        $pago->save();
+        return redirect()->route('admin.pagos.indextrash')->with('success','restaurar');
+    }
 }

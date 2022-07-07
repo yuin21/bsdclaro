@@ -29,9 +29,9 @@ class BsdPago extends Model
         // 'usuario_reg' ,
         // 'usuario_act' ,
         // 'created_at',
-        // 'updated_at',  
+        // 'updated_at',
      ] ;
-     
+
 
     protected $table='bsd_pago';
 
@@ -41,6 +41,10 @@ class BsdPago extends Model
 
     public function venta(){
         return $this->belongsTo('App\Models\BsdVenta', 'bsd_venta_id');
+    }
+
+    public function detallespago(){
+        return $this->hasMany('App\Models\BsdDetallePago');
     }
 
 }

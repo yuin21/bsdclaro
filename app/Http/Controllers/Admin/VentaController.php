@@ -178,7 +178,7 @@ class VentaController extends Controller
 
     public function destroyLogico(BsdVenta $ventas)
     {
-        //dd($venta);
+        //dd($ventas);
         $ventas->estado = 0;
         $ventas->save();
         return redirect()->route('admin.ventas.index')->with('success','destroyLogico');

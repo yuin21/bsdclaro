@@ -11,11 +11,11 @@
 
 @section('content')
     <div class="card">
-        {{-- <div class="card-header">
+        <div class="card-header">
             <a class="btn btn-info mb-2" href="{{ route('admin.pagos.indextrash') }}">
                 <i class="fas fa-trash"></i> Anulados
             </a>
-        </div> --}}
+        </div>
         @if ($bsd_pago->count())
             <div class="card-body table-responsive">
                 <div>
@@ -44,32 +44,26 @@
                                     {{ $pago->cuotapersonal->personal->ape_paterno }}
                                 </td>
                                 <td>{{ $pago->venta->total }}</td>
-                                <td>{{ $pago->porcentaje_comision }}</td>
-                                <td>{{ $pago->comision_consultor }}</td>
-                                <td>{{ $pago->estado_carpeta }}</td>
-                                <td>{{ $pago->pago_1er_recibo }}</td>
-                                <td>{{ $pago->pago_dace }}</td>
-                                <td>{{ $pago->abono_consultor }}</td>
+                                <td>{{ $pago->porcentaje_comision }} %</td>
+                                <td>{{ $pago->comision_consultor}}</td>
+                                <td>{{ $pago->estado_carpeta === 'C' ? 'Conforme' : 'No Conforme' }}</td>
+                                <td>{{ $pago->pago_1er_recibo === 'S' ? 'Si' : 'No' }}</td>
+                                <td>{{ $pago->pago_dace === 'S' ? 'Si' : 'No' }}</td>
+                                <td>{{ $pago->abono_consultor === 'S' ? 'Si' : 'No' }}</td>
                                 <td width="260px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.pagos.show', $pago) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver
                                         </a>
-                                        {{-- <a href="{{ route('admin.ventas.tracking', $venta) }}"
-                                        class="btn btn-sm btn-info text-nowrap" id="Seguimiento"
-                                        <?php if ($venta->avance_oportunidad !== 100){ ?> style="display: none;" <?php   } ?>>
-                                            <i class="fas fa-eye"></i> Seguimiento
-                                        </a>   --}}
-                                        {{-- <form action="{{ route('admin.ventas.destroyLogico', $venta) }}"
+                                        <form action="{{ route('admin.pagos.destroyLogico', $pago) }}"
                                             class="form-borrar" method="post">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Anular
-                                                {{-- Remover
+                                                <i class="fas fa-minus-circle"></i> Remover
                                             </button>
-                                        </form>  --}}
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -85,24 +79,12 @@
     </div>
 @stop
 
-{{-- Nota: Creo que lo ideal es hacerlo en un apartado, no dentro del mismo codigo html, pero lo intente no habia podido
-    Debido al tiempo se quedará así pero falta revisar esta parte. style="display: none;
-     @section('js')
-    <script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){
-            $('#ver_avance_oportunidad').val('bye')
-        });
-        $(window).on("load", $('#ver_avance_oportunidad').val('bye'));
-    </script>
-@endsection --}}
-
 @section('js')
     @if (session('success') === 'destroyLogico')
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'La venta se ha anulado con éxito',
+                title: 'El pago se ha anulado con éxito',
             })
         </script>
     @endif
@@ -111,7 +93,7 @@
         $('.form-borrar').submit(function(e) {
             e.preventDefault()
             Swal.fire({
-                title: 'Va a anular una venta',
+                title: 'Va a anular un pago',
                 text: "Puede verlo y restaurarlo en la opción: Anulados",
                 icon: 'warning',
                 showCancelButton: true,
