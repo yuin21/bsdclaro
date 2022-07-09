@@ -17,8 +17,7 @@ return new class extends Migration
         $procedure = "DROP PROCEDURE IF EXISTS `sp_contarServicios`;
         CREATE PROCEDURE `sp_contarServicios`(IN _id_servicio INT, IN _id_personal INT)
         BEGIN
-        Select personal.nom_personal, servicio.nom_servicio, SUM(cf_con_igv) as sumcfconigv,
-        count(servicio.nom_servicio) * cantidad as contservicio
+        Select personal.nom_personal, servicio.nom_servicio, SUM(cf_con_igv) as sumcfconigv
         from bsd_detalle_venta as detalleventa join
         bsd_venta as venta join
         bsd_servicio as servicio join

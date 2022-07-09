@@ -794,12 +794,13 @@
                 })
             };
             const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
-            const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
+            const plan = precioplan.value // formato: Id, nombre, precio, ID_TIPO_SERVICIO
+            const nombreplan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
             const ugis = inputUgis.value
             const numerosLineasNuevas = inputNumerosLineasNuevas.value
             const equipoproducto = inputEquipoProducto.value
-            const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
+            const subtotal_igv = Number((plan * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
 
             // obtener data de valores nulos
@@ -832,8 +833,8 @@
                 <td width="20px">${cont}</td>
                 <td>${tipoServicio[1]}</td>
                 <td>${servicio[1]}</td>
-                <td>${plan[1]}</td>
-                <td id="dv_precioplan">${plan[2]}</td>
+                <td>${nombreplan[1]}</td>
+                <td id="dv_precioplan">${plan}</td>
                 <td id="dv_cantidad">${cantidad}</td>
                 <td>${ugis}</td>
                 <td>
@@ -856,8 +857,8 @@
                 </td>
                 <input type="hidden" name="tiposServicio[]" value="${tipoServicio[0]}">
                 <input type="hidden" name="servicios[]" value="${servicio[0]}">
-                <input type="hidden" name="planes[]" value="${plan[0]}">
-                <input type="hidden" name="precioplanes[]" value="${plan[2]}">
+                <input type="hidden" name="planes[]" value="${nombreplan[0]}">
+                <input type="hidden" name="precioplanes[]" value="${plan}">
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
                 <input type="hidden" name="ugises[]" value="${ugis}">
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
