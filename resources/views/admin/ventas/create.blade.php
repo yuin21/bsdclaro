@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('tipo_contrato', 'Tipo de Contrato*') !!}
-                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'D' => 'Digital'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
                             @error('tipo_contrato')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -776,10 +776,10 @@
                     title: 'Faltan datos'
                 })
             }
-
+            //console.log(!inputEquipoProducto.value)
             // obtener la data
             const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
-            if(tipoServicio[1] =='Móvil' && !inputNumerosLineasNuevas.value){
+            if(tipoServicio[1] =='Móvil' && (!inputNumerosLineasNuevas.value || !inputEquipoProducto.value)){
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',

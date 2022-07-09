@@ -45,7 +45,7 @@
                                 <td>{{ $venta->cliente->ruc }} <br> {{ $venta->cliente->razon_social }} </td>
                                 <td>{{ $venta->sec }}</td>
                                 <td>{{ $venta->sot }}</td>
-                                <td>{{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}</td>
+                                <td>{{ $venta->tipo_contrato === 'D' ? 'Digital' : 'Fisico' }}</td>
                                 <td id="avance_oportunidad">{{ $venta->avance_oportunidad }}%</td>
                                 <td width="260px">
                                     <div class="d-flex" style="gap: 10px">
@@ -57,7 +57,7 @@
                                         class="btn btn-sm btn-info text-nowrap" id="Seguimiento"
                                         <?php if ($venta->avance_oportunidad >= 100){ ?> style="display: none;" <?php   } ?>>
                                             <i class="fas fa-eye"></i> Seguimiento
-                                        </a>  
+                                        </a>
                                         <form action="{{ route('admin.ventas.destroyLogico', $venta) }}"
                                             class="form-borrar" method="post">
                                             @csrf
@@ -66,14 +66,14 @@
                                                 <i class="fas fa-minus-circle"></i> Anular
                                                 {{-- Remover  --}}
                                             </button>
-                                        </form>                                
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>            
+            </div>
         @else
             <div class="card-body">
                 <strong>Sin Registros</strong>

@@ -64,7 +64,7 @@
                                     <td>{{ $venta->cliente->ruc }} <br> {{ $venta->cliente->razon_social }} </td>
                                     <td>{{ $venta->sec }}</td>
                                     <td>{{ $venta->sot }}</td>
-                                    <td>{{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}</td>
+                                    <td>{{ $venta->tipo_contrato === 'D' ? 'Digital' : 'Fisico' }}</td>
                                     <td id="avance_oportunidad">{{ $venta->avance_oportunidad }}%</td>
                                     <td width="260px">
                                         <form action="{{ route('admin.reportes.generatePDF', $venta) }}" method="post">

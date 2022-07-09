@@ -83,10 +83,10 @@
     <ul class="list-group">
         <li class="list-group-item">
             <span class="list-group-iten-name">Tipo de contrato: </span>
-            {{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}
+            {{ $venta->tipo_contrato === 'D' ? 'Digital' : 'Fisico' }}
         </li>
         <li class="list-group-item">
-            <span class="list-group-iten-name">Saliforce:</span> {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
+            <span class="list-group-iten-name">Salesforce:</span> {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
         </li>
         <li class="list-group-item">
             <span class="list-group-iten-name">SOT:</span> {{ $venta->sot }}

@@ -24,7 +24,7 @@ return new class extends Migration
             ->references("id")
             ->on("bsd_cliente");
             $table->timestamp('fecha_registro')->useCurrent();;
-            $table->char('tipo_contrato', 1)->comment('F (Fisico) or V (Virtual)');
+            $table->char('tipo_contrato', 1)->comment('F (Fisico) or D (Digital)');
             $table->char('sec', 8); //Esta en Detalle_Pago
             //valores nuevos agregados desde aca
             $table->string('nro_oportunidad',18);
