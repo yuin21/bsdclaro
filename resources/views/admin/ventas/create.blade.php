@@ -201,7 +201,7 @@
                         </div>
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin-top: 15px; min-width:180px']) !!}
+                                {!! Form::label('estado_linea', 'Estado de Linea *', ['style' => 'margin-top: 15px; min-width:180px']) !!}
                                 {{-- {!! Form::select('estado_linea', $estadoslinea, null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione'],  ['style' =>  'margin-top: 17px'] ) !!}
                                  --}}
                                 <select name="estado_linea" id="estadoLinea" class="selectpicker form-control"
@@ -769,7 +769,7 @@
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
-            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value) {
+            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !estadoLinea.value) {
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
