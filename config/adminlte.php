@@ -343,7 +343,13 @@ return [
                     'text' => 'Gráficas',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'route'     => 'admin.reportes.indexGraficas',
-                    'can' => 'admin.reportes.indexfGraficas',
+                    'can' => 'admin.reportes.indexGraficas',
+                ],
+                [
+                    'text' => 'Ventas',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'route'     => 'admin.reportes.indexVentas',
+                    'can' => 'admin.reportes.indexfVentas',
                 ],
             ]
         ],
@@ -371,13 +377,13 @@ return [
                     'route' => 'admin.users.index',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'active' => ['admin/users*'],
-                    'can'   => 'admin.users.index',
+                    'can'   => 'admin.users.indexf',
                 ],
                 'submenu' => [
                     'text'    => 'Cargas Masivas',
                     'icon'    => "fas fa-fw fa-file-csv",
                     'active' => ['admin/cargasmasivas*'],
-                    'can' => 'admin.cargasmasivas',
+                    'can' => 'adminlte.cargasmasivas',
                     'submenu' => [
                         [
                             'text' => 'Base Fija',

@@ -41,18 +41,19 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'adminlte.reportes', 'description' => 'Sección: Reportes'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.reportes.indexVentasDiarias', 'description' => 'Ventas Diarias'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.reportes.indexVentasConsultor', 'description' => 'Ventas por Consultor'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
-        Permission::create(['name' => 'admin.reportes.indexfGraficas', 'description' => 'Gráficas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.reportes.indexGraficas', 'description' => 'Gráficas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        Permission::create(['name' => 'admin.reportes.indexfVentas', 'description' => 'Ventas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
 
         // seccion Configuración
         Permission::create(['name' => 'adminlte.configuracion', 'description' => 'Sección: Configuración'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
         Permission::create(['name' => 'admin.empresa.index', 'description' => 'Empresa'])->syncRoles([$roleAdmin]);
         Permission::create(['name' => 'admin.roles.index', 'description' => 'Roles'])->syncRoles([$roleAdmin]);
-        Permission::create(['name' => 'admin.users.index', 'description' => 'Usuarios'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.users.indexf', 'description' => 'Usuarios'])->syncRoles([$roleAdmin]);
         // subsección cargas masivas
-        Permission::create(['name' => 'admin.cargasmasivas', 'description' => 'Sub Sección: Cargas Masivas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
-        Permission::create(['name' => 'admin.import_basefija.index', 'description' => 'Base Fija'])->syncRoles([$roleAdmin]);
-        Permission::create(['name' => 'admin.import_basemovil.index', 'description' => 'Base Movil'])->syncRoles([$roleAdmin]);
-        Permission::create(['name' => 'admin.import_baserenueva.indexf', 'description' => 'Base Renueva'])->syncRoles([$roleAdmin]);
+        //Permission::create(['name' => 'adminlte.cargasmasivas', 'description' => 'Sub Sección: Cargas Masivas'])->syncRoles([$roleAdmin]); // para ver el titulo de seccion
+        //Permission::create(['name' => 'admin.import_basefija.index', 'description' => 'Base Fija'])->syncRoles([$roleAdmin]);
+        //Permission::create(['name' => 'admin.import_basemovil.index', 'description' => 'Base Movil'])->syncRoles([$roleAdmin]);
+        //Permission::create(['name' => 'admin.import_baserenueva.indexf', 'description' => 'Base Renueva'])->syncRoles([$roleAdmin]);
 
 
         // // seccion Usuarios

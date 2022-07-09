@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BsdPersonal;
+use App\Models\BsdServicio;
 use Illuminate\Http\Request;
 use App\Models\BsdVenta;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
+
 // use PDF;
 
 class ReportesController extends Controller
@@ -86,5 +89,29 @@ class ReportesController extends Controller
       }
       //dd($bsd_venta);
       return view('admin.reportes.index_ventasConsultor', compact('bsd_venta', 'request','personal'));
+    }
+
+    public function index_ventas(){
+        $bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nom_servicio')->get();
+        //dd($bsd_servicio);
+        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
+        $personal = $bsd_personal->pluck('PersonalFullName', 'id');
+        $servicios = [];
+        foreach($bsd_servicio as $servicio){
+            $servicios[] = [$servicio->id];
+        }
+        $personales = [];
+        foreach($bsd_personal as $personal){
+            $personales[] = [$personal->id];
+        }
+        //dd($personales);
+        $total_servicio = [];
+        foreach($personales as $id_personal){
+            foreach($servicios as $id_servicio){
+                $total_servicio[] = [DB::select('CALL sp_contarServicios(?,?)', [$id_servicio[0],$id_personal[0]])];
+            }
+        }
+        dd($total_servicio);
+        return view('admin.reportes.index_ventas', compact('personal'));
     }
 }
