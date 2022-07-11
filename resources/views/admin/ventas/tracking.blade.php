@@ -90,6 +90,65 @@
                     @enderror
                 </div>
             </div>
+            <hr>
+            <h4 class="text-bold">Detalle</h4>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            @foreach ($venta->detallesventa as $detalle)
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-6">
+                                            {!! Form::label('servicio', 'Servicio', ['class' => 'text-nowrap']) !!}
+                                            {!! Form::text('servicio', $detalle->servicio->nom_servicio, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            {!! Form::label('tipo_servicio', 'Tipo Servicio') !!}
+                                            {!! Form::text('tipo_servicio',  $detalle->tipoServicio->nom_tipo_servicio, ['class' => 'selectpicker form-control', 'disabled' => 'disabled']) !!}
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            {!! Form::label('plan', 'Plan') !!}
+                                            {!! Form::text('plan', $detalle->plan->nombre_plan, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>
+                                        {{-- <div class="col-lg-4 col-sm-6">
+                                            {!! Form::label('estado_id', 'Estado') !!}
+                                            {!! Form::text('estado_id', $detalle->estadoLinea->id, ['class' => 'form-control', 'disabled' => 'disabled','id'=>'estado_id']) !!}
+                                        </div>
+                                        <div class="col-lg-4 col-sm-6">
+                                            {!! Form::label('prueba', 'Prueba') !!}
+                                            {!! Form::text('prueba', null, ['class' => 'form-control', 'disabled' => 'disabled','id'=>'prueba']) !!}
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            @foreach($estadoslinea as $estados => $estados_linea)
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-6">
+                                            {!! Form::label('estado_linea', 'Estado de Linea *') !!}
+                                            <select name="estado_linea" id="estadoLinea" class="selectpicker form-control"
+                                            title="Seleccionar">
+                                                @foreach($estados_linea as $estado => $estado_linea)
+                                                    <option
+                                                        value="{{ $estado_linea->id }}">
+                                                        {{ $estado_linea->nombre_estado_linea }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-4 float-right']) !!}
             {!! Form::close() !!}
         </div>
@@ -267,6 +326,9 @@
 @stop
 
 @section('js')
+<script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
 
     @if (session('success') == 'update')
         <script>
@@ -276,9 +338,19 @@
             })
         </script>
     @endif
+
+    <script>
+        var estado = $('#estado_id').val();
+        $('#prueba').val(estado);
+        $('#prueba').change();
+        $("#estadoLinea").find(`option[value='${estado}']`);
+        $('#estadoLinea').selectpicker('refresh');
+    </script>
 @stop
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <style>
         .tag-detalle {
             display: inline-block;

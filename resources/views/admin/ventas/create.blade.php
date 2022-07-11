@@ -300,8 +300,9 @@
                         </table>
                     </div>
                     <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
+                        {!! Form::label('total_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
                         {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                        {!! Form::hidden('total_sin_igv', null) !!}
                     </div>
                     <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
                         {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
@@ -542,7 +543,8 @@
         const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
         const inputTotal = document.getElementById('inputTotal')
         const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
-        const total = document.getElementById('total') // input hidden para mandar a registrar
+        const total = document.getElementById('total')
+        const total_sin_igv = document.getElementById('total_sin_igv') // input hidden para mandar a registrar
         //Agregar data de valores nulos
         const inputOperador = document.getElementById('inputOperador')
         const estadoLinea = document.getElementById('estadoLinea')
@@ -556,7 +558,7 @@
         let cantDetallesVenta = 0 // parecido al cont
         let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
         let total_igv = 0
-        let total_sin_igv = 0
+        let total_sinigv = 0
         const IGV = 1.18
 
         // fecha actual en input
@@ -759,8 +761,11 @@
         selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio
             $('#precioplan').val(dataPlan[2])
+            var precio = parseFloat(dataPlan[2]);
+            $('#precioplan').val((precio).toFixed(2))
             const tipoServicio = selectTipoServicio.value.split('_')
             if(tipoServicio[1]=='Fija'){
+                $('#inputCantidad').val('1');
                 //$('#inputCantidad').val(dataPlan[1])
                 const cantPlanes = dataPlan[1].split('+').length
                 $('#inputUgis').val(cantPlanes)
@@ -817,7 +822,7 @@
             cont++
             cantDetallesVenta++
             total_igv = Number((total_igv + subtotal_igv).toFixed(2))
-            total_sin_igv = Number((total_igv / IGV).toFixed(2))
+            total_sinigv = Number((total_igv / IGV).toFixed(2))
 
             let htmlNumerosLineaNueva = ''
             numerosLineasNuevas.split(',').map(num => {
@@ -875,8 +880,9 @@
             </tr>`
 
             inputTotal.value = total_igv
-            inputTotal_sin_igv.value = total_sin_igv
+            inputTotal_sin_igv.value = total_sinigv
             total.value = total_igv
+            total_sin_igv.value = total_sinigv
             //limpiar inputs
             inputCantidad.value = '0'
             $('#precioplan').val(0)
@@ -916,10 +922,11 @@
         // eliminar un detalle de venta de la lista
         function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
             total_igv = Number((total_igv - subtotal_igv).toFixed(2))
-            total_sin_igv = Number((total_igv / IGV).toFixed(2))
+            total_sinigv = Number((total_igv / IGV).toFixed(2))
             inputTotal.value = total_igv
-            inputTotal_sin_igv.value = total_sin_igv
+            inputTotal_sin_igv.value = total_sinigv
             total.value = total_igv
+            total_sin_igv.value = total_sinigv
             const item = document.getElementById(idDetalleVenta)
             tbodyDetalleVenta.removeChild(item)
             cantDetallesVenta--

@@ -44,5 +44,8 @@
 
             }
         });
+
+        $('#tipo_doc_iden').val('DNI');
+        $('#tipo_doc_iden').change();
     </script>
 @stop

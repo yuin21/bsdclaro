@@ -152,7 +152,12 @@ class VentaController extends Controller
 
     public function tracking(BsdVenta $venta)
     {
-        return view('admin.ventas.tracking', compact('venta'));
+        $estadoslinea = [];
+        foreach($venta->detallesventa as $detalle){
+            $estadoslinea[] = BsdEstadoLinea::where('estado', 1)->where('bsd_tipo_servicio_id',$detalle->bsd_tipo_servicio_id)->get();
+        }
+        // $estados_linea = $estadoslinea->pluck('nombre_estado_linea', 'id');
+        return view('admin.ventas.tracking', compact('venta', 'estadoslinea'));
     }
 
     public function trackingUpdate(Request $request, BsdVenta $venta) {

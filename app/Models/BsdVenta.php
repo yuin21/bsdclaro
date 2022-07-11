@@ -28,16 +28,17 @@ class BsdVenta extends Model
         'fecha_conforme',
         'fecha_avance_oportunidad',
         'fecha_oportunidad_ganada',
+        'total_sin_igv',
         'total',
-        
+
         // 'estado_venta',
         // 'estado',
         // 'usuario_reg' ,
         // 'usuario_act' ,
         // 'created_at',
-        // 'updated_at',  
+        // 'updated_at',
      ] ;
-     
+
 
     protected $table='bsd_venta';
 
@@ -67,16 +68,16 @@ class BsdVenta extends Model
                 return "No existen valores";
         }
     }
-    
+
     // public function getFechaEntrega(){
     //     $fecha_entrega = $this->fecha_entrega;
-    //     $fecha = substr($fecha_entrega, 0, -9); 
+    //     $fecha = substr($fecha_entrega, 0, -9);
     //     return $fecha;
     // }
 
     public function getFechaRegistro(){
         $fecha_registro = $this->fecha_registro;
-        $fecha = substr($fecha_registro, 0, -9); 
+        $fecha = substr($fecha_registro, 0, -9);
         return $fecha;
     }
 }

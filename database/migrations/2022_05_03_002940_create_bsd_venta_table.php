@@ -44,6 +44,7 @@ return new class extends Migration
             $table->char('sot', 8)->nullable();
             //$table->char('estado_te', 1)->nullable()->comment('C or N');
             $table->float('total');
+            $table->float('total_sin_igv');
             $table->char('estado_venta', 1)->default('P')->comment('P (Pendiente), E (Enviado), C (Conforme), N (No conforme)');
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');

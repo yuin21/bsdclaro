@@ -34,7 +34,7 @@
 </div>
 
 <div class="form-group">
-    <div class="row">        
+    <div class="row">
         <div class="col-6">
             {!! Form::label('direccion', 'Dirección') !!}
             {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
@@ -55,19 +55,19 @@
             @error('email')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-        </div>   
+        </div>
     </div>
 </div>
 
 <div class="form-group">
-    <div class="row">     
+    <div class="row">
         <div class="col-3">
             {!! Form::label('tipo_doc_iden', 'Tipo de Documento*') !!}
-            {!! Form::select('tipo_doc_iden', $tipos_doc, null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
+            {!! Form::select('tipo_doc_iden', $tipos_doc, null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar', 'id'=>'tipo_doc_iden']) !!}
             @error('tipo_doc_iden')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
-        </div>  
+        </div>
         <div class="col-3">
             {!! Form::label('nro_doc_iden', 'Número de Documento*') !!}
             {!! Form::text('nro_doc_iden', null, ['class' => 'form-control']) !!}

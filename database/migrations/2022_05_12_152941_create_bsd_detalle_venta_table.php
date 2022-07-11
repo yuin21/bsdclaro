@@ -42,7 +42,7 @@ return new class extends Migration
             $table->float('precio_plan');
             $table->float('cf_con_igv');
             $table->float('cf_sin_igv');
-            $table->string('equipo_producto', 30)->nullable();
+            $table->string('equipo_producto', 50)->nullable();
             $table->string('operador', 20)->nullable();
             //$table->char('estado_linea', 1)->nullable()->comment('A or D'); //Entiendo que el estado es desactivado por defecto, pero cuando se registra la fecha de activado, este cambia a activado
             $table->date('fecha_activado')->nullable();
