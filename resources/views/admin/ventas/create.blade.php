@@ -184,7 +184,7 @@
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('inputCantidad', 'Cantidad*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad']) !!}
                             </div>
                         </div>
                         <div class="col-6" id="div_ugis">
@@ -654,7 +654,7 @@
                     $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-6');
                     $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                     //$('#div_observacion').toggleClass('pull-left');
-                    $('#inputCantidad').attr("disabled", true);
+                    //$('#inputCantidad').attr("disabled", true);
                     $('#inputCantidad').val('0');
                     $('#div_equipoproducto').show();
                     $('#inputEquipoProducto').val(null);
@@ -683,7 +683,7 @@
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
                     $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-3');
                     $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
-                    $('#inputCantidad').attr("disabled", false);
+                    //$('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#div_ugis').show();
                     $('#inputUgis').val('0');
@@ -710,7 +710,7 @@
                     $('#div_hora').show();
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-8');
                     $('#div_estado_venta').removeClass('col-lg-3').addClass('col-lg-4');
-                    $('#inputCantidad').attr("disabled", false);
+                    //$('#inputCantidad').attr("disabled", false);
                     $('#inputCantidad').val('0');
                     $('#inputUgis').val(null);
                     $('#div_ugis').hide();

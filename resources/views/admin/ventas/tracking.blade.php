@@ -92,46 +92,55 @@
             </div>
             <hr>
             <h4 class="text-bold">Detalle</h4>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8">
+            <div class="container float-right">
+                <div class="row justify-content-center">
+                    <div class="col-sm-9">
                         <div class="row">
                             @foreach ($venta->detallesventa as $detalle)
                                 <div class="col-sm-12">
                                     <div class="row">
-                                        <div class="col-lg-4 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             {!! Form::label('servicio', 'Servicio', ['class' => 'text-nowrap']) !!}
                                             {!! Form::text('servicio', $detalle->servicio->nom_servicio, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                                         </div>
-                                        <div class="col-lg-4 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             {!! Form::label('tipo_servicio', 'Tipo Servicio') !!}
-                                            {!! Form::text('tipo_servicio',  $detalle->tipoServicio->nom_tipo_servicio, ['class' => 'selectpicker form-control', 'disabled' => 'disabled']) !!}
+                                            {!! Form::text('tipo_servicio',  $detalle->tipoServicio->nom_tipo_servicio, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                                         </div>
-                                        <div class="col-lg-4 col-sm-6">
+                                        <div class="col-lg-6 col-sm-6">
                                             {!! Form::label('plan', 'Plan') !!}
                                             {!! Form::text('plan', $detalle->plan->nombre_plan, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                                         </div>
-                                        {{-- <div class="col-lg-4 col-sm-6">
-                                            {!! Form::label('estado_id', 'Estado') !!}
-                                            {!! Form::text('estado_id', $detalle->estadoLinea->id, ['class' => 'form-control', 'disabled' => 'disabled','id'=>'estado_id']) !!}
+                                        <div class="col-lg-6 col-sm-6">
+                                            {!! Form::hidden('id_detalle_venta[]', $detalle->id, ['class' => 'form-control div_detalle_venta']) !!}
                                         </div>
-                                        <div class="col-lg-4 col-sm-6">
-                                            {!! Form::label('prueba', 'Prueba') !!}
-                                            {!! Form::text('prueba', null, ['class' => 'form-control', 'disabled' => 'disabled','id'=>'prueba']) !!}
+                                        {{-- <div class="col-6">
+                                            {!! Form::label('bsd_tipo_servicio_id', 'Tipo de Servicio') !!}
+                                            {!! Form::select('bsd_tipo_servicio_id', $estadoslinea, null, ['class' => 'form-control']) !!}
+
+                                            @error('bsd_tipo_servicio_id')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div> --}}
+                                        {{-- <div class="col-lg-4 col-sm-6 estado_id">
+                                            {!! Form::label('estado_id', 'Estado') !!}
+                                            {!! Form::text('estado_id', $detalle->estadoLinea->id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>--}}
+                                        <div class="detalle_id">
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="row">
                             @foreach($estadoslinea as $estados => $estados_linea)
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-lg-12 col-sm-6">
                                             {!! Form::label('estado_linea', 'Estado de Linea *') !!}
-                                            <select name="estado_linea" id="estadoLinea" class="selectpicker form-control"
+                                            <select name="estado_linea[]" class="selectpicker form-control div_estado_linea"
                                             title="Seleccionar">
                                                 @foreach($estados_linea as $estado => $estado_linea)
                                                     <option
@@ -340,11 +349,34 @@
     @endif
 
     <script>
-        var estado = $('#estado_id').val();
-        $('#prueba').val(estado);
-        $('#prueba').change();
-        $("#estadoLinea").find(`option[value='${estado}']`);
-        $('#estadoLinea').selectpicker('refresh');
+        var estado = document.getElementsByClassName('div_estado_linea');
+        //var prueba = document.getElementsByClassName('div_prueba');
+            arrayGuardar = [];
+            for (var i = 0; i < estado.length; i++) {
+                arrayGuardar[i] = estado[i].value;
+                console.log (estado[i].value);
+            }
+        console.log(estado)
+        //$(".estadoLinea").find(`option[value='${estado}']`);
+        //$('.estadoLinea').selectpicker('refresh');
+
+        // let detalleVenta = document.getElementsByClassName('div_detalle_venta')
+        //     arrayGuardarDetalle = [];
+        //     for (var i = 0; i < detalleVenta.length; i++) {
+        //         arrayGuardarDetalle[i] = detalleVenta[i].value;
+        //         console.log (detalleVenta[i].value);
+        //     }
+        // console.log(detalleVenta)
+        //let div_estadoLinea = document.getElementsByClassName('div_estado_linea')
+        //const estadoLinea = document.getElementById('estadoLinea')
+        //const estado_linea = estadoLinea.value
+        //const tipo_servicio = tipo_servicio.value
+        //const plan = plan.value
+        //const id_detalle_venta = id_detalle.value
+
+        // //console.log(id_detalle)
+        // div_estadoLinea.innerHTML += `
+        //     <input type="hidden" name="estado_linea[]" value="${estado_linea}">`
     </script>
 @stop
 
