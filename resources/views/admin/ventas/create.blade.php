@@ -181,7 +181,7 @@
                                 {!! Form::text('precioplan', number_format(0,2), ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan']) !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" id="div_cantidad">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('inputCantidad', 'Cantidad*', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad']) !!}
@@ -195,7 +195,7 @@
                         </div>
                         <div class="col-6" id="div_inputNumerosLineasNuevas">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva*', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
                             </div>
                         </div>
@@ -655,6 +655,7 @@
                     $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                     //$('#div_observacion').toggleClass('pull-left');
                     //$('#inputCantidad').attr("disabled", true);
+                    $('#div_cantidad').show();
                     $('#inputCantidad').val('0');
                     $('#div_equipoproducto').show();
                     $('#inputEquipoProducto').val(null);
@@ -684,6 +685,7 @@
                     $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-3');
                     $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                     //$('#inputCantidad').attr("disabled", false);
+                    $('#div_cantidad').hide();
                     $('#inputCantidad').val('0');
                     $('#div_ugis').show();
                     $('#inputUgis').val('0');
@@ -711,6 +713,7 @@
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-8');
                     $('#div_estado_venta').removeClass('col-lg-3').addClass('col-lg-4');
                     //$('#inputCantidad').attr("disabled", false);
+                    $('#div_cantidad').show();
                     $('#inputCantidad').val('0');
                     $('#inputUgis').val(null);
                     $('#div_ugis').hide();
@@ -774,7 +777,7 @@
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
-            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value || !estadoLinea.value) {
+            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !estadoLinea.value) {
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
@@ -785,14 +788,14 @@
             // obtener la data
             const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
             //if(tipoServicio[1] =='Móvil' && (!inputNumerosLineasNuevas.value || !inputEquipoProducto.value)){
-            if(tipoServicio[1] =='Móvil' && !inputEquipoProducto.value){
+            if(tipoServicio[1] =='Móvil' && (!inputEquipoProducto.value || !inputCantidad.value)){
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
                     title: 'Faltan datos'
                 })
             };
-            if(tipoServicio[1] =='Fija' && !inputEquipoProducto.value){
+            if(tipoServicio[1] =='Fija' && !inputEquipoProducto.value ){
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
