@@ -784,7 +784,8 @@
             //console.log(!inputEquipoProducto.value)
             // obtener la data
             const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
-            if(tipoServicio[1] =='Móvil' && (!inputNumerosLineasNuevas.value || !inputEquipoProducto.value)){
+            //if(tipoServicio[1] =='Móvil' && (!inputNumerosLineasNuevas.value || !inputEquipoProducto.value)){
+            if(tipoServicio[1] =='Móvil' && !inputEquipoProducto.value){
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
