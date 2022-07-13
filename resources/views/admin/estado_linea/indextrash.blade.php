@@ -4,9 +4,9 @@
 
 @section('content_header')
     <a href="{{ route('admin.estado_linea.index') }}" class="float-right mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Ver lista de estado_lineaes
+        <i class="fas fa-chevron-circle-left"></i> Ver lista de Estado Lineaes
     </a>
-    <h1 class="text-bold">estado_linea Removido</h1>
+    <h1 class="text-bold">Estado Linea Removido</h1>
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
                             <tr>
                                 <th>Item</th>
                                 <th>Tipo</th>
-                                <th>Nombres</th>                               
+                                <th>Nombres</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -28,10 +28,10 @@
                                 <tr>
                                     <td width="20px">{{ $loop->iteration }}</td>
                                     <td>{{ $estado_linea->tiposervicio->nom_tipo_servicio }}</td>
-                                    <td>{{ $estado_linea->nombre_estado_linea }}</td>                                    
+                                    <td>{{ $estado_linea->nombre_estado_linea }}</td>
                                     <td width="200px">
                                         <div class="d-flex" style="gap: 10px">
-                                            <form action="{{ route('admin.estado_linea.restaurarestadolinea', $estado_linea) }}" method="post">
+                                            <form action="{{ route('admin.estado_linea.restauraEstadoLinea', $estado_linea) }}" method="post">
                                                 @csrf
                                                 @method('PUT')
                                                 <button type="submit" class="btn btn-sm btn-info text-nowrap">

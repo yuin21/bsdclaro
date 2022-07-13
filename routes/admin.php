@@ -89,7 +89,7 @@ Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan']
 Route::resource('estado_linea', EstadolineaController::class)->names('admin.estado_linea');
 Route::get('removidos/estado_linea', [EstadolineaController::class, 'indextrash'])->name('admin.estado_linea.indextrash');
 Route::put('estado_lineas/{estado_linea}/destroylogico', [EstadolineaController::class, 'destroyLogico'])->name('admin.estado_linea.destroyLogico');
-Route::put('estado_lineas/{estado_linea}/restauraEstadolinea', [EstadolineaController::class, 'restauraEstadolinea'])->name('admin.estado_linea.restauraEstadolinea');
+Route::put('estado_lineas/{estado_linea}/restauraEstadoLinea', [EstadolineaController::class, 'restauraEstadoLinea'])->name('admin.estado_linea.restauraEstadoLinea');
 
 //Ventas
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
