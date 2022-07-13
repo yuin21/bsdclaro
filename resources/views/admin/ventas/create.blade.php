@@ -659,7 +659,7 @@
                     $('#inputCantidad').val('0');
                     $('#div_equipoproducto').show();
                     $('#inputEquipoProducto').val(null);
-                    $('#inputUgis').val(null);
+                    $('#inputUgis').val('0');
                     $('#div_ugis').hide();
                     //$('#fecha_entrega_te').attr("readonly", false);
                     //$('#fecha_avance_oportunidad').attr("readonly", false);
@@ -713,9 +713,9 @@
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-8');
                     $('#div_estado_venta').removeClass('col-lg-3').addClass('col-lg-4');
                     //$('#inputCantidad').attr("disabled", false);
-                    $('#div_cantidad').show();
+                    $('#div_cantidad').hide();
                     $('#inputCantidad').val('0');
-                    $('#inputUgis').val(null);
+                    $('#inputUgis').val('0');
                     $('#div_ugis').hide();
                     $('#div_equipoproducto').hide();
                     $('#inputEquipoProducto').val(null);
@@ -772,6 +772,9 @@
                 //$('#inputCantidad').val(dataPlan[1])
                 const cantPlanes = dataPlan[1].split('+').length
                 $('#inputUgis').val(cantPlanes)
+            }else if(tipoServicio[1]=='Internet Dedicado'){
+                $('#inputCantidad').val('1');
+                $('#inputUgis').val('0');
             }
         });
 
