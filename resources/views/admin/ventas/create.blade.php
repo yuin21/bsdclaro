@@ -279,8 +279,8 @@
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad</th>
-                                    <th>Ugis</th>
+                                    {{-- <th id="cantidadUgis">Cantidad</th> --}}
+                                    <th>Cantidad/UGIS</th>
                                     <th>Números de linea nueva</th>
                                     <th>Equipo/Producto</th>
 
@@ -839,15 +839,15 @@
                     </span>
                 `
             })
-
+            if(ugis !== '0'){
+            //document.getElementById("cantidadUgis").innerHTML = "UGIS"
             tbodyDetalleVenta.innerHTML += `
             <tr id="detalleventa_${cont}">
                 <td width="20px">${cont}</td>
                 <td>${tipoServicio[1]}</td>
                 <td>${servicio[1]}</td>
                 <td>${nombreplan[1]}</td>
-                <td id="dv_precioplan">${plan}</td>
-                <td id="dv_cantidad">${cantidad}</td>
+                <td>${plan}</td>
                 <td>${ugis}</td>
                 <td>
                     ${htmlNumerosLineaNueva}
@@ -885,6 +885,54 @@
                 <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
 
             </tr>`
+            }else{
+            //document.getElementById("cantidadUgis").innerHTML = "Cantidad"
+            tbodyDetalleVenta.innerHTML += `
+            <tr id="detalleventa_${cont}">
+                <td width="20px">${cont}</td>
+                <td>${tipoServicio[1]}</td>
+                <td>${servicio[1]}</td>
+                <td>${nombreplan[1]}</td>
+                <td>${plan}</td>
+                <td>${cantidad}</td>
+                <td>
+                    ${htmlNumerosLineaNueva}
+                </td>
+                <td>${equipoproducto}</td>
+
+                <td>${operador}</td>
+                <td>${estado_linea[1]}</td>
+                <td>${fechaactivado}</td>
+                <td>${horas}</td>
+
+                <td id="dv_subtotal_sin_igv">${subtotal_sin_igv}</td>
+                <td id="dv_subtotal_igv">${subtotal_igv}</td>
+
+                <td width="30px">
+                    <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+                <input type="hidden" name="tiposServicio[]" value="${tipoServicio[0]}">
+                <input type="hidden" name="servicios[]" value="${servicio[0]}">
+                <input type="hidden" name="planes[]" value="${nombreplan[0]}">
+                <input type="hidden" name="precioplanes[]" value="${plan}">
+                <input type="hidden" name="cantidades[]" value="${cantidad}">
+                <input type="hidden" name="ugises[]" value="${ugis}">
+                <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
+                <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
+
+                <input type="hidden" name="operador[]" value="${operador}">
+                <input type="hidden" name="estado_linea[]" value="${estado_linea[0]}">
+                <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
+                <input type="hidden" name="horas[]" value="${horas}">
+
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
+                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
+
+            </tr>`
+            }
+
 
             inputTotal.value = total_igv
             inputTotal_sin_igv.value = total_sinigv
