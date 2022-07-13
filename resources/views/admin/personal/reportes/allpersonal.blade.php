@@ -35,6 +35,7 @@
         }
 
     </style>
+
 </head>
 
 <body>
@@ -44,7 +45,7 @@
     ?>
     <p style="text-align:right">Fecha impresion: {{ $date = date('Y/m/d h:i A')}}</p>
     <hr color="#000000">
-    
+
     <table class="table">
         <thead>
             <tr>
@@ -58,7 +59,7 @@
                 <th>Celular</th>
                 <th>Email</th>
             </tr>
-            
+
         </thead>
         <tbody>
             @foreach ($bsd_personal as $personal)
@@ -91,7 +92,7 @@
     <hr color="#000000">
     <p style="text-align:right">Pagina 1</p>
     <div class="page-break"></div>
-    
+
     <script type="text/php">
        if ( isset($pdf) ) {
             $pdf->page_script('
