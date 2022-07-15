@@ -145,13 +145,17 @@ class VentaController extends Controller
         return redirect()->route('admin.ventas.show', $venta)->with('success','store');
     }
 
-    public function show(BsdVenta $venta)
+    public function show($id_venta)
     {
+        $venta = BsdVenta::find($id_venta);
+        //dd($venta);
         return view('admin.ventas.show', compact('venta'));
     }
 
-    public function tracking(BsdVenta $venta)
+    public function tracking($id_venta)
     {
+        $venta = BsdVenta::find($id_venta);
+
         $estadoslinea = [];
         foreach($venta->detallesventa as $detalle){
             $estadoslinea[] = BsdEstadoLinea::where('estado', 1)->where('bsd_tipo_servicio_id',$detalle->bsd_tipo_servicio_id)->get();
@@ -193,9 +197,10 @@ class VentaController extends Controller
     }
 
 
-    public function destroyLogico(BsdVenta $ventas)
+    public function destroyLogico($id_venta)
     {
         //dd($ventas);
+        $ventas = BsdVenta::find($id_venta);
         $ventas->estado = 0;
         $ventas->save();
         return redirect()->route('admin.ventas.index')->with('success','destroyLogico');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\bsdEstadoLinea;
+use App\Models\BsdEstadoLinea;
 use App\Models\BsdTipoServicio;
 use Illuminate\Http\Request;
 
