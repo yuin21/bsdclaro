@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\BsdCliente;
 use Illuminate\Http\Request;
-
+use App\Imports\Tipo_cliente;
 
 class ClienteController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.personal.index');
+        $this->middleware('can:admin.clientes.index');
     }
 
     public function index()
@@ -20,35 +20,35 @@ class ClienteController extends Controller
 
     public function create()
     {
-        return view('admin.clientes.create');
+        $tipos_cliente  = Tipo_cliente::getTipo_cliente();
+        $tipos_cliente  = $tipos_cliente ->pluck('name', 'cod');
+        return view('admin.clientes.create', compact('tipos_cliente'));
     }
-   
+
     public function store(Request $request)
     {
         $request->validate([
             'ruc' => "required|string|max:11|unique:bsd_cliente",
             'razon_social'=> 'required|string|max:120' ,
             'num_celular'=> 'required|string|max:30',
-            'direccion'=> 'required|string|max:90' ,
-            'departamento'=> 'required|string|max:25',
-            'provincia'=> 'required|string|max:40',
-            'distrito'=> 'required|string|max:50',
-            'tipo_cliente'=> 'required|string|max:30',
         ]);
 
         $cliente= BsdCliente::create($request->all());
 
-        return redirect()->route('admin.clientes.show', $cliente)->with('success','store'); 
+        return redirect()->route('admin.clientes.show', $cliente)->with('success','store');
     }
 
     public function show(BsdCliente $cliente)
     {
-        return view('admin.clientes.show', compact('cliente'));
+        $tipos_cliente  = Tipo_cliente::getTipo_cliente();
+        return view('admin.clientes.show', compact('cliente','tipos_cliente'));
     }
 
     public function edit(BsdCliente $cliente)
     {
-        return view('admin.clientes.edit', compact('cliente'));
+        $tipos_cliente  = Tipo_cliente::getTipo_cliente();
+        $tipos_cliente  = $tipos_cliente ->pluck('name', 'cod');
+        return view('admin.clientes.edit', compact('cliente','tipos_cliente' ));
     }
 
     public function update(Request $request, BsdCliente $cliente)
@@ -57,11 +57,7 @@ class ClienteController extends Controller
             'ruc' => 'required|string|max:11',
             'razon_social'=> 'required|string|max:120' ,
             'num_celular'=> 'required|string|max:30',
-            'direccion'=> 'required|string|max:90' ,
-            'departamento'=> 'required|string|max:25',
-            'provincia'=> 'required|string|max:40',
-            'distrito'=> 'required|string|max:50',
-            'tipo_cliente'=> 'required|string|max:30',
+
         ]);
 
         $cliente->update($request->all());
@@ -72,7 +68,7 @@ class ClienteController extends Controller
     public function destroy(BsdCliente $cliente)
     {
         $cliente->delete();
-        return redirect()->route('admin.clientes.indextrash')->with('success','destroy'); 
+        return redirect()->route('admin.clientes.indextrash')->with('success','destroy');
     }
     public function indextrash()
     {
@@ -85,13 +81,13 @@ class ClienteController extends Controller
     {
         $cliente->estado = 0;
         $cliente->save();
-        return redirect()->route('admin.clientes.index')->with('success','destroyLogico');       
+        return redirect()->route('admin.clientes.index')->with('success','destroyLogico');
     }
 
     public function restaurarCliente(BsdCliente $cliente)
     {
         $cliente->estado = 1;
         $cliente->save();
-        return redirect()->route('admin.clientes.indextrash')->with('success','restaurar');       
+        return redirect()->route('admin.clientes.indextrash')->with('success','restaurar');
     }
 }

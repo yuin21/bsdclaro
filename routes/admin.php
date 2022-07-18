@@ -14,9 +14,13 @@ use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\CuotaController;
 use App\Http\Controllers\Admin\TipoServicioController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\EstadoLineaController;
 use App\Http\Controllers\Admin\VentaController;
+use App\Http\Controllers\Admin\NumeroLineaNuevaController;
 use App\Http\Controllers\Admin\EmpresaController;
 use App\Http\Controllers\Admin\CuotaPersonalController;
+use App\Http\Controllers\Admin\ReportesController;
+use App\Http\Controllers\Admin\PagoController;
 
 Route::get('', [HomeController::class, 'index'])->name('admin.home');
 
@@ -81,10 +85,27 @@ Route::get('removidos/plan', [PlanController::class, 'indextrash'])->name('admin
 Route::put('plan/{plan}/destroylogico', [PlanController::class, 'destroyLogico'])->name('admin.plan.destroyLogico');
 Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan'])->name('admin.plan.restaurarPlan');
 
+//Estado de las líneas de tipo de servicio
+Route::resource('estado_linea', EstadolineaController::class)->names('admin.estado_linea');
+Route::get('removidos/estado_linea', [EstadolineaController::class, 'indextrash'])->name('admin.estado_linea.indextrash');
+Route::put('estado_lineas/{estado_linea}/destroylogico', [EstadolineaController::class, 'destroyLogico'])->name('admin.estado_linea.destroyLogico');
+Route::put('estado_lineas/{estado_linea}/restauraEstadoLinea', [EstadolineaController::class, 'restauraEstadoLinea'])->name('admin.estado_linea.restauraEstadoLinea');
+
 //Ventas
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
+Route::get('ventas/tracking/{venta}', [VentaController::class, 'tracking'])->name('admin.ventas.tracking');
+Route::put('ventas/tracking/{venta}/update', [VentaController::class, 'trackingUpdate'])->name('admin.ventas.tranckingupdate');
+Route::get('removidos/ventas', [VentaController::class, 'indextrash'])->name('admin.ventas.indextrash');
+Route::put('ventas/{ventas}/destroylogico', [VentaController::class, 'destroyLogico'])->name('admin.ventas.destroyLogico');
+Route::put('ventas/{ventas}/restaurarVenta', [VentaController::class, 'restaurarVenta'])->name('admin.ventas.restaurarVenta');
 
-//Empresa
+//Numero_linea_nueva
+Route::resource('numero_linea_nueva', NumeroLineaNuevaController::class)->names('admin.numero_linea_nueva');
+Route::get('removidos/numero_linea_nueva', [NumeroLineaNuevaController::class, 'indextrash'])->name('admin.numero_linea_nueva.indextrash');
+Route::put('numero_linea_nueva/{numero_linea_nueva}/destroylogico', [NumeroLineaNuevaController::class, 'destroyLogico'])->name('admin.numero_linea_nueva.destroyLogico');
+Route::put('numero_linea_nueva/{numero_linea_nueva}/restaurarNumero', [NumeroLineaNuevaController::class, 'restaurarNumero'])->name('admin.numero_linea_nueva.restaurarNumero');
+
+//Empresa_1
 Route::resource('empresa', EmpresaController::class)->names('admin.empresa');
 Route::get('removidos/empresa', [EmpresaController::class, 'indextrash'])->name('admin.empresa.indextrash');
 Route::put('empresa/{empresa}/destroylogico', [EmpresaController::class, 'destroyLogico'])->name('admin.empresa.destroyLogico');
@@ -95,3 +116,20 @@ Route::resource('cuotapersonal', CuotaPersonalController::class)->names('admin.c
 Route::get('removidos/cuotapersonal', [CuotaPersonalController::class, 'indextrash'])->name('admin.cuotapersonal.indextrash');
 Route::put('cuotapersonal/{cuotapersonal}/destroylogico', [CuotaPersonalController::class, 'destroyLogico'])->name('admin.cuotapersonal.destroyLogico');
 Route::put('cuotapersonal/{cuotapersonal}/restaurarCuotaPersonal', [CuotaPersonalController::class, 'restaurarCuotaPersonal'])->name('admin.cuotapersonal.restaurarCuotaPersonal');
+
+//Reportes
+Route::get('reportes/ventasDiarias', [ReportesController::class, 'index_ventasDiarias'])->name('admin.reportes.indexVentasDiarias');
+Route::post('reportes/ventasDiarias/buscar', [ReportesController::class, 'search'])->name('admin.reportes.search');
+Route::post('reportes/{venta}/generarPDF', [ReportesController::class, 'generatePDF'])->name('admin.reportes.generatePDF');
+Route::get('reportes/graficas', [ReportesController::class, 'indexGraficas'])->name('admin.reportes.indexGraficas');
+Route::get('reportes/ventasConsultor', [ReportesController::class, 'index_ventasConsultor'])->name('admin.reportes.indexVentasConsultor');
+Route::post('reportes/ventasConsultor/buscar', [ReportesController::class, 'searchConsultor'])->name('admin.reportes.searchConsultor');
+Route::get('reportes/ventas', [ReportesController::class, 'index_ventas'])->name('admin.reportes.indexVentas');
+
+//Pagos
+Route::resource('pagos', PagoController::class)->only(['index', 'create', 'store', 'show'])->names('admin.pagos');
+Route::get('pagos/tracking/{pago}', [PagoController::class, 'tracking'])->name('admin.pagos.tracking');
+Route::put('pagos/tracking/{pago}/update', [PagoController::class, 'trackingUpdate'])->name('admin.pagos.tranckingupdate');
+Route::get('removidos/pagos', [PagoController::class, 'indextrash'])->name('admin.pagos.indextrash');
+Route::put('pagos/{pago}/destroylogico', [PagoController::class, 'destroyLogico'])->name('admin.pagos.destroyLogico');
+Route::put('pagos/{pago}/restaurarVenta', [PagoController::class, 'restaurarPago'])->name('admin.pagos.restaurarPago');

@@ -15,9 +15,9 @@
                     <thead class="border">
                         <tr>
                             <th>Item</th>
-                            <th>Tipo de Servicio</th>
-                            <th>Nombre de Plan</th>
-                            <th>Precio</th>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            <th style='text-align:center'>Precio</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -27,16 +27,20 @@
                                 <td width="20px">{{ $loop->iteration }}</td>
                                 <td>{{ $plan->tiposervicio->nom_tipo_servicio }}</td>
                                 <td>{{ $plan->nombre_plan }}</td>
-                                <td>{{ $plan->precio }}</td>
+                                <td style='text-align:center'>
+                                    {{ number_format($plan->precio, 2) }}
+                                </td>
                                 <td width="270px">
                                     <div class="d-flex" style="gap: 10px">
                                         <a href="{{ route('admin.plan.show', $plan) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver
+                                            {{-- Ver  --}}
                                         </a>
                                         <a href="{{ route('admin.plan.edit', $plan) }}"
                                             class="btn btn-success btn-sm text-nowrap">
                                             <i class="fas fa-pen"></i> Editar
+                                            {{-- Editar --}}
                                         </a>
                                         <form action="{{ route('admin.plan.destroyLogico', $plan) }}"
                                             class="form-borrar" method="post">
@@ -44,6 +48,7 @@
                                             @method('PUT')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
                                                 <i class="fas fa-minus-circle"></i> Remover
+                                                {{-- Remover --}}
                                             </button>
                                         </form>
                                     </div>
@@ -56,7 +61,7 @@
         </div>
     @else
         <div class="card-body">
-            <strong>Sin datos de los planes</strong>
+            <strong>Sin Registros</strong>
         </div>
     @endif
 </div>

@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('bsd_tipo_servicio', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_tipo_servicio', 15)->comment('Movil o Fija')->unique();
+            $table->string('nom_tipo_servicio', 50)->comment('Movil o Fija')->unique();
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();

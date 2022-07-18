@@ -16,25 +16,14 @@ class ClienteSeeder extends Seeder
     public function run()
     {
         BsdCliente::create([
-            'ruc'  => '10800865255',
-            'razon_social'  => 'FekiSHop',
-            'num_celular'  => '111222333',
-            'direccion'  => 'Fekimania',
-            'departamento'  => 'fekideparta',
-            'provincia'  => 'fekiprovincia',
-            'distrito'  => 'fekilugar',
-            'tipo_cliente'  => 'fekitipo',
-        ]);
-
-        BsdCliente::create([
-            'ruc'  => '10700722111',
-            'razon_social'  => 'AnonimoShop',
-            'num_celular'  => '888222333',
-            'direccion'  => 'Anonimomania',
-            'departamento'  => 'Anonimodeparta',
-            'provincia'  => 'Anonimoprovincia',
-            'distrito'  => 'Anonimolugar',
-            'tipo_cliente'  => 'Anonimotipo',
-        ]);
+            'ruc'  => '20607560219',
+            'razon_social'  => 'PRODUCCIONES & CATERING GM E.I.R.L.',
+            'num_celular'  => '945889900',
+            'direccion'  => 'Av. Pacifico 574',
+            'departamento'  => 'ANCASH',
+            'provincia'  => 'SANTA',
+            'distrito'  => 'NUEVO CHIMBOTE',
+            'tipo_cliente'  => 'NUEVO',
+        ]);       
     }
 }

@@ -16,29 +16,30 @@ class PersonalSeeder extends Seeder
     public function run()
     {
         BsdPersonal::create([
-            'nom_personal' => 'Pedro' ,
-            'ape_paterno'  => 'Torres',
-            'ape_materno' => 'Garcia',
+            'nom_personal' => 'GIOVANNA ALEJANDRINA' ,
+            'ape_paterno'  => 'MANRIQUE',
+            'ape_materno' => 'NARVAEZ',
             'cargo' => 'Vendedor' ,
             'tipo_personal' => 'Senior',
-            'tipo_doc_iden' => 'CEX',
-            'nro_doc_iden' => '111111111111',
+            'tipo_doc_iden' => 'DNI',
+            'nro_doc_iden' => '32975322',
             'direccion' => 'TorresDirec',
-            'celular' => '1223334444',
-            'email' => 'pedrito@gmail.com',
+            'celular' => '999999999',
+            'email' => 'giovanna.manrique@claro-negocios.com.pe',
         ]);
 
         BsdPersonal::create([
-          'nom_personal' => 'Juan' ,
-          'ape_paterno'  => 'Fuentes',
-          'ape_materno' => 'Flores',
+          'nom_personal' => 'Ruben' ,
+          'ape_paterno'  => 'Arribasplata',
+          'ape_materno' => 'Aponte',
+          'usuario_sisact'=> 'D99941294',
           'cargo' => 'Consultor' ,
           'tipo_personal' => 'Regular',
           'tipo_doc_iden' => 'CEX',
-          'nro_doc_iden' => '22222222222',
-          'direccion' => 'FuentesDirec',
-          'celular' => '8223354444',
-          'email' => 'juanfuentes@gmail.com',
+          'nro_doc_iden' => '47667788',
+          'direccion' => 'Urb. Santa Rosa Mz. E Lt.24',
+          'celular' => '957889900',
+          'email' => 'ruben.arriblasplata@claro-negocios.com.pe',
       ]);
     }
 }

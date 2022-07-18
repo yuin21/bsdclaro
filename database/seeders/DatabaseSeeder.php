@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CuotaSeeder::class);
         $this->call(EmpresaSeeder::class);
         $this->call(CuotaPersonalSeeder::class);
+        $this->call(EstadoLineaSeeder::class);
     }
 }

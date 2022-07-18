@@ -24,18 +24,28 @@ return new class extends Migration
             ->references("id")
             ->on("bsd_cliente");
             $table->timestamp('fecha_registro')->useCurrent();;
-            $table->string('tipo_contrato', 20);
-            $table->char('sec', 8); //Esta en Detalle_Pago 
-            $table->char('tipo_entrega_vpo_bpo',1)->nullable()->comment('V or B');;
-            $table->string('observaciones', 300)->nullable();
-            $table->timestamp('fecha_entrega_te')->nullable();
-            $table->string('observaciones_te', 300)->nullable();
-            $table->char('registrado_selforce', 1)->default('S')->comment('S or N');//No se si se registra en selforce despues o durante la venta
-            $table->string('solicitud', 200)->nullable();
+            $table->char('tipo_contrato', 1)->comment('F (Fisico) or D (Digital)');
+            $table->char('sec', 8); //Esta en Detalle_Pago
+            //valores nuevos agregados desde aca
+            $table->string('nro_oportunidad',18);
+            $table->smallInteger('avance_oportunidad');
+            $table->char('nro_proyecto', 10)->nullable();
+            $table->date('fecha_conforme')->nullable();
+            $table->date('fecha_avance_oportunidad')->nullable();
+            $table->date('fecha_oportunidad_ganada')->nullable();
+            //Hasta aqui
+            //Hasta aqui
+            //$table->char('tipo_entrega_vpo_bpo',1)->nullable()->comment('V or B');;
+            $table->string('observacion', 350)->nullable();
+            $table->date('fecha_entrega')->nullable();
+            //$table->string('observaciones_te', 300)->nullable();
+            $table->char('salesforce', 1)->comment('S (Si) or N (No)');//No se si se registra en selforce despues o durante la venta
+            $table->string('solicitud', 50)->nullable();
             $table->char('sot', 8)->nullable();
-            $table->char('estado_te', 1)->nullable()->comment('C or N');
+            //$table->char('estado_te', 1)->nullable()->comment('C or N');
             $table->float('total');
-            $table->char('estado_venta', 1)->default('A')->comment('A or N');
+            $table->float('total_sin_igv');
+            $table->char('estado_venta', 1)->default('P')->comment('P (Pendiente), E (Enviado), C (Conforme), N (No conforme)');
             $table->char('estado', 1)->default('1')->comment('1 or 0');
             $table->string('usuario_reg', 255)->default('system');
             $table->string('usuario_act', 255)->nullable();

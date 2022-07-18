@@ -61,7 +61,7 @@
                 @endforeach
             </div>
             <div class="float-right">
-                {!! Form::submit('Registrar', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
                 {!! Form::close() !!}
             </div>

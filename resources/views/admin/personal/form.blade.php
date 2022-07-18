@@ -47,9 +47,6 @@
 <label for="operador"> Operacion </label>
 <input id="operador" class="form-control" type="text" name="operador" value="{{isset($reporteventamovil->operador)?$reporteventamovil->operador:old('operador')}}" {{($modo=='Ver')?'readonly="readonly"':""}}>
 
-<label for="fecha_registro"> Fecha Registro </label>
-<input id="fecha_registro" class="form-control" type="text" name="fecha_registro" value="{{isset($reporteventamovil->fecha_registro)?$reporteventamovil->fecha_registro:old('fecha_registro')}}" {{($modo=='Ver')?'readonly="readonly"':""}}>
-
 <label for="tipo_contrato"> Tipo Contrato </label>
 <input id="tipo_contrato" class="form-control" type="text" name="tipo_contrato" value="{{isset($reporteventamovil->tipo_contrato)?$reporteventamovil->tipo_contrato:old('tipo_contrato')}}" {{($modo=='Ver')?'readonly="readonly"':""}}>
 

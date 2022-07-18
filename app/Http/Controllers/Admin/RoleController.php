@@ -23,11 +23,52 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
+        //dd($permissions);
         return view('admin.roles.create', compact('permissions'));
     }
 
     public function store(Request $request)
     {
+        $aux = 0;
+        $aux2 = 0;
+        $aux3 = 0;
+        $aux4 = 0;
+        $aux5 = 0;
+        foreach($request->permissions as $permisos){
+            if($aux == 0){
+                if($permisos == "2" || $permisos == "3" || $permisos == "4" || $permisos == "5" || $permisos == "6"
+                || $permisos == "7" || $permisos == "8" || $permisos == "9"){
+                    $request->permissions = array_merge($request->permissions, array("1"));
+                    $aux=1;
+                };
+            };
+            if($aux2 == 0){
+                if($permisos == "11" || $permisos == "12"){
+                    $request->permissions = array_merge($request->permissions, array("10"));
+                    $aux2=1;
+                };
+            };
+            if($aux3 == 0){
+                if($permisos == "14" || $permisos == "15" || $permisos == "16" || $permisos == "17"){
+                    $request->permissions = array_merge($request->permissions, array("13"));
+                    $aux3=1;
+                };
+            };
+            if($aux4 == 0){
+                if($permisos == "19" || $permisos == "20"|| $permisos == "21" ||
+                $permisos == "23" || $permisos == "24" || $permisos == "25"){
+                    $request->permissions = array_merge($request->permissions, array("18"));
+                    $aux4=1;
+                };
+            };
+            if($aux5 == 0){
+                if($permisos == "23" || $permisos == "24" || $permisos == "25"){
+                    $request->permissions = array_merge($request->permissions, array("22"));
+                    $aux5=1;
+                };
+            };
+        };
+        //dd($request->permissions);
         $request->validate([
             'name' => 'required|unique:roles',
         ]);
@@ -49,6 +90,49 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
+        //dd($request->permissions);
+        $aux = 0;
+        $aux2 = 0;
+        $aux3 = 0;
+        $aux4 = 0;
+        $aux5 = 0;
+        foreach($request->permissions as $permisos){
+            if($aux == 0){
+                if($permisos == "2" || $permisos == "3" || $permisos == "4" || $permisos == "5" || $permisos == "6"
+                || $permisos == "7" || $permisos == "8" || $permisos == "9"){
+                    $request->permissions = array_merge($request->permissions, array("1"));
+                    $aux=1;
+                };
+            };
+            if($aux2 == 0){
+                if($permisos == "11" || $permisos == "12"){
+                    $request->permissions = array_merge($request->permissions, array("10"));
+                    $aux2=1;
+                };
+            };
+            if($aux3 == 0){
+                if($permisos == "14" || $permisos == "15" || $permisos == "16" || $permisos == "17"){
+                    $request->permissions = array_merge($request->permissions, array("13"));
+                    $aux3=1;
+                };
+            };
+            if($aux4 == 0){
+                if($permisos == "19" || $permisos == "20"|| $permisos == "21" ||
+                $permisos == "23" || $permisos == "24" || $permisos == "25"){
+                    $request->permissions = array_merge($request->permissions, array("18"));
+                    $aux4=1;
+                };
+            };
+            if($aux5 == 0){
+                if($permisos == "23" || $permisos == "24" || $permisos == "25"){
+                    $request->permissions = array_merge($request->permissions, array("22"));
+                    $aux5=1;
+                };
+            };
+        };
+
+        //dd($request->permissions);
+
         $request->validate([
             'name' => "required|unique:roles,name,$role->id",
         ]);

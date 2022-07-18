@@ -22,5 +22,12 @@ class BsdCuota extends Model
     //public function setUsuario_reg($usuario_reg){
     //    $this->usuario_reg = $usuario_reg;
     //}
+
+    public function getCuotaRoundAttribute()
+    {   
+        $cuota = $this->attributes['cuota'];
+        $coutaRound = number_format($cuota, 2);
+        return $coutaRound;
+    }
     
 }

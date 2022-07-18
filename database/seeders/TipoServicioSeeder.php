@@ -16,10 +16,14 @@ class TipoServicioSeeder extends Seeder
     public function run()
     {
         BsdTipoServicio::create([
-            'nom_tipo_servicio' => 'movil',
+            'nom_tipo_servicio' => 'Móvil',
         ]);
         BsdTipoServicio::create([
-            'nom_tipo_servicio' => 'fija',
+            'nom_tipo_servicio' => 'Fija',
         ]);
+        BsdTipoServicio::create([
+            'nom_tipo_servicio' => 'Internet Dedicado',
+        ]);
+        
     }
 }

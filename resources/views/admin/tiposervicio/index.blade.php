@@ -4,9 +4,9 @@
 
 @section('content_header')
     <a class="btn btn-primary float-right text-nowra" href="{{ route('admin.tiposervicio.create') }}">
-        <i class="fas fa-plus-circle"></i> Registrar Tipo de Servicio
+        <i class="fas fa-plus-circle"></i> Registrar 
     </a>
-    <h1 class="text-bold">Tipo de Servicio</h1>
+    <h1 class="text-bold">Lista de Tipos de Servicio</h1>
 @stop
 
 @section('content')

@@ -45,17 +45,20 @@
                                         <a href="{{ route('admin.users.show', $user) }}"
                                             class="btn btn-sm btn-info text-nowrap">
                                             <i class="fas fa-eye"></i> Ver
+                                            {{-- Ver  --}}
                                         </a>
                                         <a class="btn btn-success btn-sm text-nowrap"
                                             href="{{ route('admin.users.edit', $user) }}">
                                             <i class="fas fa-pen"></i> Editar
+                                            {{-- Editar --}}
                                         </a>
                                         <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
                                             class="form-delete text-nowrap">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger text-nowrap">
-                                                <i class="fas fa-minus-circle"></i> Eliminar</button>
+                                                <i class="fas fa-minus-circle"></i> Remover
+                                                {{--Remover --}}</button>
                                         </form>
                                     </div>
                                 </td>

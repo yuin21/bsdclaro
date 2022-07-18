@@ -1,6 +1,6 @@
 <div class="form-group">
     {!! Form::label('bsd_tipo_servicio_id', 'Tipo de Servicio') !!}
-    {!! Form::select('bsd_tipo_servicio_id', $tiposervicios, null, ['class' => 'form-control']) !!}
+    {!! Form::select('bsd_tipo_servicio_id', $tiposervicios, null, ['class' => 'selectpicker form-control', 'title' => 'seleccionar']) !!}
 
     @error('bsd_tipo_servicio_id')
         <span class="text-danger">{{ $message }}</span>
@@ -19,7 +19,7 @@
         </div>
         <div class="col-4">
             {!! Form::label('precio', 'Precio') !!}
-            {!! Form::text('precio', null, ['class' => 'form-control']) !!}
+            {!! Form::text('precio', number_format(0,2), ['class' => 'form-control','id'=>'precio']) !!}
 
             @error('precio')
                 <span class="text-danger">{{ $message }}</span>

@@ -6,7 +6,7 @@
     <a href="{{ route('admin.clientes.index') }}" class="float-right mt-2">
         <i class="fas fa-chevron-circle-left"></i> Ver lista de clientes
     </a>
-    <h1 class="text-bold">Ver Clientes</h1>
+    <h1 class="text-bold">Ver Cliente</h1>
 @stop
 
 @section('content')
@@ -35,12 +35,13 @@
                     <b style="min-width:200px; display: inline-block">Distrito</b> {{ $cliente->distrito}}
                 </li>
                 <li class="list-group-item">
-                    <b style="min-width:200px; display: inline-block">Año:</b> {{ $cliente->tipo_cliente}}
+                    <b style="min-width:200px; display: inline-block">Tipo cliente:</b> {{ $cliente->tipo_cliente}}
                 </li>
             </ul>
         </div>
     </div>
 @stop
+
 
 @section('js')
     @if (session('success') == 'update')

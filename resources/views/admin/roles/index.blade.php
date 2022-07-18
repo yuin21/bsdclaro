@@ -4,9 +4,9 @@
 
 @section('content_header')
     <a href="{{ route('admin.roles.create') }}" class="btn btn-primary float-right text-nowrap">
-        <i class="fas fa-plus-circle"></i> Registrar Rol
+        <i class="fas fa-plus-circle"></i> Registrar
     </a>
-    <h1 class="font-weight-bold">Roles</h1>
+    <h1 class="font-weight-bold">Lista de Roles</h1>
 @stop
 
 @section('content')

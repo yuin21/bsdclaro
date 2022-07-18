@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:admin.users.index');
+        $this->middleware('can:admin.users.indexf');
     }
 
     public function index()

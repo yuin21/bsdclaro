@@ -15,10 +15,26 @@
             {!! Form::open(['route' => 'admin.cuotapersonal.store']) !!}
             @include('admin.cuotapersonal.partials.form')
             <div class="float-right">
-                {!! Form::submit('Registrar', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ url()->previous() }}" class="btn btn-danger ml-1">Cancelar</a>
                 {!! Form::close() !!}
             </div>
         </div>
     </div>
+@stop
+
+
+@section('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+@stop
+@section('js')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script>
+    // fecha actual en input 
+    const fecha = new Date();
+    const mes = fecha.toLocaleString('default', { month: 'long' })
+    $('#mes').val(mes)
+    const año = fecha.getFullYear()
+    $('#año').val(año)
+    </script>
 @stop

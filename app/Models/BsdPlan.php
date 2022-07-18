@@ -25,4 +25,5 @@ class BsdPlan extends Model
     public function tiposervicio(){
         return $this->belongsTo('App\Models\BsdTipoServicio', 'bsd_tipo_servicio_id');
     }
+
 }
