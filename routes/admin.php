@@ -125,6 +125,7 @@ Route::get('reportes/graficas', [ReportesController::class, 'indexGraficas'])->n
 Route::get('reportes/ventasConsultor', [ReportesController::class, 'index_ventasConsultor'])->name('admin.reportes.indexVentasConsultor');
 Route::post('reportes/ventasConsultor/buscar', [ReportesController::class, 'searchConsultor'])->name('admin.reportes.searchConsultor');
 Route::get('reportes/ventas', [ReportesController::class, 'index_ventas'])->name('admin.reportes.indexVentas');
+Route::post('reportes/ventas/buscar', [ReportesController::class, 'consultar_venta_rpt'])->name('admin.reportes.consultar_venta_rpt');
 
 //Pagos
 Route::resource('pagos', PagoController::class)->only(['index', 'create', 'store', 'show'])->names('admin.pagos');
