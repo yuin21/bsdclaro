@@ -734,6 +734,8 @@
                 }
                 else{
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
+                    $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-3');
+                    $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                 }
 
             }
