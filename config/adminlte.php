@@ -343,14 +343,14 @@ return [
                     'text' => 'Gráficas',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'route'     => 'admin.reportes.indexGraficas',
-                    'can' => 'admin.reportes.indexfGraficas',
+                    'can' => 'admin.reportes.indexGraficas',
                 ],
-                // [
-                //     'text' => 'Ventas',
-                //     'icon'  => 'far fa-fw fa-dot-circle',
-                //     'route'     => 'admin.reportes.indexVentas',
-                //     'can' => 'admin.reportes.indexfVentas',
-                // ],
+                [
+                    'text' => 'Ventas',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'route'     => 'admin.reportes.indexVentas',
+                    'can' => 'admin.reportes.indexfVentas',
+                ],
             ]
         ],
         [

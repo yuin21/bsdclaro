@@ -7,44 +7,61 @@
 @stop
 
 @section('content')
+<div class="card">
+    <div class="card-body">
+        {!! Form::open(['route' => 'admin.reportes.consultar_venta_rpt', 'id' => 'formFechas']) !!}
+        <div class="row">
+            <div class="col-lg-6 col-sm-6">
+                {!! Form::label('fecha_inicio', 'Fecha Inicio', ['class' => 'text-nowrap']) !!}
+                {!! Form::date('fecha_inicio', isset($fecha_inicio) ? $fecha_inicio :null, ['class' => 'form-control', 'id' => 'fecha_inicio']) !!}
+                @error('fecha_inicio')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="col-lg-6 col-sm-6">
+                {!! Form::label('fecha_fin', 'Fecha Fin', ['class' => 'text-nowrap']) !!}
+                {!! Form::date('fecha_fin', isset($fecha_fin) ? $fecha_fin :null, ['class' => 'form-control', 'id' => 'fecha_fin']) !!}
+                @error('fecha_fin')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+        {!! Form::submit('Buscar', ['class' => 'btn btn-primary mt-4 float-right', 'id' => 'btnBuscar']) !!}
+        {!! Form::close() !!}
+    </div>
+</div>
     <div class="card">
         <div class="card-header">
             MOVILES
         </div>
-        @if ($bsd_pago->count())
+        @if (!empty($ventas_rpt))
             <div class="card-body table-responsive">
-                <div>
-                    {{ $bsd_pago->links() }}
-                </div>
                 <table class="table table-bordered table-hover">
                     <thead class="border">
                         <tr>
-                            <th>Item</th>
-                            <th>Consultores</th>
-                            <th>Reno</th>
-                            <th>C/IGV</th>
-                            <th>S/IGV</th>
-                            <th>Alta</th>
-                            <th>Porta</th>
-                            <th>N° Lineas</th>
-                            <th>C/IGV Moviles</th>
-                            <th>S/IGV Moviles</th>
+                            <th>CONSULTORES</th>
+                            <th>RENO</th>
+                            <th>C/ IGV</th>
+                            <th>S/ IGV</th>
+                            <th>ALTA</th>
+                            <th>PORTA</th>
+                            <th>N° LINEAS</th>
+                            <th>C/IGV MOVILES</th>
+                            <th>S/IGV MOVILES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($bsd_pago as $pago)
+                        @foreach ($ventas_rpt as $ventas)
                             <tr>
-                                <td width="20px">{{ $loop->iteration }}</td>
-                                <td>{{ $pago->cuotapersonal->personal->nom_personal }}
-                                    {{ $pago->cuotapersonal->personal->ape_paterno }}
-                                </td>
-                                <td>{{ $pago->venta->total }}</td>
-                                <td>{{ $pago->porcentaje_comision }} %</td>
-                                <td>{{ $pago->comision_consultor}}</td>
-                                <td>{{ $pago->estado_carpeta === 'C' ? 'Conforme' : 'No Conforme' }}</td>
-                                <td>{{ $pago->pago_1er_recibo === 'S' ? 'Si' : 'No' }}</td>
-                                <td>{{ $pago->pago_dace === 'S' ? 'Si' : 'No' }}</td>
-                                <td>{{ $pago->abono_consultor === 'S' ? 'Si' : 'No' }}</td>
+                                <td>{{ $ventas->CONSULTORES}}</td>
+                                <td>{{ $ventas->RENO}}</td>
+                                <td>{{ $ventas->CON_IGV }}</td>
+                                <td>{{ $ventas->SIN_IGV}}</td>
+                                <td>{{ $ventas->ALTA}}</td>
+                                <td>{{ $ventas->PORTA}}</td>
+                                <td>{{ $ventas->N_LINEAS}}</td>
+                                <td>{{ $ventas->CON_IGV_MOVILES}}</td>
+                                <td>{{ $ventas->SIN_IGV_MOVILES}}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -56,4 +73,50 @@
             </div>
         @endif
     </div>
+@stop
+
+@section('js')
+    <script>
+        const btnBuscar = document.getElementById('btnBuscar')
+
+        function alerta(title = 'Faltan datos') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            return Toast.fire({
+                icon: 'warning',
+                title
+            })
+        }
+
+        const formFechas = document.getElementById('formFechas')
+        formFechas.addEventListener('submit', (e) => {
+            e.preventDefault()
+            //verificar los datos obligatorios
+            const {
+                fecha_inicio,
+                fecha_fin
+            } = e.target
+
+
+            if (!fecha_inicio.value && !fecha_fin.value) return  alerta(
+                'Falta Fecha de Inicio y Fecha Fin')
+
+            if (!fecha_inicio.value) return alerta(
+                'Falta Fecha de Inicio')
+
+            if (!fecha_fin.value) return  alerta(
+                'Falta Fecha de Fin')
+
+            formFechas.submit()
+        })
+    </script>
 @stop

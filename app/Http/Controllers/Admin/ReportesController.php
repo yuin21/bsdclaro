@@ -92,26 +92,14 @@ class ReportesController extends Controller
     }
 
     public function index_ventas(){
-        $bsd_servicio = BsdServicio::where('estado', 1)->orderBy('nom_servicio')->get();
-        //dd($bsd_servicio);
-        $bsd_personal = BsdPersonal::where('estado', 1)->orderBy('nom_personal')->get();
-        $personal = $bsd_personal->pluck('PersonalFullName', 'id');
-        $servicios = [];
-        foreach($bsd_servicio as $servicio){
-            $servicios[] = [$servicio->id];
-        }
-        $personales = [];
-        foreach($bsd_personal as $personal){
-            $personales[] = [$personal->id];
-        }
-        //dd($personales);
-        $total_servicio = [];
-        foreach($personales as $id_personal){
-            foreach($servicios as $id_servicio){
-                $total_servicio[] = [DB::select('CALL sp_contarServicios(?,?)', [$id_servicio[0],$id_personal[0]])];
-            }
-        }
-        dd($total_servicio);
-        return view('admin.reportes.index_ventas', compact('personal'));
+        //$ventas_rpt = DB::select('CALL sp_ventas_rpt(?,?)', ['2022-05-01','2022-07-30']);
+        return view('admin.reportes.index_ventas');
+    }
+    public function consultar_venta_rpt(Request $request){
+        //dd($request);
+        $ventas_rpt = DB::select('CALL sp_ventas_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
+        $fecha_inicio = $request->fecha_inicio;
+        $fecha_fin = $request->fecha_fin;
+        return view('admin.reportes.index_ventas', compact('ventas_rpt','fecha_inicio','fecha_fin'));
     }
 }
