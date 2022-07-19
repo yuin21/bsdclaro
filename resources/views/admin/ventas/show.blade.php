@@ -26,10 +26,10 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Tipo de contrato: </span>
-                                    {{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}
+                                    {{ $venta->tipo_contrato === 'D' ? 'Digital' : 'Fisico' }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Saliforce: </span>
+                                    <span class="text-bold tag-detalle">Salesforce: </span>
                                     {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
                                 </li>
                                 <li class="list-group-item">
@@ -116,7 +116,7 @@
                                         <td> {{ $detalle->tipoServicio->nom_tipo_servicio }}</td>
                                         <td> {{ $detalle->servicio->nom_servicio }}</td>
                                         <td> {{ $detalle->plan->nombre_plan }}</td>
-                                        <td class="tag-number" id="precio"> {{ number_format($detalle->plan->precio, 2) }}</td>
+                                        <td class="tag-number" id="precio"> {{ number_format($detalle->precio_plan, 2) }}</td>
                                         <td class="tag-number" id="cantidad"> {{ $detalle->cantidad }}</td>
                                         <td class="tag-number" id="ugis"> {{ $detalle->ugis }}</td>
                                         <td>

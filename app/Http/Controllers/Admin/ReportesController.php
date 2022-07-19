@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BsdPersonal;
+use App\Models\BsdServicio;
 use Illuminate\Http\Request;
 use App\Models\BsdVenta;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
+
 // use PDF;
 
 class ReportesController extends Controller
@@ -86,5 +89,17 @@ class ReportesController extends Controller
       }
       //dd($bsd_venta);
       return view('admin.reportes.index_ventasConsultor', compact('bsd_venta', 'request','personal'));
+    }
+
+    public function index_ventas(){
+        //$ventas_rpt = DB::select('CALL sp_ventas_rpt(?,?)', ['2022-05-01','2022-07-30']);
+        return view('admin.reportes.index_ventas');
+    }
+    public function consultar_venta_rpt(Request $request){
+        //dd($request);
+        $ventas_rpt = DB::select('CALL sp_ventas_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
+        $fecha_inicio = $request->fecha_inicio;
+        $fecha_fin = $request->fecha_fin;
+        return view('admin.reportes.index_ventas', compact('ventas_rpt','fecha_inicio','fecha_fin'));
     }
 }

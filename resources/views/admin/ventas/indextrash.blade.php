@@ -38,7 +38,7 @@
                                     <td>{{ $venta->cliente->ruc }} <br> {{ $venta->cliente->razon_social }} </td>
                                     <td>{{ $venta->sec }}</td>
                                     <td>{{ $venta->sot }}</td>
-                                    <td>{{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}</td>
+                                    <td>{{ $venta->tipo_contrato === 'D' ? 'Digital' : 'Fisico' }}</td>
                                     <td id="avance_oportunidad">{{ $venta->avance_oportunidad }}%</td>
                                     <td width="260px">
                                         <div class="d-flex" style="gap: 10px">
@@ -85,7 +85,7 @@
         </script>
     @endif --}}
 
-{{-- 
+{{--
     <script>
         $('.form-delete').submit(function(e) {
             e.preventDefault()

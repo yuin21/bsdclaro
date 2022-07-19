@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             {!! Form::label('tipo_contrato', 'Tipo de Contrato*') !!}
-                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'V' => 'Virtual'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
+                            {!! Form::select('tipo_contrato', ['F' => 'Físico', 'D' => 'Digital'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
                             @error('tipo_contrato')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -181,10 +181,10 @@
                                 {!! Form::text('precioplan', number_format(0,2), ['class' => 'form-control mt-2', 'id' => 'precioplan', 'placeholder' => 'precio plan']) !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6" id="div_cantidad">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
                                 {!! Form::label('inputCantidad', 'Cantidad*', ['style' => 'margin: 0; min-width:180px']) !!}
-                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad', 'disabled' => 'disabled']) !!}
+                                {!! Form::text('inputCantidad', 0, ['class' => 'form-control mt-2', 'id' => 'inputCantidad', 'placeholder' => 'cantidad']) !!}
                             </div>
                         </div>
                         <div class="col-6" id="div_ugis">
@@ -195,13 +195,13 @@
                         </div>
                         <div class="col-6" id="div_inputNumerosLineasNuevas">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva*', ['style' => 'margin: 0; min-width:180px']) !!}
+                                {!! Form::label('inputNumerosLineasNuevas', 'Números de linea nueva', ['style' => 'margin: 0; min-width:180px']) !!}
                                 {!! Form::text('inputNumerosLineasNuevas', null, ['class' => 'form-control mt-2', 'id' => 'inputNumerosLineasNuevas', 'placeholder' => 'Números de Lineas nuevas']) !!}
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mt-2 d-flex  align-items-center" style="gap: 10px;">
-                                {!! Form::label('estado_linea', 'Estado de Linea', ['style' => 'margin-top: 15px; min-width:180px']) !!}
+                                {!! Form::label('estado_linea', 'Estado de Linea *', ['style' => 'margin-top: 15px; min-width:180px']) !!}
                                 {{-- {!! Form::select('estado_linea', $estadoslinea, null, ['class' => 'selectpicker form-control', 'id' => 'estadoLinea', 'title'=>'Seleccione'],  ['style' =>  'margin-top: 17px'] ) !!}
                                  --}}
                                 <select name="estado_linea" id="estadoLinea" class="selectpicker form-control"
@@ -279,8 +279,8 @@
                                     <th>Servicio</th>
                                     <th>Plan</th>
                                     <th>Precio Plan</th>
-                                    <th>Cantidad</th>
-                                    <th>Ugis</th>
+                                    {{-- <th id="cantidadUgis">Cantidad</th> --}}
+                                    <th>Cantidad/UGIS</th>
                                     <th>Números de linea nueva</th>
                                     <th>Equipo/Producto</th>
 
@@ -300,8 +300,9 @@
                         </table>
                     </div>
                     <div class="mt-2 d-flex justify-content-end align-items-center" style="gap: 10px;">
-                        {!! Form::label('inputTotal_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
+                        {!! Form::label('total_sin_igv', 'Sin IGV', ['style' => 'margin: 0']) !!}
                         {!! Form::text('inputTotal_sin_igv', null, ['class' => 'form-control', 'id' => 'inputTotal_sin_igv', 'disabled' => 'disabled', 'style' => 'max-width: 150px']) !!}
+                        {!! Form::hidden('total_sin_igv', null) !!}
                     </div>
                     <div class="d-flex justify-content-end align-items-center text-danger" style="gap: 10px;">
                         {!! Form::label('total', 'Total', ['style' => 'margin: 0']) !!}
@@ -542,7 +543,8 @@
         const tbodyDetalleVenta = document.getElementById('tbodyDetalleVenta')
         const inputTotal = document.getElementById('inputTotal')
         const inputTotal_sin_igv = document.getElementById('inputTotal_sin_igv')
-        const total = document.getElementById('total') // input hidden para mandar a registrar
+        const total = document.getElementById('total')
+        const total_sin_igv = document.getElementById('total_sin_igv') // input hidden para mandar a registrar
         //Agregar data de valores nulos
         const inputOperador = document.getElementById('inputOperador')
         const estadoLinea = document.getElementById('estadoLinea')
@@ -556,7 +558,7 @@
         let cantDetallesVenta = 0 // parecido al cont
         let cont = 0 // el cont sirve para manejar un id diferente de cada detalle venta para eliminarlo
         let total_igv = 0
-        let total_sin_igv = 0
+        let total_sinigv = 0
         const IGV = 1.18
 
         // fecha actual en input
@@ -652,11 +654,12 @@
                     $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-6');
                     $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                     //$('#div_observacion').toggleClass('pull-left');
-                    $('#inputCantidad').attr("disabled", true);
+                    //$('#inputCantidad').attr("disabled", true);
+                    $('#div_cantidad').show();
                     $('#inputCantidad').val('0');
                     $('#div_equipoproducto').show();
                     $('#inputEquipoProducto').val(null);
-                    $('#inputUgis').val(null);
+                    $('#inputUgis').val('0');
                     $('#div_ugis').hide();
                     //$('#fecha_entrega_te').attr("readonly", false);
                     //$('#fecha_avance_oportunidad').attr("readonly", false);
@@ -681,7 +684,8 @@
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
                     $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-3');
                     $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
-                    $('#inputCantidad').attr("disabled", false);
+                    //$('#inputCantidad').attr("disabled", false);
+                    $('#div_cantidad').hide();
                     $('#inputCantidad').val('0');
                     $('#div_ugis').show();
                     $('#inputUgis').val('0');
@@ -708,9 +712,10 @@
                     $('#div_hora').show();
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-8');
                     $('#div_estado_venta').removeClass('col-lg-3').addClass('col-lg-4');
-                    $('#inputCantidad').attr("disabled", false);
+                    //$('#inputCantidad').attr("disabled", false);
+                    $('#div_cantidad').hide();
                     $('#inputCantidad').val('0');
-                    $('#inputUgis').val(null);
+                    $('#inputUgis').val('0');
                     $('#div_ugis').hide();
                     $('#div_equipoproducto').hide();
                     $('#inputEquipoProducto').val(null);
@@ -728,7 +733,11 @@
                     $('#div_operador').hide();
                 }
                 else{
+                    $('#div_sot').show();
+                    $('#div_nro_proyecto').show();
                     $('#div_observacion').removeClass('col-lg-6').addClass('col-lg-3');
+                    $('#div_observacion').removeClass('col-lg-8').addClass('col-lg-3');
+                    $('#div_estado_venta').removeClass('col-lg-4').addClass('col-lg-3');
                 }
 
             }
@@ -759,34 +768,41 @@
         selectPlan.on('changed.bs.select', function(e, clickedIndex, isSelected, previousValue) {
             const dataPlan = e.target.value.split('_') // formato: Id, nombre, precio
             $('#precioplan').val(dataPlan[2])
+            var precio = parseFloat(dataPlan[2]);
+            $('#precioplan').val((precio).toFixed(2))
             const tipoServicio = selectTipoServicio.value.split('_')
             if(tipoServicio[1]=='Fija'){
+                $('#inputCantidad').val('1');
                 //$('#inputCantidad').val(dataPlan[1])
                 const cantPlanes = dataPlan[1].split('+').length
                 $('#inputUgis').val(cantPlanes)
+            }else if(tipoServicio[1]=='Internet Dedicado'){
+                $('#inputCantidad').val('1');
+                $('#inputUgis').val('0');
             }
         });
 
         // agregar detalle de venta a la lista
         btnAgregar.addEventListener('click', () => {
-            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !inputCantidad.value) {
+            if (!selectTipoServicio.value || !selectServicio.value || !selectPlan.val() || !estadoLinea.value) {
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
                     title: 'Faltan datos'
                 })
             }
-
+            //console.log(!inputEquipoProducto.value)
             // obtener la data
             const tipoServicio = selectTipoServicio.value.split('_') // formato: Id, nombre
-            if(tipoServicio[1] =='Móvil' && !inputNumerosLineasNuevas.value){
+            //if(tipoServicio[1] =='Móvil' && (!inputNumerosLineasNuevas.value || !inputEquipoProducto.value)){
+            if(tipoServicio[1] =='Móvil' && (!inputEquipoProducto.value || !inputCantidad.value)){
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
                     title: 'Faltan datos'
                 })
             };
-            if(tipoServicio[1] =='Fija' && !inputEquipoProducto.value){
+            if(tipoServicio[1] =='Fija' && !inputEquipoProducto.value ){
                 alerta('Faltan datos en el detalle de venta a agregar')
                 return Toast.fire({
                     icon: 'warning',
@@ -794,12 +810,13 @@
                 })
             };
             const servicio = selectServicio.value.split('_') // formato: Id, nombre, ID_TIPO_SERVICIO
-            const plan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
+            const plan = precioplan.value // formato: Id, nombre, precio, ID_TIPO_SERVICIO
+            const nombreplan = selectPlan.val().split('_') // formato: Id, nombre, precio, ID_TIPO_SERVICIO
             const cantidad = inputCantidad.value
             const ugis = inputUgis.value
             const numerosLineasNuevas = inputNumerosLineasNuevas.value
             const equipoproducto = inputEquipoProducto.value
-            const subtotal_igv = Number((plan[2] * cantidad).toFixed(2))
+            const subtotal_igv = Number((plan * cantidad).toFixed(2))
             const subtotal_sin_igv = Number((subtotal_igv / IGV).toFixed(2))
 
             // obtener data de valores nulos
@@ -816,7 +833,7 @@
             cont++
             cantDetallesVenta++
             total_igv = Number((total_igv + subtotal_igv).toFixed(2))
-            total_sin_igv = Number((total_igv / IGV).toFixed(2))
+            total_sinigv = Number((total_igv / IGV).toFixed(2))
 
             let htmlNumerosLineaNueva = ''
             numerosLineasNuevas.split(',').map(num => {
@@ -826,15 +843,15 @@
                     </span>
                 `
             })
-
+            if(ugis !== '0'){
+            //document.getElementById("cantidadUgis").innerHTML = "UGIS"
             tbodyDetalleVenta.innerHTML += `
             <tr id="detalleventa_${cont}">
                 <td width="20px">${cont}</td>
                 <td>${tipoServicio[1]}</td>
                 <td>${servicio[1]}</td>
-                <td>${plan[1]}</td>
-                <td id="dv_precioplan">${plan[2]}</td>
-                <td id="dv_cantidad">${cantidad}</td>
+                <td>${nombreplan[1]}</td>
+                <td>${plan}</td>
                 <td>${ugis}</td>
                 <td>
                     ${htmlNumerosLineaNueva}
@@ -856,8 +873,8 @@
                 </td>
                 <input type="hidden" name="tiposServicio[]" value="${tipoServicio[0]}">
                 <input type="hidden" name="servicios[]" value="${servicio[0]}">
-                <input type="hidden" name="planes[]" value="${plan[0]}">
-                <input type="hidden" name="precioplanes[]" value="${plan[2]}">
+                <input type="hidden" name="planes[]" value="${nombreplan[0]}">
+                <input type="hidden" name="precioplanes[]" value="${plan}">
                 <input type="hidden" name="cantidades[]" value="${cantidad}">
                 <input type="hidden" name="ugises[]" value="${ugis}">
                 <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
@@ -872,10 +889,59 @@
                 <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
 
             </tr>`
+            }else{
+            //document.getElementById("cantidadUgis").innerHTML = "Cantidad"
+            tbodyDetalleVenta.innerHTML += `
+            <tr id="detalleventa_${cont}">
+                <td width="20px">${cont}</td>
+                <td>${tipoServicio[1]}</td>
+                <td>${servicio[1]}</td>
+                <td>${nombreplan[1]}</td>
+                <td>${plan}</td>
+                <td>${cantidad}</td>
+                <td>
+                    ${htmlNumerosLineaNueva}
+                </td>
+                <td>${equipoproducto}</td>
+
+                <td>${operador}</td>
+                <td>${estado_linea[1]}</td>
+                <td>${fechaactivado}</td>
+                <td>${horas}</td>
+
+                <td id="dv_subtotal_sin_igv">${subtotal_sin_igv}</td>
+                <td id="dv_subtotal_igv">${subtotal_igv}</td>
+
+                <td width="30px">
+                    <button type="button" class="btn btn-sm btn-danger" onclick='handleDeleteDetalleVenta("detalleventa_${cont}", ${subtotal_igv}, ${subtotal_sin_igv})'>
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+                <input type="hidden" name="tiposServicio[]" value="${tipoServicio[0]}">
+                <input type="hidden" name="servicios[]" value="${servicio[0]}">
+                <input type="hidden" name="planes[]" value="${nombreplan[0]}">
+                <input type="hidden" name="precioplanes[]" value="${plan}">
+                <input type="hidden" name="cantidades[]" value="${cantidad}">
+                <input type="hidden" name="ugises[]" value="${ugis}">
+                <input type="hidden" name="numerosLineasNuevas[]" value="${numerosLineasNuevas}">
+                <input type="hidden" name="equipoproducto[]" value="${equipoproducto}">
+
+                <input type="hidden" name="operador[]" value="${operador}">
+                <input type="hidden" name="estado_linea[]" value="${estado_linea[0]}">
+                <input type="hidden" name="fechaactivado[]" value="${fechaactivado}">
+                <input type="hidden" name="horas[]" value="${horas}">
+
+                <input type="hidden" name="subtotales_sinigv[]" value="${subtotal_sin_igv}">
+                <input type="hidden" name="subtotales_igv[]" value="${subtotal_igv}">
+
+            </tr>`
+            }
+
 
             inputTotal.value = total_igv
-            inputTotal_sin_igv.value = total_sin_igv
+            inputTotal_sin_igv.value = total_sinigv
             total.value = total_igv
+            total_sin_igv.value = total_sinigv
             //limpiar inputs
             inputCantidad.value = '0'
             $('#precioplan').val(0)
@@ -915,10 +981,11 @@
         // eliminar un detalle de venta de la lista
         function handleDeleteDetalleVenta(idDetalleVenta, subtotal_igv, subtotal_sin_igv) {
             total_igv = Number((total_igv - subtotal_igv).toFixed(2))
-            total_sin_igv = Number((total_igv / IGV).toFixed(2))
+            total_sinigv = Number((total_igv / IGV).toFixed(2))
             inputTotal.value = total_igv
-            inputTotal_sin_igv.value = total_sin_igv
+            inputTotal_sin_igv.value = total_sinigv
             total.value = total_igv
+            total_sin_igv.value = total_sinigv
             const item = document.getElementById(idDetalleVenta)
             tbodyDetalleVenta.removeChild(item)
             cantDetallesVenta--

@@ -145,17 +145,29 @@ class VentaController extends Controller
         return redirect()->route('admin.ventas.show', $venta)->with('success','store');
     }
 
-    public function show(BsdVenta $venta)
+    public function show($id_venta)
     {
+        $venta = BsdVenta::find($id_venta);
+        //dd($venta);
         return view('admin.ventas.show', compact('venta'));
     }
 
-    public function tracking(BsdVenta $venta)
+    public function tracking($id_venta)
     {
-        return view('admin.ventas.tracking', compact('venta'));
+        $venta = BsdVenta::find($id_venta);
+
+        $estadoslinea = [];
+        foreach($venta->detallesventa as $detalle){
+            $estadoslinea[] = BsdEstadoLinea::where('estado', 1)->where('bsd_tipo_servicio_id',$detalle->bsd_tipo_servicio_id)->get();
+        }
+        //$estados_linea = $estadoslinea->pluck('nombre_estado_linea', 'id');
+       // $estados_linea = BsdEstadoLinea::where('estado', 1)->get();
+        //$estadoslinea = $estados_linea->pluck('nombre_estado_linea', 'id');
+        return view('admin.ventas.tracking', compact('venta', 'estadoslinea'));
     }
 
-    public function trackingUpdate(Request $request, BsdVenta $venta) {
+    public function trackingUpdate(Request $request, BsdVenta $venta, BsdDetalleVenta $bsdDetalleVenta) {
+        //dd($venta->id);
         $venta->nro_oportunidad = $request->nro_oportunidad;
         $venta->fecha_avance_oportunidad = $request->fecha_avance_oportunidad;
         $venta->fecha_oportunidad_ganada = $request->fecha_oportunidad_ganada;
@@ -164,7 +176,16 @@ class VentaController extends Controller
         $venta->fecha_conforme = $request->fecha_conforme;
         $venta->estado_venta = $request->estado_venta;
         $venta->observacion = $request->observacion;
-
+        // 2. registrar detalles de venta
+            //dd($request);
+            for ($i=0; $i < count($request->id_detalle_venta); $i++) {
+                if($request->estado_linea[$i] != '' || $request->estado_linea[$i] != null){
+                    $bsdDetalleVenta = BsdDetalleVenta::find($request->id_detalle_venta[$i]);
+                    $bsdDetalleVenta->bsd_estado_linea_id = $request->estado_linea[$i];
+                    $bsdDetalleVenta->save();
+                }
+            }
+        //dd($bsdDetalleVenta);
         $venta->save();
         return redirect()->route('admin.ventas.tracking', $venta)->with('success', 'update');
     }
@@ -176,9 +197,10 @@ class VentaController extends Controller
     }
 
 
-    public function destroyLogico(BsdVenta $ventas)
+    public function destroyLogico($id_venta)
     {
         //dd($ventas);
+        $ventas = BsdVenta::find($id_venta);
         $ventas->estado = 0;
         $ventas->save();
         return redirect()->route('admin.ventas.index')->with('success','destroyLogico');

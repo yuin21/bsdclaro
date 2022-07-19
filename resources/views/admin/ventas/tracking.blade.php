@@ -90,6 +90,74 @@
                     @enderror
                 </div>
             </div>
+            <hr>
+            <h4 class="text-bold">Detalle</h4>
+            <div class="container float-right">
+                <div class="row justify-content-center">
+                    <div class="col-sm-9">
+                        <div class="row">
+                            @foreach ($venta->detallesventa as $detalle)
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-6">
+                                            {!! Form::label('servicio', 'Servicio', ['class' => 'text-nowrap']) !!}
+                                            {!! Form::text('servicio', $detalle->servicio->nom_servicio, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>
+                                        <div class="col-lg-3 col-sm-6">
+                                            {!! Form::label('tipo_servicio', 'Tipo Servicio') !!}
+                                            {!! Form::text('tipo_servicio',  $detalle->tipoServicio->nom_tipo_servicio, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>
+                                        <div class="col-lg-6 col-sm-6">
+                                            {!! Form::label('plan', 'Plan') !!}
+                                            {!! Form::text('plan', $detalle->plan->nombre_plan, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>
+                                        <div class="col-lg-6 col-sm-6">
+                                            {!! Form::hidden('id_detalle_venta[]', $detalle->id, ['class' => 'form-control div_detalle_venta']) !!}
+                                        </div>
+                                        {{-- <div class="col-6">
+                                            {!! Form::label('bsd_tipo_servicio_id', 'Tipo de Servicio') !!}
+                                            {!! Form::select('bsd_tipo_servicio_id', $estadoslinea, null, ['class' => 'form-control']) !!}
+
+                                            @error('bsd_tipo_servicio_id')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div> --}}
+                                        {{-- <div class="col-lg-4 col-sm-6 estado_id">
+                                            {!! Form::label('estado_id', 'Estado') !!}
+                                            {!! Form::text('estado_id', $detalle->estadoLinea->id, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                                        </div>--}}
+                                        <div class="detalle_id">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="row">
+                            @foreach($estadoslinea as $estados => $estados_linea)
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-6">
+                                            {!! Form::label('estado_linea', 'Estado de Linea *') !!}
+                                            <select name="estado_linea[]" class="selectpicker form-control div_estado_linea"
+                                            title="Seleccionar">
+                                                @foreach($estados_linea as $estado => $estado_linea)
+                                                    <option
+                                                        value="{{ $estado_linea->id }}">
+                                                        {{ $estado_linea->nombre_estado_linea }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-4 float-right']) !!}
             {!! Form::close() !!}
         </div>
@@ -111,10 +179,10 @@
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <span class="text-bold tag-detalle">Tipo de contrato: </span>
-                                    {{ $venta->tipo_contrato === 'V' ? 'Virtual' : 'Fisico' }}
+                                    {{ $venta->tipo_contrato === 'D' ? 'Digital' : 'Fisico' }}
                                 </li>
                                 <li class="list-group-item">
-                                    <span class="text-bold tag-detalle">Saliforce: </span>
+                                    <span class="text-bold tag-detalle">Salesforce: </span>
                                     {{ $venta->salesforce === 'N' ? 'NO' : 'SI' }}
                                 </li>
                                 <li class="list-group-item">
@@ -201,7 +269,7 @@
                                         <td> {{ $detalle->tipoServicio->nom_tipo_servicio }}</td>
                                         <td> {{ $detalle->servicio->nom_servicio }}</td>
                                         <td> {{ $detalle->plan->nombre_plan }}</td>
-                                        <td class="tag-number" id="precio"> {{ number_format($detalle->plan->precio, 2) }}</td>
+                                        <td class="tag-number" id="precio"> {{ number_format($detalle->precio_plan, 2) }}</td>
                                         <td class="tag-number" id="cantidad"> {{ $detalle->cantidad }}</td>
                                         <td class="tag-number" id="ugis"> {{ $detalle->ugis }}</td>
                                         <td>
@@ -267,6 +335,9 @@
 @stop
 
 @section('js')
+<script src="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
 
     @if (session('success') == 'update')
         <script>
@@ -276,9 +347,42 @@
             })
         </script>
     @endif
+
+    <script>
+        var estado = document.getElementsByClassName('div_estado_linea');
+        //var prueba = document.getElementsByClassName('div_prueba');
+            arrayGuardar = [];
+            for (var i = 0; i < estado.length; i++) {
+                arrayGuardar[i] = estado[i].value;
+                console.log (estado[i].value);
+            }
+        console.log(estado)
+        //$(".estadoLinea").find(`option[value='${estado}']`);
+        //$('.estadoLinea').selectpicker('refresh');
+
+        // let detalleVenta = document.getElementsByClassName('div_detalle_venta')
+        //     arrayGuardarDetalle = [];
+        //     for (var i = 0; i < detalleVenta.length; i++) {
+        //         arrayGuardarDetalle[i] = detalleVenta[i].value;
+        //         console.log (detalleVenta[i].value);
+        //     }
+        // console.log(detalleVenta)
+        //let div_estadoLinea = document.getElementsByClassName('div_estado_linea')
+        //const estadoLinea = document.getElementById('estadoLinea')
+        //const estado_linea = estadoLinea.value
+        //const tipo_servicio = tipo_servicio.value
+        //const plan = plan.value
+        //const id_detalle_venta = id_detalle.value
+
+        // //console.log(id_detalle)
+        // div_estadoLinea.innerHTML += `
+        //     <input type="hidden" name="estado_linea[]" value="${estado_linea}">`
+    </script>
 @stop
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.1/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <style>
         .tag-detalle {
             display: inline-block;

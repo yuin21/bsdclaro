@@ -89,7 +89,7 @@ Route::put('plan/{plan}/restaurarPlan', [PlanController::class, 'restaurarPlan']
 Route::resource('estado_linea', EstadolineaController::class)->names('admin.estado_linea');
 Route::get('removidos/estado_linea', [EstadolineaController::class, 'indextrash'])->name('admin.estado_linea.indextrash');
 Route::put('estado_lineas/{estado_linea}/destroylogico', [EstadolineaController::class, 'destroyLogico'])->name('admin.estado_linea.destroyLogico');
-Route::put('estado_lineas/{estado_linea}/restauraEstadolinea', [EstadolineaController::class, 'restauraEstadolinea'])->name('admin.estado_linea.restauraEstadolinea');
+Route::put('estado_lineas/{estado_linea}/restauraEstadoLinea', [EstadolineaController::class, 'restauraEstadoLinea'])->name('admin.estado_linea.restauraEstadoLinea');
 
 //Ventas
 Route::resource('ventas', VentaController::class)->only(['index', 'create', 'store', 'show'])->names('admin.ventas');
@@ -124,6 +124,8 @@ Route::post('reportes/{venta}/generarPDF', [ReportesController::class, 'generate
 Route::get('reportes/graficas', [ReportesController::class, 'indexGraficas'])->name('admin.reportes.indexGraficas');
 Route::get('reportes/ventasConsultor', [ReportesController::class, 'index_ventasConsultor'])->name('admin.reportes.indexVentasConsultor');
 Route::post('reportes/ventasConsultor/buscar', [ReportesController::class, 'searchConsultor'])->name('admin.reportes.searchConsultor');
+Route::get('reportes/ventas', [ReportesController::class, 'index_ventas'])->name('admin.reportes.indexVentas');
+Route::post('reportes/ventas/buscar', [ReportesController::class, 'consultar_venta_rpt'])->name('admin.reportes.consultar_venta_rpt');
 
 //Pagos
 Route::resource('pagos', PagoController::class)->only(['index', 'create', 'store', 'show'])->names('admin.pagos');

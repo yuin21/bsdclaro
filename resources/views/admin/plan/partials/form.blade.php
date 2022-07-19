@@ -19,7 +19,7 @@
         </div>
         <div class="col-4">
             {!! Form::label('precio', 'Precio') !!}
-            {!! Form::text('precio', null, ['class' => 'form-control']) !!}
+            {!! Form::text('precio', number_format(0,2), ['class' => 'form-control','id'=>'precio']) !!}
 
             @error('precio')
                 <span class="text-danger">{{ $message }}</span>
