@@ -23,7 +23,7 @@
                     <tbody>
                         @foreach ($bsd_servicio as $servicio)
                             <tr>
-                                <td width="20px">{{ $loop->iteration }}</td>
+                                <td>{{$bsd_servicio->perPage()*($bsd_servicio->currentPage()-1)+$loop->iteration}}</td>
                                 <td>{{ $servicio->tiposervicio->nom_tipo_servicio }}</td>
                                 <td>{{ $servicio->nom_servicio }}</td>
                                 <td width="270px">

@@ -12,15 +12,15 @@ class PlanIndex extends Component
     public $search;
     protected $paginationTheme = "bootstrap";
 
-    public function updatingSearch(){
-        $this->resetPage();
-    }
+
 
     public function render()
     {
         $bsd_plan = BsdPlan::where('estado', 1)->where('nombre_plan','LIKE','%'.$this->search.'%')
-        
-        ->paginate(15);
+
+        ->Paginate(15);
+
+
         return view('livewire.admin.plan-index', compact('bsd_plan'));
     }
 }

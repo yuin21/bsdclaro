@@ -17,7 +17,7 @@ class BsdPlan extends Model
         // 'usuario_reg' ,
         // 'usuario_act' ,
         // 'created_at',
-        // 'updated_at',  
+        // 'updated_at',
      ] ;
 
     protected $table='bsd_plan';
