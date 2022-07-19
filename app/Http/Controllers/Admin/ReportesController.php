@@ -98,8 +98,10 @@ class ReportesController extends Controller
     public function consultar_venta_rpt(Request $request){
         //dd($request);
         $ventas_rpt = DB::select('CALL sp_ventas_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
+        $ventas_fijas_rpt = DB::select('CALL sp_ventas_fijas_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
         $fecha_inicio = $request->fecha_inicio;
         $fecha_fin = $request->fecha_fin;
-        return view('admin.reportes.index_ventas', compact('ventas_rpt','fecha_inicio','fecha_fin'));
+        return view('admin.reportes.index_ventas', compact('ventas_rpt','fecha_inicio','fecha_fin','ventas_fijas_rpt'));
     }
+
 }

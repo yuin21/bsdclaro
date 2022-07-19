@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1 class="text-bold">VENTAS ACTIVADAS</h1>
+    <h1 class="text-bold">VENTAS ACTIVAS</h1>
 @stop
 
 @section('content')
@@ -73,6 +73,45 @@
             </div>
         @endif
     </div>
+    <div class="card">
+        <div class="card-header">
+            Fijas
+        </div>
+        @if (!empty($ventas_fijas_rpt))
+            <div class="card-body table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="border">
+                        <tr>
+                            <th>CONSULTORES</th>
+                            <th>IFI</th>
+                            <th>FTTH</th>
+                            <th>HFC</th>
+                            <th>UGIS</th>
+                            <th>C/IGV FIJA</th>
+                            <th>S/IGV FIJA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($ventas_fijas_rpt as $ventas)
+                            <tr>
+                                <td>{{ $ventas->CONSULTORES}}</td>
+                                <td>{{ $ventas->IFI}}</td>
+                                <td>{{ $ventas->FTTH }}</td>
+                                <td>{{ $ventas->HFC}}</td>
+                                <td>{{ $ventas->UGIS}}</td>
+                                <td>{{ $ventas->CON_IGV_FIJA}}</td>
+                                <td>{{ $ventas->SIN_IGV_FIJA}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="card-body">
+                <strong>Sin Registros</strong>
+            </div>
+        @endif
+    </div>
 @stop
 
 @section('js')
@@ -106,6 +145,9 @@
                 fecha_fin
             } = e.target
 
+            if(fecha_inicio.value>fecha_fin.value) return alerta(
+                'La Fecha de Inicio es mayor a la Fecha Fin'
+            )
 
             if (!fecha_inicio.value && !fecha_fin.value) return  alerta(
                 'Falta Fecha de Inicio y Fecha Fin')
@@ -118,5 +160,6 @@
 
             formFechas.submit()
         })
+
     </script>
 @stop
