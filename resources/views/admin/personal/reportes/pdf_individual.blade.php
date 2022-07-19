@@ -64,10 +64,12 @@
                 <div class="card">
                     <span class="list-group-iten-name">Cargo:</span> {{ $personal->cargo }}
                 </div>
+
                 <div class="card">
                     <span class="list-group-iten-name">Tipo de documento:</span>
                     {{ $personal->tipo_doc_iden }}
                 </div>
+
                 <div class="card">
                     <span class="list-group-iten-name">Número de documento:</span>
                     {{ $personal->nro_doc_iden }}
