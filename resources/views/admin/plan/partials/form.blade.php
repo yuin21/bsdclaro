@@ -19,8 +19,7 @@
         </div>
         <div class="col-4">
             {!! Form::label('precio', 'Precio') !!}
-            {!! Form::text('precio', number_format(0,2), ['class' => 'form-control','id'=>'precio']) !!}
-
+            {!! Form::text('precio', number_format(0,2), ['class' => 'form-control','id'=>'precio', 'onkeypress'=>'mascara(this,cpf)','onpaste'=>"return false"]) !!}
             @error('precio')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
