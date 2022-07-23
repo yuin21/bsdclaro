@@ -33,6 +33,8 @@ class VentaIndex extends Component
             bsd_venta.sec, bsd_venta.sot, bsd_venta.fecha_registro,
             bsd_venta.total_sin_igv, bsd_venta.total, bsd_venta.avance_oportunidad')
             ->where('bsd_venta.estado', 1)->where('p.ape_paterno','LIKE','%'.$this->search.'%')
+            ->orWhere('p.ape_materno','LIKE','%'.$this->search.'%')
+            ->orWhere('p.nom_personal','LIKE','%'.$this->search.'%')
             ->paginate(15);
         } else if($this->search == null){
             $bsd_venta = BsdVenta::join("bsd_personal as p", "p.id", "=", "bsd_venta.bsd_personal_id")
@@ -51,6 +53,8 @@ class VentaIndex extends Component
             bsd_venta.sec, bsd_venta.sot, bsd_venta.fecha_registro,
             bsd_venta.total_sin_igv, bsd_venta.total, bsd_venta.avance_oportunidad')
             ->where('bsd_venta.estado', 1)->where('p.ape_paterno','LIKE','%'.$this->search.'%')
+            ->orWhere('p.ape_materno','LIKE','%'.$this->search.'%')
+            ->orWhere('p.nom_personal','LIKE','%'.$this->search.'%')
             ->whereYear('bsd_venta.fecha_registro',$anio)->whereMonth('bsd_venta.fecha_registro',$mes)
             ->whereDay('bsd_venta.fecha_registro',$dia)->paginate(15);
         }
