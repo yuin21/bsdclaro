@@ -114,6 +114,9 @@
                                         <div class="col-lg-6 col-sm-6">
                                             {!! Form::hidden('id_detalle_venta[]', $detalle->id, ['class' => 'form-control div_detalle_venta']) !!}
                                         </div>
+                                        <div class="col-lg-6 col-sm-6">
+                                            {!! Form::hidden('id_estado_venta[]', $detalle->estadoLinea->id, ['class' => 'form-control detalle_estado_linea']) !!}
+                                        </div>
                                         {{-- <div class="col-6">
                                             {!! Form::label('bsd_tipo_servicio_id', 'Tipo de Servicio') !!}
                                             {!! Form::select('bsd_tipo_servicio_id', $estadoslinea, null, ['class' => 'form-control']) !!}
@@ -134,17 +137,17 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="row">
+                        <div class="row" onload="myFunction()">
                             @foreach($estadoslinea as $estados => $estados_linea)
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-lg-12 col-sm-6">
                                             {!! Form::label('estado_linea', 'Estado de Linea *') !!}
-                                            <select name="estado_linea[]" class="selectpicker form-control div_estado_linea"
-                                            title="Seleccionar">
+                                            <select name="estado_linea[]" class="selectpicker form-control select_estado_linea"
+                                            id="select_{{$loop->iteration}}" title="Seleccionar">
                                                 @foreach($estados_linea as $estado => $estado_linea)
                                                     <option
-                                                        value="{{ $estado_linea->id }}">
+                                                        class="estado_linea" value="{{ $estado_linea->id }}">
                                                         {{ $estado_linea->nombre_estado_linea }}
                                                     </option>
                                                 @endforeach
@@ -349,34 +352,23 @@
     @endif
 
     <script>
-        var estado = document.getElementsByClassName('div_estado_linea');
-        //var prueba = document.getElementsByClassName('div_prueba');
-            arrayGuardar = [];
-            for (var i = 0; i < estado.length; i++) {
-                arrayGuardar[i] = estado[i].value;
-                console.log (estado[i].value);
+
+        var estado_linea = document.getElementsByClassName('estado_linea');
+        var detalle_estado_linea = document.getElementsByClassName('detalle_estado_linea');
+
+        arrayGuardar = [];
+        for (var i = 0; i < detalle_estado_linea.length; i++) {
+            arrayGuardar[i] = detalle_estado_linea[i].value;
+            //console.error(detalle_estado_linea[i].value);
+        }
+
+        $(function myFunction(){
+            for(var i = 0; i <arrayGuardar.length;i++){
+                $("#select_"+(i+1)).val(arrayGuardar[i])
+                $("#select_"+(i+1)).selectpicker('refresh');
             }
-        console.log(estado)
-        //$(".estadoLinea").find(`option[value='${estado}']`);
-        //$('.estadoLinea').selectpicker('refresh');
+        });
 
-        // let detalleVenta = document.getElementsByClassName('div_detalle_venta')
-        //     arrayGuardarDetalle = [];
-        //     for (var i = 0; i < detalleVenta.length; i++) {
-        //         arrayGuardarDetalle[i] = detalleVenta[i].value;
-        //         console.log (detalleVenta[i].value);
-        //     }
-        // console.log(detalleVenta)
-        //let div_estadoLinea = document.getElementsByClassName('div_estado_linea')
-        //const estadoLinea = document.getElementById('estadoLinea')
-        //const estado_linea = estadoLinea.value
-        //const tipo_servicio = tipo_servicio.value
-        //const plan = plan.value
-        //const id_detalle_venta = id_detalle.value
-
-        // //console.log(id_detalle)
-        // div_estadoLinea.innerHTML += `
-        //     <input type="hidden" name="estado_linea[]" value="${estado_linea}">`
     </script>
 @stop
 

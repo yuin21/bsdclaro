@@ -23,11 +23,10 @@
                     </thead>
                     <tbody>
                         @foreach ($bsd_plan as $plan)
-                            <tr>
-                                <td width="20px">{{ $loop->iteration }}</td>
+                        <td>{{$bsd_plan->perPage()*($bsd_plan->currentPage()-1)+$loop->iteration}}</td>
                                 <td>{{ $plan->tiposervicio->nom_tipo_servicio }}</td>
                                 <td>{{ $plan->nombre_plan }}</td>
-                                <td style='text-align:center'>
+                                <td style='text-align:center'>S/.
                                     {{ number_format($plan->precio, 2) }}
                                 </td>
                                 <td width="270px">

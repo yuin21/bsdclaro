@@ -3,15 +3,15 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <a href="{{ route('admin.ventas.index') }}" class="float-right mt-2">
-        <i class="fas fa-chevron-circle-left"></i> Ver lista de ventas
+    <a href="{{ route('admin.pagos.index') }}" class="float-right mt-2">
+        <i class="fas fa-chevron-circle-left"></i> Ver lista de pagos
     </a>
-    <h1 class="text-bold">Ver Venta</h1>
+    <h1 class="text-bold">Ver Pago</h1>
 @stop
 
 @section('content')
     <div class="row">
-        <div class="col-8">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                     {{-- <h5 class="flex-grow-1">Venta: <span class="badge badge-warning">{{ $venta->fecha_registro }}</span> --}}

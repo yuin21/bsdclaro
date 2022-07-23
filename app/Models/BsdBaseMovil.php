@@ -9,6 +9,7 @@ class BsdBaseMovil extends Model
 {
     use HasFactory;
 
+
     protected $fillable= [
         'sec',
         'fecha_operacion',

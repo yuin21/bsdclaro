@@ -5,7 +5,7 @@
         </a>
         <div class="row">
             <div class="col-lg-9 col-sm-6" >
-                <input wire:model="search" class="form-control" type="text" placeholder="Busque por Apellido Paterno">
+                <input wire:model="search" class="form-control" type="text" placeholder="Busque por Personal">
             </div>
             <div class="col-lg-3 col-sm-6" >
                 <input type="date" wire:model="searchFecha" class="form-control" placeholder="Busque por Fecha de Registro">
