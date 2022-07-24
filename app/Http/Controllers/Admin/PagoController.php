@@ -41,6 +41,8 @@ class PagoController extends Controller
         $request->validate([
             'bsd_cuota_personal_id' => 'required',
             'bsd_venta_id' => 'required',
+            'factor' => 'required|numeric',
+            'comision_dace' => 'required|numeric',
             'porcentaje_comision' => 'required|numeric',
             'comision_consultor' => 'required|numeric',
             'estado_carpeta' => 'required',

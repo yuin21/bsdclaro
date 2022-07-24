@@ -349,7 +349,13 @@ return [
                     'text' => 'Ventas',
                     'icon'  => 'far fa-fw fa-dot-circle',
                     'route'     => 'admin.reportes.indexVentas',
-                    'can' => 'admin.reportes.indexfVentas',
+                    'can' => 'admin.reportes.indexVentas',
+                ],
+                [
+                    'text' => 'Pagos',
+                    'icon'  => 'far fa-fw fa-dot-circle',
+                    'route'     => 'admin.reportes.indexVentas',
+                    'can' => 'admin.reportes.indexfPagos',
                 ],
             ]
         ],

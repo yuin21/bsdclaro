@@ -22,10 +22,12 @@ return new class extends Migration
             $table->bigInteger('bsd_venta_id')->unsigned();
             $table->foreign('bsd_venta_id')
             ->references("id")
-            ->on("bsd_venta");            
+            ->on("bsd_venta");
+            $table->float('factor');
+            $table->float('comision_dace');
             $table->float('porcentaje_comision');
             $table->float('comision_consultor');
-            $table->char('estado_carpeta', 1)->comment('C or N'); 
+            $table->char('estado_carpeta', 1)->comment('C or N');
             $table->char('pago_1er_recibo', 1)->comment('S or N');
             $table->char('pago_dace', 1)->comment('S or N');
             $table->char('abono_consultor', 1)->comment('S or N');

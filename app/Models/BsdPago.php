@@ -13,6 +13,8 @@ class BsdPago extends Model
         'id',
         'bsd_cuota_personal_id',
         'bsd_venta_id',
+        'factor',
+        'comision_dace',
         'porcentaje_comision',
         'comision_consultor',
         'estado_carpeta',

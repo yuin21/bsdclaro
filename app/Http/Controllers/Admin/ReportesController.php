@@ -104,4 +104,18 @@ class ReportesController extends Controller
         return view('admin.reportes.index_ventas', compact('ventas_rpt','fecha_inicio','fecha_fin','ventas_fijas_rpt'));
     }
 
+    public function index_pagos(){
+        //$ventas_rpt = DB::select('CALL sp_ventas_rpt(?,?)', ['2022-05-01','2022-07-30']);
+        return view('admin.reportes.index_pagos');
+    }
+    public function consultar_pago_rpt(Request $request){
+        //dd($request);
+        $pagos_moviles_rpt = DB::select('CALL sp_pagos_moviles_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
+        $pagos_fijas_rpt = DB::select('CALL sp_pagos_fijas_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
+        $pagos_comisiones_total_rpt = DB::select('CALL sp_pagos_comisiones_total_rpt(?,?)', [$request->fecha_inicio,$request->fecha_fin]);
+        $fecha_inicio = $request->fecha_inicio;
+        $fecha_fin = $request->fecha_fin;
+        return view('admin.reportes.index_pagos', compact('pagos_moviles_rpt','pagos_fijas_rpt','pagos_comisiones_total_rpt','fecha_inicio','fecha_fin'));
+    }
+
 }

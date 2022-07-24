@@ -54,6 +54,20 @@
                     <div class="card-body">
                         <div class="row mb-4">
                             <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('factor', 'Factor') !!}
+                                {!! Form::text('factor', null, ['class' => 'form-control']) !!}
+                                @error('factor')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
+                                {!! Form::label('comision_dace', 'Comisión Dace') !!}
+                                {!! Form::text('comision_dace', null, ['class' => 'form-control']) !!}
+                                @error('comision_dace')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-lg-4 col-sm-6">
                                 {!! Form::label('porcentaje_comision', '% Comision') !!}
                                 {!! Form::select('porcentaje_comision', ['70' => '70 %', '80' => '80 %', '90' => '90 %', '100' => '100 %'],null, ['class' => 'selectpicker form-control', 'title'=>'Seleccione']) !!}
                                 @error('porcentaje_comision')
