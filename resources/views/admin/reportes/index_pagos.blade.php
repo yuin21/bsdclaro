@@ -116,10 +116,10 @@
                             <th class="centrar">FTTH</th>
                             <th class="centrar">OLO</th>
                             <th class="centrar">TOTAL</th>
-                            <th class="centrar">RENTA_TOTAL</th>
-                            <th class="centrar">COMISION_BRUTA_DACE</th>
-                            <th class="centrar">COMISION_NETA_DACE</th>
-                            <th class="centrar">COMISION_CONSULTOR_FIJAS</th>
+                            <th class="centrar">RENTA TOTAL</th>
+                            <th class="centrar">COMISION BRUTA DACE</th>
+                            <th class="centrar">COMISION NETA DACE</th>
+                            <th class="centrar">COMISION CONSULTOR FIJAS</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -183,8 +183,8 @@
                             <th class="centrar">MOVIL</th>
                             <th class="centrar">FIJA</th>
                             <th class="centrar">RENO</th>
-                            <th class="centrar">SUB_TOTAL</th>
-                            <th class="centrar">CUMP_DIC</th>
+                            <th class="centrar">SUB TOTAL</th>
+                            <th class="centrar">CUMP DIC</th>
                             <th class="centrar">TOTAL</th>
                             <th class="centrar">CUOTA</th>
                         </tr>
