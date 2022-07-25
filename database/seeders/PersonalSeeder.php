@@ -156,8 +156,8 @@ class PersonalSeeder extends Seeder
         ]);
 
             BsdPersonal::create([
-            'nom_personal' => 'José' ,
-            'ape_paterno'  => 'Silva',
+            'nom_personal' => 'Daniel' ,
+            'ape_paterno'  => 'Zarate',
             'ape_materno' => '',
             'usuario_sisact'=> 'D99941294',
             'cargo' => 'Vendedor' ,
@@ -166,7 +166,7 @@ class PersonalSeeder extends Seeder
             'nro_doc_iden' => '88888890',
             'direccion' => '',
             'celular' => '',
-            'email' => 'jose.silva@claro-negocios.com.pe',
+            'email' => 'daniel.zarate@claro-negocios.com.pe',
         ]);
     }
 }
