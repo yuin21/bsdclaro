@@ -17,7 +17,7 @@
 <label for="ejecutivo"> Ejecutivo </label>
 <input id="ejecutivo" class="form-control"  type="text" name="ejecutivo" value="{{isset($reporteventamovil->ejecutivo)?$reporteventamovil->ejecutivo:old('ejecutivo')}}" {{($modo=='Ver')?'readonly="readonly"':""}}>
 
-<label for="razon_social"> Razon Social </label>
+<label for="razon_social">  </label>
 <input id="razon_social" class="form-control" type="text" name="razon_social" value="{{isset($reporteventamovil->razon_social)?$reporteventamovil->razon_social:old('razon_social')}}" {{($modo=='Ver')?'readonly="readonly"':""}}>
 
 <label for="ruc"> RUC </label>

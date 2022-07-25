@@ -95,6 +95,7 @@ class VentaController extends Controller
                 $cliente= new BsdCliente();
                 $cliente->ruc = $request->searchCliente; // searchCliente contiene el ruc del cliente
                 $cliente->razon_social = $request->razon_social;
+                //$cliente->direccion = $request->direccion; 
                 $cliente->save();
                 $request->merge(['bsd_cliente_id' => $cliente->id]);
             }

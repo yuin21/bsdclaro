@@ -30,7 +30,7 @@ class EmpresaController extends Controller
             'ruc' => 'required|string|max:11|unique:bsd_empresa,ruc',
             'razon_social' => 'required|string|max:120',
             'representante'=> 'required|string|max:120',
-            'direccion' => 'string|max:90',
+            'direccion' => 'string|max:300',
             'celular' => 'string|max:30',
             'email'=> 'string|email|max:75|unique:bsd_empresa,email',
         ]);
@@ -55,7 +55,7 @@ class EmpresaController extends Controller
             'ruc' => "required|string|max:11|unique:bsd_empresa,ruc,$empresa->id",
             'razon_social' => 'required|string|max:120',
             'representante'=> 'required|string|max:120',
-            'direccion' => 'string|max:90',
+            'direccion' => 'string|max:300',
             'celular' => 'string|max:30',
             'email'=> "string|email|max:75|unique:bsd_empresa,email, $empresa->id",
         ]); 

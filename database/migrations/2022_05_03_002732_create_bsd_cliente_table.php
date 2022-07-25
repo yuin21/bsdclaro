@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('ruc', 11)->unique();
             $table->string('razon_social', 120);
             $table->string('num_celular', 30)->nullable()->comment('999999999 or +51 999999999'); //No se si ponerle unico
-            $table->string('direccion', 90)->nullable();
+            $table->string('direccion', 300)->nullable();
             $table->string('departamento', 25)->nullable();
             $table->string('provincia', 40)->nullable();
             $table->string('distrito', 50)->nullable();

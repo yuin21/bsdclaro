@@ -30,31 +30,31 @@ class PersonalSeeder extends Seeder
         ]);
 
         BsdPersonal::create([
-          'nom_personal' => 'Maricarmen Lisbette' ,
-          'ape_paterno'  => 'Cabrera',
-          'ape_materno' => 'Chacón',
-          'usuario_sisact'=> 'D99941294',
-          'cargo' => 'Consultor' ,
-          'tipo_personal' => 'Regular',
-          'tipo_doc_iden' => 'DNI',
-          'nro_doc_iden' => '88888881',
-          'direccion' => '',
-          'celular' => '',
-          'email' => 'maricarmen.cabrera@claro-negocios.com.pe',
+            'nom_personal' => 'Maricarmen Lisbette' ,
+            'ape_paterno'  => 'Cabrera',
+            'ape_materno' => 'Chacón',
+            'usuario_sisact'=> 'D99941294',
+            'cargo' => 'Consultor' ,
+            'tipo_personal' => 'Regular',
+            'tipo_doc_iden' => 'DNI',
+            'nro_doc_iden' => '88888881',
+            'direccion' => '',
+            'celular' => '',
+            'email' => 'maricarmen.cabrera@claro-negocios.com.pe',
         ]);
 
         BsdPersonal::create([
-        'nom_personal' => 'Yessenia' ,
-        'ape_paterno'  => 'Escalante',
-        'ape_materno' => '',
-        'usuario_sisact'=> 'D99941294',
-        'cargo' => 'Consultor' ,
-        'tipo_personal' => 'Regular',
-        'tipo_doc_iden' => 'DNI',
-        'nro_doc_iden' => '88888882',
-        'direccion' => '',
-        'celular' => '',
-        'email' => 'yessenia.escalante@claro-negocios.com.pe',
+            'nom_personal' => 'Yessenia' ,
+            'ape_paterno'  => 'Escalante',
+            'ape_materno' => '',
+            'usuario_sisact'=> 'D99941294',
+            'cargo' => 'Consultor' ,
+            'tipo_personal' => 'Regular',
+            'tipo_doc_iden' => 'DNI',
+            'nro_doc_iden' => '88888882',
+            'direccion' => '',
+            'celular' => '',
+            'email' => 'yessenia.escalante@claro-negocios.com.pe',
         ]);
 
         BsdPersonal::create([

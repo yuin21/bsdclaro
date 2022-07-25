@@ -9,7 +9,7 @@
             @enderror
         </div>
         <div class="col-6">
-            {!! Form::label('razon_social', 'Razon Social') !!}
+            {!! Form::label('razon_social', '') !!}
             {!! Form::text('razon_social', null, ['class' => 'form-control']) !!}
         
             @error('razon_social')
