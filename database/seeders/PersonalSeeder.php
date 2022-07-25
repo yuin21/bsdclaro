@@ -101,7 +101,7 @@ class PersonalSeeder extends Seeder
 
         BsdPersonal::create([
             'nom_personal' => 'Yessenia Paola' ,
-            'ape_paterno'  => 'Perez',
+            'ape_paterno'  => 'Peréz',
             'ape_materno' => 'Loyola',
             'usuario_sisact'=> 'D99941294',
             'cargo' => 'Vendedor' ,
