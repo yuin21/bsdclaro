@@ -18,7 +18,13 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Super Administrador',
             'email' => 'yuin21@hotmail.com',
-            'password' => '$2y$10$qbJYAvKYonuivyDXdU8Sq.NoSn0x21Zgq7CIi1fmlZUecjF1N2vq.'
+            'password' => bcrypt('Admin2022=')
+        ])->assignRole('Administrador');
+
+        User::create([
+            'name' => 'Juan Carlos Salas Espíritu',
+            'email' => 'jsalasespiritu@gmail.com',
+            'password' => bcrypt('Admin2022.')
         ])->assignRole('Administrador');
 
         User::create([
@@ -29,16 +35,10 @@ class UserSeeder extends Seeder
         ])->assignRole('Consultor');
 
         User::create([
-            'name' => 'Juan Carlos Salas Espíritu',
-            'email' => 'jsalasespiritu@gmail.com',
-            'password' => '$2y$10$YLew4TpmJQEYhR//CR1.iudcVfwrxzsfvLFpusItd.eToLyVPGDGC'
-        ])->assignRole('Vendedor');
-
-        User::create([
             'name' => 'Paola Peréz',
             'email' => 'perez_loyola@hotmail.com',
             'password' => '$2y$10$/N0zXSqcrJiCokB4i1ghFO/KifOtxd6V3Jz0FjbD7UwdvQ2zrZRcy'
-        ])->assignRole('Vendedor');
+        ])->assignRole('Mesa de Control');
 
     }
 }
